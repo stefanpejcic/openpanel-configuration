@@ -1,2 +1,4 @@
 # openpanel-configuration
-Configuration files for /etc/openpanel/
+Configuration files for `/etc/openpanel/`
+
+# ✌️
