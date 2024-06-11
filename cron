@@ -1,0 +1,40 @@
+# /etc/cron.d/openpanel: crontab entries for the OpenPanel
+#
+#
+# This file is used by OpenPanel to schedule cronjobs
+#
+# It should NOT be edited manually as it is overwritten on update.
+# To add crons please use the crontab as root user.
+#
+# Important Note!  This cronjob will NOT be executed if you are
+# running systemd as your init system.  If you are running systemd,
+# the cronjob.timer function takes precedence over this cronjob.  For
+# more details, see the systemd.timer manpage, or use systemctl show
+# certbot.timer.
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# SSL
+0 */3 * * * root opencli ssl-hostname
+0 */3 * * * root certbot renew --post-hook 'systemctl reload nginx'
+
+# STATISTICS
+0 * * * * root opencli docker-collect_stats
+30 2 * * * root opencli domains-stats
+30 3 * * * root opencli server-stats --json --save
+
+# MAINTENANCE
+* 2 * * * root opencli docker-usage_stats_cleanup
+15 0 * * * root opencli update
+0 0 12 * * root opencli server-ips
+0 */6 * * * root opencli server-motd
+
+# BACKUPS
+0 7 * * * root opencli backup-check
+0 8 * * * root opencli backup-scheduler
+
+# MONITORING
+* * * * * root bash /usr/local/admin/service/notifications.sh
+@reboot root bash /usr/local/admin/service/notifications.sh --startup
+@reboot root opencli server-on_startup
