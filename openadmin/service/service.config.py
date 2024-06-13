@@ -6,6 +6,7 @@ import multiprocessing
 from gunicorn.config import Config
 import configparser
 import os
+from pathlib import Path
 
 CONFIG_FILE_PATH = '/etc/openpanel/openpanel/conf/openpanel.config'
 
@@ -52,6 +53,13 @@ pidfile = 'adminpanel'
 #accesslog = "-"
 errorlog = "/var/log/openpanel/admin/error.log"
 accesslog = "/var/log/openpanel/admin/access.log"
+
+def ensure_directory(file_path):
+    directory = Path(file_path).parent
+    directory.mkdir(parents=True, exist_ok=True)
+
+ensure_directory(errorlog)
+ensure_directory(accesslog)
 
 def post_fork(server, worker):
     server.log.info("Worker spawned (pid: %s)", worker.pid)
