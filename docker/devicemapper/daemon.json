@@ -1,7 +1,8 @@
 {
-      "storage-driver": "devicemapper",
-      "log-driver": "local",
-      "log-opts": {
-         "max-size": "5m"
+	"storage-driver": "overlay2",
+	"iptables": false,
+	"log-driver": "local",
+	"log-opts": {
+		"max-size": "5m"
          }
 }
