@@ -11,6 +11,8 @@
 # Author: Stefan Pejcic (stefan@pejcic.rs)                                               #
 ##########################################################################################
 
+docker cp openpanel:/usr/local/panel/version /usr/local/panel/version > /dev/null 2>&1
+
 VERSION=$(cat /usr/local/panel/version)
 CONFIG_FILE_PATH='/etc/openpanel/openpanel/conf/openpanel.config'
 GREEN='\033[0;32m'
