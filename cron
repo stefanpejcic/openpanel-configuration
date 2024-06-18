@@ -16,25 +16,25 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # SSL
-0 */3 * * * root opencli ssl-hostname
-0 */3 * * * root certbot renew --post-hook 'systemctl reload nginx'
+0 */3 * * * root /usr/bin/opencli ssl-hostname && echo "$(date) SSL hostname check executed" >> /var/log/openpanel.log
+0 */3 * * * root /usr/bin/certbot renew --post-hook 'systemctl reload nginx' && echo "$(date) Certbot renewal executed" >> /var/log/openpanel.log
 
 # STATISTICS
-0 * * * * root opencli docker-collect_stats
-30 2 * * * root opencli domains-stats
-30 3 * * * root opencli server-stats --json --save
+0 * * * * root /usr/bin/opencli docker-collect_stats && echo "$(date) Docker statistics collected" >> /var/log/openpanel.log
+30 2 * * * root /usr/bin/opencli domains-stats && echo "$(date) Domain statistics collected" >> /var/log/openpanel.log
+30 3 * * * root /usr/bin/opencli server-stats --json --save && echo "$(date) Server statistics collected" >> /var/log/openpanel.log
 
 # MAINTENANCE
-* 2 * * * root opencli docker-usage_stats_cleanup
-15 0 * * * root opencli update
-0 0 12 * * root opencli server-ips
-0 */6 * * * root opencli server-motd
+* 2 * * * root /usr/bin/opencli docker-usage_stats_cleanup && echo "$(date) Docker usage stats cleanup executed" >> /var/log/openpanel.log
+15 0 * * * root /usr/bin/opencli update && echo "$(date) System update executed" >> /var/log/openpanel.log
+0 0 12 * * root /usr/bin/opencli server-ips && echo "$(date) Server IP listing executed" >> /var/log/openpanel.log
+0 */6 * * * root /usr/bin/opencli server-motd && echo "$(date) Server MOTD updated" >> /var/log/openpanel.log
 
 # BACKUPS
-0 7 * * * root opencli backup-check
-0 8 * * * root opencli backup-scheduler
+0 7 * * * root /usr/bin/opencli backup-check && echo "$(date) Backup check executed" >> /var/log/openpanel.log
+0 8 * * * root /usr/bin/opencli backup-scheduler && echo "$(date) Backup scheduler executed" >> /var/log/openpanel.log
 
 # MONITORING
-* * * * * root bash /usr/local/admin/service/notifications.sh
-@reboot root bash /usr/local/admin/service/notifications.sh --startup
-@reboot root opencli server-on_startup
+* * * * * root /bin/bash /usr/local/admin/service/notifications.sh && echo "$(date) Notifications script executed" >> /var/log/openpanel.log
+@reboot root /bin/bash /usr/local/admin/service/notifications.sh --startup && echo "$(date) Notifications script executed at startup" >> /var/log/openpanel.log
+@reboot root /usr/bin/opencli server-on_startup && echo "$(date) Server startup tasks executed" >> /var/log/openpanel.log
