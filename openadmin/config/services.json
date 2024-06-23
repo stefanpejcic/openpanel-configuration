@@ -1,5 +1,10 @@
 [
     {
+        "name": "OpenAdmin",
+        "type": "system",
+        "real_name": "admin"
+    },
+    {
         "name": "Docker",
         "type": "system",
         "real_name": "docker"
