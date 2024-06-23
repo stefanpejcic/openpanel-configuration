@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Docker",
+        "type": "system",
+        "real_name": "docker"
+    },
+    {
+        "name": "OpenPanel",
+        "type": "docker",
+        "real_name": "openpanel"
+    },
+    {
+        "name": "Web Server",
+        "type": "system",
+        "real_name": "nginx"
+    },
+    {
+        "name": "Database",
+        "type": "docker",
+        "real_name": "openpanel_mysql"
+    }
+]
