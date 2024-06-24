@@ -23,5 +23,15 @@
         "name": "Database",
         "type": "docker",
         "real_name": "openpanel_mysql"
+    },
+    {
+        "name": "DNS",
+        "type": "system",
+        "real_name": "bind9"
+    },
+    {
+        "name": "Firewall",
+        "type": "system",
+        "real_name": "ufw"
     }
 ]
