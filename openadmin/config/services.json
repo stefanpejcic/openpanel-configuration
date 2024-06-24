@@ -27,7 +27,7 @@
     {
         "name": "DNS",
         "type": "system",
-        "real_name": "bind9"
+        "real_name": "named"
     },
     {
         "name": "Firewall",
