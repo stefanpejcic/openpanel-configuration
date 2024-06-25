@@ -30,6 +30,11 @@
         "real_name": "named"
     },
     {
+        "name": "File Watcher",
+        "type": "system",
+        "real_name": "watcher"
+    },
+    {
         "name": "Firewall",
         "type": "system",
         "real_name": "ufw"
