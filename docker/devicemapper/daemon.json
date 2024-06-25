@@ -1,6 +1,5 @@
 {
 	"storage-driver": "devicemapper",
-	"iptables": false,
 	"log-driver": "local",
 	"log-opts": {
 		"max-size": "5m"
