@@ -95,7 +95,7 @@ if [[ $? -ne 0 || $user_count -eq 0 ]]; then
     new_password=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 16)
 
     # Create the user table if it doesn't exist
-    sqlite3 "$DB_PATH" "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'user', is_active BOOLEAN DEFAULT 1 NOT NU>
+    sqlite3 "$DB_PATH" "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'user', is_active BOOLEAN DEFAULT 1 NOT NULL);"  > /dev/null 2>&1 && 
 
     # Add the new user with the generated username and password
     opencli admin new "$new_username" "$new_password" > /dev/null 2>&1
