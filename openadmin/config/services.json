@@ -20,6 +20,16 @@
         "real_name": "nginx"
     },
     {
+        "name": "Dovecot & Postfix",
+        "type": "docker",
+        "real_name": "openadmin_mailserver"
+    },
+    {
+        "name": "Roundcube",
+        "type": "docker",
+        "real_name": "openadmin_roundcube"
+    },
+    {
         "name": "Database",
         "type": "docker",
         "real_name": "openpanel_mysql"
