@@ -150,7 +150,7 @@ ALTER TABLE `domains`
 -- AUTO_INCREMENT for table `plans`
 --
 ALTER TABLE `plans`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sites`
