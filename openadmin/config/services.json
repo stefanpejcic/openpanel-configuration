@@ -2,51 +2,61 @@
     {
         "name": "OpenAdmin",
         "type": "system",
+        "on_dashboard": false,
         "real_name": "admin"
     },
     {
         "name": "Docker",
         "type": "system",
+        "on_dashboard": true,
         "real_name": "docker"
     },
     {
         "name": "OpenPanel",
         "type": "docker",
+        "on_dashboard": true,
         "real_name": "openpanel"
     },
     {
         "name": "Web Server",
         "type": "system",
+        "on_dashboard": true,
         "real_name": "nginx"
     },
     {
         "name": "Dovecot & Postfix",
         "type": "docker",
+        "on_dashboard": false,
         "real_name": "openadmin_mailserver"
     },
     {
         "name": "Roundcube",
         "type": "docker",
+        "on_dashboard": false,
         "real_name": "openadmin_roundcube"
     },
     {
         "name": "Database",
         "type": "docker",
+        "on_dashboard": true,
         "real_name": "openpanel_mysql"
     },
     {
         "name": "DNS",
         "type": "system",
+        "on_dashboard": true,
         "real_name": "named"
     },
     {
         "name": "File Watcher",
         "type": "system",
+        "on_dashboard": false,
         "real_name": "watcher"
     },
     {
         "name": "ConfigServer Firewall",
         "type": "system",
+        "on_dashboard": true,
         "real_name": "csf"
     }
 ]
