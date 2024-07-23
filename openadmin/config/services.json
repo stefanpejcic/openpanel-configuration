@@ -45,8 +45,8 @@
         "real_name": "watcher"
     },
     {
-        "name": "Firewall",
+        "name": "ConfigServer Firewall",
         "type": "system",
-        "real_name": "ufw"
+        "real_name": "csf"
     }
 ]
