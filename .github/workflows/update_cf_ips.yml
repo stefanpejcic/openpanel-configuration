@@ -17,6 +17,7 @@ jobs:
     - name: Create get_cf_ips.sh script
       run: |
         mkdir -p .github/scripts
+        echo "" > nginx/cloudflare.inc
         echo '#!/bin/bash' > .github/scripts/get_cf_ips.sh
         echo 'cf_ips="$(curl -fsLm5 --retry 2 https://api.cloudflare.com/client/v4/ips)"' >> .github/scripts/get_cf_ips.sh
         echo '' >> .github/scripts/get_cf_ips.sh
@@ -51,7 +52,8 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add nginx/cloudflare.inc
-        git commit -m "Update Cloudflare IPs"
+        git commit -m "Update Cloudflare IPs" || echo "No changes to commit"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
