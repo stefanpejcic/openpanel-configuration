@@ -2,9 +2,11 @@ name: Update Cloudflare IPs
 
 on:
   schedule:
-    # Runs every 5 minutes for testing purposes
     - cron: '*/5 * * * *'
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Ensure that the workflow has permission to push changes
 
 jobs:
   update_cf_ips:
@@ -17,7 +19,7 @@ jobs:
     - name: Create get_cf_ips.sh script
       run: |
         mkdir -p .github/scripts
-        echo "" > nginx/cloudflare.inc
+        echo '' > nginx/cloudflare.inc
         echo '#!/bin/bash' > .github/scripts/get_cf_ips.sh
         echo 'cf_ips="$(curl -fsLm5 --retry 2 https://api.cloudflare.com/client/v4/ips)"' >> .github/scripts/get_cf_ips.sh
         echo '' >> .github/scripts/get_cf_ips.sh
@@ -56,4 +58,3 @@ jobs:
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
