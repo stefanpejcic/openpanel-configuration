@@ -111,4 +111,4 @@ echo -e  "        - 👉 Discord: https://discord.openpanel.co/"
 echo -e  ""
 echo -e  "================================================================"
 
-
+timeout 1 docker cp openpanel:/usr/local/panel/version /usr/local/panel/version > /dev/null 2>&1 #1 sec max
