@@ -2,12 +2,11 @@ name: Update Cloudflare IPs
 
 on:
   schedule:
-    # Runs every 5 minutes for testing purposes
-    - cron: '*/5 * * * *'
-  workflow_dispatch: # Allows manual triggering
+    - cron: '0 10 * * *'
+  workflow_dispatch: # manual trigger
 
 permissions:
-  contents: write  # Ensure that the workflow has permission to push changes
+  contents: write  # to push
 
 jobs:
   update_cf_ips:
