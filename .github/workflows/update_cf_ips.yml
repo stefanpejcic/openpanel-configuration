@@ -4,6 +4,7 @@ on:
   schedule:
     # Runs every 5 minutes for testing purposes
     - cron: '*/5 * * * *'
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   update_cf_ips:
