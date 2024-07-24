@@ -3,7 +3,7 @@ name: Update Cloudflare IPs
 on:
   schedule:
     # Runs at 00:00 UTC every day
-    - cron: '0 0 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   update_cf_ips:
