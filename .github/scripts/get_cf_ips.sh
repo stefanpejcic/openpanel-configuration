@@ -17,12 +17,33 @@ jobs:
       run: |
         mkdir -p .github/scripts
         echo '#!/bin/bash' > .github/scripts/get_cf_ips.sh
-        echo 'curl -s https://www.cloudflare.com/ips-v4' >> .github/scripts/get_cf_ips.sh
-        echo 'curl -s https://www.cloudflare.com/ips-v6' >> .github/scripts/get_cf_ips.sh
+        echo 'cf_ips="$(curl -fsLm5 --retry 2 https://api.cloudflare.com/client/v4/ips)"' >> .github/scripts/get_cf_ips.sh
+        echo '' >> .github/scripts/get_cf_ips.sh
+        echo 'if [ -n "$cf_ips" ] && [ "$(echo "$cf_ips" | jq -r ''.success//""'')" = "true" ]; then' >> .github/scripts/get_cf_ips.sh
+        echo '  cf_inc="nginx/cloudflare.inc"' >> .github/scripts/get_cf_ips.sh
+        echo '' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "[ * ] Updating Cloudflare IP Ranges for Nginx..."' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "# Cloudflare IP Ranges" > $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "# IPv4" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  for ipv4 in $(echo "$cf_ips" | jq -r ''.result.ipv4_cidrs[]//""'' | sort); do' >> .github/scripts/get_cf_ips.sh
+        echo '    echo "set_real_ip_from $ipv4;" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  done' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "# IPv6" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  for ipv6 in $(echo "$cf_ips" | jq -r ''.result.ipv6_cidrs[]//""'' | sort); do' >> .github/scripts/get_cf_ips.sh
+        echo '    echo "set_real_ip_from $ipv6;" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  done' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo '  echo "real_ip_header CF-Connecting-IP;" >> $cf_inc' >> .github/scripts/get_cf_ips.sh
+        echo 'fi' >> .github/scripts/get_cf_ips.sh
         chmod +x .github/scripts/get_cf_ips.sh
 
+    - name: Install jq
+      run: sudo apt-get install -y jq
+
     - name: Run get_cf_ips.sh
-      run: .github/scripts/get_cf_ips.sh > nginx/cloudflare.inc
+      run: .github/scripts/get_cf_ips.sh
 
     - name: Commit and push changes
       run: |
@@ -33,4 +54,3 @@ jobs:
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
