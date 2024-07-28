@@ -17,7 +17,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # SSL
 0 */3 * * * root /usr/local/bin/opencli ssl-hostname && echo "$(date) SSL hostname check executed" >> /var/log/openpanel/admin/cron.log
-0 */3 * * * root /usr/bin/certbot renew --post-hook 'systemctl reload nginx' && echo "$(date) Certbot renewal executed" >> /var/log/openpanel/admin/cron.log
+15 */3 * * * root /usr/bin/certbot renew --post-hook 'systemctl reload nginx' && echo "$(date) Certbot renewal executed" >> /var/log/openpanel/admin/cron.log
 
 # STATISTICS
 0 * * * * root /usr/local/bin/opencli docker-collect_stats && echo "$(date) Docker statistics collected" >> /var/log/openpanel/admin/cron.log
