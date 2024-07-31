@@ -38,7 +38,9 @@ if get_ssl_status():
 
 bind = ["0.0.0.0:" + str(get_custom_port())]
 backlog = 2048
-workers = multiprocessing.cpu_count() * 2 + 1
+calculated_workers = multiprocessing.cpu_count() * 2 + 1
+max_workers = 10
+workers = min(calculated_workers, max_workers)
 worker_class = 'gevent'
 worker_connections = 1000
 timeout = 30
