@@ -35,8 +35,9 @@ if get_ssl_status():
 
 bind = ["0.0.0.0:2087"]
 backlog = 2048
-workers = 2
-#workers = multiprocessing.cpu_count() + 1
+calculated_workers = multiprocessing.cpu_count() * 2 + 1
+max_workers = 10
+workers = min(calculated_workers, max_workers)
 
 # Use gevent worker class
 worker_class = 'gevent'
