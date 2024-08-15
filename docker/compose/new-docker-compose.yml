@@ -15,8 +15,8 @@ services:
       - openadmin_mysql:/var/lib/mysql
       - /etc/openpanel/:/etc/openpanel/
       - /etc/openpanel/docker/compose/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
-    mem_limit: 1g
-    cpus: 1
+    mem_limit: 0.1g
+    cpus: 0.1
     oom_kill_disable: true
 
   # OpenPanel service running on port 2083
