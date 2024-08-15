@@ -37,7 +37,6 @@ services:
       - /sys:/host/sys:ro
       - /:/hostfs:ro
       - /home:/home
-      - /etc/ufw:/etc/ufw
       - /usr/local/admin:/usr/local/admin
       - /usr/local/admin/scripts:/usr/local/admin/scripts
       - /var/log:/var/log
