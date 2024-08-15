@@ -93,7 +93,7 @@ services:
 
   # DNS
   bind9:
-    container_name: dns
+    container_name: openpanel_dns
     image: ubuntu/bind9:latest
     environment:
       - BIND9_USER=root
