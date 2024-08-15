@@ -48,8 +48,8 @@ services:
       - openadmin_mysql:/var/lib/mysql
       - /usr/bin/docker:/usr/bin/docker
     network_mode: host
-    mem_limit: 0.1g
-    cpus: 0.1
+    mem_limit: 1g
+    cpus: 1.0
     restart: always
     privileged: true
 
