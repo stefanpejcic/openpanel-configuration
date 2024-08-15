@@ -36,7 +36,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 8 * * * root /usr/local/bin/opencli backup-scheduler && echo "$(date) Backup scheduler executed" >> /var/log/openpanel/admin/cron.log
 
 # MONITORING
-* * * * * root /bin/bash /usr/local/admin/service/notifications.sh && echo "$(date) Notifications script executed" >> /var/log/openpanel/admin/cron.log
+*/5 * * * * root /bin/bash /usr/local/admin/service/notifications.sh && echo "$(date) Notifications script executed" >> /var/log/openpanel/admin/cron.log
 45 11 * * * root /bin/bash /usr/local/admin/service/notifications.sh --report && echo "$(date) Daily Usage Report generated" >> /var/log/openpanel/admin/cron.log
 @reboot root /bin/bash /usr/local/admin/service/notifications.sh --startup && echo "$(date) Notifications script executed at startup" >> /var/log/openpanel/admin/cron.log
 @reboot root /usr/local/bin/opencli server-on_startup && echo "$(date) Server startup tasks executed" >> /var/log/openpanel/admin/cron.log
