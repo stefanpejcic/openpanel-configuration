@@ -40,6 +40,7 @@ services:
       - /usr/local/admin:/usr/local/admin
       - /usr/local/admin/scripts:/usr/local/admin/scripts
       - /var/log:/var/log
+      - /etc/ufw:/etc/ufw
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/my.cnf:/etc/my.cnf
       - /etc/openpanel/:/etc/openpanel/
