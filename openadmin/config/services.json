@@ -19,7 +19,7 @@
     },
     {
         "name": "Web Server",
-        "type": "system",
+        "type": "docker",
         "on_dashboard": true,
         "real_name": "nginx"
     },
