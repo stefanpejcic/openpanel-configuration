@@ -7,7 +7,17 @@ server {
     access_log /var/log/nginx/domlogs/<DOMAIN_NAME>.log;
     include /etc/openpanel/openpanel/core/users/<USERNAME>/domains/<DOMAIN_NAME>-block_ips.conf;
 
+    # certbot
+    location ^~ /.well-known/ {
+        access_log           off;
+        log_not_found        off;
+        root                 /home/<USERNAME>/<DOMAIN_NAME>;
+        autoindex            off;
+        index                index.html;
+        try_files            $uri $uri/ =404;
+    }
 
+    # container
     location / {
         if ($scheme = "https") {
             proxy_pass https://<IP>;
