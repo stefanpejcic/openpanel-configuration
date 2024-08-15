@@ -91,8 +91,22 @@ services:
     cpus: 0.1
     oom_kill_disable: true
 
-
-
+  # DNS
+  bind9:
+    container_name: dns
+    image: ubuntu/bind9:latest
+    environment:
+      - BIND9_USER=root
+      - TZ=America/New_York
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - /etc/bind/:/etc/bind/
+    restart: unless-stopped
+    mem_limit: 0.1g
+    cpus: 0.1
+    oom_kill_disable: true
 
   #mailserver:
   #  image: ghcr.io/docker-mailserver/docker-mailserver:latest
