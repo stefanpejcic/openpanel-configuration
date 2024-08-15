@@ -47,11 +47,8 @@ services:
       - openadmin_mysql:/var/lib/mysql
       - /usr/bin/docker:/usr/bin/docker
     network_mode: host
-    deploy:
-      resources:
-        limits:
-          memory: 1g
-          cpus: '1.0'
+    mem_limit: 0.1g
+    cpus: 0.1
     restart: always
     privileged: true
 
@@ -74,7 +71,10 @@ services:
         - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/
         - /etc/hosts:/etc/hosts
     restart: unless-stopped
-
+    mem_limit: 1g
+    cpus: 1.0
+    oom_kill_disable: true
+    
   # SSL status and renewals
   certbot:
     image: certbot/certbot:latest
