@@ -48,12 +48,6 @@
         "real_name": "openpanel_dns"
     },
     {
-        "name": "File Watcher",
-        "type": "system",
-        "on_dashboard": false,
-        "real_name": "watcher"
-    },
-    {
         "name": "ConfigServer Firewall",
         "type": "system",
         "on_dashboard": true,
