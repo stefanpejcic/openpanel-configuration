@@ -47,6 +47,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - openadmin_mysql:/var/lib/mysql
       - /usr/bin/docker:/usr/bin/docker
+      - /root/:/root/
     network_mode: host
     mem_limit: 1g
     cpus: 1.0
