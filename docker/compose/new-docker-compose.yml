@@ -15,7 +15,7 @@ services:
       - openadmin_mysql:/var/lib/mysql
       - /etc/openpanel/:/etc/openpanel/
       - /etc/openpanel/docker/compose/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
-    mem_limit: 0.1g
+    mem_limit: 0.5g
     cpus: 1.0
     oom_kill_disable: true
 
