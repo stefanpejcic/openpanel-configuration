@@ -43,9 +43,9 @@
     },
     {
         "name": "DNS",
-        "type": "system",
+        "type": "docker",
         "on_dashboard": true,
-        "real_name": "named"
+        "real_name": "openpanel_dns"
     },
     {
         "name": "File Watcher",
