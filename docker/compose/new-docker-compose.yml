@@ -73,6 +73,7 @@ services:
         - /etc/letsencrypt/:/etc/letsencrypt/
         - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/
         - /etc/hosts:/etc/hosts
+        - /usr/share/nginx/html/:/usr/share/nginx/html/
     restart: unless-stopped
     mem_limit: 1g
     cpus: 1.0
