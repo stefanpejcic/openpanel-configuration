@@ -1,5 +1,5 @@
 server {
-    listen <LISTEN_IP>;
+    listen 80;
     server_name <DOMAIN_NAME>;
     modsecurity on;
     modsecurity_rules_file /etc/nginx/modsec/main.conf;
