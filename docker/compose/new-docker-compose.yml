@@ -68,6 +68,8 @@ services:
         - /etc/openpanel/nginx/error_pages/snippets/:/etc/nginx/snippets/
         - /etc/openpanel/nginx/error_pages/:/srv/http/default/
         - /var/log/nginx/:/var/log/nginx/
+        - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
+        - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
         - /etc/letsencrypt/:/etc/letsencrypt/
         - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/
         - /etc/hosts:/etc/hosts
