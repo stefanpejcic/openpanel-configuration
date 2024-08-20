@@ -48,6 +48,10 @@ services:
       - openadmin_mysql:/var/lib/mysql
       - /usr/bin/docker:/usr/bin/docker
       - /root/:/root/
+      #  https://dev.openpanel.com/customize.html#Custom-Code
+      - /etc/openpanel/openpanel/custom_code/:/usr/local/panel/templates/custom_code/
+      - /etc/openpanel/openpanel/custom_code/custom.css:/usr/local/panel/static/css/custom.css
+      - /etc/openpanel/openpanel/custom_code/custom.js:/usr/local/panel/static/js/custom.js
     network_mode: host
     mem_limit: 1g
     cpus: 1.0
@@ -83,12 +87,12 @@ services:
   certbot:
     image: certbot/certbot:latest
     container_name: certbot
-    network_mode: "host"  # Use host network for direct access to web servers
+    network_mode: "host"
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt                    # Let's Encrypt certificates
-      - /var/lib/letsencrypt:/var/lib/letsencrypt            # Working directory for Certbot
+      - /etc/letsencrypt:/etc/letsencrypt                     # Let's Encrypt certificates
+      - /var/lib/letsencrypt:/var/lib/letsencrypt             # Working directory for Certbot
       - /etc/nginx/sites-available:/etc/nginx/sites-available # Access to Nginx config for authentication challenges
-      - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled    # Enabled sites for reloading after cert issuance
+      - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled     # Enabled sites for reloading after cert issuance
     entrypoint: /bin/sh -c 'trap exit TERM; while :; do sleep 6h & wait $${!}; certbot renew; nginx -s reload; done'
     restart: unless-stopped
     mem_limit: 0.1g
@@ -112,61 +116,6 @@ services:
     cpus: 0.1
     oom_kill_disable: true
 
-  #mailserver:
-  #  image: ghcr.io/docker-mailserver/docker-mailserver:latest
-  #  container_name: openadmin_mailserver
-  #  hostname: mail.openpanel.site
-  #  env_file: mailserver.env
-  #  ports:
-  #    - "25:25"
-  #    - "143:143"
-  #    - "465:465"
-  #    - "587:587"
-  #    - "993:993"
-  #  volumes:
-  #    - ./docker-data/dms/mail-data/:/var/mail/
-  #    - ./docker-data/dms/mail-state/:/var/mail-state/
-  #    - ./docker-data/dms/mail-logs/:/var/log/mail/
-  #    - ./docker-data/dms/config/:/tmp/docker-mailserver/
-  #    - /etc/localtime:/etc/localtime:ro
-  #  restart: always
-  #  stop_grace_period: 1m
-  #  healthcheck:
-  #    test: "ss --listening --tcp | grep -P 'LISTEN.+:smtp' || exit 1"
-  #    timeout: 3s
-  #    retries: 0
-  #  deploy:
-  #    resources:
-  #      limits:
-  #        memory: 1g
-  #        cpus: '1.0'
-  #  networks:
-  #    - openadmin_mail_network
-
-  #roundcube:
-  #  image: roundcube/roundcubemail
-  #  container_name: openadmin_roundcube
-  #  restart: always
-  #  environment:
-  #    - ROUNDCUBEMAIL_DEFAULT_HOST=openadmin_mailserver
-  #    - ROUNDCUBEMAIL_SMTP_SERVER=openadmin_mailserver
-  #  ports:
-  #    - "8080:80"
-  #  networks:
-  #    - openadmin_mail_network
-  #  deploy:
-  #    resources:
-  #      limits:
-  #        memory: 1g
-  #        cpus: '1.0'
-
-
-#networks:
-#  openadmin_mail_network:
-#    driver: bridge
-
-
-
-# make the data persistent
+# make the mysql data persistent
 volumes:
   openadmin_mysql:
