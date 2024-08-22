@@ -60,7 +60,7 @@ services:
 
   # Webserver from 0.2.5+
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     container_name: nginx
     network_mode: "host"
     volumes:
@@ -76,7 +76,7 @@ services:
         - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
         - /etc/letsencrypt/:/etc/letsencrypt/
         - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/
-        - /etc/hosts:/etc/hosts
+        - /etc/hosts:/etc/hosts:ro
         - /usr/share/nginx/html/:/usr/share/nginx/html/
     restart: unless-stopped
     mem_limit: 1g
