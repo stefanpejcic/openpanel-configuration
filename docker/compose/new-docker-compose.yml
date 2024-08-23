@@ -69,6 +69,7 @@ services:
         - /etc/openpanel/nginx/vhosts/openpanel_proxy.conf:/etc/openpanel/nginx/vhosts/openpanel_proxy.conf
         - /etc/nginx/sites-available/:/etc/nginx/sites-available/
         - /etc/nginx/sites-enabled/:/etc/nginx/sites-enabled/
+        - /etc/nginx/ssl/:/etc/nginx/ssl/ # for custom ssl from 0.2.6
         - /etc/openpanel/nginx/error_pages/snippets/:/etc/nginx/snippets/
         - /etc/openpanel/nginx/error_pages/:/srv/http/default/
         - /var/log/nginx/:/var/log/nginx/
