@@ -52,6 +52,7 @@ services:
       - /etc/openpanel/openpanel/custom_code/:/usr/local/panel/templates/custom_code/
       - /etc/openpanel/openpanel/custom_code/custom.css:/usr/local/panel/static/css/custom.css
       - /etc/openpanel/openpanel/custom_code/custom.js:/usr/local/panel/static/js/custom.js
+      - /etc/openpanel/openpanel/conf/knowledge_base_articles.json:/etc/openpanel/openpanel/conf/knowledge_base_articles.json
     network_mode: host
     mem_limit: 1g
     cpus: 1.0
