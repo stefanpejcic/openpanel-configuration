@@ -17,3 +17,5 @@ ns2     14400     IN      A       {server_ip}
 www     14400     IN      CNAME   {domain}.
 
 mail    14400     IN      A       {server_ip}
+
+{domain}.    14400     IN      TXT       "v=spf1 ip4:{server_ip} +a +mx ~all"
