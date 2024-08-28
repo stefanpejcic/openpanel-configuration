@@ -1,7 +1,7 @@
 {
     "name": "System configuration only",
     "destination": "2",
-    "directory": "backup",
+    "directory": "/backup",
     "type": ["configuration"],
     "schedule": "monthly",
     "retention": "4",
