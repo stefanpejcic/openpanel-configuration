@@ -1,0 +1,39 @@
+name: Update Serial Number Daily
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight UTC
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  update-serial:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Update serial number
+        run: |
+          # Get today's date in YYYYMMDD format
+          DATE=$(date -u +"%Y%m%d")
+          
+          # Define the file path
+          FILE="bind9/zone_template.txt"
+          
+          # Read the content of the file
+          CONTENT=$(cat $FILE)
+          
+          # Update the serial number with today's date
+          NEW_CONTENT=$(echo "$CONTENT" | sed "s/^${DATE:0:8}[0-9][0-9]/${DATE}01/")
+          
+          # Write the updated content back to the file
+          echo "$NEW_CONTENT" > $FILE
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'bind9/zone_template.txt'
+          message: 'Update serial number with current date'
+          author_name: 'GitHub Actions'
+          author_email: 'actions@github.com'
