@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Update serial number
         run: |
@@ -31,3 +33,4 @@ jobs:
           message: 'Update serial number with current date'
           author_name: 'GitHub Actions'
           author_email: 'actions@github.com'
+          token: ${{ secrets.PAT_TOKEN }}
