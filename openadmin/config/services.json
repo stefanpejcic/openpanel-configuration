@@ -26,7 +26,7 @@
     {
         "name": "Dovecot & Postfix",
         "type": "docker",
-        "on_dashboard": false,
+        "on_dashboard": true,
         "real_name": "openadmin_mailserver"
     },
     {
