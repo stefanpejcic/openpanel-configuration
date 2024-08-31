@@ -21,14 +21,8 @@ jobs:
           # Define the file path
           FILE="bind9/zone_template.txt"
           
-          # Read the content of the file
-          CONTENT=$(cat $FILE)
-          
-          # Update the serial number with today's date
-          NEW_CONTENT=$(echo "$CONTENT" | sed "s/^${DATE:0:8}[0-9][0-9]/${DATE}01/")
-          
-          # Write the updated content back to the file
-          echo "$NEW_CONTENT" > $FILE
+          # Update the serial number in the file
+          sed -i -E "s/^([[:space:]]*[0-9]{8})[0-9]{2}/\1${DATE}01/" $FILE
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
