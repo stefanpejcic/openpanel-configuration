@@ -34,3 +34,4 @@ jobs:
           author_name: 'GitHub Actions'
           author_email: 'actions@github.com'
           token: ${{ secrets.PAT_TOKEN }}
+
