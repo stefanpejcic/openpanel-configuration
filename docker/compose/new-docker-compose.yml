@@ -80,6 +80,7 @@ services:
         - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/
         - /etc/hosts:/etc/hosts:ro
         - /usr/share/nginx/html/:/usr/share/nginx/html/
+        - /home/:/home/
     restart: unless-stopped
     mem_limit: 1g
     cpus: 1.0
