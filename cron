@@ -27,6 +27,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 4 * * * root /usr/local/bin/opencli websites-pagespeed --all && echo "$(date) Google PageSpeed data collected for all domains" >> /var/log/openpanel/admin/cron.log
 
 # MAINTENANCE
+*/5 * * * * root /bin/bash /usr/local/admin/scripts/server/recreate_hosts && echo "$(date) /etc/hosts file recreated via cron" >> /var/log/openpanel/admin/cron.log
 * 2 * * * root /usr/local/bin/opencli docker-usage_stats_cleanup && echo "$(date) Docker usage stats cleanup executed" >> /var/log/openpanel/admin/cron.log
 15 0 * * * root /usr/local/bin/opencli update && echo "$(date) System update executed" >> /var/log/openpanel/admin/cron.log
 0 0 12 * * root /usr/local/bin/opencli server-ips && echo "$(date) Server IP listing executed" >> /var/log/openpanel/admin/cron.log
