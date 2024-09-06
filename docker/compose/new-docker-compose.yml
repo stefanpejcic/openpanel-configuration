@@ -78,7 +78,7 @@ services:
         - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
         - /etc/letsencrypt/:/etc/letsencrypt/
         - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/
-        - /etc/hosts:/etc/hosts:ro
+        - /etc/hosts:/etc/hosts
         - /usr/share/nginx/html/:/usr/share/nginx/html/
         - /home/:/home/:ro
     restart: unless-stopped
