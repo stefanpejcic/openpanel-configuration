@@ -1,7 +1,7 @@
 {
     "name": "Partial backup for each account",
     "destination": "1",
-    "directory": "backup",
+    "directory": "/backup",
     "type": ["partial"],
     "schedule": "weekly",
     "retention": "4",
