@@ -1,7 +1,7 @@
 {
-    "name": "Full backup for each account",
+    "name": "Full snapshot for each account",
     "destination": "1",
-    "directory": "backup",
+    "directory": "/backup",
     "type": ["accounts"],
     "schedule": "daily",
     "retention": "30",
