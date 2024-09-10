@@ -119,6 +119,41 @@ services:
     cpus: 0.1
     oom_kill_disable: true
 
+  # FTP
+  ftp_env_generator:
+    image: alpine:latest
+    container_name: ftp_env_generator
+    volumes:
+      - /etc/openpanel/ftp/:/etc/openpanel/ftp/
+      - /usr/local/admin/scripts/ftp/users:/usr/local/admin/scripts/ftp/users
+    entrypoint: /bin/sh -c "/usr/local/admin/scripts/ftp/users"
+    restart: "no"  # Do not restart, we just want it to run once
+
+  openadmin_ftp:
+    image: delfer/alpine-ftp-server
+    container_name: openadmin_ftp
+    restart: always
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    volumes:
+      - /home/:/home/
+      - /etc/openpanel/users/:/etc/openpanel/ftp/users/
+      # uncomment for ssl # - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - ftp_env_generator
+    env_file:
+      - /etc/openpanel/ftp/all.users
+    # uncomment the following lines for SSL and replace ftp.YOUR_DOMAIN_HERE.com with your domain
+    # environment:
+      # - ADDRESS=ftp.YOUR_DOMAIN_HERE.com
+      # - TLS_CERT="/etc/letsencrypt/live/ftp.YOUR_DOMAIN_HERE.com/fullchain.pem"
+      # - TLS_KEY="/etc/letsencrypt/live/ftp.YOUR_DOMAIN_HERE.com/privkey.pem"
+    mem_limit: 0.5g
+    cpus: 0.5
+
+
+
 # make the mysql data persistent
 volumes:
   openadmin_mysql:
