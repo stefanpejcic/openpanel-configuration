@@ -42,6 +42,12 @@
         "real_name": "openpanel_mysql"
     },
     {
+        "name": "FTP",
+        "type": "docker",
+        "on_dashboard": false,
+        "real_name": "openadmin_ftp"
+    },
+    {
         "name": "DNS",
         "type": "docker",
         "on_dashboard": true,
