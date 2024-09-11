@@ -130,7 +130,9 @@ services:
     restart: "no"  # Do not restart, we just want it to run once
 
   openadmin_ftp:
-    image: delfer/alpine-ftp-server
+    #OLD# image: delfer/alpine-ftp-server
+    build:
+      context: /etc/openpanel/ftp/    
     container_name: openadmin_ftp
     restart: always
     ports:
