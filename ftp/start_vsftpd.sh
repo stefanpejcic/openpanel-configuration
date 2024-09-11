@@ -38,8 +38,9 @@ for i in $USERS ; do
   fi
 
     if [ -z "$GID" ]; then
-      GID=$UID
+      GID="33" # www-data group
     fi
+    
     #Check if the group with the same ID already exists
     GROUP=$(getent group $GID | cut -d: -f1)
     if [ ! -z "$GROUP" ]; then
