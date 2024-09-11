@@ -138,6 +138,9 @@ services:
       - "21000-21010:21000-21010"
     volumes:
       - /home/:/home/
+      - /etc/openpanel/ftp/vsftpd.conf:/etc/vsftpd/vsftpd.conf
+      - /etc/openpanel/ftp/start_vsftpd.sh:/bin/start_vsftpd.sh
+      - /etc/openpanel/ftp/vsftpd.chroot_list:/etc/vsftpd.chroot_list
       - /etc/openpanel/users/:/etc/openpanel/ftp/users/
       # uncomment for ssl # - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
