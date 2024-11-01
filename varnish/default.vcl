@@ -1,15 +1,21 @@
 vcl 4.1;
 
-backend default {
+backend http_backend {
     .host = "127.0.0.1";
     .port = "8080";
 }
 
+backend https_backend {
+    .host = "127.0.0.1";
+    .port = "8443";
+}
+
 sub vcl_recv {
     if (req.http.X-Forwarded-Proto == "https") {
-        set req.http.X-Forwarded-Proto = "https";
+        set req.backend_hint = https_backend;
+    } else {
+        set req.backend_hint = http_backend;
     }
-    set req.backend_hint = default;
 }
 
 sub vcl_backend_response {
