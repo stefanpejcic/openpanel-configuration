@@ -55,7 +55,7 @@ services:
       - /usr/local/admin/scripts:/usr/local/admin/scripts
       - /var/log:/var/log
       - /etc/ufw:/etc/ufw
-      - /var/lib/csf/:/var/lib/csf/csf/
+      - /var/lib/csf/:/var/lib/csf/
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/my.cnf:/etc/my.cnf
       - /etc/openpanel/:/etc/openpanel/
