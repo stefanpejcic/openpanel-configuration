@@ -8,6 +8,8 @@ backend default {
 sub vcl_recv {
     if (req.http.X-Forwarded-Proto == "https") {
         set req.http.X-Forwarded-Proto = "https";
+    } else {
+        set req.http.X-Forwarded-Proto = "http";
     }
     set req.backend_hint = default;
 }
