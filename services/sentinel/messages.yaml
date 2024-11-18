@@ -26,8 +26,6 @@ DISK_USAGE:
   title: "⚠️ Running out of Disk Space!"
   message: ""
 
-  
-
 SSH_LOGIN:
   title: "Suspicious SSH login detected"
   message: "SSH users currently logged-in that have not accessed OpenAdmin interface. IP addresses: "
