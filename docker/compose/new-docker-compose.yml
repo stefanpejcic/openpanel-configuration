@@ -112,10 +112,11 @@ services:
     container_name: certbot
     network_mode: "host"
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt                     # Let's Encrypt certificates
-      - /var/lib/letsencrypt:/var/lib/letsencrypt             # Working directory for Certbot
-      - /etc/nginx/sites-available:/etc/nginx/sites-available # Access to Nginx config for authentication challenges
-      - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled     # Enabled sites for reloading after cert issuance
+      - /etc/letsencrypt:/etc/letsencrypt                                         # Let's Encrypt certificates are stored here
+      - /var/lib/letsencrypt:/var/lib/letsencrypt                                 # Working directory for Certbot container
+      - /etc/nginx/sites-available:/etc/nginx/sites-available                     # Access to Nginx config for authentication challenges
+      - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled                         # Enabled sites for reloading after cert issuance
+      - /var/log/letsencrypt/letsencrypt.log:/var/log/letsencrypt/letsencrypt.log # for troubleshooting
     entrypoint: /bin/sh -c 'trap exit TERM; while :; do sleep 6h & wait $${!}; certbot renew; nginx -s reload; done'
     restart: unless-stopped
     mem_limit: 0.1g
