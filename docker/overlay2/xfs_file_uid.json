@@ -1,5 +1,4 @@
 {
-  "userns-remap": "default",
 	"log-driver": "local",
 	"log-opts": {
 		"max-size": "5m"
