@@ -76,6 +76,7 @@ services:
     mem_limit: 1g
     cpus: 1.0
     restart: always
+    privileged: true
     userns_mode: host
 
   # Webserver from 0.2.5+
