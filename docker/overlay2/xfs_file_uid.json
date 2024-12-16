@@ -1,7 +1,5 @@
 {
   "userns-remap": "default",
-  "data-root": "/var/lib/docker",
-	"storage-driver": "overlay2",
 	"log-driver": "local",
 	"log-opts": {
 		"max-size": "5m"
