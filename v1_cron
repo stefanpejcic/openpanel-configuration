@@ -24,7 +24,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 * * * * root /usr/local/bin/opencli docker-collect_stats && echo "$(date) Docker statistics collected" >> /var/log/openpanel/admin/cron.log
 30 2 * * * root /usr/local/bin/opencli domains-stats && echo "$(date) Domain statistics collected" >> /var/log/openpanel/admin/cron.log
 0 4 * * * root /usr/local/bin/opencli websites-pagespeed --all && echo "$(date) Google PageSpeed data collected for all domains" >> /var/log/openpanel/admin/cron.log
-0 * * * * root repquota -u / > /etc/openpanel/openpanel/core/users/repquota && echo "$(date) Cached quota data refreshed for all users" >> /var/log/openpanel/admin/cron.log
+0 */4 * * * root /usr/local/bin/opencli user-quota --all && echo "$(date) Disk and Inodes limits applied and cached data refreshed all users" >> /var/log/openpanel/admin/cron.log
 
 
 # MAINTENANCE
