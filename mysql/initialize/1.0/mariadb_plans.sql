@@ -61,7 +61,8 @@ CREATE TABLE `plans` (
 
 LOCK TABLES `plans` WRITE;
 /*!40000 ALTER TABLE `plans` DISABLE KEYS */;
-INSERT INTO `plans` VALUES (1,'ubuntu_nginx_mysql','Unlimited disk space and Nginx',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/nginx',100,'0 GB'),(2,'ubuntu_apache_mysql','Unlimited disk space and Apache',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/apache',100),(3,'ubuntu_apache_mariadb','Unlimited disk space and Apache+MariaDB',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/apache-mariadb',100),(4,'ubuntu_nginx_mariadb','Unlimited disk space and Nginx+MariaDB',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/nginx-mariadb',100);
+INSERT INTO `plans` VALUES (1,'ubuntu_nginx_mysql','Unlimited disk space and Nginx',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/nginx',100,'0 GB'),(2,'ubuntu_apache_mysql','Unlimited disk space and Apache',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/apache',100),
+  (3,'ubuntu_apache_mariadb','Unlimited disk space and Apache+MariaDB',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/apache-mariadb',100),(4,'ubuntu_nginx_mariadb','Unlimited disk space and Nginx+MariaDB',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/nginx-mariadb',100),(5,'ubuntu_litespeed_mysql','Unlimited disk space and OpenLiteSpeed+MySQL',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/litespeed-mariadb',100),(6,'ubuntu_litespeed_mariadb','Unlimited disk space and OpenLiteSpeed+MariaDB',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/litespeed-mysql',100);
 /*!40000 ALTER TABLE `plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +178,7 @@ ALTER TABLE `domains`
 -- AUTO_INCREMENT for table `plans`
 --
 ALTER TABLE `plans`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sites`
