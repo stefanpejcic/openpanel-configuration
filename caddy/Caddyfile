@@ -1,0 +1,10 @@
+# redirects
+
+* {
+    redir /openpanel https://openpanel.yourdomain.com
+    redir /webmail https://webmail.yourdomain.com
+}
+
+
+# import all sites
+import /etc/openpanel/openpanel/core/users/*/domains
