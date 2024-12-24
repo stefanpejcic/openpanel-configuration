@@ -86,7 +86,7 @@ services:
     network_mode: "host"
     volumes:
       - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile                    # Caddy config
-      - /etc/openpanel/caddy/sites:/etc/caddy/sites                            # Site configurations (optional, modular sites)
+      - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/ # domains files
       - /etc/openpanel/caddy/ssl:/data/caddy/certificates                      # Custom SSL certificates
       - /etc/openpanel/caddy/logs:/var/log/caddy                               # Caddy logs
       - /etc/hosts:/etc/hosts                                                  # To maintain host configurations
