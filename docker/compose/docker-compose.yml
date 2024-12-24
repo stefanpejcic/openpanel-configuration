@@ -19,12 +19,26 @@ services:
     cpus: 1.0
     oom_kill_disable: true
 
+  # Malware Scanner used from user panel
+  clamav:
+    image: clamav/clamav:latest
+    container_name: clamav
+    volumes:
+      - /home:/home
+      - ./clamav-db:/var/lib/clamav
+    restart: unless-stopped
+    environment:
+      - CLAMD_STARTUP_DELAY=30
+    mem_limit: 1g
+    cpus: 1.0
+
   # OpenPanel service running on port 2083
   openpanel:
     image: openpanel/openpanel
     container_name: openpanel
     depends_on:
       - openpanel_mysql
+      #- clamav
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -41,6 +55,7 @@ services:
       - /usr/local/admin/scripts:/usr/local/admin/scripts
       - /var/log:/var/log
       - /etc/ufw:/etc/ufw
+      - /var/lib/csf/:/var/lib/csf/
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/my.cnf:/etc/my.cnf
       - /etc/openpanel/:/etc/openpanel/
@@ -53,43 +68,29 @@ services:
       - /etc/openpanel/openpanel/custom_code/custom.css:/usr/local/panel/static/css/custom.css
       - /etc/openpanel/openpanel/custom_code/custom.js:/usr/local/panel/static/js/custom.js
       - /etc/openpanel/openpanel/conf/knowledge_base_articles.json:/etc/openpanel/openpanel/conf/knowledge_base_articles.json
+      # localization
+      - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/
+      # emails
+      - /usr/local/mail/openmail/:/usr/local/mail/openmail/
     network_mode: host
     mem_limit: 1g
     cpus: 1.0
     restart: always
     privileged: true
+    userns_mode: host
 
-  # Webserver from 0.2.5+
-  nginx:
-    image: openpanel/waf # openpanel/waf for modsecurity or nginx:alpine
-    container_name: nginx
+  # Webserver from 1.0.0
+  caddy:
+    image: caddy:latest
+    container_name: caddy
     network_mode: "host"
     volumes:
-        - /etc/openpanel/nginx/nginx.conf:/usr/local/nginx/conf/nginx.conf                  # for modsecurity
-        # - /etc/openpanel/nginx/nginx.conf:/etc/nginx/nginx.conf                           # for standalone nginx
-        - /etc/openpanel/nginx/vhosts/default.conf:/etc/nginx/conf.d/default.conf 
-        - /etc/openpanel/nginx/vhosts/openpanel_proxy.conf:/etc/openpanel/nginx/vhosts/openpanel_proxy.conf
-        - /etc/nginx/sites-available/:/etc/nginx/sites-available/
-        - /etc/nginx/sites-enabled/:/etc/nginx/sites-enabled/
-        - /etc/nginx/ssl/:/etc/nginx/ssl/ # for custom ssl from 0.2.6
-        - /etc/openpanel/nginx/error_pages/snippets/:/usr/local/nginx/conf/snippets/
-        - /etc/openpanel/nginx/error_pages/:/srv/http/default/
-        - /var/log/nginx/:/var/log/nginx/
-        - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
-        - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
-        - /etc/letsencrypt/:/etc/letsencrypt/
-        - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/
-        - /etc/hosts:/etc/hosts
-        - /usr/share/nginx/html/:/usr/share/nginx/html/
-        - /home/:/home/:ro
-        # start modsecurity #
-        - /etc/openpanel/nginx/modsecurity/modsec_includes.conf:/usr/local/nginx/conf/modsec_includes.conf
-        - /etc/openpanel/nginx/modsecurity/modsecurity.conf:/usr/local/nginx/conf/modsecurity.conf
-        - /etc/openpanel/nginx/modsecurity/crs-setup.conf:/usr/local/nginx/conf/rules/crs-setup.conf
-        - /etc/openpanel/nginx/modsecurity/rules/:/usr/local/nginx/conf/rules/
-        - /etc/openpanel/nginx/modsecurity/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/usr/local/nginx/conf/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf
-        - /etc/openpanel/nginx/modsecurity/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf:/usr/local/nginx/conf/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
-        #   end modsecurity #
+      - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile                    # Caddy config
+      - /etc/openpanel/caddy/sites:/etc/caddy/sites                            # Site configurations (optional, modular sites)
+      - /etc/openpanel/caddy/ssl:/data/caddy/certificates                      # Custom SSL certificates
+      - /etc/openpanel/caddy/logs:/var/log/caddy                               # Caddy logs
+      - /etc/hosts:/etc/hosts                                                  # To maintain host configurations
+      - /home:/home                                                            # user files
     restart: unless-stopped
     mem_limit: 1g
     cpus: 1.0
@@ -101,10 +102,11 @@ services:
     container_name: certbot
     network_mode: "host"
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt                     # Let's Encrypt certificates
-      - /var/lib/letsencrypt:/var/lib/letsencrypt             # Working directory for Certbot
-      - /etc/nginx/sites-available:/etc/nginx/sites-available # Access to Nginx config for authentication challenges
-      - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled     # Enabled sites for reloading after cert issuance
+      - /etc/letsencrypt:/etc/letsencrypt                                         # Let's Encrypt certificates are stored here
+      - /var/lib/letsencrypt:/var/lib/letsencrypt                                 # Working directory for Certbot container
+      - /etc/nginx/sites-available:/etc/nginx/sites-available                     # Access to Nginx config for authentication challenges
+      - /etc/nginx/sites-enabled:/etc/nginx/sites-enabled                         # Enabled sites for reloading after cert issuance
+      - /var/log/letsencrypt/letsencrypt.log:/var/log/letsencrypt/letsencrypt.log # for troubleshooting
     entrypoint: /bin/sh -c 'trap exit TERM; while :; do sleep 6h & wait $${!}; certbot renew; nginx -s reload; done'
     restart: unless-stopped
     mem_limit: 0.1g
@@ -136,10 +138,9 @@ services:
       - /etc/openpanel/ftp/:/etc/openpanel/ftp/
       - /usr/local/admin/scripts/ftp/users:/usr/local/admin/scripts/ftp/users
     entrypoint: /bin/sh -c "/usr/local/admin/scripts/ftp/users"
-    restart: "no"  # Do not restart, we just want it to run once
+    restart: "no"  # only run once
 
   openadmin_ftp:
-    #OLD# image: delfer/alpine-ftp-server
     build:
       context: /etc/openpanel/ftp/    
     container_name: openadmin_ftp
@@ -153,16 +154,10 @@ services:
       - /etc/openpanel/ftp/start_vsftpd.sh:/bin/start_vsftpd.sh
       - /etc/openpanel/ftp/vsftpd.chroot_list:/etc/vsftpd.chroot_list
       - /etc/openpanel/users/:/etc/openpanel/ftp/users/
-      # uncomment for ssl # - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - ftp_env_generator
     env_file:
       - /etc/openpanel/ftp/all.users
-    # uncomment the following lines for SSL and replace ftp.YOUR_DOMAIN_HERE.com with your domain
-    # environment:
-      # - ADDRESS=ftp.YOUR_DOMAIN_HERE.com
-      # - TLS_CERT="/etc/letsencrypt/live/ftp.YOUR_DOMAIN_HERE.com/fullchain.pem"
-      # - TLS_KEY="/etc/letsencrypt/live/ftp.YOUR_DOMAIN_HERE.com/privkey.pem"
     mem_limit: 0.5g
     cpus: 0.5
 
