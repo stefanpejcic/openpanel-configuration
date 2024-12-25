@@ -1,5 +1,11 @@
-# redirects
+# ssl
+{
+    on_demand_tls {
+        ask "http://localhost:2087/allow"
+    }
+}
 
+# redirects
 * {
     redir /openpanel https://openpanel.yourdomain.com
     redir /webmail https://webmail.yourdomain.com
