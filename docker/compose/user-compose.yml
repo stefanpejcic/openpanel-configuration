@@ -1,11 +1,15 @@
 services:
-  ${username}_service:
+  user_service:
     image: ${docker_image}
     container_name: ${username}
     hostname: ${hostname}
     restart: unless-stopped
     ports:
-      - "${ports_param}"
+      - "${port_1}"
+      - "${port_2}"
+      - "${port_3}"
+      - "${port_4}"
+      - "${port_5}"
     deploy:
       resources:
         limits:
