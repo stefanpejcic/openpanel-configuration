@@ -1,0 +1,27 @@
+services:
+  ${username}_service:
+    image: ${docker_image}
+    container_name: ${username}
+    hostname: ${hostname}
+    restart: unless-stopped
+    ports:
+      - "${ports_param}"
+    deploy:
+      resources:
+        limits:
+          cpus: "${cpu}"
+          memory: "${ram}"
+    volumes:
+      - /home/${username}/var/crons:/var/spool/cron/crontabs
+      - /home/${username}:/home/${username}
+      - /home/${username}/var/lib/mysql:/var/lib/mysql
+      - /home/${username}/var/lib/php/sessions:/var/lib/php/sessions
+      - /home/${username}/etc/${path}/sites-available:/etc/${path}/sites-available
+      - /etc/openpanel/skeleton/motd:/etc/motd:ro
+      - /etc/openpanel/nginx/default_page.html:/etc/${path}/default_page.html:ro
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
