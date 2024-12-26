@@ -87,8 +87,6 @@ services:
       # emails
       - /usr/local/mail/openmail/:/usr/local/mail/openmail/
     network_mode: host
-    mem_limit: 1g
-    cpus: 1.0
     restart: always
     privileged: true
     userns_mode: host
