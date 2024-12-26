@@ -61,7 +61,7 @@ CREATE TABLE `plans` (
 
 LOCK TABLES `plans` WRITE;
 /*!40000 ALTER TABLE `plans` DISABLE KEYS */;
-INSERT INTO `plans` VALUES (1,'ubuntu_nginx_mysql','Unlimited disk space and Nginx',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/nginx',100),(2,'ubuntu_apache_mysql','Unlimited disk space and Apache',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/apache',100);
+INSERT INTO `plans` VALUES (1,'ubuntu_nginx_mysql','Ubuntu24 with Nginx and MySQL',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/nginx',100),(2,'ubuntu_apache_mysql','Ubuntu24 with Apache and MySQL',0,10,0,0,'10 GB',1000000,0,'1','1g','openpanel/apache',100);
 /*!40000 ALTER TABLE `plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
