@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `domains` (
   `domain_id` int NOT NULL,
-  `domain_name` varchar(255) NOT NULL,
+  `docroot` varchar(255) NOT NULL,
   `domain_url` varchar(255) NOT NULL,
   `user_id` int DEFAULT NULL,
   `php_version` varchar(255) DEFAULT '8.2'
