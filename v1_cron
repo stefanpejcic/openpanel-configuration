@@ -33,6 +33,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 0 12 * * root /usr/local/bin/opencli server-ips && echo "$(date) Server IP listing executed" >> /var/log/openpanel/admin/cron.log
 0 */10 * * * root /usr/local/bin/opencli server-motd && echo "$(date) Server MOTD updated" >> /var/log/openpanel/admin/cron.log
 0 */8 * * * root /usr/local/bin/opencli ftp-users && echo "$(date) FTP users file recreated" >> /var/log/openpanel/admin/cron.log
+0 */1 * * * root quotacheck -avm && repquota -u / > /etc/openpanel/openpanel/core/users/repquota > /dev/null 2>&1 && echo "$(date) User quotas recalculated" >> /var/log/openpanel/admin/cron.log
+
 
 # BACKUPS
 0 7 * * * root /usr/local/bin/opencli backup-check && echo "$(date) Backup check executed" >> /var/log/openpanel/admin/cron.log
