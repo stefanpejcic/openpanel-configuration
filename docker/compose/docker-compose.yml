@@ -32,12 +32,25 @@ services:
     mem_limit: 1g
     cpus: 1.0
 
+# used by panel ui to store user sessions and counters
+  openpanel_redis:
+    image: redis:latest
+    container_name: openpanel_redis
+    command: ["redis-server", "--unixsocket", "/tmp/redis/redis.sock", "--unixsocketperm", "770"]
+    network_mode: host
+    volumes:
+      - /tmp/redis/:/tmp/redis/
+    mem_limit: 0.1g
+    cpus: 0.1
+    restart: always
+
   # OpenPanel service running on port 2083
   openpanel:
     image: openpanel/openpanel
     container_name: openpanel
     depends_on:
       - openpanel_mysql
+      - openpanel_redis
       #- clamav
     cap_add:
       - NET_ADMIN
@@ -63,6 +76,7 @@ services:
       - openadmin_mysql:/var/lib/mysql
       - /usr/bin/docker:/usr/bin/docker
       - /root/:/root/
+      - /tmp/redis/:/tmp/redis/
       #  https://dev.openpanel.com/customize.html#Custom-Code
       - /etc/openpanel/openpanel/custom_code/:/usr/local/panel/templates/custom_code/
       - /etc/openpanel/openpanel/custom_code/custom.css:/usr/local/panel/static/css/custom.css
