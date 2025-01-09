@@ -18,7 +18,7 @@ services:
     volumes:
       - /home/${username}/var/crons:/var/spool/cron/crontabs
       - /home/${username}:/home/${username}
-      - /home/${username}/var/lib/mysql:/var/lib/mysql
+      #- /home/${username}/var/lib/mysql:/var/lib/mysql
       - /home/${username}/var/lib/php/sessions:/var/lib/php/sessions
       - /home/${username}/etc/${path}/sites-available:/etc/${path}/sites-available
       - /etc/openpanel/skeleton/motd:/etc/motd:ro
