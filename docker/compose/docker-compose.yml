@@ -96,11 +96,10 @@ services:
     network_mode: "host"
     volumes:
       - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile                    # Caddy config
-      - /etc/openpanel/openpanel/core/users/:/etc/openpanel/openpanel/core/users/ # domains files
+      - /etc/openpanel/caddy/domains/:/etc/openpanel/caddy/domains/            # domains files
       - /etc/openpanel/caddy/ssl:/data/caddy/certificates                      # Custom SSL certificates
       - /etc/openpanel/caddy/logs:/var/log/caddy                               # Caddy logs
-      - /etc/hosts:/etc/hosts                                                  # To maintain host configurations
-      - /home:/home                                                            # user files
+      - /etc/openpanel/caddy/templates/:/etc/openpanel/caddy/templates/        # suspended user and domain templates
     restart: unless-stopped
     mem_limit: 1g
     cpus: 1.0
