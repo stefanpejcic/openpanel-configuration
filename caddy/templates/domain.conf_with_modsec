@@ -9,7 +9,19 @@
                 SecRuleEngine On
             `
         }
-        reverse_proxy <BACKEND_PROXY>
+
+        # SSL
+        @https {
+            protocol https
+        }
+        reverse_proxy @https 127.0.0.1:<SSL_PORT>
+
+        # non-SSL
+        @http {
+            protocol http
+        }
+        reverse_proxy @http 127.0.0.1:<NON_SSL_PORT>
+
     }
 
         tls {
