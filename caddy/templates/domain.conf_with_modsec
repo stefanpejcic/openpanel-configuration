@@ -1,0 +1,18 @@
+<DOMAIN_NAME>, *.<DOMAIN_NAME> {
+    route {
+        coraza_waf {
+            load_owasp_crs
+            directives `
+                Include /etc/openpanel/caddy/coraza_rules.conf
+                Include /etc/openpanel/caddy/coreruleset/crs-setup.conf.example
+                Include /etc/openpanel/caddy/coreruleset/rules/*.conf
+                SecRuleEngine On
+            `
+        }
+        reverse_proxy <BACKEND_PROXY>
+    }
+
+        tls {
+                on_demand
+        }
+}
