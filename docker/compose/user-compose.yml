@@ -10,6 +10,7 @@ services:
       - "${port_3}"
       - "${port_4}"
       - "${port_5}"
+      - "${port_6}"
     deploy:
       resources:
         limits:
