@@ -27,6 +27,7 @@ services:
       - /home:/home
       - ./clamav-db:/var/lib/clamav
     restart: unless-stopped
+    network_mode: host # needed to update db daily
     environment:
       - CLAMD_STARTUP_DELAY=30
     mem_limit: 1g
