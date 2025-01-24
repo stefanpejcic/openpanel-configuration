@@ -11,7 +11,7 @@
 # Author: Stefan Pejcic (stefan@pejcic.rs)                                               #
 ##########################################################################################
 
-VERSION=$(cat /usr/local/panel/version)
+VERSION=$(opencli version)
 CONFIG_FILE_PATH='/etc/openpanel/openpanel/conf/openpanel.config'
 GITHUB_CONF_REPO="https://github.com/stefanpejcic/openpanel-configuration"
 GREEN='\033[0;32m'
