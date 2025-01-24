@@ -72,7 +72,7 @@ get_force_domain() {
 }
 
 get_public_ip() {
-    ip=$(curl --silent --max-time 1 -4 https://ip.openpanel.co || wget --timeout=1 -qO- https://ip.openpanel.co || curl --silent --max-time 1 -4 https://ifconfig.me)
+    ip=$(curl --silent --max-time 1 -4 https://ip.openpanel.com || wget --timeout=1 -qO- https://ipv4.openpanel.com || curl --silent --max-time 1 -4 https://ifconfig.me)
     
     if [ -z "$ip" ] || ! [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         ip=$(hostname -I | awk '{print $1}')
