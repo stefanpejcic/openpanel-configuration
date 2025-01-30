@@ -10,7 +10,7 @@ from pathlib import Path
 
 # File paths
 CADDYFILE_PATH = "/etc/caddy/Caddyfile"
-CADDY_CERT_DIR = "/var/lib/caddy/certificates/acme-v2.example.com/"
+CADDY_CERT_DIR = "/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"
 DOCKER_COMPOSE_PATH = "/root/docker-compose.yml"
 
 
@@ -63,6 +63,7 @@ def get_domain_from_caddyfile():
 
 def check_ssl_exists(domain):
     cert_path = os.path.join(CADDY_CERT_DIR, domain)
+    # check if cert and key exist
     return os.path.exists(cert_path) and os.listdir(cert_path)
 
 
