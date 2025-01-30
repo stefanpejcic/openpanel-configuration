@@ -3,21 +3,35 @@
 # https://docs.gunicorn.org/en/stable/settings.html
 
 import multiprocessing
-from gunicorn.config import Config
-import configparser
 import os
-from pathlib import Path
 import re
+import yaml  # pip install pyyaml
+from pathlib import Path
 
-CONFIG_FILE_PATH = '/etc/openpanel/openpanel/conf/openpanel.config'
-CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
+# File paths
+CADDYFILE_PATH = "/etc/caddy/Caddyfile"
 CADDY_CERT_DIR = "/var/lib/caddy/certificates/acme-v2.example.com/"
+DOCKER_COMPOSE_PATH = "/root/docker-compose.yml"
 
-def read_config():
-    config = configparser.ConfigParser()
-    if os.path.exists(CONFIG_FILE_PATH):
-        config.read(CONFIG_FILE_PATH)
-    return config
+
+def get_port_from_dockerfile():
+    try:
+        with open(DOCKER_COMPOSE_PATH, "r") as file:
+            compose_data = yaml.safe_load(file)
+
+        services = compose_data.get("services", {})
+        openpanel_service = services.get("openpanel", {})
+        ports = openpanel_service.get("ports", [])
+
+        for port_mapping in ports:
+            if isinstance(port_mapping, str):  # Format: "2083:2083"
+                host_port = port_mapping.split(":")[0]
+                return int(host_port)
+
+    except Exception as e:
+        print(f"Error reading docker-compose.yml: {e}")
+
+    return 2083  # fallback
 
 
 def get_domain_from_caddyfile():
@@ -51,7 +65,9 @@ def check_ssl_exists(domain):
     cert_path = os.path.join(CADDY_CERT_DIR, domain)
     return os.path.exists(cert_path) and os.listdir(cert_path)
 
+
 DOMAIN = get_domain_from_caddyfile()
+PORT = get_port_from_dockerfile()
 
 if DOMAIN and check_ssl_exists(DOMAIN):
     PROTOCOL = "https"
