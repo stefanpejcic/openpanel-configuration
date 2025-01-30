@@ -37,6 +37,7 @@ services:
   openpanel_redis:
     image: redis:latest
     container_name: openpanel_redis
+    #command: /bin/bash -c "mkdir -p /tmp/redis && chmod 770 /tmp/redis && chown 999:999 /tmp/redis && redis-server --unixsocket /tmp/redis/redis.sock --unixsocketperm 770 --port 0"
     command: ["redis-server", "--unixsocket", "/tmp/redis/redis.sock", "--unixsocketperm", "770"]
     network_mode: host
     volumes:
