@@ -7,8 +7,11 @@ from gunicorn.config import Config
 import configparser
 import os
 from pathlib import Path
+import re
 
 CONFIG_FILE_PATH = '/etc/openpanel/openpanel/conf/openpanel.config'
+CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
+CADDY_CERT_DIR = "/var/lib/caddy/certificates/acme-v2.example.com/"
 
 def read_config():
     config = configparser.ConfigParser()
@@ -16,42 +19,60 @@ def read_config():
         config.read(CONFIG_FILE_PATH)
     return config
 
-def get_custom_port():
-    config = read_config()
-    return int(config.get('DEFAULT', 'port', fallback=2083))
 
-def get_ssl_status():
-    config = read_config()
-    return config.getboolean('DEFAULT', 'ssl', fallback=False)
+def get_domain_from_caddyfile():
+    domain = None
+    in_block = False
 
-if get_ssl_status():
-    import ssl
-    import socket
-    hostname = socket.gethostname()
+    try:
+        with open(CADDYFILE_PATH, "r") as file:
+            for line in file:
+                line = line.strip()
 
-    certfile = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
-    keyfile = f'/etc/letsencrypt/live/{hostname}/privkey.pem'
-    ssl_version = 'TLS'
-    ca_certs = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
-    cert_reqs = ssl.CERT_NONE
-    ciphers = 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH'
+                if "# START HOSTNAME DOMAIN #" in line:
+                    in_block = True
+                    continue
 
-bind = ["0.0.0.0:" + str(get_custom_port())]
+                if "# END HOSTNAME DOMAIN #" in line:
+                    break
+
+                if in_block:
+                    match = re.match(r"^([\w.-]+) \{", line)
+                    if match:
+                        domain = match.group(1)
+                        break
+    except Exception as e:
+        print(f"Error reading Caddyfile: {e}")
+
+    return domain
+
+
+def check_ssl_exists(domain):
+    cert_path = os.path.join(CADDY_CERT_DIR, domain)
+    return os.path.exists(cert_path) and os.listdir(cert_path)
+
+DOMAIN = get_domain_from_caddyfile()
+
+if DOMAIN and check_ssl_exists(DOMAIN):
+    PROTOCOL = "https"
+else:
+    PROTOCOL = "http"
+
+bind = [f"{PROTOCOL}://0.0.0.0:{PORT}"]
+
 backlog = 2048
 calculated_workers = multiprocessing.cpu_count() * 2 + 1
 max_workers = 10
 workers = min(calculated_workers, max_workers)
 worker_class = 'gevent'
 worker_connections = 1000
-timeout = 30
-graceful_timeout = 30
+timeout = 10
+graceful_timeout = 10
 keepalive = 2
 max_requests = 1000
 max_requests_jitter = 50
 pidfile = 'openpanel'
-# BUG https://github.com/benoitc/gunicorn/issues/2382
-#errorlog = "-"   # Log to stdout
-#accesslog = "-"
+
 errorlog = "/var/log/openpanel/user/error.log"
 accesslog = "/var/log/openpanel/user/access.log"
 
