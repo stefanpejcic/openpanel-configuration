@@ -6,32 +6,64 @@ import multiprocessing
 from gunicorn.config import Config
 import configparser
 import os
+import re
 from pathlib import Path
 
-CONFIG_FILE_PATH = '/etc/openpanel/openpanel/conf/openpanel.config'
 
-def read_config():
-    config = configparser.ConfigParser()
-    if os.path.exists(CONFIG_FILE_PATH):
-        config.read(CONFIG_FILE_PATH)
-    return config
+# File paths
+CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
+CADDY_CERT_DIR = "/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"
+DOCKER_COMPOSE_PATH = "/root/docker-compose.yml"
 
-def get_ssl_status():
-    config = read_config()
-    return config.getboolean('DEFAULT', 'ssl', fallback=False)
 
-if get_ssl_status():
+def get_domain_from_caddyfile():
+    domain = None
+    in_block = False
+    
+    # Check if the Caddyfile exists first
+    if not os.path.exists(CADDYFILE_PATH):
+        print(f"Caddyfile does not exist at {CADDYFILE_PATH}. No SSL will be used.")
+        return None
+
+    try:
+        with open(CADDYFILE_PATH, "r") as file:
+            for line in file:
+                line = line.strip()
+
+                if "# START HOSTNAME DOMAIN #" in line:
+                    in_block = True
+                    continue
+
+                if "# END HOSTNAME DOMAIN #" in line:
+                    break
+
+                if in_block:
+                    match = re.match(r"^([\w.-]+) \{", line)
+                    if match:
+                        domain = match.group(1)
+                        break
+    except Exception as e:
+        print(f"Error reading Caddyfile: {e}")
+
+    return domain
+
+
+def check_ssl_exists(domain):
+    cert_path = os.path.join(CADDY_CERT_DIR, domain)
+    return os.path.exists(cert_path) and os.listdir(cert_path)
+
+
+
+DOMAIN = get_domain_from_caddyfile()
+
+if DOMAIN and check_ssl_exists(DOMAIN):
     import ssl
-    import socket
-    hostname = socket.gethostname()
-
-    certfile = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
-    keyfile = f'/etc/letsencrypt/live/{hostname}/privkey.pem'
-    ssl_version = 'TLS'
-    ca_certs = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
+    certfile = os.path.join(CADDY_CERT_DIR, DOMAIN, f'{DOMAIN}.crt')
+    keyfile = os.path.join(CADDY_CERT_DIR, DOMAIN, f'{DOMAIN}.key')    
+    #ssl_version = 'TLS'
+    #ca_certs = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
     cert_reqs = ssl.CERT_NONE
     ciphers = 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH'
-
 
 bind = ["0.0.0.0:2087"]
 backlog = 2048
