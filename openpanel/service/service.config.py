@@ -68,7 +68,6 @@ def get_domain_from_caddyfile():
 
 def check_ssl_exists(domain):
     cert_path = os.path.join(CADDY_CERT_DIR, domain)
-    # check if cert and key exist
     return os.path.exists(cert_path) and os.listdir(cert_path)
 
 
@@ -77,8 +76,8 @@ PORT = get_port_from_dockerfile()
 
 if DOMAIN and check_ssl_exists(DOMAIN):
     import ssl
-    certfile = f'{CADDY_CERT_DIR}{DOMAIN}/fullchain.pem'
-    keyfile = f'{CADDY_CERT_DIR}{DOMAIN}/privkey.pem'
+    certfile = os.path.join(CADDY_CERT_DIR, DOMAIN, f'{DOMAIN}.crt')
+    keyfile = os.path.join(CADDY_CERT_DIR, DOMAIN, f'{DOMAIN}.key')    
     ssl_version = 'TLS'
     #ca_certs = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
     cert_reqs = ssl.CERT_NONE
