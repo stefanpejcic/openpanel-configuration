@@ -105,6 +105,7 @@ services:
       - /etc/openpanel/caddy/templates/:/etc/openpanel/caddy/templates/               # suspended user and domain templates
       - /etc/openpanel/caddy/coreruleset/:/etc/openpanel/caddy/coreruleset            # OWASP coreruleset
       - /etc/openpanel/caddy/coraza_rules.conf:/etc/openpanel/caddy/coraza_rules.conf # default rules
+      - /var/log/caddy/:/var/log/caddy/
     restart: unless-stopped
     mem_limit: 1g
     cpus: 1.0
