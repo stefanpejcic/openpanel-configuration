@@ -9,7 +9,7 @@ import yaml  # pip install pyyaml
 from pathlib import Path
 
 # File paths
-CADDYFILE_PATH = "/etc/caddy/Caddyfile"
+CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
 CADDY_CERT_DIR = "/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"
 DOCKER_COMPOSE_PATH = "/root/docker-compose.yml"
 
@@ -37,6 +37,11 @@ def get_port_from_dockerfile():
 def get_domain_from_caddyfile():
     domain = None
     in_block = False
+    
+    # Check if the Caddyfile exists first
+    if not os.path.exists(CADDYFILE_PATH):
+        print(f"Caddyfile does not exist at {CADDYFILE_PATH}. No SSL will be used.")
+        return None
 
     try:
         with open(CADDYFILE_PATH, "r") as file:
@@ -71,12 +76,15 @@ DOMAIN = get_domain_from_caddyfile()
 PORT = get_port_from_dockerfile()
 
 if DOMAIN and check_ssl_exists(DOMAIN):
-    PROTOCOL = "https"
-else:
-    PROTOCOL = "http"
+    import ssl
+    certfile = f'{CADDY_CERT_DIR}{DOMAIN}/fullchain.pem'
+    keyfile = f'{CADDY_CERT_DIR}{DOMAIN}/privkey.pem'
+    ssl_version = 'TLS'
+    #ca_certs = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
+    cert_reqs = ssl.CERT_NONE
+    ciphers = 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH'
 
-bind = [f"{PROTOCOL}://0.0.0.0:{PORT}"]
-
+bind = [f"0.0.0.0:{PORT}"]
 backlog = 2048
 calculated_workers = multiprocessing.cpu_count() * 2 + 1
 max_workers = 10
