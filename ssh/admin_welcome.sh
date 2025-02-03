@@ -13,6 +13,8 @@
 
 VERSION=$(opencli version)
 CONFIG_FILE_PATH='/etc/openpanel/openpanel/conf/openpanel.config'
+CADDY_FILE="/etc/openpanel/caddy/Caddyfile"
+CADDY_CERT_DIR="/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"
 GITHUB_CONF_REPO="https://github.com/stefanpejcic/openpanel-configuration"
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -40,11 +42,6 @@ read_config() {
     ' "$CONFIG_FILE_PATH"
 }
 
-get_ssl_status() {
-    config=$(read_config "DEFAULT")
-    ssl_status=$(echo "$config" | grep -i 'ssl' | cut -d'=' -f2)
-    [[ "$ssl_status" == "yes" ]] && echo true || echo false
-}
 
 get_license() {
     config=$(read_config "LICENSE")
@@ -73,10 +70,7 @@ get_public_ip() {
 
 
 get_admin_url() {
-    caddyfile="/etc/openpanel/caddy/Caddyfile"
-    CADDY_CERT_DIR="/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"
-
-    domain_block=$(awk '/# START HOSTNAME DOMAIN #/{flag=1; next} /# END HOSTNAME DOMAIN #/{flag=0} flag {print}' "$caddyfile")
+    domain_block=$(awk '/# START HOSTNAME DOMAIN #/{flag=1; next} /# END HOSTNAME DOMAIN #/{flag=0} flag {print}' "$CADDY_FILE")
     domain=$(echo "$domain_block" | sed '/^\s*$/d' | grep -v '^\s*#' | head -n1)
     domain=$(echo "$domain" | sed 's/[[:space:]]*{//' | xargs)
     domain=$(echo "$domain" | sed 's|^http[s]*://||')
