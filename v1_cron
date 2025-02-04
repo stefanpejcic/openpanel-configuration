@@ -15,11 +15,6 @@
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-# SSL
-0 */3 * * * root /usr/local/bin/opencli ssl-hostname && echo "$(date) SSL hostname check executed" >> /var/log/openpanel/admin/cron.log
-45 */3 * * * root /usr/local/bin/opencli ssl-user --all --generate && echo "$(date) SSL generation for all domains executed" >> /var/log/openpanel/admin/cron.log
-
-
 # STATISTICS
 0 * * * * root /usr/local/bin/opencli docker-collect_stats --all && echo "$(date) Docker statistics collected" >> /var/log/openpanel/admin/cron.log
 30 2 * * * root /usr/local/bin/opencli domains-stats && echo "$(date) Domain statistics collected" >> /var/log/openpanel/admin/cron.log
