@@ -91,7 +91,7 @@ services:
     network_mode: host
     restart: always
     privileged: true
-    userns_mode: host
+    #OFF FOR USER ROOT#userns_mode: host
 
   # Webserver from 1.0.0
   caddy:
