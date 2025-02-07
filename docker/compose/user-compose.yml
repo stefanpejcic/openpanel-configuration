@@ -17,13 +17,8 @@ services:
           cpus: "${cpu}"
           memory: "${ram}"
     volumes:
-      - /home/${username}/var/crons:/var/spool/cron/crontabs
-      - /home/${username}:/home/${username}
-      #- /home/${username}/var/lib/mysql:/var/lib/mysql
-      - /home/${username}/var/lib/php/sessions:/var/lib/php/sessions
-      - /home/${username}/etc/${path}/sites-available:/etc/${path}/sites-available
-      - /etc/openpanel/skeleton/motd:/etc/motd:ro
-      - /etc/openpanel/nginx/default_page.html:/etc/${path}/default_page.html:ro
+      - /etc/openpanel/skeleton/motd:/etc/motd:ro                                  # ssh welcome msg
+      - /etc/openpanel/nginx/default_page.html:/etc/${path}/default_page.html:ro   # default site page
     networks:
       - default
 
