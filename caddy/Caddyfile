@@ -5,12 +5,6 @@
     }
 }
 
-# redirects
-* {
-    redir /openpanel https://openpanel.yourdomain.com
-    redir /webmail https://webmail.yourdomain.com
-}
-
 # START HOSTNAME DOMAIN #
 example.net {
     reverse_proxy localhost:2087
