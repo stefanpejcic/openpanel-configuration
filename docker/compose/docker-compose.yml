@@ -97,7 +97,7 @@ services:
   caddy:
     image: openpanel/caddy-coraza
     container_name: caddy
-    network_mode: "host"
+    #network_mode: "host"
     volumes:
       - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile                           # Caddy config
       - /etc/openpanel/caddy/ssl:/data/caddy/certificates                             # Custom SSL certificates
@@ -105,6 +105,10 @@ services:
       - /etc/openpanel/caddy/coraza_rules.conf:/etc/openpanel/caddy/coraza_rules.conf # default rules
       - /var/log/caddy/:/var/log/caddy/
     restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     mem_limit: 1g
     cpus: 1.0
     oom_kill_disable: true
