@@ -63,12 +63,12 @@ LOCK TABLES `plans` WRITE;
 /*!40000 ALTER TABLE `plans` DISABLE KEYS */;
 INSERT INTO `plans` (id, name, description, domains_limit, websites_limit, email_limit, ftp_limit, disk_limit, inodes_limit, db_limit, cpu, ram, docker_image, bandwidth) 
 VALUES
-(1, 'ubuntu_nginx_mysql', 'Ubuntu with Nginx and MySQL', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/nginx', 100),
-(2, 'ubuntu_apache_mysql', 'Ubuntu with Apache and MySQL', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/apache', 100),
-(3, 'ubuntu_apache_mariadb', 'Ubuntu with Apache and MariaDB', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/apache-mariadb', 100),
-(4, 'ubuntu_nginx_mariadb', 'Ubuntu with Nginx and MariaDB', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/nginx-mariadb', 100),
-(5, 'ubuntu_litespeed_mysql', 'Ubuntu with OpenLiteSpeed and MySQL', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/litespeed-mysql', 100),
-(6, 'ubuntu_litespeed_mariadb', 'Ubuntu with OpenLiteSpeed and MariaDB', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/litespeed-mariadb', 100);
+(1, 'Nginx MySQL Standard', 'Ubuntu with Nginx and MySQL', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/nginx', 100),
+(2, 'Classic Apache MySQL', 'Ubuntu with Apache and MySQL', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/apache', 100),
+(3, 'MariaDB Apache Pro', 'Ubuntu with Apache and MariaDB', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/apache-mariadb', 100),
+(4, 'MariaDB Nginx Pro', 'Ubuntu with Nginx and MariaDB', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/nginx-mariadb', 100),
+(5, 'LiteSpeed Nginx Boost', 'Ubuntu with OpenLiteSpeed and MySQL', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/litespeed-mysql', 100),
+(6, 'LiteSpeed MariaDB Premium', 'Ubuntu with OpenLiteSpeed and MariaDB', 0, 10, 0, 0, '10 GB', 1000000, 0, '1', '1g', 'openpanel/litespeed-mariadb', 100);
 /*!40000 ALTER TABLE `plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
