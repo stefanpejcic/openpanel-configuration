@@ -18,7 +18,7 @@ services:
           memory: "${ram}"
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro                                  # ssh welcome msg
-      - /etc/openpanel/nginx/default_page.html:/etc/${path}/default_page.html:ro   # default site page
+      #- /etc/openpanel/nginx/default_page.html:/etc/${path}/default_page.html:ro   # default site page
     networks:
       - default
 
