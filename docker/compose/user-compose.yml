@@ -17,12 +17,24 @@ services:
           cpus: "${cpu}"
           memory: "${ram}"
     volumes:
-      - /etc/openpanel/skeleton/motd:/etc/motd:ro                                  # ssh welcome msg
-      - /home/${context}/mail/:/var/mail/                                  # ssh welcome msg
-      #- /etc/openpanel/nginx/default_page.html:/etc/${path}/default_page.html:ro   # default site page
+      - /etc/openpanel/skeleton/motd:/etc/motd:ro         # SSH welcome message
+      - /home/${context}/mail/:/var/mail/                 # Mail storage
+      - webserver_data:/etc/${path}/                      # Nginx/Apache data
+      - mysql_data:/var/lib/mysql                         # MySQL data
+      - html_data:/var/www/html/                          # Website files
     networks:
       - default
 
 networks:
   default:
     driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  html_data:
+    driver: local
+  webserver_data:
+    driver: local
+
+
