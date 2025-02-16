@@ -53,7 +53,7 @@ services:
     depends_on:
       - openpanel_mysql
       - openpanel_redis
-      - ${RUN_CLAMAV:-false}clamav
+      - ${RUN_CLAMAV:-false} == "true" && clamav || ""
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
