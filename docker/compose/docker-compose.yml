@@ -12,26 +12,26 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - openadmin_mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
       - /etc/openpanel/:/etc/openpanel/
       - /root/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
-    mem_limit: 0.5g
-    cpus: 1.0
+    mem_limit: ${MYSQL_RAM}
+    cpus: ${MYSQL_CPUS}
     oom_kill_disable: true
 
   # Malware Scanner used from user panel
   clamav:
-    image: clamav/clamav:latest
+    image: clamav/clamav:${CLAMAV_VERSION}
     container_name: clamav
     volumes:
       - /home:/home
       - ./clamav-db:/var/lib/clamav
     restart: unless-stopped
-    network_mode: host # needed to update db daily
+    network_mode: ${CLAMAV_DB_AUTOUPDATE} # needed to update db daily
     environment:
-      - CLAMD_STARTUP_DELAY=30
-    mem_limit: 1g
-    cpus: 1.0
+      - CLAMD_STARTUP_DELAY=${CLAMD_STARTUP_DELAY}
+    mem_limit: ${CLAMAV_RAM}
+    cpus: ${CLAMAV_CPUS}
 
 # used by panel ui to store user sessions and counters
   openpanel_redis:
@@ -41,24 +41,24 @@ services:
     command: ["redis-server", "--unixsocket", "/tmp/redis/redis.sock", "--unixsocketperm", "770"]
     network_mode: host
     volumes:
-      - /tmp/redis/:/tmp/redis/
-    mem_limit: 0.1g
-    cpus: 0.1
+      - ${REDIS_SOCKET}:/tmp/redis/
+    mem_limit: ${REDIS_RAM}
+    cpus: ${REDIS_CPUS}
     restart: always
 
   # OpenPanel service running on port 2083
   openpanel:
-    image: openpanel/openpanel:1.0.0
+    image: openpanel/openpanel:${VERSION}
     container_name: openpanel
     depends_on:
       - openpanel_mysql
       - openpanel_redis
-      #- clamav
+      - ${RUN_CLAMAV:-false}clamav
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
     ports:
-      - "2083:2083/tcp"
+      - "${PORT}:2083/tcp"
     volumes:
       - /etc/bind:/etc/bind
       - /lib/modules:/lib/modules:ro
@@ -76,10 +76,10 @@ services:
       - /etc/my.cnf:/etc/my.cnf
       - /etc/openpanel/:/etc/openpanel/
       - /var/run/docker.sock:/var/run/docker.sock
-      - openadmin_mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
       - /usr/bin/docker:/usr/bin/docker
       - /root/:/root/
-      - /tmp/redis/:/tmp/redis/
+      - ${REDIS_SOCKET}:/tmp/redis/
       #  https://dev.openpanel.com/customize.html#Custom-Code
       - /etc/openpanel/openpanel/custom_code/:/usr/local/panel/templates/custom_code/
       - /etc/openpanel/openpanel/custom_code/custom.css:/usr/local/panel/static/css/custom.css
@@ -93,12 +93,14 @@ services:
     restart: always
     privileged: true
     #OFF FOR USER ROOT#userns_mode: host
-
+    mem_limit: ${OPENPANEL_RAM}
+    cpus: ${OPENPANEL_CPUS}
+    
   # Webserver from 1.0.0
   caddy:
-    image: openpanel/caddy-coraza
+    image: ${CADDY_IMAGE}
     container_name: caddy
-    network_mode: "host"
+    network_mode: "host" #check
     volumes:
       - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile                           # Caddy config
       - /etc/openpanel/caddy/ssl:/data/caddy/certificates                             # Custom SSL certificates
@@ -106,25 +108,25 @@ services:
       - /etc/openpanel/caddy/coraza_rules.conf:/etc/openpanel/caddy/coraza_rules.conf # default rules
       - /var/log/caddy/:/var/log/caddy/
     restart: unless-stopped
-    mem_limit: 1g
-    cpus: 1.0
+    mem_limit: ${CADDY_RAM}
+    cpus: ${CADDY_CPUS}
     oom_kill_disable: true
 
   # DNS
   bind9:
     container_name: openpanel_dns
-    image: ubuntu/bind9:latest
+    image: ubuntu/bind9:${BIND9_VERSION}
     environment:
       - BIND9_USER=root
-      - TZ=America/New_York
+      - TZ=${BIND_TIMEZONE}
     ports:
       - "53:53/tcp"
       - "53:53/udp"
     volumes:
       - /etc/bind/:/etc/bind/
     restart: unless-stopped
-    mem_limit: 0.1g
-    cpus: 0.1
+    mem_limit: ${BIND9_RAM}
+    cpus: ${BIND9_CPUS}
     oom_kill_disable: true
 
   # FTP
@@ -144,7 +146,7 @@ services:
     restart: always
     ports:
       - "21:21"
-      - "21000-21010:21000-21010"
+      - "${FTP_PORT_RANGE}:21000-21010"
     volumes:
       - /home/:/home/
       - /etc/openpanel/ftp/vsftpd.conf:/etc/vsftpd/vsftpd.conf
@@ -155,11 +157,11 @@ services:
       - ftp_env_generator
     env_file:
       - /etc/openpanel/ftp/all.users
-    mem_limit: 0.5g
-    cpus: 0.5
+    mem_limit: ${FTP_RAM}
+    cpus: ${FTP_CPUS}
 
 
 
 # make the mysql data persistent
 volumes:
-  openadmin_mysql:
+  mysql:
