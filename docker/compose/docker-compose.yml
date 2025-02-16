@@ -53,7 +53,7 @@ services:
     depends_on:
       - openpanel_mysql
       - openpanel_redis
-      - ${RUN_CLAMAV:-false} == "true" && clamav || ""
+      #- clamav
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -93,8 +93,6 @@ services:
     restart: always
     privileged: true
     #OFF FOR USER ROOT#userns_mode: host
-    mem_limit: ${OPENPANEL_RAM}
-    cpus: ${OPENPANEL_CPUS}
     
   # Webserver from 1.0.0
   caddy:
