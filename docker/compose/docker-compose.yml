@@ -67,7 +67,7 @@ services:
       - /:/hostfs:ro
       - /home:/home
       - /usr/local/admin:/usr/local/admin
-      - /usr/local/admin/scripts:/usr/local/admin/scripts
+      - /usr/local/opencli:/usr/local/opencli
       - /var/log:/var/log
       - /etc/ufw:/etc/ufw
       - /var/lib/csf/:/var/lib/csf/
