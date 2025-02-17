@@ -18,6 +18,9 @@ services:
     mem_limit: ${MYSQL_RAM}
     cpus: ${MYSQL_CPUS}
     oom_kill_disable: true
+    networks:
+      - openpanel_network
+    
 
   # Malware Scanner used from user panel
   clamav:
@@ -39,12 +42,13 @@ services:
     container_name: openpanel_redis
     #command: /bin/bash -c "mkdir -p /tmp/redis && chmod 770 /tmp/redis && chown 999:999 /tmp/redis && redis-server --unixsocket /tmp/redis/redis.sock --unixsocketperm 770 --port 0"
     command: ["redis-server", "--unixsocket", "/tmp/redis/redis.sock", "--unixsocketperm", "770"]
-    network_mode: host
     volumes:
       - ${REDIS_SOCKET}:/tmp/redis/
     mem_limit: ${REDIS_RAM}
     cpus: ${REDIS_CPUS}
     restart: always
+    networks:
+      - openpanel_network
 
   # OpenPanel service running on port 2083
   openpanel:
@@ -73,7 +77,7 @@ services:
       - /etc/ufw:/etc/ufw
       - /var/lib/csf/:/var/lib/csf/
       - /etc/letsencrypt:/etc/letsencrypt
-      - /etc/my.cnf:/etc/my.cnf
+      - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf
       - /etc/openpanel/:/etc/openpanel/
       - /var/run/docker.sock:/var/run/docker.sock
       - mysql:/var/lib/mysql
@@ -89,16 +93,22 @@ services:
       - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/
       # emails
       - /usr/local/mail/openmail/:/usr/local/mail/openmail/
-    network_mode: host
     restart: always
     privileged: true
+    networks:
+      - openpanel_network
     #OFF FOR USER ROOT#userns_mode: host
-    
+        
   # Webserver from 1.0.0
   caddy:
     image: ${CADDY_IMAGE}
     container_name: caddy
-    network_mode: "host" #check
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     volumes:
       - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile                           # Caddy config
       - /etc/openpanel/caddy/ssl:/data/caddy/certificates                             # Custom SSL certificates
@@ -109,6 +119,8 @@ services:
     mem_limit: ${CADDY_RAM}
     cpus: ${CADDY_CPUS}
     oom_kill_disable: true
+    networks:
+      - openpanel_network
 
   # DNS
   bind9:
@@ -126,6 +138,8 @@ services:
     mem_limit: ${BIND9_RAM}
     cpus: ${BIND9_CPUS}
     oom_kill_disable: true
+    networks:
+      - openpanel_network
 
   # FTP
   ftp_env_generator:
@@ -136,6 +150,8 @@ services:
       - /usr/local/admin/scripts/ftp/users:/usr/local/admin/scripts/ftp/users
     entrypoint: /bin/sh -c "/usr/local/admin/scripts/ftp/users"
     restart: "no"  # only run once
+    networks:
+      - openpanel_network
 
   openadmin_ftp:
     build:
@@ -157,9 +173,16 @@ services:
       - /etc/openpanel/ftp/all.users
     mem_limit: ${FTP_RAM}
     cpus: ${FTP_CPUS}
-
+    networks:
+      - openpanel_network
 
 
 # make the mysql data persistent
 volumes:
   mysql:
+
+
+# define custom network
+networks:
+  openpanel_network:
+    driver: bridge
