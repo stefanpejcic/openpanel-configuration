@@ -13,27 +13,6 @@ CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
 CADDY_CERT_DIR = "/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"
 DOCKER_COMPOSE_PATH = "/root/docker-compose.yml"
 
-
-def get_port_from_dockerfile():
-    try:
-        with open(DOCKER_COMPOSE_PATH, "r") as file:
-            compose_data = yaml.safe_load(file)
-
-        services = compose_data.get("services", {})
-        openpanel_service = services.get("openpanel", {})
-        ports = openpanel_service.get("ports", [])
-
-        for port_mapping in ports:
-            if isinstance(port_mapping, str):  # Format: "2083:2083"
-                host_port = port_mapping.split(":")[0]
-                return int(host_port)
-
-    except Exception as e:
-        print(f"Error reading docker-compose.yml: {e}")
-
-    return 2083  # fallback
-
-
 def get_domain_from_caddyfile():
     domain = None
     in_block = False
@@ -72,7 +51,7 @@ def check_ssl_exists(domain):
 
 
 DOMAIN = get_domain_from_caddyfile()
-PORT = get_port_from_dockerfile()
+PORT = "2083"
 
 if DOMAIN and check_ssl_exists(DOMAIN):
     import ssl
