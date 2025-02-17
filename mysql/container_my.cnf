@@ -1,5 +1,5 @@
 [client]
 user = panel
 database = panel
-password = 
+password = NewPassword
 host = openpanel_mysql
