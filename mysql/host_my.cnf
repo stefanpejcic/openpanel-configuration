@@ -3,4 +3,4 @@ user = panel
 database = panel
 password = NewPassword
 host = 127.0.0.1
-#protocol = tcp
+protocol = tcp
