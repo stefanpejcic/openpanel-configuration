@@ -1,6 +1,6 @@
 [client]
 user = panel
 database = panel
-password = 
+password = NewPassword
 host = 127.0.0.1
 #protocol = tcp
