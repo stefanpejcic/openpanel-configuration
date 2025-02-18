@@ -16,7 +16,7 @@ http://example.net {
 # END HOSTNAME DOMAIN #
 
 # import /check route
-import /etc/openpanel/caddy/check
+import /etc/openpanel/caddy/check.conf
 
 # import all sites
 import /etc/openpanel/caddy/domains/*
