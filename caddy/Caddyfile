@@ -1,7 +1,7 @@
 # ssl
 {
     on_demand_tls {
-        ask "http://localhost:2087/allow"
+        ask "http://localhost/check"
     }
 }
 
@@ -14,6 +14,9 @@ http://example.net {
     reverse_proxy localhost:2087
 }
 # END HOSTNAME DOMAIN #
+
+# import /check route
+import /etc/openpanel/caddy/check
 
 # import all sites
 import /etc/openpanel/caddy/domains/*
