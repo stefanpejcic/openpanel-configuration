@@ -97,7 +97,7 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `services` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT '1,2,3,4,5,6,7,8,9,10,11,12',
+  `owner` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `user_domains` varchar(255) NOT NULL DEFAULT '',
   `twofa_enabled` tinyint(1) DEFAULT '0',
   `otp_secret` varchar(255) DEFAULT NULL,
