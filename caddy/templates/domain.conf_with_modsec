@@ -23,6 +23,8 @@ http://<DOMAIN_NAME>, http://*.<DOMAIN_NAME> {
             Include /etc/openpanel/caddy/coreruleset/crs-setup.conf.example
             Include /etc/openpanel/caddy/coreruleset/rules/*.conf
             SecRuleEngine On
+            SecAuditLog /var/log/caddy/coraza_audit.log
+            SecAuditLogParts ABIJDEFHZ
         `
     }
 
@@ -67,6 +69,8 @@ https://<DOMAIN_NAME>, https://*.<DOMAIN_NAME> {
             Include /etc/openpanel/caddy/coreruleset/crs-setup.conf.example
             Include /etc/openpanel/caddy/coreruleset/rules/*.conf
             SecRuleEngine On
+            SecAuditLog /var/log/caddy/coraza_audit.log
+            SecAuditLogParts ABIJDEFHZ
         `
     }
 
