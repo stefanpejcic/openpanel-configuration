@@ -21,7 +21,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 
 # MAINTENANCE
-* 2 * * * root /usr/local/bin/opencli docker-usage_stats_cleanup && echo "$(date) Docker usage stats cleanup executed" >> /var/log/openpanel/admin/cron.log
+0 2 * * * root /usr/local/bin/opencli docker-usage_stats_cleanup && echo "$(date) Docker usage stats cleanup executed" >> /var/log/openpanel/admin/cron.log
 15 0 * * * root /usr/local/bin/opencli update && echo "$(date) System update executed" >> /var/log/openpanel/admin/cron.log
 0 0 12 * * root /usr/local/bin/opencli server-ips && echo "$(date) Server IP listing executed" >> /var/log/openpanel/admin/cron.log
 0 */10 * * * root /usr/local/bin/opencli server-motd && echo "$(date) Server MOTD updated" >> /var/log/openpanel/admin/cron.log
