@@ -14,6 +14,7 @@ services:
           memory: "${OS_RAM:-0.5G}"
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro         # SSH welcome message
+      - /home/${CONTEXT}/my.cnf:/etc/my.cnf               # Mysql root logins
       - /home/${CONTEXT}/mail/:/var/mail/                 # Mail storage
       - webserver_data:/etc/${path}/                      # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                  # Postgres data
@@ -56,6 +57,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql                         # MySQL data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld   # MySQL socket
+      - /home/${CONTEXT}/my.cnf:/etc/my.cnf               # pass for terminal
     deploy:
       resources:
         limits:
