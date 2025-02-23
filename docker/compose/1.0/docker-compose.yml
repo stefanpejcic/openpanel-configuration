@@ -35,7 +35,7 @@ services:
       - "${HTTPS_PORT}"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - webserver_data:/etc/${path}/sites-enabled/
+      - webserver_data:/etc/${path}/
       - html_data:/var/www/html/                          # Website files     
     deploy:
       resources:
@@ -157,6 +157,185 @@ services:
       timeout: 5s
     networks:
       - default
+
+
+  php-fpm-5.6:
+    image: php:5.6-fpm
+    container_name: php-fpm-5.6
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/5.6.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-7.0:
+    image: php:7.0-fpm
+    container_name: php-fpm-7.0
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.0.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-7.1:
+    image: php:7.1-fpm
+    container_name: php-fpm-7.1
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.1.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-7.2:
+    image: php:7.2-fpm
+    container_name: php-fpm-7.2
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.2.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-7.3:
+    image: php:7.3-fpm
+    container_name: php-fpm-7.3
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.3.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-7.4:
+    image: php:7.4-fpm
+    container_name: php-fpm-7.4
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.4.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-8.0:
+    image: php:8.0-fpm
+    container_name: php-fpm-8.0
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.0.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-8.1:
+    image: php:8.1-fpm
+    container_name: php-fpm-8.1
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.1.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-8.2:
+    image: php:8.2-fpm
+    container_name: php-fpm-8.2
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.2.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-8.3:
+    image: php:8.3-fpm
+    container_name: php-fpm-8.3
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.3.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+  php-fpm-8.4:
+    image: php:8.4-fpm
+    container_name: php-fpm-8.4
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.4.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.125"
+          memory: "0.25G"
+    networks:
+      - default
+
+
 
 networks:
   default:
