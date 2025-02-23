@@ -24,7 +24,6 @@ services:
     networks:
       - default
     command: [ "tail", "-f", "/dev/null" ]
-
   nginx:
     image: nginx:latest
     container_name: nginx
@@ -44,6 +43,29 @@ services:
           memory: "${NGINX_RAM:-0.5G}"   
     networks:
       - default
+
+
+  varnish:
+    image: varnish:stable
+    container_name: varnish
+    volumes:
+      - "./default.vcl:/etc/varnish/default.vcl"
+    ports:
+      - "${HTTP_PORT}"
+      - "${HTTPS_PORT}"
+    tmpfs:
+      - /var/lib/varnish:exec
+    deploy:
+      resources:
+        limits:
+          cpus: "${VARNISH_CPU:-0.5}"
+          memory: "${VARNISH_RAM:-0.5G}"       
+    environment:
+      - VARNISH_SIZE=${VARNISH_SIZE:-1G}
+    command: "-p default_keep=300"
+    depends_on:
+      - "${WEB_SERVER:-nginx}"
+
 
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
@@ -71,10 +93,37 @@ services:
       timeout: 5s
       retries: 10
 
+  mariadb:
+    image: mariadb:${MARIADB_VERSION:-latest}
+    container_name: mariadb
+    restart: always
+    user: "${UID:-0}"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+    ports:
+      - "${MYSQL_PORT}"
+    volumes:
+      - mariadb_data:/var/lib/mysql                         # MariaDB data
+      - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld     # MariaDB socket
+      - /home/${CONTEXT}/my.cnf:/etc/my.cnf                 # Configuration file
+    deploy:
+      resources:
+        limits:
+          cpus: "${MARIADB_CPU:-0.5}"
+          memory: "${MARIADB_RAM:-0.5G}"
+    networks:
+      - default
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+
   phpmyadmin:
     container_name: phpmyadmin 
     depends_on:
-      - mysql
+      - "${MYSQL_TYPE:-mysql}"
     image: phpmyadmin #:5.2.2-fpm-alpine
     restart: always
     user: "${UID:-0}"
@@ -135,6 +184,167 @@ services:
       - default
 
 
+
+  php-fpm-5.6:
+    image: php:5.6-fpm
+    container_name: php-fpm-5.6
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/5.6.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_56_CPU:-0.125}"
+          memory: "${PHP_56_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-7.0:
+    image: php:7.0-fpm
+    container_name: php-fpm-7.0
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.0.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_70_CPU:-0.125}"
+          memory: "${PHP_70_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-7.1:
+    image: php:7.1-fpm
+    container_name: php-fpm-7.1
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.1.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_71_CPU:-0.125}"
+          memory: "${PHP_71_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-7.2:
+    image: php:7.2-fpm
+    container_name: php-fpm-7.2
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.2.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_72_CPU:-0.125}"
+          memory: "${PHP_72_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-7.3:
+    image: php:7.3-fpm
+    container_name: php-fpm-7.3
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.3.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_73_CPU:-0.125}"
+          memory: "${PHP_73_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-7.4:
+    image: php:7.4-fpm
+    container_name: php-fpm-7.4
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/7.4.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_74_CPU:-0.125}"
+          memory: "${PHP_74_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-8.0:
+    image: php:8.0-fpm
+    container_name: php-fpm-8.0
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.0.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_80_CPU:-0.125}"
+          memory: "${PHP_80_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-8.1:
+    image: php:8.1-fpm
+    container_name: php-fpm-8.1
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.1.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_81_CPU:-0.125}"
+          memory: "${PHP_81_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-8.2:
+    image: php:8.2-fpm
+    container_name: php-fpm-8.2
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.2.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_82_CPU:-0.125}"
+          memory: "${PHP_82_RAM:-0.25G}"
+    networks:
+      - default
+
+  php-fpm-8.3:
+    image: php:8.3-fpm
+    container_name: php-fpm-8.3
+    restart: always
+    user: "${UID:-0}"
+    volumes:
+      - html_data:/var/www/html/
+      - /home/${CONTEXT}/php.ini/8.3.ini:/usr/local/etc/php/php.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_83_CPU:-0.125}"
+          memory: "${PHP_83_RAM:-0.25G}"
+    networks:
+      - default
+
   php-fpm-8.4:
     image: php:8.4-fpm
     container_name: php-fpm-8.4
@@ -146,10 +356,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.125"
-          memory: "0.25G"
+          cpus: "${PHP_84_CPU:-0.125}"
+          memory: "${PHP_84_RAM:-0.25G}"
     networks:
       - default
+
 
 
 networks:
