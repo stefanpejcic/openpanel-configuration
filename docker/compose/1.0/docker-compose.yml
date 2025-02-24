@@ -73,25 +73,30 @@ services:
     restart: always
     user: "${UID:-0}"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}       
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
     ports:
       - "${MYSQL_PORT}"
     volumes:
       - mysql_data:/var/lib/mysql                         # MySQL data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld   # MySQL socket
-      - /home/${CONTEXT}/my.cnf:/etc/my.cnf               # pass for terminal
+      - /home/${CONTEXT}/my.cnf:/etc/my.cnf               # Pass for terminal
     deploy:
       resources:
         limits:
           cpus: "${MYSQL_CPU:-0.5}"
-          memory: "${MYSQL_RAM:-0.5G}"  
+          memory: "${MYSQL_RAM:-0.5G}"
     networks:
-      - default    
+      - default
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
       interval: 1s
       timeout: 5s
       retries: 10
+    command: >
+      sh -c "echo 'user=root' >> /etc/my.cnf &&
+             echo 'password=${MYSQL_ROOT_PASSWORD:-rootpassword}' >> /etc/my.cnf &&
+             cat /etc/my.cnf &&
+             exec docker-entrypoint.sh mysqld"
 
   mariadb:
     image: mariadb:${MARIADB_VERSION:-latest}
@@ -118,7 +123,11 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
-
+    command: >
+      sh -c "echo 'user=root' >> /etc/my.cnf &&
+             echo 'password=${MYSQL_ROOT_PASSWORD:-rootpassword}' >> /etc/my.cnf &&
+             cat /etc/my.cnf &&
+             exec docker-entrypoint.sh mysqld"
 
   phpmyadmin:
     container_name: phpmyadmin 
