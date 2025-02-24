@@ -14,7 +14,6 @@ services:
           memory: "${OS_RAM:-0.5G}"
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro         # SSH welcome message
-      - /home/${CONTEXT}/my.cnf:/etc/my.cnf               # Mysql root logins
       - /home/${CONTEXT}/mail/:/var/mail/                 # Mail storage
       - webserver_data:/etc/${path}/sites-available/      # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                  # Postgres data
