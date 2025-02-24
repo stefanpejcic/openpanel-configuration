@@ -12,6 +12,8 @@ services:
         limits:
           cpus: "${OS_CPU:-0.5}"
           memory: "${OS_RAM:-0.5G}"
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro         # SSH welcome message
       - /home/${CONTEXT}/mail/:/var/mail/                 # Mail storage
@@ -42,30 +44,34 @@ services:
         limits:
           cpus: "${NGINX_CPU:-0.5}"
           memory: "${NGINX_RAM:-0.5G}"   
+    security_opt:
+      - no-new-privileges:true
     networks:
       - default
 
 
-apache:
-  image: httpd:latest
-  container_name: apache
-  restart: always
-  user: "${UID:-0}"
-  ports:
-    - "${HTTP_PORT}"
-    - "${HTTPS_PORT}"
-  volumes:
-    #- ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
-    - webserver_data:/usr/local/apache2/conf.d                   # Additional Apache configs
-    - html_data:/usr/local/apache2/htdocs/                       # Website files
-    - /etc/openpanel/nginx/certs/:/etc/apache2/ssl/              # SSL certificates
-  deploy:
-    resources:
-      limits:
-        cpus: "${APACHE_CPU:-0.5}"
-        memory: "${APACHE_RAM:-0.5G}"
-  networks:
-    - default
+  apache:
+    image: httpd:latest
+    container_name: apache
+    restart: always
+    user: "${UID:-0}"
+    ports:
+      - "${HTTP_PORT}"
+      - "${HTTPS_PORT}"
+    volumes:
+      #- ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
+      - webserver_data:/usr/local/apache2/conf.d                   # Additional Apache configs
+      - html_data:/usr/local/apache2/htdocs/                       # Website files
+      - /etc/openpanel/nginx/certs/:/etc/apache2/ssl/              # SSL certificates
+    deploy:
+      resources:
+        limits:
+          cpus: "${APACHE_CPU:-0.5}"
+          memory: "${APACHE_RAM:-0.5G}"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - default
 
   varnish:
     image: varnish:stable
@@ -87,8 +93,12 @@ apache:
     command: "-p default_keep=300"
     depends_on:
       - "${WEB_SERVER:-nginx}"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - default
 
-
+      
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
     container_name: mysql
@@ -108,6 +118,8 @@ apache:
           memory: "${MYSQL_RAM:-0.5G}"
     networks:
       - default
+    security_opt:
+      - no-new-privileges:true
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
       interval: 1s
@@ -136,6 +148,8 @@ apache:
         limits:
           cpus: "${MARIADB_CPU:-0.5}"
           memory: "${MARIADB_RAM:-0.5G}"
+    security_opt:
+      - no-new-privileges:true
     networks:
       - default
     healthcheck:
