@@ -23,7 +23,8 @@ services:
       - html_data:/var/www/html/                          # Website files
       - /home/${CONTEXT}/sockets/:/var/run/               # All Sockets
     networks:
-      - default
+      - www
+      - db
     command: [ "tail", "-f", "/dev/null" ]
     
   nginx:
@@ -47,7 +48,7 @@ services:
     security_opt:
       - no-new-privileges:true
     networks:
-      - default
+      - www
 
 
   apache:
@@ -71,7 +72,7 @@ services:
     security_opt:
       - no-new-privileges:true
     networks:
-      - default
+      - www
 
   varnish:
     image: varnish:stable
@@ -96,7 +97,7 @@ services:
     security_opt:
       - no-new-privileges:true
     networks:
-      - default
+      - www
 
       
   mysql:
@@ -117,7 +118,7 @@ services:
           cpus: "${MYSQL_CPU:-0.5}"
           memory: "${MYSQL_RAM:-0.5G}"
     networks:
-      - default
+      - db
     security_opt:
       - no-new-privileges:true
     healthcheck:
@@ -151,7 +152,7 @@ services:
     security_opt:
       - no-new-privileges:true
     networks:
-      - default
+      - db
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
       interval: 1s
@@ -181,7 +182,7 @@ services:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
     networks:
-      - default
+      - db
 
   redis:
     image: redis:${REDIS_VERSION:-7.4.2-alpine}
@@ -202,7 +203,7 @@ services:
       start_period: 10s
       timeout: 5s
     networks:
-      - default
+      - www
 
   memcached:
     image: memcached:${MEMCACHED_VERSION:-7.4.2-alpine}
@@ -224,7 +225,7 @@ services:
       start_period: 10s
       timeout: 5s
     networks:
-      - default
+      - www
 
 
   php-fpm-5.6:
@@ -241,7 +242,8 @@ services:
           cpus: "${PHP_FPM_5_6_CPU:-0.125}"
           memory: "${PHP_FPM_5_6_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-7.0:
     image: php:7.0-fpm
@@ -257,7 +259,8 @@ services:
           cpus: "${PHP_FPM_7_0_CPU:-0.125}"
           memory: "${PHP_FPM_7_0_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-7.1:
     image: php:7.1-fpm
@@ -273,7 +276,8 @@ services:
           cpus: "${PHP_FPM_7_1_CPU:-0.125}"
           memory: "${PHP_FPM_7_1_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-7.2:
     image: php:7.2-fpm
@@ -289,7 +293,8 @@ services:
           cpus: "${PHP_FPM_7_2_CPU:-0.125}"
           memory: "${PHP_FPM_7_2_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-7.3:
     image: php:7.3-fpm
@@ -305,7 +310,8 @@ services:
           cpus: "${PHP_FPM_7_3_CPU:-0.125}"
           memory: "${PHP_FPM_7_3_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-7.4:
     image: php:7.4-fpm
@@ -321,7 +327,8 @@ services:
           cpus: "${PHP_FPM_7_4_CPU:-0.125}"
           memory: "${PHP_FPM_7_4_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-8.0:
     image: php:8.0-fpm
@@ -337,7 +344,8 @@ services:
           cpus: "${PHP_FPM_8_0_CPU:-0.125}"
           memory: "${PHP_FPM_8_0_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-8.1:
     image: php:8.1-fpm
@@ -353,7 +361,8 @@ services:
           cpus: "${PHP_FPM_8_1_CPU:-0.125}"
           memory: "${PHP_FPM_8_1_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-8.2:
     image: php:8.2-fpm
@@ -369,7 +378,8 @@ services:
           cpus: "${PHP_FPM_8_2_CPU:-0.125}"
           memory: "${PHP_FPM_8_2_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-8.3:
     image: php:8.3-fpm
@@ -385,7 +395,8 @@ services:
           cpus: "${PHP_FPM_8_3_CPU:-0.125}"
           memory: "${PHP_FPM_8_3_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
   php-fpm-8.4:
     image: php:8.4-fpm
@@ -401,11 +412,16 @@ services:
           cpus: "${PHP_FPM_8_4_CPU:-0.125}"
           memory: "${PHP_FPM_8_4_RAM:-0.25G}"
     networks:
-      - default
+      - www
+      - db
 
 
 networks:
   default:
+    driver: bridge
+  www:
+    driver: bridge
+  db:
     driver: bridge
 
 volumes:
