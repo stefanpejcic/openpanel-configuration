@@ -107,7 +107,7 @@ services:
     ports:
       - "${MYSQL_PORT}"
     volumes:
-      - mariadb_data:/var/lib/mysql                         # MariaDB data
+      - mysql_data:/var/lib/mysql                         # MariaDB data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld     # MariaDB socket
     deploy:
       resources:
