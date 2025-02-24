@@ -48,8 +48,8 @@ services:
     restart: always
     user: "${UID:-0}"
     ports:
-      - "${PROXY_HTTP_PORT}:+${PROXY_HTTP_PORT:-${HTTP_PORT}}"
-      - "${PROXY_HTTPS_PORT}:+${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
+      - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
+      - "${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
     working_dir: /var/www/html
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
@@ -73,8 +73,8 @@ services:
     restart: always
     user: "${UID:-0}"
     ports:
-      - "${PROXY_HTTP_PORT}:+${PROXY_HTTP_PORT:-${HTTP_PORT}}"
-      - "${PROXY_HTTPS_PORT}:+${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
+      - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
+      - "${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
     working_dir: /var/www/html
     volumes:
       #- ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
@@ -97,8 +97,8 @@ services:
     volumes:
       - "./default.vcl:/etc/varnish/default.vcl"
     ports:
-      - "${PROXY_HTTP_PORT}:+${HTTP_PORT}}"
-      - "${PROXY_HTTPS_PORT}:+${HTTPS_PORT}}"
+      - "${HTTP_PORT}"
+      - "${HTTPS_PORT}"
     tmpfs:
       - /var/lib/varnish:exec
     deploy:
