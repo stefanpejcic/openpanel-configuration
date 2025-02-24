@@ -79,7 +79,6 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql                         # MySQL data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld   # MySQL socket
-      - /home/${CONTEXT}/my.cnf:/etc/my.cnf               # Pass for terminal
     deploy:
       resources:
         limits:
@@ -110,7 +109,6 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql                         # MariaDB data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld     # MariaDB socket
-      - /home/${CONTEXT}/my.cnf:/etc/my.cnf                 # Configuration file
     deploy:
       resources:
         limits:
