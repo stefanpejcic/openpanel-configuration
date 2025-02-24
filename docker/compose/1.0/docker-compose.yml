@@ -222,6 +222,31 @@ services:
     networks:
       - www
 
+
+  elasticsearch:
+    image: elasticsearch:${ELASTICSEARH_VERSION:-7.16.1}
+    container_name: elasticsearch
+    restart: unless-stopped
+    user: "${UID:-0}"
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      - /home/${CONTEXT}/sockets/elasticsearch:/var/run/elasticsearch
+    deploy:
+      resources:
+        limits:
+          cpus: "${ELASTICSEARCH_CPU:-0.5}"
+          memory: "${ELASTICSEARCH_RAM-1G}" 
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - www
+
+
   memcached:
     image: memcached:${MEMCACHED_VERSION:-7.4.2-alpine}
     container_name: memcached
