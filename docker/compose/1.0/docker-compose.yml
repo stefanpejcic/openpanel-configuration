@@ -35,6 +35,7 @@ services:
     ports:
       - "${HTTP_PORT}"
       - "${HTTPS_PORT}"
+    working_dir: /var/www/html
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - webserver_data:/etc/nginx/conf.d
@@ -59,6 +60,7 @@ services:
     ports:
       - "${HTTP_PORT}"
       - "${HTTPS_PORT}"
+    working_dir: /var/www/html
     volumes:
       #- ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
       - webserver_data:/usr/local/apache2/conf.d                   # Additional Apache configs
