@@ -14,19 +14,19 @@ services:
           cpus: "${OS_CPU:-0.5}"
           memory: "${OS_RAM:-0.5G}"
         blkio_config:
-          weight: "${OS_BLKIO_WEIGHT:-500"
+          weight: "${OS_BLKIO_WEIGHT:-500}"
           device_read_bps:
             - path: "${DEVICE_NAME}"
               rate: "${OS_READ_BPS:-10mb}"
           device_write_bps:
             - path: "${DEVICE_NAME}"
-              rate: "${OS_WRITE_BPS:-5mb"
+              rate: "${OS_WRITE_BPS:-5mb}"
           device_read_iops:
             - path: "${DEVICE_NAME}"
-              rate: "${OS_READ_IOPS:-100"
+              rate: "${OS_READ_IOPS:-100}"
           device_write_iops:
             - path: "${DEVICE_NAME}"
-              rate: "${OS_WRITE_IOPS:-50"
+              rate: "${OS_WRITE_IOPS:-50}"
     security_opt:
       - no-new-privileges:true
     volumes:
