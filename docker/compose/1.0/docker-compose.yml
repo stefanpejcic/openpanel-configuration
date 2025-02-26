@@ -32,7 +32,7 @@ services:
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro         # SSH welcome message
       - /home/${CONTEXT}/mail/:/var/mail/                 # Mail storage
-      - webserver_data:/etc/${path}/sites-available/      # Nginx/Apache data
+      - webserver_data:/etc/${WEB_SERVER}/sites-available/      # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                  # Postgres data
       - mysql_data:/var/lib/mysql                         # MySQL data      
       - html_data:/var/www/html/                          # Website files
