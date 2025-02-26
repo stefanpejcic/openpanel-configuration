@@ -10,7 +10,7 @@ services:
     deploy:
       resources:
         limits:
-          pids: "${OS_PIDS:-100}"
+          #pids: ${OS_PIDS:-100} # https://github.com/docker/cli/issues/5009
           cpus: "${OS_CPU:-0.5}"
           memory: "${OS_RAM:-0.5G}"
     security_opt:
