@@ -27,7 +27,23 @@ services:
       - www
       - db
     command: [ "tail", "-f", "/dev/null" ]
-    
+
+  busybox:
+    image: busybox
+    container_name: busybox          
+    restart: always
+    user: "${USER_ID:-0}"
+    working_dir: /var/www/html
+    deploy:
+      resources:
+        limits:
+          cpus: "${BUSYBOX_CPU:-0.1}"
+          memory: "${BUSYBOX_RAM:-0.1G}"   
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - html_data:/var/www/html/
+
   nginx:
     image: nginx:latest
     container_name: nginx
