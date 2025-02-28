@@ -21,9 +21,10 @@ services:
       - webserver_data:/etc/${WEB_SERVER}/sites-available/ # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                   # Postgres data
       - mysql_data:/var/lib/mysql                          # MySQL data
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf                # mysql root pass - created/updated on mysql restart
+      - /home/${CONTEXT}/my.cnf:/root/.my.cnf              # mysql root pass - created/updated on mysql restart
       - html_data:/var/www/html/                           # Website files
       - /home/${CONTEXT}/sockets/:/var/run/                # All Sockets
+      - /home/${CONTEXT}/php.ini/:/php/                    # php.ini files for containers
     networks:
       - www
       - db
