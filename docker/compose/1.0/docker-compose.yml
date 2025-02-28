@@ -180,11 +180,6 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
-    command: >
-      sh -c "echo 'user=root' >> /etc/my.cnf &&
-             echo 'password=${MYSQL_ROOT_PASSWORD:-rootpassword}' >> /etc/my.cnf &&
-             cat /etc/my.cnf &&
-             exec docker-entrypoint.sh mysqld"
 
   phpmyadmin:
     container_name: phpmyadmin 
