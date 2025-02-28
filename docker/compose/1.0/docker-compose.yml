@@ -275,7 +275,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/5.6.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/5.6/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -292,7 +292,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.0.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/7.0/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -309,7 +309,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.1.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/7.1/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -326,7 +326,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.2.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/7.2/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -343,7 +343,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.3.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/7.3/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -360,7 +360,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.4.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/7.4/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -377,7 +377,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.0.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/8.0/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -394,7 +394,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.1.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/8.1/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -411,7 +411,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.2.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/8.2/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -428,7 +428,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.3.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/8.3/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
@@ -445,7 +445,7 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.4.ini:/usr/local/etc/php/php.ini:ro
+      - /home/${CONTEXT}/php.ini/8.4/:/usr/local/etc/php/
     deploy:
       resources:
         limits:
