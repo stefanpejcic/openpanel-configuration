@@ -47,7 +47,7 @@ services:
       - html_data:/var/www/html/
 
   nginx:
-    image: nginx:latest
+    image: nginx:${NGINX_VERSION:-latest}
     container_name: nginx
     restart: always
     user: "${USER_ID:-0}"
@@ -72,7 +72,7 @@ services:
 
 
   apache:
-    image: httpd:latest
+    image: httpd::${APACHE_VERSION:-latest}
     container_name: apache
     restart: always
     user: "${USER_ID:-0}"
@@ -96,7 +96,7 @@ services:
       - www
 
   varnish:
-    image: varnish:stable
+    image: varnish::${VARNISH_VERSION:-stable}
     container_name: varnish
     user: "${USER_ID:-0}"
     volumes:
@@ -151,7 +151,7 @@ services:
       retries: 10
 
   mariadb:
-    image: mariadb:${MARIADB_VERSION:-latest}
+    image: mariadb:${MYSQL_VERSION:-latest}
     container_name: mariadb
     restart: always
     user: "${USER_ID:-0}"
