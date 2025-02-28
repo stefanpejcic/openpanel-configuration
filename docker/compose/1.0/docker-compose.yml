@@ -21,6 +21,7 @@ services:
       - webserver_data:/etc/${WEB_SERVER}/sites-available/ # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                   # Postgres data
       - mysql_data:/var/lib/mysql                          # MySQL data      
+      - /home/${CONTEXT}/my.cnf:/root/.my.cnf                # mysql root pass - created/updated on mysql restart
       - html_data:/var/www/html/                           # Website files
       - /home/${CONTEXT}/sockets/:/var/run/                # All Sockets
     networks:
@@ -132,6 +133,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql                         # MySQL data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld   # MySQL socket
+      - /home/${CONTEXT}/my.cnf:/root/.my.cnf             # mysql root pass - created/updated on mysql restart
     deploy:
       resources:
         limits:
