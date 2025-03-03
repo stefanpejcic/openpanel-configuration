@@ -200,6 +200,35 @@ services:
     networks:
       - db
 
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-latest}
+    container_name: postgres
+    restart: always
+    #user: "${USER_ID:-0}"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgrespassword}
+    ports:
+      - "${POSTGRES_PORT}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data            # PostgreSQL data
+      - /home/${CONTEXT}/sockets/postgres:/var/run/postgresql  # PostgreSQL socket
+    deploy:
+      resources:
+        limits:
+          cpus: "${POSTGRES_CPU:-0.3}"
+          memory: "${POSTGRES_RAM:-0.3}"
+    networks:
+      - db
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres}']
+      interval: 1s
+      timeout: 5s
+      retries: 10
+      
+
   redis:
     image: redis:${REDIS_VERSION:-7.4.2-alpine}
     container_name: redis
