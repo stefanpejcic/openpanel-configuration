@@ -50,7 +50,6 @@ CREATE TABLE `plans` (
   `db_limit` int NOT NULL,
   `cpu` varchar(50) DEFAULT NULL,
   `ram` varchar(50) DEFAULT NULL,
-  `docker_image` varchar(50) DEFAULT NULL,
   `bandwidth` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -61,10 +60,10 @@ CREATE TABLE `plans` (
 
 LOCK TABLES `plans` WRITE;
 /*!40000 ALTER TABLE `plans` DISABLE KEYS */;
-INSERT INTO `plans` (id, name, description, domains_limit, websites_limit, email_limit, ftp_limit, disk_limit, inodes_limit, db_limit, cpu, ram, docker_image, bandwidth) 
+INSERT INTO `plans` (id, name, description, domains_limit, websites_limit, email_limit, ftp_limit, disk_limit, inodes_limit, db_limit, cpu, ram, bandwidth) 
 VALUES
-(1, 'Standard plan', 'Small plan for testing', 0, 10, 0, 0, '5 GB', 1000000, 0, '2', '2g', 'openpanel/ubuntu', 10),
-(2, 'Developer Plus', '4 cores, 6G ram', 0, 10, 0, 0, '10 GB', 1000000, 0, '4', '6g', 'openpanel/ubuntu', 100);
+(1, 'Standard plan', 'Small plan for testing', 0, 10, 0, 0, '5 GB', 1000000, 0, '2', '2g', 10),
+(2, 'Developer Plus', '4 cores, 6G ram', 0, 10, 0, 0, '10 GB', 1000000, 0, '4', '6g', 100);
 /*!40000 ALTER TABLE `plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
