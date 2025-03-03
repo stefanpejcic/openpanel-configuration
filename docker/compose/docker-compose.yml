@@ -52,7 +52,7 @@ services:
 
   # OpenPanel service running on port 2083
   openpanel:
-    image: openpanel/openpanel:${VERSION}
+    image: openpanel/openpanel-ui:${VERSION}
     container_name: openpanel
     depends_on:
       - openpanel_mysql
