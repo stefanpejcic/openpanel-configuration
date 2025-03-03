@@ -273,7 +273,7 @@ services:
     image: bitnami/php-fpm:5.6
     container_name: php-fpm-5.6
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/5.6/:/opt/bitnami/php/etc/conf.d/
@@ -298,7 +298,7 @@ services:
     image: bitnami/php-fpm:7.0
     container_name: php-fpm-7.0
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/7.0/:/opt/bitnami/php/etc/conf.d/
@@ -323,7 +323,7 @@ services:
     image: bitnami/php-fpm:7.1
     container_name: php-fpm-7.1
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/7.1/:/opt/bitnami/php/etc/conf.d/
@@ -348,7 +348,7 @@ services:
     image: bitnami/php-fpm:7.2
     container_name: php-fpm-7.2
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/7.2/:/usr/local/etc/php/
@@ -373,7 +373,7 @@ services:
     image: bitnami/php-fpm:7.3
     container_name: php-fpm-7.3
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/7.3/:/opt/bitnami/php/etc/conf.d/
@@ -398,7 +398,7 @@ services:
     image: bitnami/php-fpm:7.4
     container_name: php-fpm-7.4
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/7.4/:/opt/bitnami/php/etc/conf.d/
@@ -423,7 +423,7 @@ services:
     image: bitnami/php-fpm:8.0
     container_name: php-fpm-8.0
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/8.0/:/opt/bitnami/php/etc/conf.d/
@@ -448,7 +448,7 @@ services:
     image: bitnami/php-fpm:8.1
     container_name: php-fpm-8.1
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/8.1/:/opt/bitnami/php/etc/conf.d/
@@ -473,7 +473,7 @@ services:
     image: bitnami/php-fpm:8.2
     container_name: php-fpm-8.2
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/8.2/:/opt/bitnami/php/etc/conf.d/
@@ -498,7 +498,7 @@ services:
     image: bitnami/php-fpm:8.3
     container_name: php-fpm-8.3
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/8.3/:/opt/bitnami/php/etc/conf.d/
@@ -523,7 +523,7 @@ services:
     image: bitnami/php-fpm:8.4
     container_name: php-fpm-8.4
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/8.4/:/opt/bitnami/php/etc/conf.d/
