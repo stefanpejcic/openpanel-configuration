@@ -276,7 +276,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/5.6/:/opt/bitnami/php/etc/php-fpm.conf
+      - /home/${CONTEXT}/php.ini/5.6/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_5_6_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_5_6_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_5_6_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_5_6_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_5_6_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_5_6_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_5_6_PHP_UPLOAD_MAX_FILESIZE:-256M}      
     deploy:
       resources:
         limits:
@@ -293,7 +301,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.0/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/7.0/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_7_0_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_0_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_7_0_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_7_0_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_7_0_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_7_0_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_0_PHP_UPLOAD_MAX_FILESIZE:-256M}   
     deploy:
       resources:
         limits:
@@ -310,7 +326,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.1/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/7.1/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_7_1_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_1_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_7_1_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_7_1_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_7_1_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_7_1_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_1_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -328,6 +352,14 @@ services:
     volumes:
       - html_data:/var/www/html/
       - /home/${CONTEXT}/php.ini/7.2/:/usr/local/etc/php/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_7_2_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_2_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_7_2_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_7_2_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_7_2_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_7_2_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_2_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -344,7 +376,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.3/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/7.3/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_7_3_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_3_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_7_3_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_7_3_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_7_3_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_7_3_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_3_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -361,7 +401,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.4/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/7.4/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_7_4_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_4_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_7_4_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_7_4_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_7_4_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_7_4_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_4_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -378,7 +426,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.0/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/8.0/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_8_0_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_0_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_8_0_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_8_0_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_8_0_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_8_0_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_0_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -395,7 +451,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.1/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/8.1/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_8_1_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_1_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_8_1_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_8_1_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_8_1_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_8_1_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_1_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -412,7 +476,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.2/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/8.2/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_8_2_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_2_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_8_2_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_8_2_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_8_2_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_8_2_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_2_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -429,7 +501,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.3/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/8.3/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_8_3_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_3_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_8_3_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_8_3_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_8_3_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_8_3_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_3_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
@@ -446,7 +526,15 @@ services:
     user: "${USER_ID:-0}"
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.4/:/usr/local/etc/php/
+      - /home/${CONTEXT}/php.ini/8.4/:/opt/bitnami/php/etc/conf.d/
+    environment:
+      - PHP_ENABLE_OPCACHE=${PHP_FPM_8_4_ENABLE_OPCACHE:-true}
+      - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_4_PHP_MAX_EXECUTION_TIME:-600}
+      - PHP_MAX_INPUT_TIME=${PHP_FPM_8_4_PHP_MAX_INPUT_TIME:-600}
+      - PHP_MAX_INPUT_VARS=${PHP_FPM_8_4_PHP_MAX_INPUT_VARS:-1000}
+      - PHP_MEMORY_LIMIT=${PHP_FPM_8_4_PHP_MEMORY_LIMIT:-512M}
+      - PHP_POST_MAX_SIZE=${PHP_FPM_8_4_PHP_POST_MAX_SIZE:-512M}
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_4_PHP_UPLOAD_MAX_FILESIZE:-256M} 
     deploy:
       resources:
         limits:
