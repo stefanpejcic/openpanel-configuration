@@ -21,7 +21,7 @@
         "name": "Web Server",
         "type": "docker",
         "on_dashboard": true,
-        "real_name": "nginx"
+        "real_name": "caddy"
     },
     {
         "name": "Dovecot & Postfix",
