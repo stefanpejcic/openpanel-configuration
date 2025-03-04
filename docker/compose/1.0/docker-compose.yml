@@ -211,7 +211,7 @@ services:
     ports:
       - "${POSTGRES_PORT}"
     volumes:
-      - postgres_data:/var/lib/postgresql/data            # PostgreSQL data
+      - pg_data:/var/lib/postgresql/data            # PostgreSQL data
       - /home/${CONTEXT}/sockets/postgres:/var/run/postgresql  # PostgreSQL socket
     deploy:
       resources:
