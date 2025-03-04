@@ -671,7 +671,7 @@ services:
 
       
   minecraft:
-    image: itzg/minecraft-server
+    image: itzg/minecraft-server:{MINECRAFT_VERSION:-latest}
     tty: true
     stdin_open: true
     ports:
