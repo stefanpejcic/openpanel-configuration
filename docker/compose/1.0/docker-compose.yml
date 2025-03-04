@@ -668,7 +668,25 @@ services:
         mv wp-cli.phar /usr/local/bin/wp && \
         php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
       "     
+
       
+  minecraft:
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - "${MINECRAFT_PORT:-127.0.0.1:25565:25565}"
+    environment:
+      EULA: "TRUE"
+    volumes:
+      - mc_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: "${MINECRAFT_CPU:-0.25}"
+          memory: "${MINECRAFT_RAM:-0.25G}"
+    networks:
+      - www
 
 networks:
   default:
@@ -686,4 +704,6 @@ volumes:
   webserver_data:
     driver: local
   pg_data:
+    driver: local
+  mc_data:
     driver: local
