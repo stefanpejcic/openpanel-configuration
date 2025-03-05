@@ -673,6 +673,7 @@ services:
       
   minecraft:
     image: itzg/minecraft-server:${MINECRAFT_VERSION:-latest}
+    container_name: minecraft
     tty: true
     stdin_open: true
     ports:
