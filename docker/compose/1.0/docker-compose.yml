@@ -184,7 +184,7 @@ services:
       - "${MYSQL_TYPE:-mysql}"
     image: phpmyadmin #:5.2.2-fpm-alpine
     restart: always
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
     ports:
       - "${PMA_PORT}"
     deploy:
