@@ -184,6 +184,8 @@ services:
       - "${MYSQL_TYPE:-mysql}"
     image: phpmyadmin #:5.2.2-fpm-alpine
     restart: always
+    volumes:
+      - html_data:/html/ #varwwwhtml are sites!
     #user: "${USER_ID:-0}"
     ports:
       - "${PMA_PORT}"
@@ -197,6 +199,8 @@ services:
       MAX_EXECUTION_TIME: ${PMA_MAX_EXECUTION_TIME:-600}
       MEMORY_LIMIT: ${PMA_MEMORY_LIMIT:-512M}
       UPLOAD_LIMIT: ${PMA_UPLOAD_LIMIT:-256M}
+      PMA_UPLOADDIR: "/html/"
+      PMA_SAVEDIR: "/html/"
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
     networks:
       - db
