@@ -48,10 +48,10 @@ services:
       - html_data:/var/www/html/
 
   nginx:
-    image: nginx:${NGINX_VERSION:-latest}
+    image: nginxinc/nginx-unprivileged:${NGINX_VERSION:-latest}
     container_name: nginx
     restart: always
-    #user: "${USER_ID:-0}"
+    user: "${USER_ID:-0}"
     ports:
       - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
       - "${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
