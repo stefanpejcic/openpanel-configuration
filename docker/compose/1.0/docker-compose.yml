@@ -688,6 +688,11 @@ services:
         limits:
           cpus: "${MINECRAFT_CPU:-1.0}"
           memory: "${MINECRAFT_RAM:-1.0G}"
+    healthcheck:
+      test: mc-health
+      start_period: 1m
+      interval: 5s
+      retries: 20
     networks:
       - www
 
