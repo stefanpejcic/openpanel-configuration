@@ -678,9 +678,9 @@ services:
     ports:
       - "${MINECRAFT_PORT:-25565}:25565"
     environment:
-      - EULA: "TRUE"
-      - ENABLE_QUERY: "${MINECRAFT_ENABLE_QUERY:-true}"
-      - QUERY_PORT: "${MINECRAFT_PORT:-25565}"
+      EULA: "TRUE"
+      ENABLE_QUERY: "${MINECRAFT_ENABLE_QUERY:-true}"
+      QUERY_PORT: "${MINECRAFT_PORT:-25565}"
     volumes:
       - mc_data:/data
     deploy:
