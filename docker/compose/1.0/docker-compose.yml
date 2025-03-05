@@ -133,9 +133,10 @@ services:
     ports:
       - "${MYSQL_PORT}"
     volumes:
-      - mysql_data:/var/lib/mysql                         # MySQL data
-      - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld   # MySQL socket
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf             # mysql root pass - created/updated on mysql restart
+      - mysql_data:/var/lib/mysql                                 # MySQL data
+      - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld           # MySQL socket
+      - /home/${CONTEXT}/my.cnf:/root/.my.cnf                     # mysql root pass - created/updated on mysql restart
+      - /home/${CONTEXT}/custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     deploy:
       resources:
         limits:
