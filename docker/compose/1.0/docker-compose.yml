@@ -686,8 +686,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "${MINECRAFT_CPU:-0.25}"
-          memory: "${MINECRAFT_RAM:-0.25G}"
+          cpus: "${MINECRAFT_CPU:-1.0}"
+          memory: "${MINECRAFT_RAM:-1.0G}"
     networks:
       - www
 
