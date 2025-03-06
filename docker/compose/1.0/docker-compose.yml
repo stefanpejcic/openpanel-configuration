@@ -20,7 +20,7 @@ services:
       - webserver_data:/etc/${WEB_SERVER}/sites-available/ # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                   # Postgres data
       - mysql_data:/var/lib/mysql                          # MySQL data
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf              # mysql root pass - created/updated on mysql restart
+      - /home/${CONTEXT}/my.cnf:/root/.my.cnf:ro           # mysql root pass - created/updated on mysql restart
       - html_data:/var/www/html/                           # Website files
       - /home/${CONTEXT}/sockets/:/var/run/                # All Sockets
       - /home/${CONTEXT}/php.ini/:/php/                    # php.ini files for containers
@@ -124,7 +124,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql                                 # MySQL data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld           # MySQL socket
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf                     # mysql root pass - created/updated on mysql restart
+      - /home/${CONTEXT}/my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - /home/${CONTEXT}/custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     deploy:
       resources:
@@ -150,7 +150,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql                                 # MariaDB data
       - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld           # MariaDB socket
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf                     # mysql root pass - created/updated on mysql restart
+      - /home/${CONTEXT}/my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - /home/${CONTEXT}/custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     deploy:
       resources:
