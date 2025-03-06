@@ -13,8 +13,6 @@ services:
           #pids: ${OS_PIDS:-100} # https://github.com/docker/cli/issues/5009
           cpus: "${OS_CPU:-0.5}"
           memory: "${OS_RAM:-0.5G}"
-    security_opt:
-      - no-new-privileges:true
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro          # SSH welcome message
       - /home/${CONTEXT}/mail/:/var/mail/                  # Mail storage
@@ -42,8 +40,6 @@ services:
         limits:
           cpus: "${BUSYBOX_CPU:-0.1}"
           memory: "${BUSYBOX_RAM:-0.1G}"   
-    security_opt:
-      - no-new-privileges:true
     volumes:
       - html_data:/var/www/html/
 
@@ -66,8 +62,6 @@ services:
         limits:
           cpus: "${NGINX_CPU:-0.5}"
           memory: "${NGINX_RAM:-0.5G}"   
-    security_opt:
-      - no-new-privileges:true
     networks:
       - www
 
@@ -91,8 +85,6 @@ services:
         limits:
           cpus: "${APACHE_CPU:-0.5}"
           memory: "${APACHE_RAM:-0.5G}"
-    security_opt:
-      - no-new-privileges:true
     networks:
       - www
 
@@ -117,8 +109,6 @@ services:
     command: "-p default_keep=300"
     depends_on:
       - "${WEB_SERVER:-nginx}"
-    security_opt:
-      - no-new-privileges:true
     networks:
       - www
 
@@ -143,8 +133,6 @@ services:
           memory: "${MYSQL_RAM:-0.5G}"
     networks:
       - db
-    security_opt:
-      - no-new-privileges:true
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
       interval: 1s
@@ -169,8 +157,6 @@ services:
         limits:
           cpus: "${MARIADB_CPU:-0.5}"
           memory: "${MARIADB_RAM:-0.5G}"
-    security_opt:
-      - no-new-privileges:true
     networks:
       - db
     healthcheck:
@@ -226,8 +212,6 @@ services:
           memory: "${POSTGRES_RAM:-0.3}"
     networks:
       - db
-    security_opt:
-      - no-new-privileges:true
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres}']
       interval: 1s
@@ -254,8 +238,6 @@ services:
           memory: "${PGADMIN_RAM:-0.1}"
     networks:
       - db
-    security_opt:
-      - no-new-privileges:true
 
   
   redis:
