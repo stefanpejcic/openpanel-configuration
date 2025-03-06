@@ -127,7 +127,6 @@ services:
     image: mysql:${MYSQL_VERSION:-latest}
     container_name: mysql
     restart: always
-    #user: "${USER_ID:-0}"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
     ports:
@@ -156,7 +155,6 @@ services:
     image: mariadb:${MYSQL_VERSION:-latest}
     container_name: mariadb
     restart: always
-    user: "${USER_ID:-0}"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
     ports:
