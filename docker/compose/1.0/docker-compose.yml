@@ -328,7 +328,7 @@ services:
 
 
   php-fpm-5.6:
-    image: bitnami/php-fpm:5.6
+    image: shinsenter/php:5.6-fpm
     container_name: php-fpm-5.6
     restart: always
     volumes:
@@ -355,11 +355,11 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "      
 
   php-fpm-7.0:
-    image: bitnami/php-fpm:7.0
+    image: shinsenter/php:7.0-fpm
     container_name: php-fpm-7.0
     restart: always
     volumes:
@@ -386,11 +386,11 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
   php-fpm-7.1:
-    image: bitnami/php-fpm:7.1
+    image: shinsenter/php:7.1-fpm
     container_name: php-fpm-7.1
     restart: always
     volumes:
@@ -417,12 +417,12 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
 
   php-fpm-7.2:
-    image: bitnami/php-fpm:7.2
+    image: shinsenter/php:7.2-fpm
     container_name: php-fpm-7.2
     restart: always
     volumes:
@@ -449,13 +449,13 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
 
 
   php-fpm-7.3:
-    image: bitnami/php-fpm:7.3
+    image: shinsenter/php:7.3-fpm
     container_name: php-fpm-7.3
     restart: always
     volumes:
@@ -482,12 +482,12 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
 
   php-fpm-7.4:
-    image: bitnami/php-fpm:7.4
+    image: shinsenter/php:7.4-fpm
     container_name: php-fpm-7.4
     restart: always
     volumes:
@@ -514,11 +514,11 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
   php-fpm-8.0:
-    image: bitnami/php-fpm:8.0
+    image: shinsenter/php:8.0-fpm
     container_name: php-fpm-8.0
     restart: always
     volumes:
@@ -545,12 +545,12 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
 
   php-fpm-8.1:
-    image: bitnami/php-fpm:8.1
+    image: shinsenter/php:8.1-fpm
     container_name: php-fpm-8.1
     restart: always
     volumes:
@@ -577,12 +577,12 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
 
       
   php-fpm-8.2:
-    image: bitnami/php-fpm:8.2
+    image: shinsenter/php:8.2-fpm
     container_name: php-fpm-8.2
     restart: always
     volumes:
@@ -609,12 +609,12 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
 
   php-fpm-8.3:
-    image: bitnami/php-fpm:8.3
+    image: shinsenter/php:8.3-fpm
     container_name: php-fpm-8.3
     restart: always
     volumes:
@@ -641,11 +641,11 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
       
   php-fpm-8.4:
-    image: bitnami/php-fpm:8.4
+    image: shinsenter/php:8.4-fpm
     container_name: php-fpm-8.4
     restart: always
     volumes:
@@ -672,7 +672,7 @@ services:
         curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
         chmod +x wp-cli.phar && \
         mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm -F --pid /opt/bitnami/php/tmp/php-fpm.pid -y /opt/bitnami/php/etc/php-fpm.conf
+        php-fpm
       "     
 
       
