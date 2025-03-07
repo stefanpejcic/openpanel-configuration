@@ -695,13 +695,31 @@ networks:
 volumes:
   mysql_data:
     driver: local
+    labels:
+      description: "This volume holds the mysql/mariadb databases."
+      purpose: "database"
   html_data:
     driver: local
+    labels:
+      description: "This volume holds the /var/www/html/ directory."
+      purpose: "storage"
   mail_data:
-    driver: local    
+    driver: local
+    labels:
+      description: "This volume holds the /var/mail/ directory."
+      purpose: "storage"
   webserver_data:
     driver: local
+    labels:
+      description: "This volume holds the Nginx/Apache vhost files."
+      purpose: "configuration"
   pg_data:
     driver: local
+    labels:
+      description: "This volume holds the postgresql databases."
+      purpose: "database"
   mc_data:
     driver: local
+    labels:
+      description: "This volume holds the minecraft data directory."
+      purpose: "storage"
