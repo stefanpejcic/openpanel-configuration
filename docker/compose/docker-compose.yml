@@ -175,9 +175,15 @@ services:
 # make the mysql data persistent
 volumes:
   mysql:
-
+    labels:
+      description: "This volume holds the openpanel database."
+      purpose: "configuration"
 
 # define custom network
 networks:
   openpanel_network:
     driver: bridge
+    labels:
+      description: "This network allows OpenPanel UI to communicate to system containers."
+      purpose: "internal"
+  
