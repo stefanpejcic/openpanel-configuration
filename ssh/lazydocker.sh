@@ -21,7 +21,8 @@ if [ "$USER_UID" -ne 0 ]; then
         --memory="100m" \
         --pids-limit="10" \
         --security-opt no-new-privileges \
-        -v /hostfs/run/user/$USER_UID/docker.sock:/var/run/docker.sock
+        -v /hostfs/run/user/$USER_UID/docker.sock:/var/run/docker.sock \
+        lazyteam/lazydocker
 else
     exec "$@"
 fi
