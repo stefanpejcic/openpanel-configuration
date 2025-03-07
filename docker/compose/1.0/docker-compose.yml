@@ -687,10 +687,19 @@ services:
 networks:
   default:
     driver: bridge
+    labels:
+      description: "This network is not used used and serves as a fallback."
+      purpose: "internal"
   www:
     driver: bridge
+    labels:
+      description: "This network is used for communication between website services (webserver to apps)."
+      purpose: "internal"
   db:
     driver: bridge
+    labels:
+      description: "This network is used for communication between websites and database services (apps to database)."
+      purpose: "internal"
 
 volumes:
   mysql_data:
