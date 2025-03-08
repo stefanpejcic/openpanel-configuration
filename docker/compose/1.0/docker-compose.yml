@@ -286,6 +286,31 @@ services:
       - www
 
 
+  opensearch:
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-2.11.0}
+    container_name: opensearch
+    restart: unless-stopped
+    user: "${USER_ID:-0}"
+    environment:
+      discovery.type: single-node
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+      DISABLE_SECURITY_PLUGIN: "true"
+    volumes:
+      - /home/${CONTEXT}/sockets/opensearch:/var/run/opensearch
+    deploy:
+      resources:
+        limits:
+          cpus: "${OPENSEARCH_CPU:-0.5}"
+          memory: "${OPENSEARCH_RAM:-1G}" 
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - www
+      
+
   memcached:
     image: memcached:${MEMCACHED_VERSION:-7.4.2-alpine}
     container_name: memcached
