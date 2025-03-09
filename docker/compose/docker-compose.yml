@@ -93,6 +93,9 @@ services:
       - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/
       # emails
       - /usr/local/mail/openmail/:/usr/local/mail/openmail/
+      # time
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro      
     restart: always
     privileged: true
     networks:
