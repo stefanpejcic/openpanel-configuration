@@ -764,6 +764,11 @@ volumes:
     labels:
       description: "This volume holds the mysql/mariadb databases."
       purpose: "database"
+  mssql_data:
+    driver: local
+    labels:
+      description: "This volume holds the MSSQL databases."
+      purpose: "database"      
   html_data:
     driver: local
     labels:
