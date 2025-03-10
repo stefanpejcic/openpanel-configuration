@@ -1,5 +1,5 @@
 {
-  "max_accounts": unlimited,
+  "max_accounts": "unlimited",
   "current_accounts": 0,
   "allowed_plans": []
 }
