@@ -67,7 +67,7 @@ services:
 
 
   apache:
-    image: httpd::${APACHE_VERSION:-latest}
+    image: httpd:${APACHE_VERSION:-latest}
     container_name: apache
     restart: always
     #user: "${USER_ID:-0}"
@@ -89,7 +89,7 @@ services:
       - www
 
   varnish:
-    image: varnish::${VARNISH_VERSION:-stable}
+    image: varnish:${VARNISH_VERSION:-stable}
     container_name: varnish
     user: "${USER_ID:-0}"
     volumes:
