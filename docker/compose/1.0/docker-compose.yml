@@ -372,7 +372,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/5.6/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/5.6/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_5_6_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_5_6_PHP_MAX_EXECUTION_TIME:-600}
@@ -403,7 +403,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.0/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/7.0/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -434,7 +434,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.1/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/7.1/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -499,7 +499,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.3/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/7.3/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -531,7 +531,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.4/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/7.4/:/usr/local/etc/php
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_4_PHP_MAX_EXECUTION_TIME:-600}
@@ -562,7 +562,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.0/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/8.0/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -594,7 +594,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.1/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/8.1/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -626,7 +626,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.2/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/8.2/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_2_PHP_MAX_EXECUTION_TIME:-600}
@@ -658,7 +658,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.3/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/8.3/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -689,7 +689,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.4/:/opt/bitnami/php/etc/conf.d/
+      - /home/${CONTEXT}/php.ini/8.4/:/usr/local/etc/php/
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_4_PHP_MAX_EXECUTION_TIME:-600}
