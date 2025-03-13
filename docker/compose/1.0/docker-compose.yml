@@ -76,10 +76,11 @@ services:
       - "${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
     working_dir: /var/www/html
     volumes:
-      #- ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro        # Apache configuration
-      - webserver_data:/usr/local/apache2/conf.d                   # Additional Apache configs
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
+      - webserver_data: /etc/httpd/conf.d/                         # Additional Apache configs
       - html_data:/var/www/html/                                   # Website files
       - /etc/openpanel/nginx/certs/:/etc/apache2/ssl/              # SSL certificates
+      
     deploy:
       resources:
         limits:
