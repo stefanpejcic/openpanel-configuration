@@ -15,15 +15,15 @@ services:
           memory: "${OS_RAM:-0.5G}"
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro          # SSH welcome message
-      - /home/${CONTEXT}/mail/:/var/mail/                  # Mail storage
+      - ./mail/:/var/mail/                  # Mail storage
       - mail_data:/var/mail/                               # Mail storage      
       - webserver_data:/etc/${WEB_SERVER}/sites-available/ # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                   # Postgres data
       - mysql_data:/var/lib/mysql                          # MySQL data
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf:ro           # mysql root pass - created/updated on mysql restart
+      - ./my.cnf:/root/.my.cnf:ro           # mysql root pass - created/updated on mysql restart
       - html_data:/var/www/html/                           # Website files
-      - /home/${CONTEXT}/sockets/:/var/run/                # All Sockets
-      - /home/${CONTEXT}/php.ini/:/php/                    # php.ini files for containers
+      - ./sockets/:/var/run/                # All Sockets
+      - ./php.ini/:/php/                    # php.ini files for containers
     networks:
       - www
       - db
@@ -50,7 +50,7 @@ services:
     user: "${USER_ID:-0}"
     ports:
       - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
-      - "${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
+      - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
@@ -73,7 +73,7 @@ services:
     #user: "${USER_ID:-0}"
     ports:
       - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
-      - "${PROXY_HTTPS_PORT:-${HTTPS_PORT}}"
+      - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
       - ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
@@ -92,12 +92,16 @@ services:
   varnish:
     image: varnish:${VARNISH_VERSION:-stable}
     container_name: varnish
-    user: "${USER_ID:-0}"
+    #user: "${USER_ID:-0}"
+    environment:
+      WEB_SERVER: "${WEB_SERVER:-nginx}"
+      VARNISH_SIZE: "${VARNISH_SIZE:-1G}"
+    entrypoint: /bin/sh -c "cp /etc/varnish/default.vcl.template /etc/varnish/default.vcl && sed -i 's|VARNISH_BACKEND_HOST|'"$WEB_SERVER"'|g' /etc/varnish/default.vcl && /usr/local/bin/docker-varnish-entrypoint"
+    command: [ "-n", "/var/lib/varnish" ]
     volumes:
-      - "./default.vcl:/etc/varnish/default.vcl"
+      - ./default.vcl:/etc/varnish/default.vcl.template:ro  
     ports:
-      - "${HTTP_PORT}"
-      - "${HTTPS_PORT}"
+      - "${PROXY_HTTP_PORT:+${HTTP_PORT}}"
     tmpfs:
       - /var/lib/varnish:exec
     deploy:
@@ -105,13 +109,11 @@ services:
         limits:
           cpus: "${VARNISH_CPU:-0.5}"
           memory: "${VARNISH_RAM:-0.5G}"       
-    environment:
-      - VARNISH_SIZE=${VARNISH_SIZE:-1G}
-    command: "-p default_keep=300"
     depends_on:
       - "${WEB_SERVER:-nginx}"
     networks:
       - www
+
 
       
   mysql:
@@ -124,9 +126,9 @@ services:
       - "${MYSQL_PORT}"
     volumes:
       - mysql_data:/var/lib/mysql                                 # MySQL data
-      - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld           # MySQL socket
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
-      - /home/${CONTEXT}/custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
+      - ./sockets/mysqld:/var/run/mysqld           # MySQL socket
+      - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
+      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     deploy:
       resources:
         limits:
@@ -150,9 +152,9 @@ services:
       - "${MYSQL_PORT}"
     volumes:
       - mysql_data:/var/lib/mysql                                 # MariaDB data
-      - /home/${CONTEXT}/sockets/mysqld:/var/run/mysqld           # MariaDB socket
-      - /home/${CONTEXT}/my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
-      - /home/${CONTEXT}/custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
+      - ./sockets/mysqld:/var/run/mysqld           # MariaDB socket
+      - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
+      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     deploy:
       resources:
         limits:
@@ -208,8 +210,8 @@ services:
       - "${MSSQL_PORT}"
     volumes:
       - mssql_data:/var/opt/mssql                                      # MSSQL data
-      - /home/${CONTEXT}/sockets/mssql:/var/opt/mssql/sockets          # MSSQL socket
-      - /home/${CONTEXT}/mssql.conf:/etc/mssql/mssql.conf:ro           # Custom MSSQL config
+      - ./sockets/mssql:/var/opt/mssql/sockets          # MSSQL socket
+      - ./mssql.conf:/etc/mssql/mssql.conf:ro           # Custom MSSQL config
     deploy:
       resources:
         limits:
@@ -237,7 +239,7 @@ services:
       - "${POSTGRES_PORT}"
     volumes:
       - pg_data:/var/lib/postgresql/data            # PostgreSQL data
-      - /home/${CONTEXT}/sockets/postgres:/var/run/postgresql  # PostgreSQL socket
+      - ./sockets/postgres:/var/run/postgresql  # PostgreSQL socket
     deploy:
       resources:
         limits:
@@ -279,7 +281,7 @@ services:
     restart: unless-stopped
     user: "${USER_ID:-0}"
     volumes:
-      - /home/${CONTEXT}/sockets/redis:/var/run/redis  # Redis socket
+      - ./sockets/redis:/var/run/redis  # Redis socket
     deploy:
       resources:
         limits:
@@ -304,7 +306,7 @@ services:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     volumes:
-      - /home/${CONTEXT}/sockets/elasticsearch:/var/run/elasticsearch
+      - ./sockets/elasticsearch:/var/run/elasticsearch
     deploy:
       resources:
         limits:
@@ -329,7 +331,7 @@ services:
       OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
       DISABLE_SECURITY_PLUGIN: "true"
     volumes:
-      - /home/${CONTEXT}/sockets/opensearch:/var/run/opensearch
+      - ./sockets/opensearch:/var/run/opensearch
     deploy:
       resources:
         limits:
@@ -350,7 +352,7 @@ services:
     restart: unless-stopped
     user: "${USER_ID:-0}"
     volumes:
-      - /home/${CONTEXT}/sockets/memcached:/var/run/memcached  # Memcached socket
+      - ./sockets/memcached:/var/run/memcached  # Memcached socket
     deploy:
       resources:
         limits:
@@ -373,7 +375,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/5.6.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/5.6.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_5_6_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_5_6_PHP_MAX_EXECUTION_TIME:-600}
@@ -404,7 +406,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.0.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/7.0.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -435,7 +437,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.1.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/7.1.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -467,7 +469,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.2.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/7.2.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_2_PHP_MAX_EXECUTION_TIME:-600}
@@ -500,7 +502,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.3.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/7.3.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -532,7 +534,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/7.4/:/usr/local/etc/php
+      - ./php.ini/7.4/:/usr/local/etc/php
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_4_PHP_MAX_EXECUTION_TIME:-600}
@@ -563,7 +565,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.0.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/8.0.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -595,7 +597,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.1.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/8.1.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -627,7 +629,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.2.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_2_PHP_MAX_EXECUTION_TIME:-600}
@@ -659,7 +661,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.3.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/8.3.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -690,7 +692,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - /home/${CONTEXT}/php.ini/8.4.ini:/usr/local/etc/php/php.ini
+      - ./php.ini/8.4.ini:/usr/local/etc/php/php.ini
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_4_PHP_MAX_EXECUTION_TIME:-600}
