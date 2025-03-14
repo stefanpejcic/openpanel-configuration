@@ -280,6 +280,7 @@ services:
     container_name: redis
     restart: unless-stopped
     user: "${USER_ID:-0}"
+    command: ["redis-server", "--unixsocket", "/var/run/redis/redis.sock", "--unixsocketperm", "770", "--bind", "0.0.0.0", "--port", "6379"]
     volumes:
       - ./sockets/redis:/var/run/redis  # Redis socket
     deploy:
@@ -344,22 +345,21 @@ services:
       retries: 3
     networks:
       - www
-      
-
+  
   memcached:
     image: memcached:${MEMCACHED_VERSION:-7.4.2-alpine}
     container_name: memcached
     restart: unless-stopped
     user: "${USER_ID:-0}"
+    command: ["memcached", "-u", "root", "-s", "/var/run/memcached.sock", "-a", "770", "-l", "0.0.0.0", "-p", "11211"]
     volumes:
-      - ./sockets/memcached:/var/run/memcached  # Memcached socket
+      - ./sockets/memcached:/var/run/  # Memcached socket
     deploy:
       resources:
         limits:
           cpus: "${MEMCACHED_CPU:-0.1}"
           memory: "${MEMCACHED_RAM-0.1G}" 
-    command: [ "memcached", "-u", "root" ]
-    healthcheck:    
+    healthcheck:
       test: ["CMD", "memcached", "-h"]
       interval: 30s
       retries: 3
@@ -376,6 +376,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/5.6.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_5_6_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_5_6_PHP_MAX_EXECUTION_TIME:-600}
@@ -407,6 +408,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.0.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -438,6 +440,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.1.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -470,6 +473,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.2.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_2_PHP_MAX_EXECUTION_TIME:-600}
@@ -503,6 +507,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.3.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -535,6 +540,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.4/:/usr/local/etc/php
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_4_PHP_MAX_EXECUTION_TIME:-600}
@@ -566,6 +572,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.0.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -598,6 +605,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.1.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -630,6 +638,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_2_PHP_MAX_EXECUTION_TIME:-600}
@@ -662,6 +671,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.3.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -693,6 +703,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.4.ini:/usr/local/etc/php/php.ini
+      - ./sockets/:/var/run/:ro
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_4_PHP_MAX_EXECUTION_TIME:-600}
