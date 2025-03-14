@@ -8,6 +8,25 @@ import re
 import yaml  # pip install pyyaml
 from pathlib import Path
 
+# From version 1.1.4, we no longer restart admin/user services on configuration changes. Instead, 
+# we create a flag file (/root/openadmin_restart_needed) and remind the user via the GUI that a restart 
+# is needed to apply the changes. 
+# Here, on restart, we check and remove that flag to ensure it’s cleared.
+RESTART_FILE_PATH = '/root/openpanel_restart_needed'
+
+# Function to check if the file exists and remove it
+def check_and_remove_restart_file():
+    if os.path.exists(RESTART_FILE_PATH):
+        try:
+            os.remove(RESTART_FILE_PATH)
+            print(f"Removed the restart-needed flag for OpenPanel UI.")
+        except Exception as e:
+            print(f"Error removing {RESTART_FILE_PATH}: {e}")
+
+# Call the function before starting the Gunicorn server
+check_and_remove_restart_file()
+
+
 # File paths
 CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
 CADDY_CERT_DIR = "/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"
