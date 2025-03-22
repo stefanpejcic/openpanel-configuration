@@ -101,7 +101,7 @@ services:
     volumes:
       - ./default.vcl:/etc/varnish/default.vcl.template:ro  
     ports:
-      - "${PROXY_HTTP_PORT:+${HTTP_PORT}}"
+      - "${HTTP_PORT}"
     tmpfs:
       - /var/lib/varnish:exec
     deploy:
