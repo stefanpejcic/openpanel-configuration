@@ -384,7 +384,11 @@ services:
       - PHP_MAX_INPUT_VARS=${PHP_FPM_5_6_PHP_MAX_INPUT_VARS:-1000}
       - PHP_MEMORY_LIMIT=${PHP_FPM_5_6_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_5_6_PHP_POST_MAX_SIZE:-512M}
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_5_6_PHP_UPLOAD_MAX_FILESIZE:-256M}      
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_5_6_PHP_UPLOAD_MAX_FILESIZE:-256M}   
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -416,7 +420,11 @@ services:
       - PHP_MAX_INPUT_VARS=${PHP_FPM_7_0_PHP_MAX_INPUT_VARS:-1000}
       - PHP_MEMORY_LIMIT=${PHP_FPM_7_0_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_7_0_PHP_POST_MAX_SIZE:-512M}
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_0_PHP_UPLOAD_MAX_FILESIZE:-256M}   
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_0_PHP_UPLOAD_MAX_FILESIZE:-256M}  
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -448,7 +456,11 @@ services:
       - PHP_MAX_INPUT_VARS=${PHP_FPM_7_1_PHP_MAX_INPUT_VARS:-1000}
       - PHP_MEMORY_LIMIT=${PHP_FPM_7_1_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_7_1_PHP_POST_MAX_SIZE:-512M}
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_1_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_1_PHP_UPLOAD_MAX_FILESIZE:-256M}
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -481,7 +493,11 @@ services:
       - PHP_MAX_INPUT_VARS=${PHP_FPM_7_2_PHP_MAX_INPUT_VARS:-1000}
       - PHP_MEMORY_LIMIT=${PHP_FPM_7_2_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_7_2_PHP_POST_MAX_SIZE:-512M}
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_2_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_2_PHP_UPLOAD_MAX_FILESIZE:-256M}
+      - APP_USER=${CONTEXT:-www-data}
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -516,6 +532,10 @@ services:
       - PHP_MEMORY_LIMIT=${PHP_FPM_7_3_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_7_3_PHP_POST_MAX_SIZE:-512M}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_3_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -549,6 +569,10 @@ services:
       - PHP_MEMORY_LIMIT=${PHP_FPM_7_4_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_7_4_PHP_POST_MAX_SIZE:-512M}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_7_4_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -581,6 +605,10 @@ services:
       - PHP_MEMORY_LIMIT=${PHP_FPM_8_0_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_8_0_PHP_POST_MAX_SIZE:-512M}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_0_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -614,6 +642,10 @@ services:
       - PHP_MEMORY_LIMIT=${PHP_FPM_8_1_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_8_1_PHP_POST_MAX_SIZE:-512M}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_1_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -647,6 +679,10 @@ services:
       - PHP_MEMORY_LIMIT=${PHP_FPM_8_2_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_8_2_PHP_POST_MAX_SIZE:-512M}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_2_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -680,6 +716,10 @@ services:
       - PHP_MEMORY_LIMIT=${PHP_FPM_8_3_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_8_3_PHP_POST_MAX_SIZE:-512M}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_3_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
@@ -712,6 +752,10 @@ services:
       - PHP_MEMORY_LIMIT=${PHP_FPM_8_4_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_8_4_PHP_POST_MAX_SIZE:-512M}
       - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_4_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - APP_USER=${CONTEXT:-www-data}T
+      - APP_GROUP=${CONTEXT:-www-data}
+      - APP_UID=${USER_ID:-0}
+      - APP_GID=${USER_ID:-0}
     deploy:
       resources:
         limits:
