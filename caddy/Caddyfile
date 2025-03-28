@@ -16,10 +16,10 @@ http://example.net {
 # END HOSTNAME DOMAIN #
 
 # START WEBMAIL DOMAIN #
-webmail-example.net {
+webmail.example.net {
     reverse_proxy localhost:8080
 }
-# END WEBMAIL DOMAIN #
+# END WEBMAIL DOMAIN #ns2.csnode.com.
 
 # import /check route
 import /etc/openpanel/caddy/check.conf
