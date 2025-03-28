@@ -163,7 +163,7 @@ services:
     networks:
       - db
     healthcheck:
-      test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
+      test: ['CMD-SHELL', 'mariadb-admin ping -h localhost']
       interval: 1s
       timeout: 5s
       retries: 10
