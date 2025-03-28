@@ -16,7 +16,7 @@ http://example.net {
 # END HOSTNAME DOMAIN #
 
 # START WEBMAIL DOMAIN #
-example.net {
+webmail-example.net {
     reverse_proxy localhost:8080
 }
 # END WEBMAIL DOMAIN #
