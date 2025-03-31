@@ -389,6 +389,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -425,6 +426,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -461,6 +463,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -498,6 +501,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -536,6 +540,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -573,6 +578,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -609,6 +615,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -646,6 +653,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -683,6 +691,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -720,6 +729,7 @@ services:
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -751,11 +761,12 @@ services:
       - PHP_MAX_INPUT_VARS=${PHP_FPM_8_4_PHP_MAX_INPUT_VARS:-1000}
       - PHP_MEMORY_LIMIT=${PHP_FPM_8_4_PHP_MEMORY_LIMIT:-512M}
       - PHP_POST_MAX_SIZE=${PHP_FPM_8_4_PHP_POST_MAX_SIZE:-512M}
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_4_PHP_UPLOAD_MAX_FILESIZE:-256M} 
+      - PHP_UPLOAD_MAX_FILESIZE=${PHP_FPM_8_4_PHP_UPLOAD_MAX_FILESIZE:-256M}
       - APP_USER=${CONTEXT:-root}
       - APP_GROUP=${CONTEXT:-root}
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
+      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
