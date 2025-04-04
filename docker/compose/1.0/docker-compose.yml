@@ -114,8 +114,19 @@ services:
     networks:
       - www
 
-
-      
+  cron:
+    image: mcuadros/ofelia:latest
+    container_name: cron
+    command: daemon --config=/crons.ini
+    volumes:
+      - /hostfs/run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
+      - /hostfs/home/${CONTEXT}/crons.ini:/crons.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${CRON_CPU:-0.5}"
+          memory: "${CRON_RAM:-0.5G}"
+          
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
     container_name: mysql
