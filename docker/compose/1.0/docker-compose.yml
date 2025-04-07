@@ -242,7 +242,6 @@ services:
     image: postgres:${POSTGRES_VERSION:-latest}
     container_name: postgres
     restart: always
-    #user: "${USER_ID:-0}"
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgrespassword}
@@ -291,7 +290,7 @@ services:
     container_name: redis
     restart: unless-stopped
     user: "${USER_ID:-0}"
-    command: ["redis-server", "--unixsocket", "/var/run/redis/redis.sock", "--unixsocketperm", "770", "--bind", "0.0.0.0", "--port", "6379"]
+    command: ["redis-server", "--bind", "0.0.0.0", "--port", "6379"]
     volumes:
       - ./sockets/redis:/var/run/redis  # Redis socket
     deploy:
@@ -362,7 +361,7 @@ services:
     container_name: memcached
     restart: unless-stopped
     user: "${USER_ID:-0}"
-    command: ["memcached", "-u", "root", "-s", "/var/run/memcached.sock", "-a", "770", "-l", "0.0.0.0", "-p", "11211"]
+    command: ["memcached", "-u", "root", "-l", "0.0.0.0", "-p", "11211"]
     volumes:
       - ./sockets/memcached:/var/run/  # Memcached socket
     deploy:
@@ -387,7 +386,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/5.6.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_5_6_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_5_6_PHP_MAX_EXECUTION_TIME:-600}
@@ -410,12 +409,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "      
+      sh -c "php-fpm --allow-to-run-as-root"    
 
   php-fpm-7.0:
     image: shinsenter/php:7.0-fpm
@@ -424,7 +418,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.0.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -447,12 +441,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root"   
       
   php-fpm-7.1:
     image: shinsenter/php:7.1-fpm
@@ -461,7 +450,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.1.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -484,12 +473,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root"   
       
 
   php-fpm-7.2:
@@ -499,7 +483,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.2.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_2_PHP_MAX_EXECUTION_TIME:-600}
@@ -522,12 +506,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root"
       
 
 
@@ -538,7 +517,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.3.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -561,12 +540,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root" 
       
 
   php-fpm-7.4:
@@ -576,7 +550,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/7.4/:/usr/local/etc/php
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_7_4_PHP_MAX_EXECUTION_TIME:-600}
@@ -599,12 +573,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root" 
       
   php-fpm-8.0:
     image: shinsenter/php:8.0-fpm
@@ -613,7 +582,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.0.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_0_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_0_PHP_MAX_EXECUTION_TIME:-600}
@@ -636,12 +605,8 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root"
+   
       
 
   php-fpm-8.1:
@@ -651,7 +616,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.1.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_1_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_1_PHP_MAX_EXECUTION_TIME:-600}
@@ -674,12 +639,8 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root"
+  
 
       
   php-fpm-8.2:
@@ -689,7 +650,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_2_PHP_MAX_EXECUTION_TIME:-600}
@@ -712,12 +673,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root"
       
 
   php-fpm-8.3:
@@ -727,7 +683,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.3.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_3_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_3_PHP_MAX_EXECUTION_TIME:-600}
@@ -750,12 +706,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root"
       
   php-fpm-8.4:
     image: shinsenter/php:8.4-fpm
@@ -764,7 +715,7 @@ services:
     volumes:
       - html_data:/var/www/html/
       - ./php.ini/8.4.ini:/usr/local/etc/php/php.ini
-      - ./sockets/:/var/run/
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_4_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_4_PHP_MAX_EXECUTION_TIME:-600}
@@ -787,12 +738,7 @@ services:
       - www
       - db
     command: >
-      sh -c "
-        curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-        chmod +x wp-cli.phar && \
-        mv wp-cli.phar /usr/local/bin/wp && \
-        php-fpm --allow-to-run-as-root
-      "     
+      sh -c "php-fpm --allow-to-run-as-root" 
 
 
   backup:
