@@ -33,8 +33,15 @@ for i in $USERS ; do
       GROUP_OPT="-G $GROUP"
     elif [ ! -z "$GID" ]; then
       # Group don't exist but GID supplied
-      addgroup -g $GID $NAME
-      GROUP_OPT="-G $NAME"
+      addgroup -g $GID $OPENPANEL_USER
+      GROUP_OPT="-G $OPENPANEL_USER"
+
+      # https://serverfault.com/a/435430/1254613
+      chmod +rx /home/$OPENPANEL_USER
+      chmod +rx /home/$OPENPANEL_USER/docker-data
+      chmod +rx /home/$OPENPANEL_USER/docker-data/volumes
+      chmod +rx /home/$OPENPANEL_USER/docker-data/volumes/${OPENPANEL_USER}_html_data
+      chmod +rx /home/$OPENPANEL_USER/docker-data/volumes/${OPENPANEL_USER}_html_data/_data     
     fi
 
   echo -e "$PASS\n$PASS" | adduser -h $FOLDER -s /sbin/nologin $GROUP_OPT $NAME
