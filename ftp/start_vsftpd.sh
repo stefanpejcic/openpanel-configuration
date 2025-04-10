@@ -4,17 +4,8 @@
 grep '/ftp/' /etc/passwd | cut -d':' -f1 | xargs -r -n1 deluser
 
 #Create users
-#USERS='name1|password1|[folder1][|uid1][|gid1] name2|password2|[folder2][|uid2][|gid2]'
-#may be:
-# user|password foo|bar|/home/foo
-#OR
-# user|password|/home/user/dir|10000
-#OR
-# user|password|/home/user/dir|10000|10000
-#OR
-# user|password||10000|82
+#USERS='name1|password1|folder1|GROUP_ID name2|password2||folder2|GROUP_ID '
 
-#Default user 'ftp' with password 'alpineftp'
 
 if [ -z "$USERS" ]; then
   USERS="alpineftp|alpineftp"
@@ -22,19 +13,14 @@ fi
 
 for i in $USERS ; do
   NAME=$(echo $i | cut -d'|' -f1)
-  GROUP=$NAME
+  OPENPANEL_USER=$(echo $NAME | rev | cut -d'.' -f1 | rev)
+  GROUP=$OPENPANEL_USER
   PASS=$(echo $i | cut -d'|' -f2)
   FOLDER=$(echo $i | cut -d'|' -f3)
-  UID=$(echo $i | cut -d'|' -f4)
-  # Add group handling
-  GID=$(echo $i | cut -d'|' -f5)
+  GID=$(echo $i | cut -d'|' -f4)
 
   if [ -z "$FOLDER" ]; then
     FOLDER="/ftp/$NAME"
-  fi
-
-  if [ ! -z "$UID" ]; then
-    UID_OPT="-u $UID"
   fi
 
     if [ -z "$GID" ]; then
@@ -51,10 +37,7 @@ for i in $USERS ; do
       GROUP_OPT="-G $NAME"
     fi
 
-
-  echo -e "$PASS\n$PASS" | adduser -h $FOLDER -s /sbin/nologin $UID_OPT $GROUP_OPT $NAME
-  mkdir -p $FOLDER
-  chown $NAME:$GROUP $FOLDER
+  echo -e "$PASS\n$PASS" | adduser -h $FOLDER -s /sbin/nologin $GROUP_OPT $NAME
   unset NAME PASS FOLDER UID GID
 done
 
