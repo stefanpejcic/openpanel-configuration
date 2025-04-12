@@ -1,5 +1,5 @@
 [Unit]
-Description=OpenPanel
+Description=OpenPanel Service
 After=network.target
 
 [Service]
@@ -7,7 +7,10 @@ User=root
 WorkingDirectory=/
 ExecStart=gunicorn -c /etc/openpanel/openpanel/service/service.config.py app:app
 ExecReload=/bin/kill -s HUP $MAINPID
-Restart=always
+Restart=on-failure
+RestartSec=5s
+StartLimitInterval=60s
+StartLimitBurst=3
 
 [Install]
 WantedBy=multi-user.target

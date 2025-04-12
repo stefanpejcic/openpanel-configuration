@@ -1,2 +1,5 @@
 [mysqld]
-  
+default-storage-engine = InnoDB
+general_log = 1
+general_log_file = /var/log/mysql/general.log
+

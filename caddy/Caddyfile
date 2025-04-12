@@ -1,28 +1,38 @@
 # ssl
 {
-    on_demand_tls {
-        ask "http://localhost/check"
-    }
+on_demand_tls {
+ask "http://localhost/check"
+}
 }
 
 # START HOSTNAME DOMAIN #
-example.net {
-    reverse_proxy localhost:2087
+<DOMAIN_NAME> {
+reverse_proxy localhost:2087
 }
 
-http://example.net {
-    reverse_proxy localhost:2087
+http://<DOMAIN_NAME> {
+reverse_proxy localhost:2087
 }
 # END HOSTNAME DOMAIN #
 
 # START WEBMAIL DOMAIN #
-webmail.example.net {
-    reverse_proxy localhost:8080
+webmail.<DOMAIN_NAME> {
+reverse_proxy localhost:8080
 }
-# END WEBMAIL DOMAIN #ns2.csnode.com.
+# END WEBMAIL DOMAIN #
 
 # import /check route
 import /etc/openpanel/caddy/check.conf
 
 # import all sites
 import /etc/openpanel/caddy/domains/*
+
+# Logging for imported configurations
+log {
+output file /var/log/caddy/imports.log {
+roll_size 10MiB
+roll_keep 3
+roll_keep_for 72h
+}
+format json
+}

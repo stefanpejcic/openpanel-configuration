@@ -1,3 +1,13 @@
 #.github/
 #.github/workflows/
 README.md
+# Ignore sensitive configuration files
+*.conf
+*.cnf
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.bak
