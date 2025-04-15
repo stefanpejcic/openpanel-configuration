@@ -43,6 +43,28 @@ services:
     volumes:
       - html_data:/var/www/html/
 
+
+  openresty:
+    image: openresty/openresty:${OPENRESTY_VERSION:-bullseye-fat}
+    container_name: openresty
+    restart: always
+    ports:
+      - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
+      - "${HTTPS_PORT}"
+    working_dir: /var/www/html
+    volumes:
+      #- ./openresty.conf:/etc/openresty/nginx.conf:ro # TODO
+      - webserver_data:/etc/nginx/conf.d
+      - html_data:/var/www/html/                          # Website files     
+      - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs    
+    deploy:
+      resources:
+        limits:
+          cpus: "${OPENRESTY_CPU:-0.5}"
+          memory: "${OPENRESTY_RAM:-0.5G}"   
+    networks:
+      - www
+
   nginx:
     image: nginx:${NGINX_VERSION:-latest}
     container_name: nginx
