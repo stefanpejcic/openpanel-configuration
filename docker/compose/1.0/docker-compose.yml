@@ -44,6 +44,26 @@ services:
       - html_data:/var/www/html/
 
 
+
+  filebrowser:
+    image: filebrowser/filebrowser:${FILEBROWSER_VERSION:-s6}
+    container_name: filebrowser
+    volumes:
+      - html_data:/srv
+      - ./filebrowser/config/:/config/
+      - ./filebrowser/database/:/database/
+    environment:
+      - PUID=${USER_ID:-0}
+      - PGID=${USER_ID:-0}
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${FILEBROWSER_CPU:-0.35}"
+          memory: "${FILEBROWSER_RAM:-0.35G}"   
+    networks:
+      - www
+
   openresty:
     image: openresty/openresty:${OPENRESTY_VERSION:-bullseye-fat}
     container_name: openresty
