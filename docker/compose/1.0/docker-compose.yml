@@ -356,11 +356,12 @@ services:
     image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-2.11.0}
     container_name: opensearch
     restart: unless-stopped
-    user: "${USER_ID:-0}"
     environment:
       discovery.type: single-node
       OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
       DISABLE_SECURITY_PLUGIN: "true"
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: "${OPENSEARCH_INITIAL_ADMIN_PASSWORD:-iIybFJOgznCYmpOO}"
+      DISABLE_INSTALL_DEMO_CONFIG: "true"
     volumes:
       - ./sockets/opensearch:/var/run/opensearch
     deploy:
