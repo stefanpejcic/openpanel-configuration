@@ -775,7 +775,7 @@ services:
       - webserver_data:/backup/vhosts:ro
       - pg_data:/backup/postgres:ro
       - mc_data:/backup/minecraft:ro
-      - ./backups:/archive # local!
+      #- ./backups:/archive # local!
       #- /etc/openpanel/backups/customized.template:/etc/dockervolumebackup/notifications.d/01.template:ro #https://offen.github.io/docker-volume-backup/how-tos/set-up-notifications.html
     deploy:
       resources:
