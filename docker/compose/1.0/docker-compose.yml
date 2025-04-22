@@ -138,7 +138,6 @@ services:
   varnish:
     image: varnish:${VARNISH_VERSION:-stable}
     container_name: varnish
-    #user: "${USER_ID:-0}"
     environment:
       WEB_SERVER: "${WEB_SERVER:-nginx}"
       VARNISH_SIZE: "${VARNISH_SIZE:-1G}"
@@ -155,7 +154,7 @@ services:
         limits:
           cpus: "${VARNISH_CPU:-0.5}"
           memory: "${VARNISH_RAM:-0.5G}"       
-          pids: 40
+          pids: 100
     depends_on:
       - "${WEB_SERVER:-nginx}"
     networks:
