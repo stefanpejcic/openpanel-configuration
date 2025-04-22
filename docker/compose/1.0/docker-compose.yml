@@ -10,9 +10,10 @@ services:
     deploy:
       resources:
         limits:
-          #pids: ${OS_PIDS:-100} # https://github.com/docker/cli/issues/5009
+          #pids: ${PIDS:-100} # https://github.com/docker/cli/issues/5009
           cpus: "${OS_CPU:-0.5}"
           memory: "${OS_RAM:-0.5G}"
+          pids: 40
     volumes:
       - /etc/openpanel/skeleton/motd:/etc/motd:ro          # SSH welcome message
       - ./mail/:/var/mail/                  # Mail storage
@@ -40,6 +41,7 @@ services:
         limits:
           cpus: "${BUSYBOX_CPU:-0.1}"
           memory: "${BUSYBOX_RAM:-0.1G}"   
+          pids: 40
     volumes:
       - html_data:/var/www/html/
 
@@ -61,6 +63,7 @@ services:
         limits:
           cpus: "${FILEBROWSER_CPU:-0.35}"
           memory: "${FILEBROWSER_RAM:-0.35G}"   
+          pids: 40
     networks:
       - www
 
@@ -82,6 +85,7 @@ services:
         limits:
           cpus: "${OPENRESTY_CPU:-0.5}"
           memory: "${OPENRESTY_RAM:-0.5G}"   
+          pids: 40
     networks:
       - www
 
@@ -103,6 +107,7 @@ services:
         limits:
           cpus: "${NGINX_CPU:-0.5}"
           memory: "${NGINX_RAM:-0.5G}"   
+          pids: 40
     networks:
       - www
 
@@ -126,6 +131,7 @@ services:
         limits:
           cpus: "${APACHE_CPU:-0.5}"
           memory: "${APACHE_RAM:-0.5G}"
+          pids: 40
     networks:
       - www
 
@@ -149,6 +155,7 @@ services:
         limits:
           cpus: "${VARNISH_CPU:-0.5}"
           memory: "${VARNISH_RAM:-0.5G}"       
+          pids: 40
     depends_on:
       - "${WEB_SERVER:-nginx}"
     networks:
@@ -166,6 +173,7 @@ services:
         limits:
           cpus: "${CRON_CPU:-0.5}"
           memory: "${CRON_RAM:-0.5G}"
+          pids: 40
           
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
@@ -185,6 +193,7 @@ services:
         limits:
           cpus: "${MYSQL_CPU:-0.5}"
           memory: "${MYSQL_RAM:-0.5G}"
+          pids: 40
     networks:
       - db
     healthcheck:
@@ -211,6 +220,7 @@ services:
         limits:
           cpus: "${MARIADB_CPU:-0.5}"
           memory: "${MARIADB_RAM:-0.5G}"
+          pids: 40
     networks:
       - db
     healthcheck:
@@ -235,6 +245,7 @@ services:
         limits:
           cpus: "${PMA_CPU:-0.1}"
           memory: "${PMA_RAM:-0.1G}"                
+          pids: 40
     environment:
       PMA_HOST: ${MYSQL_TYPE:-mysql}
       MAX_EXECUTION_TIME: ${PMA_MAX_EXECUTION_TIME:-600}
@@ -268,6 +279,7 @@ services:
         limits:
           cpus: "${MSSQL_CPU:-1}"
           memory: "${MSSQL_RAM:-2G}"
+          pids: 40
     networks:
       - db
     healthcheck:
@@ -295,6 +307,7 @@ services:
         limits:
           cpus: "${POSTGRES_CPU:-0.3}"
           memory: "${POSTGRES_RAM:-0.3}"
+          pids: 40
     networks:
       - db
     healthcheck:
@@ -321,6 +334,7 @@ services:
         limits:
           cpus: "${PGADMIN_CPU:-0.1}"
           memory: "${PGADMIN_RAM:-0.1}"
+          pids: 40
     networks:
       - db
 
@@ -338,6 +352,7 @@ services:
         limits:
           cpus: "${REDIS_CPU:-0.1}"
           memory: "${REDIS_RAM-0.1G}" 
+          pids: 40
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 30s
@@ -363,6 +378,7 @@ services:
         limits:
           cpus: "${ELASTICSEARCH_CPU:-0.5}"
           memory: "${ELASTICSEARCH_RAM-1G}" 
+          pids: 40
     healthcheck:
       test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
       interval: 10s
@@ -389,6 +405,7 @@ services:
         limits:
           cpus: "${OPENSEARCH_CPU:-0.5}"
           memory: "${OPENSEARCH_RAM:-1G}" 
+          pids: 40
     healthcheck:
       test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
       interval: 10s
@@ -410,6 +427,7 @@ services:
         limits:
           cpus: "${MEMCACHED_CPU:-0.1}"
           memory: "${MEMCACHED_RAM-0.1G}" 
+          pids: 40
     healthcheck:
       test: ["CMD", "memcached", "-h"]
       interval: 30s
@@ -446,6 +464,7 @@ services:
         limits:
           cpus: "${PHP_FPM_5_6_CPU:-0.125}"
           memory: "${PHP_FPM_5_6_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -478,6 +497,7 @@ services:
         limits:
           cpus: "${PHP_FPM_7_0_CPU:-0.125}"
           memory: "${PHP_FPM_7_0_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -510,6 +530,7 @@ services:
         limits:
           cpus: "${PHP_FPM_7_1_CPU:-0.125}"
           memory: "${PHP_FPM_7_1_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -543,6 +564,7 @@ services:
         limits:
           cpus: "${PHP_FPM_7_2_CPU:-0.125}"
           memory: "${PHP_FPM_7_2_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -577,6 +599,7 @@ services:
         limits:
           cpus: "${PHP_FPM_7_3_CPU:-0.125}"
           memory: "${PHP_FPM_7_3_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -610,6 +633,7 @@ services:
         limits:
           cpus: "${PHP_FPM_7_4_CPU:-0.125}"
           memory: "${PHP_FPM_7_4_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -642,6 +666,7 @@ services:
         limits:
           cpus: "${PHP_FPM_8_0_CPU:-0.125}"
           memory: "${PHP_FPM_8_0_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -676,6 +701,7 @@ services:
         limits:
           cpus: "${PHP_FPM_8_1_CPU:-0.125}"
           memory: "${PHP_FPM_8_1_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -710,6 +736,7 @@ services:
         limits:
           cpus: "${PHP_FPM_8_2_CPU:-0.125}"
           memory: "${PHP_FPM_8_2_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -743,6 +770,7 @@ services:
         limits:
           cpus: "${PHP_FPM_8_3_CPU:-0.125}"
           memory: "${PHP_FPM_8_3_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -775,6 +803,7 @@ services:
         limits:
           cpus: "${PHP_FPM_8_4_CPU:-0.125}"
           memory: "${PHP_FPM_8_4_RAM:-0.25G}"
+          pids: 40
     networks:
       - www
       - db
@@ -803,6 +832,7 @@ services:
         limits:
           cpus: "${BACKUP_CPU:-1.0}"
           memory: "${BACKUP_RAM:-1.0g}"
+          pids: 40
     command: [ "backup" ]
       
   minecraft:
@@ -823,6 +853,7 @@ services:
         limits:
           cpus: "${MINECRAFT_CPU:-1.0}"
           memory: "${MINECRAFT_RAM:-1.0G}"
+          pids: 40
     healthcheck:
       test: mc-health
       start_period: 1m
