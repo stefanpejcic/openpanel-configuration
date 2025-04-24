@@ -26,7 +26,7 @@ http://<DOMAIN_NAME>, http://*.<DOMAIN_NAME> {
             SecAuditEngine RelevantOnly
             SecRuleRemoveById 007
             SecRuleRemoveByTag example
-            SecAuditLog /var/log/caddy/coraza_audit.log
+            SecAuditLog /var/log/caddy/coraza_waf/<DOMAIN_NAME>.log
             SecAuditLogParts ABIJDEFHZ
             SecAuditLogFormat json
         `
@@ -76,7 +76,7 @@ https://<DOMAIN_NAME>, https://*.<DOMAIN_NAME> {
             SecAuditEngine RelevantOnly
             SecRuleRemoveById 007
             SecRuleRemoveByTag example
-            SecAuditLog /var/log/caddy/coraza_audit.log
+            SecAuditLog /var/log/caddy/coraza_waf/<DOMAIN_NAME>.log
             SecAuditLogParts ABIJDEFHZ
             SecAuditLogFormat json
         `
