@@ -76,7 +76,6 @@ services:
       - /var/log:/var/log
       - /etc/ufw:/etc/ufw
       - /var/lib/csf/:/var/lib/csf/
-      - /etc/letsencrypt:/etc/letsencrypt
       - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf
       - /etc/openpanel/:/etc/openpanel/
       - /var/run/docker.sock:/var/run/docker.sock
