@@ -816,6 +816,7 @@ services:
     env_file:
       - ./backup.env
     volumes:
+      - html_data:/var/www/html/:ro
       - html_data:/backup/html:ro
       - mysql_data:/backup/mysql:ro
       - mssql_data:/backup/mssql:ro
