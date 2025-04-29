@@ -84,7 +84,7 @@ services:
         limits:
           cpus: "${OPENRESTY_CPU:-0.5}"
           memory: "${OPENRESTY_RAM:-0.5G}"   
-          pids: 40
+          pids: 100
     networks:
       - www
 
@@ -106,7 +106,7 @@ services:
         limits:
           cpus: "${NGINX_CPU:-0.5}"
           memory: "${NGINX_RAM:-0.5G}"   
-          pids: 40
+          pids: 100
     networks:
       - www
 
@@ -130,7 +130,7 @@ services:
         limits:
           cpus: "${APACHE_CPU:-0.5}"
           memory: "${APACHE_RAM:-0.5G}"
-          pids: 40
+          pids: 100
     networks:
       - www
 
