@@ -27,7 +27,7 @@ dump_databases() {
         fi
     fi
 
-    databases=$(mysql -e "SHOW DATABASES;" | tail -n +2)
+    databases=$($db_type -e "SHOW DATABASES;" | tail -n +2)
 
     for db in $databases; do
         if is_excluded "$db"; then
@@ -40,17 +40,11 @@ dump_databases() {
 }
 
 if command -v mysql >/dev/null 2>&1; then
-    version=$(mysql -V)
-    if [[ "$version" == *"MariaDB"* ]]; then
-        echo "MariaDB detected"
-        dump_databases "mariadb"
-    elif [[ "$version" == *"MySQL"* ]]; then
         echo "MySQL detected"
         dump_databases "mysql"
-    else
-        echo "Unknown MySQL-compatible server: $version"
-        exit 1
-    fi
+elif command -v mariadb >/dev/null 2>&1; then
+        echo "MariaDB detected"
+        dump_databases "mariadb"
 else
     echo "MySQL/MariaDB not installed or not in PATH"
     exit 1
