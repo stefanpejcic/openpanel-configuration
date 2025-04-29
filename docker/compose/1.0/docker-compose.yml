@@ -725,6 +725,7 @@ services:
       - html_data:/var/www/html/
       - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
+      #- ./ioncube/ioncube_loader_lin_8.2.so:/usr/local/lib/php/extensions/no-debug-non-zts-20220829/ioncube_loader.so
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_2_ENABLE_OPCACHE:-true}
       - PHP_MAX_EXECUTION_TIME=${PHP_FPM_8_2_PHP_MAX_EXECUTION_TIME:-600}
