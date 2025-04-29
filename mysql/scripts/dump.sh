@@ -33,7 +33,7 @@ dump_databases() {
         if is_excluded "$db"; then
             echo "- Skipping excluded database: $db"
         else
-            echo "- Dumping database: $db using $dump_cmd"
+            echo "- Dumping database: $db"
             $dump_cmd "$db" > "/tmp/dumps/$db.sql"
         fi
     done
