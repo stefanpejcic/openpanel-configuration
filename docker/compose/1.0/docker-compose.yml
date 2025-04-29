@@ -180,12 +180,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
     ports:
-      - "${MYSQL_PORT}"
+      - "${MYSQL_PORT}"     
     volumes:
-      - mysql_data:/var/lib/mysql                                 # MySQL data
+      - mysql_data:/var/lib/mysql                  # MySQL data
+      - mysql_dumps:/tmp/dumps/                    # .sql dumps during backups      
       - ./sockets/mysqld:/var/run/mysqld           # MySQL socket
       - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
+    labels:
+      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in $(mysql -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mysqldump-dump "$db" > "/tmp/dumps/$db.sql"; done'
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
     deploy:
       resources:
         limits:
@@ -209,10 +213,14 @@ services:
     ports:
       - "${MYSQL_PORT}"
     volumes:
-      - mysql_data:/var/lib/mysql                                 # MariaDB data
+      - mysql_data:/var/lib/mysql                  # MariaDB data
+      - mysql_dumps:/tmp/dumps/                    # .sql dumps during backups
       - ./sockets/mysqld:/var/run/mysqld           # MariaDB socket
       - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
+    labels:
+      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in $(mariadb -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mariadb-dump "$db" > "/tmp/dumps/$db.sql"; done'
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
     deploy:
       resources:
         limits:
@@ -884,6 +892,11 @@ volumes:
     labels:
       description: "This volume holds the mysql/mariadb databases."
       purpose: "database"
+  mysql_dumps:
+    driver: local
+    labels:
+      description: "This volume holds the .sql dumps of databases during backup."
+      purpose: "storage"
   mssql_data:
     driver: local
     labels:
