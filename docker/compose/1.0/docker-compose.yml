@@ -34,7 +34,6 @@ services:
     image: busybox
     container_name: busybox          
     restart: always
-    #user: "${USER_ID:-0}"
     working_dir: /var/www/html
     deploy:
       resources:
@@ -188,7 +187,7 @@ services:
       - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
-      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in $(mysql -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mysqldump-dump "$db" > "/tmp/dumps/$db.sql"; done'
+      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in \$(mysql -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mysqldump "\$db" > "/tmp/dumps/\$db.sql"; done'
       - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
     deploy:
       resources:
@@ -219,7 +218,7 @@ services:
       - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
-      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in $(mariadb -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mariadb-dump "$db" > "/tmp/dumps/$db.sql"; done'
+      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in \$(mariadb -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mariadb-dump "\$db" > "/tmp/dumps/\$db.sql"; done'
       - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
     deploy:
       resources:
@@ -820,7 +819,6 @@ services:
   backup:
     image: offen/docker-volume-backup:v2
     container_name: backup
-    #user: "${USER_ID:-0}"
     env_file:
       - ./backup.env
     volumes:
@@ -832,8 +830,7 @@ services:
       - webserver_data:/backup/vhosts:ro
       - pg_data:/backup/postgres:ro
       - mc_data:/backup/minecraft:ro
-      #- ./backups:/archive # local!
-      #- /etc/openpanel/backups/customized.template:/etc/dockervolumebackup/notifications.d/01.template:ro #https://offen.github.io/docker-volume-backup/how-tos/set-up-notifications.html
+      - /run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
     deploy:
       resources:
         limits:
