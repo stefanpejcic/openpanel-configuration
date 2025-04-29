@@ -182,12 +182,13 @@ services:
       - "${MYSQL_PORT}"     
     volumes:
       - mysql_data:/var/lib/mysql                  # MySQL data
-      - mysql_dumps:/tmp/dumps/                    # .sql dumps during backups      
+      - mysql_dumps:/tmp/dumps/                    # .sql dumps during backups   
+      - /etc/openpanel/mysql/scripts/dump.sh:/dump.sh:ro
       - ./sockets/mysqld:/var/run/mysqld           # MySQL socket
       - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
-      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in \$(mysql -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mysqldump "\$db" > "/tmp/dumps/\$db.sql"; done'
+      - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
       - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
     deploy:
       resources:
@@ -214,11 +215,12 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql                  # MariaDB data
       - mysql_dumps:/tmp/dumps/                    # .sql dumps during backups
+      - /etc/openpanel/mysql/scripts/dump.sh:/dump.sh:ro
       - ./sockets/mysqld:/var/run/mysqld           # MariaDB socket
       - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
-      - docker-volume-backup.archive-pre=/bin/sh -c 'for db in \$(mariadb -e "SHOW DATABASES;" | grep -Ev "Database|information_schema|performance_schema|mysql|sys"); do mariadb-dump "\$db" > "/tmp/dumps/\$db.sql"; done'
+      - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
       - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
     deploy:
       resources:
