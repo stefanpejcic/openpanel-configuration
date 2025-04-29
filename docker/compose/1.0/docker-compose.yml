@@ -189,7 +189,7 @@ services:
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
       - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
-      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/*'
     deploy:
       resources:
         limits:
@@ -221,7 +221,7 @@ services:
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
       - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
-      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/'
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/*'
     deploy:
       resources:
         limits:
@@ -826,7 +826,7 @@ services:
     volumes:
       - html_data:/var/www/html/:ro
       - html_data:/backup/html:ro
-      - mysql_data:/backup/mysql:ro
+      - mysql_dumps:/backup/mysql:ro
       - mssql_data:/backup/mssql:ro
       - mail_data:/backup/mail:ro
       - webserver_data:/backup/vhosts:ro
