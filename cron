@@ -28,9 +28,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 */8 * * * root /usr/local/bin/opencli ftp-users && echo "$(date) FTP users file recreated" >> /var/log/openpanel/admin/cron.log
 @reboot root mkdir -p /tmp/redis && chmod 777 /tmp/redis
 
-# BACKUPS
-0 7 * * * root /usr/local/bin/opencli backup-check && echo "$(date) Backup check executed" >> /var/log/openpanel/admin/cron.log
-0 8 * * * root /usr/local/bin/opencli backup-scheduler && echo "$(date) Backup scheduler executed" >> /var/log/openpanel/admin/cron.log
 
 # MONITORING
 */5 * * * * root /bin/bash /usr/local/admin/service/notifications.sh && echo "$(date) Notifications script executed" >> /var/log/openpanel/admin/cron.log
