@@ -1,6 +1,6 @@
-  SERVICE_NAME:
+  SERVICE:
     image: node:${SERVICE_NAME_NODE_TAG:-18-slim}
-    container_name: SERVICE_NAME
+    container_name: SERVICE
     restart: always
     command: >
       sh -c "${SERVICE_NAME_NODE_INSTALL:+npm install &&} node ${SERVICE_NAME_NODE_STARTUP_FILE:-index.js}"
