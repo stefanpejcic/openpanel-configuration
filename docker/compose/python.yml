@@ -1,0 +1,16 @@
+  SERVICE_NAME:
+    image: python:${SERVICE_NAME_PY_TAG:-3.10-slim}
+    container_name: SERVICE_NAME
+    restart: always
+    command: >
+      sh -c "${SERVICE_NAME_PY_REQUIREMENTS:+pip install -r requirements.txt &&} python ${SERVICE_NAME_PY_STARTUP_FILE:-app.py}"
+    working_dir: /var/www/html/${SERVICE_NAME_PY_WORKDIR}
+    stop_signal: SIGINT
+    deploy:
+      resources:
+        limits:
+          cpus: "${SERVICE_NAME_PY_CPU:-0.1}"
+          memory: "${SERVICE_NAME_PY_RAM:-0.1G}"
+          pids: 100
+    volumes:
+      - html_data:/var/www/html/
