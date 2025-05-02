@@ -1,0 +1,15 @@
+  SERVICE_NAME:
+    image: node:${SERVICE_NAME_NODE_TAG:-18-slim}
+    container_name: SERVICE_NAME
+    restart: always
+    command: >
+      sh -c "${SERVICE_NAME_NODE_INSTALL:+npm install &&} node ${SERVICE_NAME_NODE_STARTUP_FILE:-index.js}"
+    working_dir: /var/www/html/${SERVICE_NAME_NODE_WORKDIR}
+    deploy:
+      resources:
+        limits:
+          cpus: "${SERVICE_NAME_NODE_CPU:-0.1}"
+          memory: "${SERVICE_NAME_NODE_RAM:-0.1G}"
+          pids: 100
+    volumes:
+      - html_data:/var/www/html/
