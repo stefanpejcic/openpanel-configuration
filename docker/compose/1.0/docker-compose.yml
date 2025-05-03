@@ -79,6 +79,7 @@ services:
       - webserver_data:/etc/nginx/conf.d
       - html_data:/var/www/html/                          # Website files     
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs    
+      - /etc/openpanel/nginx/default_page.html:/etc/nginx/default_page.html:ro
     deploy:
       resources:
         limits:
@@ -103,6 +104,7 @@ services:
       - webserver_data:/etc/nginx/conf.d
       - html_data:/var/www/html/                          # Website files     
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs    
+      - /etc/openpanel/nginx/default_page.html:/etc/nginx/default_page.html:ro
     deploy:
       resources:
         limits:
@@ -127,7 +129,8 @@ services:
       - ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
       - webserver_data:/etc/httpd/conf.d/                          # Additional Apache configs
       - html_data:/var/www/html/                                   # Website files
-      - /etc/openpanel/nginx/certs/:/etc/apache2/ssl/              # SSL certificates
+      - /etc/openpanel/nginx/certs/:/etc/apache2/ssl/  # SSL certificates
+      - /etc/openpanel/nginx/default_page.html:/etc/apache2/default_page.html:ro
     deploy:
       resources:
         limits:
