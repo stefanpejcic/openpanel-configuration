@@ -29,7 +29,7 @@ CREATE TABLE `domains` (
   `domain_url` varchar(255) NOT NULL,
   `user_id` int DEFAULT NULL,
   `php_version` varchar(255) DEFAULT '8.2'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
