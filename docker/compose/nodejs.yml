@@ -13,3 +13,5 @@
           pids: 100
     volumes:
       - html_data:/var/www/html/
+    networks:
+      - www
