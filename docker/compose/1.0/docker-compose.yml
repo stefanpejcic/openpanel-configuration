@@ -71,6 +71,7 @@ services:
     container_name: uptimekuma
     volumes:
       - ./data:/app/data
+      - /hostfs/run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
     deploy:
       resources:
