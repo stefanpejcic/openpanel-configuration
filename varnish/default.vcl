@@ -163,6 +163,9 @@ sub vcl_backend_response {
     set beresp.http.x-url = bereq.url;
     set beresp.http.x-host = bereq.http.host;
 
+    # https://support.torproject.org/onionservices/onion-location/
+    set beresp.http.Onion-Location = beresp.http.Onion-Location;
+
     # If we dont get a Cache-Control header from the backend
     # we default to 1h cache for all objects
     if (!beresp.http.Cache-Control) {
@@ -177,10 +180,10 @@ sub vcl_backend_response {
         set beresp.ttl = 1d;
     }
 
-	# Remove the Set-Cookie header when a specific Wordfence cookie is set
+    # Remove the Set-Cookie header when a specific Wordfence cookie is set
     if (beresp.http.Set-Cookie ~ "wfvt_|wordfence_verifiedHuman") {
 	    unset beresp.http.Set-Cookie;
-	 }
+    }
 
     if (beresp.http.Set-Cookie) {
         set beresp.http.X-Cacheable = "NO:Got Cookies";
