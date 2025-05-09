@@ -66,6 +66,23 @@ services:
     networks:
       - www
 
+  uptimekuma:
+    image: louislam/uptime-kum:${UPTIMEKUMA_VERSION:-1}
+    container_name: uptimekuma
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${UPTIMEKUMA_CPU:-0.35}"
+          memory: "${UPTIMEKUMA_RAM:-0.35G}"   
+          pids: 100
+    networks:
+      - www
+
+
+
   openresty:
     image: openresty/openresty:${OPENRESTY_VERSION:-bullseye-fat}
     container_name: openresty
