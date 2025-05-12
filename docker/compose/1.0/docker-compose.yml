@@ -867,6 +867,7 @@ services:
           memory: "${BACKUP_RAM:-1.0g}"
           pids: 100
     command: [ "backup" ]
+    restart: unless-stopped
       
   minecraft:
     image: itzg/minecraft-server:${MINECRAFT_VERSION:-latest}
