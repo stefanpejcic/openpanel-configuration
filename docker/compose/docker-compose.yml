@@ -103,7 +103,6 @@ services:
       # emails
       - /usr/local/mail/openmail/:/usr/local/mail/openmail/
       # time
-      - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro      
     restart: always
     privileged: true
