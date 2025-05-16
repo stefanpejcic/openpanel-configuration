@@ -16,6 +16,11 @@ from pathlib import Path
 # Here, on restart, we check and remove that flag to ensure it’s cleared.
 RESTART_FILE_PATH = '/root/openadmin_restart_needed'
 
+# From version 1.2.8, we have an option for admin to ompletelly disable admin panel, if done so,
+# we create a flag file (/root/openadmin_is_disabled) and exit 
+# Here, on startup, we check if that file exists.
+DISABLE_FILE_PATH = '/root/openadmin_is_disabled'
+
 # Function to check if the file exists and remove it
 def check_and_remove_restart_file():
     if os.path.exists(RESTART_FILE_PATH):
@@ -28,6 +33,9 @@ def check_and_remove_restart_file():
 # Call the function before starting the Gunicorn server
 check_and_remove_restart_file()
 
+if os.path.exists(DISABLE_FILE_PATH):
+    print(f"OpenAdmin is disabled! enable it from terminal with 'opencli admin on' or by removing the flag file: {DISABLE_FILE_PATH}")
+    sys.exit(1)
 
 # File paths
 CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
