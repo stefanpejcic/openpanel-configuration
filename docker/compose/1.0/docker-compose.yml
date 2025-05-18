@@ -21,7 +21,7 @@ services:
       - webserver_data:/etc/${WEB_SERVER}/sites-available/ # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                   # Postgres data
       - mysql_data:/var/lib/mysql                          # MySQL data
-      - ./my.cnf:/root/.my.cnf:ro           # mysql root pass - created/updated on mysql restart
+      - ./my.cnf:/root/.my.cnf:ro                          # mysql root pass - created/updated on mysql restart
       - html_data:/var/www/html/                           # Website files
       - ./sockets/:/var/run/                # All Sockets
       - ./php.ini/:/php/                    # php.ini files for containers
@@ -29,6 +29,23 @@ services:
       - www
       - db
     command: [ "tail", "-f", "/dev/null" ]
+
+  tor:
+    image: openpanel/torwebsite:${TOR_VERSION:-latest}
+    container_name: tor
+    volumes:
+      - html_data:/var/www/html
+      - ./tor/hidden_service:/var/lib/tor/hidden_service
+      - ./tor/torrc:/etc/tor/torrc
+    deploy:
+      resources:
+        limits:
+          cpus: "${TOR_CPU:-0.35}"
+          memory: "${TOR_RAM:-0.35G}"
+          pids: 100
+    networks:
+      - www
+      - db
 
   busybox:
     image: busybox
