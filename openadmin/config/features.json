@@ -1,0 +1,37 @@
+[
+  {
+    "name": "notifications",
+    "title": "Email Notifications",
+    "description": "If enabled, users can configure notification preferences from their account and they will receive emails.",
+    "link": "/account/notifications",
+    "help_link": "#"
+  },
+  {
+    "name": "account",
+    "title": "Settings (Email & Password Change)",
+    "description": "If enabled, users can change username, password and email address for the account in their user panel.",
+    "link": "/account/settings",
+    "help_link": "#"
+  },
+  {
+    "name": "sessions",
+    "title": "Active Sessions",
+    "description": "If enabled, users can view all active sessions for their account, in their user panel.",
+    "link": "/account/sessions",
+    "help_link": "#"
+  },
+  {
+    "name": "locale",
+    "title": "Locales (Language Change)",
+    "description": "If enabled, users can switch languages in their user panel.",
+    "link": "/account/languages",
+    "help_link": "#"
+  },
+  {
+    "name": "favorites",
+    "title": "Locales (Language Change)",
+    "description": "If enabled, users can add panel pages to favorites and manage them from their account.",
+    "link": "/account/favorites",
+    "help_link": "#"
+  }
+]
