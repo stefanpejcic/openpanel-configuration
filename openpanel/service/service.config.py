@@ -75,9 +75,11 @@ PORT = "2083"
 if DOMAIN and check_ssl_exists(DOMAIN):
     import ssl
     certfile = os.path.join(CADDY_CERT_DIR, DOMAIN, f'{DOMAIN}.crt')
-    keyfile = os.path.join(CADDY_CERT_DIR, DOMAIN, f'{DOMAIN}.key')    
-    ssl_version = 'TLS'
-    #ca_certs = f'/etc/letsencrypt/live/{hostname}/fullchain.pem'
+    keyfile = os.path.join(CADDY_CERT_DIR, DOMAIN, f'{DOMAIN}.key')
+
+    keyfile = keyfile
+    certfile = certfile
+    ssl_version = ssl.PROTOCOL_TLS
     cert_reqs = ssl.CERT_NONE
     ciphers = 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH'
 
