@@ -21,7 +21,7 @@ services:
       - webserver_data:/etc/${WEB_SERVER}/sites-available/ # Nginx/Apache data
       - pg_data:/var/lib/postgresql/data                   # Postgres data
       - mysql_data:/var/lib/mysql                          # MySQL data
-      - ./my.cnf:/root/.my.cnf:ro                          # mysql root pass - created/updated on mysql restart
+      - ./openpanel/my.cnf:/root/.my.cnf:ro                          # mysql root pass - created/updated on mysql restart
       - html_data:/var/www/html/                           # Website files
       - ./sockets/:/var/run/                # All Sockets
       - ./php.ini/:/php/                    # php.ini files for containers
@@ -186,7 +186,7 @@ services:
     entrypoint: /bin/sh -c "cp /etc/varnish/default.vcl.template /etc/varnish/default.vcl && sed -i 's|VARNISH_BACKEND_HOST|'"$WEB_SERVER"'|g' /etc/varnish/default.vcl && /usr/local/bin/docker-varnish-entrypoint"
     command: [ "-n", "/var/lib/varnish" ]
     volumes:
-      - ./default.vcl:/etc/varnish/default.vcl.template:ro  
+      - ./openpanel/default.vcl:/etc/varnish/default.vcl.template:ro  
     ports:
       - "${HTTP_PORT}"
     tmpfs:
@@ -228,8 +228,8 @@ services:
       - mysql_dumps:/tmp/dumps/                    # .sql dumps during backups   
       - /etc/openpanel/mysql/scripts/dump.sh:/dump.sh:ro
       - ./sockets/mysqld:/var/run/mysqld           # MySQL socket
-      - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
-      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
+      - ./openpanel/my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
+      - ./openpanel/custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
       - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
       - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/*'
@@ -260,8 +260,8 @@ services:
       - mysql_dumps:/tmp/dumps/                    # .sql dumps during backups
       - /etc/openpanel/mysql/scripts/dump.sh:/dump.sh:ro
       - ./sockets/mysqld:/var/run/mysqld           # MariaDB socket
-      - ./my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
-      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
+      - ./openpanel/my.cnf:/root/.my.cnf:ro                  # mysql root pass - created/updated on mysql restart
+      - ./openpanel/custom.cnf:/etc/mysql/conf.d/custom.cnf  # custom cnf for gui
     labels:
       - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
       - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/*'
