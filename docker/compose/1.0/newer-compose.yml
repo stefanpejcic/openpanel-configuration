@@ -24,7 +24,7 @@ services:
       - ./openpanel/my.cnf:/root/.my.cnf:ro                          # mysql root pass - created/updated on mysql restart
       - html_data:/var/www/html/                           # Website files
       - ./sockets/:/var/run/                # All Sockets
-      - ./php.ini/:/php/                    # php.ini files for containers
+      - ./openpanel/php.ini/:/php/                    # php.ini files for containers
     networks:
       - www
       - db
@@ -110,7 +110,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
-      - ./openresty.conf:/etc/openresty/nginx.conf:ro
+      - ./openpanel/openresty.conf:/etc/openresty/nginx.conf:ro
       - webserver_data:/etc/nginx/conf.d
       - html_data:/var/www/html/                          # Website files     
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs    
@@ -135,7 +135,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./openpanel/nginx.conf:/etc/nginx/nginx.conf:ro
       - webserver_data:/etc/nginx/conf.d
       - html_data:/var/www/html/                          # Website files     
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs    
@@ -161,7 +161,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
-      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
+      - ./openpanel/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro         # Apache configuration
       - webserver_data:/etc/httpd/conf.d/                          # Additional Apache configs
       - html_data:/var/www/html/                                   # Website files
       - /etc/openpanel/nginx/certs/:/etc/apache2/ssl/  # SSL certificates
@@ -494,7 +494,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/5.6.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/5.6.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_5_6_ENABLE_OPCACHE:-true}
@@ -527,7 +527,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/7.0.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/7.0.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_0_ENABLE_OPCACHE:-true}
@@ -560,7 +560,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/7.1.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/7.1.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_1_ENABLE_OPCACHE:-true}
@@ -594,7 +594,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/7.2.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/7.2.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_2_ENABLE_OPCACHE:-true}
@@ -629,7 +629,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/7.3.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/7.3.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_3_ENABLE_OPCACHE:-true}
@@ -663,7 +663,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/7.4/:/usr/local/etc/php
+      - ./openpanel/php.ini/7.4/:/usr/local/etc/php
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_7_4_ENABLE_OPCACHE:-true}
@@ -696,7 +696,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/8.0.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/8.0.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_0_ENABLE_OPCACHE:-true}
@@ -731,7 +731,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/8.1.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/8.1.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_1_ENABLE_OPCACHE:-true}
@@ -766,7 +766,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/8.2.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
       #- ./ioncube/ioncube_loader_lin_8.2.so:/usr/local/lib/php/extensions/no-debug-non-zts-20220829/ioncube_loader.so
     environment:
@@ -801,7 +801,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/8.3.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/8.3.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_3_ENABLE_OPCACHE:-true}
@@ -834,7 +834,7 @@ services:
     restart: always
     volumes:
       - html_data:/var/www/html/
-      - ./php.ini/8.4.ini:/usr/local/etc/php/php.ini
+      - ./openpanel/php.ini/8.4.ini:/usr/local/etc/php/php.ini
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp  
     environment:
       - PHP_ENABLE_OPCACHE=${PHP_FPM_8_4_ENABLE_OPCACHE:-true}
