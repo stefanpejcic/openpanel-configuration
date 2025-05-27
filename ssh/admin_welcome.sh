@@ -11,6 +11,8 @@
 # Author: Stefan Pejcic (stefan@pejcic.rs)                                               #
 ##########################################################################################
 
+[ "$(id -u)" -ne 0 ] && return
+
 VERSION=$(opencli version)
 CONFIG_FILE_PATH='/etc/openpanel/openpanel/conf/openpanel.config'
 CADDY_FILE="/etc/openpanel/caddy/Caddyfile"
