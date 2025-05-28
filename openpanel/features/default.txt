@@ -11,6 +11,7 @@ mysql
 remote_mysql
 mysql_import
 mysql_conf
+php
 php_options
 php_ini
 phpmyadmin
