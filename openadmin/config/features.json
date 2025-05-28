@@ -91,6 +91,13 @@
     "help_link": "#"
   },
   {
+    "name": "php",
+    "title": "PHP",
+    "description": "If enabled, users can change PHP version for domains, set limits and set default version for new domains.",
+    "link": "/php",
+    "help_link": "#"
+  },
+  {
     "name": "php_options",
     "title": "PHP Options",
     "description": "If enabled, users can edit configured PHP.INI directives using the Options page.",
