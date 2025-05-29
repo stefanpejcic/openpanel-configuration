@@ -84,7 +84,6 @@ services:
       - /usr/local/bin/opencli:/usr/local/bin/opencli
       - /usr/local/opencli:/usr/local/opencli
       - /var/log:/var/log
-      - /etc/ufw:/etc/ufw
       - /var/lib/csf/:/var/lib/csf/
       - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf
       - /etc/openpanel/:/etc/openpanel/
