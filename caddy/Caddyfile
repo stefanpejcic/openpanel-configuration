@@ -1,6 +1,6 @@
 # general
 {   
-    admin off
+    #admin off
     on_demand_tls {
         ask "http://localhost/check"
     }
