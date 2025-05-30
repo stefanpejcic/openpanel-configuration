@@ -224,6 +224,25 @@ ALTER TABLE `users`
   ADD CONSTRAINT `fk_plan_id` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE SET NULL;
 COMMIT;
 
+
+
+
+--
+-- View for calculating number of user domains
+--
+ALTER TABLE users MODIFY COLUMN user_domains INT NOT NULL DEFAULT 0;
+
+CREATE TRIGGER increment_user_domains
+AFTER INSERT ON domains
+FOR EACH ROW
+UPDATE users SET user_domains = user_domains + 1 WHERE id = NEW.user_id;
+
+CREATE TRIGGER decrement_user_domains
+AFTER DELETE ON domains
+FOR EACH ROW
+UPDATE users SET user_domains = user_domains - 1 WHERE id = OLD.user_id;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
