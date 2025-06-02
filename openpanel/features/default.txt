@@ -18,6 +18,7 @@ phpmyadmin
 crons
 backups
 wordpress
+website_builder
 pm2
 autoinstaller
 disk_usage
