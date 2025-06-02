@@ -140,6 +140,13 @@
     "help_link": "#"
   },
   {
+    "name": "website_builder",
+    "title": "Website Builder",
+    "description": "If enabled, users can create HTML websites using the GrapeJS drag-drop editor.",
+    "link": "/website-builder",
+    "help_link": "#"
+  },
+  {
     "name": "pm2",
     "title": "Applications",
     "description": "If enabled, containerized NodeJS and Python applications can be setup from the Autoinstaller.",
