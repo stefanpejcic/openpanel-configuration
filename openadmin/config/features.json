@@ -252,10 +252,17 @@
     "help_link": "#"
   },
   {
+    "name": "domain_logs",
+    "title": "Domain Logs",
+    "description": "If enabled, userc can view raw webserver access logs for their domains.",
+    "link": "/domains/log",
+    "help_link": "#"
+  },
+  {
     "name": "goaccess",
     "title": "GoAccess",
     "description": "If enabled, GoAccess is run on schedule to generate HTML reports from Caddy domain logs. Users can view the reports from the Domain Logs page.",
-    "link": "/domains/logs",
+    "link": "/domains/stats",
     "help_link": "#"
   },
   {
