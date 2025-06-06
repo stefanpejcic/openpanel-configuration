@@ -29,11 +29,12 @@ webserver_conf
 waf
 filemanager
 fix_permissions
+malware_scan
 dns
 redirects
 domains
 capitalize_domains
-malware_scan
+domain_logs
 goaccess
 process_manager
 redis
