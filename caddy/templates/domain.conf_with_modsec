@@ -82,7 +82,7 @@ https://<DOMAIN_NAME>, https://*.<DOMAIN_NAME> {
         `
     }
 
-    # Handle HTTPS traffic (port 443) with on_demand SSL
+    # Handle HTTPS traffic (port 443)
     reverse_proxy https://127.0.0.1:<SSL_PORT> {
       transport http {
         tls_insecure_skip_verify
@@ -97,7 +97,7 @@ https://<DOMAIN_NAME>, https://*.<DOMAIN_NAME> {
 
   }
 
-  # auto SSL with on_demand (only when SSL certificate is requested)
+  # SSL (only when SSL certificate is requested)
   tls {
     on_demand
   }
