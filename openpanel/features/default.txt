@@ -11,10 +11,15 @@ mysql
 remote_mysql
 mysql_import
 mysql_conf
+postgresql
+remote_postgresql
+postgresql_import
+postgresql_conf
 php
 php_options
 php_ini
 phpmyadmin
+pgadmin
 crons
 backups
 wordpress
