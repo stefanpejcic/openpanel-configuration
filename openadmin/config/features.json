@@ -72,7 +72,7 @@
   {
     "name": "remote_mysql",
     "title": "Remote MySQL",
-    "description": "If enabled, users can enable/disable remote access to databases.",
+    "description": "If enabled, users can enable/disable remote access to MySQL databases.",
     "link": "/mysql/remote-mysql",
     "help_link": "#"
   },
@@ -88,6 +88,41 @@
     "title": "MySQL Configuration",
     "description": "If enabled, users can edit MySQL Configuration from their user panel.",
     "link": "/mysql/configuration",
+    "help_link": "#"
+  },
+  {
+    "name": "postgresql",
+    "title": "PostgreSQL",
+    "description": "If enabled, users can manage PostgreSQL databases and users.",
+    "link": "/postgresql",
+    "help_link": "#"
+  },
+  {
+    "name": "remote_postgresql",
+    "title": "Remote PostgreSQL",
+    "description": "If enabled, users can enable/disable remote access to PostgreSQL databases.",
+    "link": "/postgresql/remote-postgresql",
+    "help_link": "#"
+  },
+  {
+    "name": "postgresql_import",
+    "title": "Import PostgreSQL Databases",
+    "description": "If enabled, users can import .sql files into PostgreSQL databases from their user panel.",
+    "link": "/postgresql/import",
+    "help_link": "#"
+  },
+  {
+    "name": "postgresql_conf",
+    "title": "MySQL Configuration",
+    "description": "If enabled, users can edit MySQL Configuration from their user panel.",
+    "link": "/postgresql/configuration",
+    "help_link": "#"
+  },
+    {
+    "name": "pgamin",
+    "title": "pgAdmin",
+    "description": "If enabled, users can manage pgAmin and use it to connect to their Postgres databases.",
+    "link": "/postgresql/pgamin",
     "help_link": "#"
   },
   {
@@ -114,7 +149,7 @@
   {
     "name": "phpmyadmin",
     "title": "phpMyAdmin",
-    "description": "If enabled, users can manage phpMyAdmin and use it to connect to their databases.",
+    "description": "If enabled, users can manage phpMyAdmin and use it to connect to their MySQL databases.",
     "link": "/mysql/phpmyadmin",
     "help_link": "#"
   },
