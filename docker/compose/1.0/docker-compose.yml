@@ -205,6 +205,7 @@ services:
     image: mcuadros/ofelia:latest
     container_name: cron
     command: daemon --config=/crons.ini
+    restart: unless-stopped
     volumes:
       - /hostfs/run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
       - /hostfs/home/${CONTEXT}/crons.ini:/crons.ini:ro
