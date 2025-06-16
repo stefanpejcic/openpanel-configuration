@@ -7,6 +7,7 @@ import os
 import re
 import yaml  # pip install pyyaml
 from pathlib import Path
+import subprocess
 
 # From version 1.1.4, we no longer restart admin/user services on configuration changes. Instead, 
 # we create a flag file (/root/openadmin_restart_needed) and remind the user via the GUI that a restart 
@@ -118,6 +119,19 @@ def pre_exec(server):
 
 def when_ready(server):
     server.log.info("Server is ready. Spawning workers")
+
+    try:
+        cmd = [
+            "docker", "--context=default", "exec", "openpanel_redis",
+            "bash", "-c",
+            "redis-cli --raw KEYS 'flask_cache_*' | xargs -r redis-cli DEL"
+        ]
+        result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        server.log.info("Redis cache cleared:\n%s", result.stdout.strip())
+    except subprocess.CalledProcessError as e:
+        server.log.error("Failed to clear Redis cache:\n%s", e.stderr.strip())
+    except Exception as e:
+        server.log.error("Unexpected error clearing Redis cache: %s", str(e))
 
 def worker_int(worker):
     worker.log.info("worker received INT or QUIT signal")
