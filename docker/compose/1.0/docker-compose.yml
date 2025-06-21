@@ -287,8 +287,9 @@ services:
     image: phpmyadmin #:5.2.2-fpm-alpine
     restart: unless-stopped
     volumes:
-      - html_data:/html/ #varwwwhtml are sites!
-    #user: "${USER_ID:-0}"
+      - html_data:/html/ #varwwwhtml are sites!    
+      - ./pma.php:/var/www/html/pma.php
+      - /etc/openpanel/mysql/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.inc.php:ro
     ports:
       - "${PMA_PORT}"
     deploy:
