@@ -11,7 +11,7 @@ UPTIMEKUMA_CPU="0.5"
 UPTIMEKUMA_RAM="0.5G"
 ```
 
-add to docker-compsoe.yml file **in the services section:
+add to docker-compose.yml file **in the services section:
 
 ```
   uptimekuma:
