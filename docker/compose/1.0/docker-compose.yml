@@ -1,34 +1,4 @@
 services:
-  user_service:
-    image: ${OS:-openpanel/ubuntu}
-    container_name: ${USERNAME}
-    hostname: ${HOSTNAME}
-    restart: unless-stopped
-    ports:
-      - "${SSH_PORT}"
-      - "${TTYD_PORT}"
-    deploy:
-      resources:
-        limits:
-          #pids: ${PIDS:-100} # https://github.com/docker/cli/issues/5009
-          cpus: "${OS_CPU:-0.5}"
-          memory: "${OS_RAM:-0.5G}"
-          pids: 100
-    volumes:
-      - /etc/openpanel/skeleton/motd:/etc/motd:ro          # SSH welcome message
-      - ./mail/:/var/mail/                  # Mail storage
-      - mail_data:/var/mail/                               # Mail storage      
-      - webserver_data:/etc/${WEB_SERVER}/sites-available/ # Nginx/Apache data
-      - pg_data:/var/lib/postgresql/data                   # Postgres data
-      - mysql_data:/var/lib/mysql                          # MySQL data
-      - ./my.cnf:/root/.my.cnf:ro                          # mysql root pass - created/updated on mysql restart
-      - html_data:/var/www/html/                           # Website files
-      - ./sockets/:/var/run/                # All Sockets
-      - ./php.ini/:/php/                    # php.ini files for containers
-    networks:
-      - www
-      - db
-    command: [ "tail", "-f", "/dev/null" ]
 
   tor:
     image: openpanel/torwebsite:${TOR_VERSION:-latest}
@@ -46,59 +16,6 @@ services:
     networks:
       - www
       - db
-
-  busybox:
-    image: busybox
-    container_name: busybox          
-    restart: unless-stopped
-    working_dir: /var/www/html
-    deploy:
-      resources:
-        limits:
-          cpus: "${BUSYBOX_CPU:-0.1}"
-          memory: "${BUSYBOX_RAM:-0.1G}"   
-          pids: 100
-    volumes:
-      - html_data:/var/www/html/
-
-
-
-  filebrowser:
-    image: filebrowser/filebrowser:${FILEBROWSER_VERSION:-s6}
-    container_name: filebrowser
-    volumes:
-      - html_data:/srv
-      - ./filebrowser/config/:/config/
-      - ./filebrowser/database/:/database/
-    environment:
-      - PUID=${USER_ID:-0}
-      - PGID=${USER_ID:-0}
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: "${FILEBROWSER_CPU:-0.35}"
-          memory: "${FILEBROWSER_RAM:-0.35G}"   
-          pids: 100
-    networks:
-      - www
-
-  uptimekuma:
-    image: louislam/uptime-kum:${UPTIMEKUMA_VERSION:-1}
-    container_name: uptimekuma
-    volumes:
-      - ./data:/app/data
-      - /hostfs/run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: "${UPTIMEKUMA_CPU:-0.35}"
-          memory: "${UPTIMEKUMA_RAM:-0.35G}"   
-          pids: 100
-    networks:
-      - www
-
 
 
   openresty:
@@ -308,39 +225,6 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
     networks:
       - db
-
-
-
-
-  mssql:
-    image: ${MSSQL_IMAGE}:${MSSQL_VERSION:-latest}
-    container_name: mssql
-    restart: unless-stopped
-    environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-StrongPassword!}
-      MSSQL_PID: ${MSSQL_PID:-Developer}  # Options: Developer, Express, Standard, Enterprise
-    ports:
-      - "${MSSQL_PORT}"
-    volumes:
-      - mssql_data:/var/opt/mssql                                      # MSSQL data
-      - ./sockets/mssql:/var/opt/mssql/sockets          # MSSQL socket
-      - ./mssql.conf:/etc/mssql/mssql.conf:ro           # Custom MSSQL config
-    deploy:
-      resources:
-        limits:
-          cpus: "${MSSQL_CPU:-1}"
-          memory: "${MSSQL_RAM:-2G}"
-          pids: 100
-    networks:
-      - db
-    healthcheck:
-      test: ['CMD-SHELL', 'sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" || exit 1']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      
-
 
   postgres:
     image: postgres:${POSTGRES_VERSION:-latest}
@@ -887,33 +771,6 @@ services:
           pids: 100
     command: [ "backup" ]
     restart: unless-stopped
-      
-  minecraft:
-    image: itzg/minecraft-server:${MINECRAFT_VERSION:-latest}
-    container_name: minecraft
-    tty: true
-    stdin_open: true
-    ports:
-      - "${MINECRAFT_PORT:-25565}:25565"
-    environment:
-      EULA: "TRUE"
-      ENABLE_QUERY: "${MINECRAFT_ENABLE_QUERY:-true}"
-      QUERY_PORT: "${MINECRAFT_PORT:-25565}"
-    volumes:
-      - mc_data:/data
-    deploy:
-      resources:
-        limits:
-          cpus: "${MINECRAFT_CPU:-1.0}"
-          memory: "${MINECRAFT_RAM:-1.0G}"
-          pids: 100
-    healthcheck:
-      test: mc-health
-      start_period: 1m
-      interval: 5s
-      retries: 20
-    networks:
-      - www
 
 networks:
   default:
@@ -943,11 +800,6 @@ volumes:
     labels:
       description: "This volume holds the .sql dumps of databases during backup."
       purpose: "storage"
-  mssql_data:
-    driver: local
-    labels:
-      description: "This volume holds the MSSQL databases."
-      purpose: "database"      
   html_data:
     driver: local
     labels:
@@ -968,8 +820,3 @@ volumes:
     labels:
       description: "This volume holds the postgresql databases."
       purpose: "database"
-  mc_data:
-    driver: local
-    labels:
-      description: "This volume holds the minecraft data directory."
-      purpose: "storage"
