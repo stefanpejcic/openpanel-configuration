@@ -15,7 +15,7 @@ MSSQL_RAM="1.0G"
 MSSQL_SA_PASSWORD="rootpassword"
 ```
 
-add to docker-compsoe.yml file **in the services section:
+add to docker-compose.yml file **in the services section:
 
 ```
   mssql:
