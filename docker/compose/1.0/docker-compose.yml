@@ -102,6 +102,7 @@ services:
       VARNISH_SIZE: "${VARNISH_SIZE:-1G}"
     entrypoint: /bin/sh -c "cp /etc/varnish/default.vcl.template /etc/varnish/default.vcl && sed -i 's|VARNISH_BACKEND_HOST|'"$WEB_SERVER"'|g' /etc/varnish/default.vcl && /usr/local/bin/docker-varnish-entrypoint"
     command: [ "-n", "/var/lib/varnish" ]
+    restart: unless-stopped
     volumes:
       - ./default.vcl:/etc/varnish/default.vcl.template:ro  
     ports:
