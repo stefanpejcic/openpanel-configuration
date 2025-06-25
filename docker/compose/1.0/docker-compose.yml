@@ -3,6 +3,7 @@ services:
   tor:
     image: openpanel/torwebsite:${TOR_VERSION:-latest}
     container_name: tor
+    restart: unless-stopped
     volumes:
       - html_data:/var/www/html
       - ./tor/hidden_service:/var/lib/tor/hidden_service
@@ -97,12 +98,12 @@ services:
   varnish:
     image: varnish:${VARNISH_VERSION:-stable}
     container_name: varnish
+    restart: unless-stopped
     environment:
       WEB_SERVER: "${WEB_SERVER:-nginx}"
       VARNISH_SIZE: "${VARNISH_SIZE:-1G}"
     entrypoint: /bin/sh -c "cp /etc/varnish/default.vcl.template /etc/varnish/default.vcl && sed -i 's|VARNISH_BACKEND_HOST|'"$WEB_SERVER"'|g' /etc/varnish/default.vcl && /usr/local/bin/docker-varnish-entrypoint"
     command: [ "-n", "/var/lib/varnish" ]
-    restart: unless-stopped
     volumes:
       - ./default.vcl:/etc/varnish/default.vcl.template:ro  
     ports:
@@ -122,8 +123,8 @@ services:
   cron:
     image: mcuadros/ofelia:latest
     container_name: cron
-    command: daemon --config=/crons.ini
     restart: unless-stopped
+    command: daemon --config=/crons.ini
     volumes:
       - /hostfs/run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
       - /hostfs/home/${CONTEXT}/crons.ini:/crons.ini:ro
@@ -200,10 +201,10 @@ services:
 
   phpmyadmin:
     container_name: phpmyadmin 
+    restart: unless-stopped
     depends_on:
       - "${MYSQL_TYPE:-mysql}"
     image: phpmyadmin #:5.2.2-fpm-alpine
-    restart: unless-stopped
     volumes:
       - html_data:/html/ #varwwwhtml are sites!    
       - ./pma.php:/var/www/html/pma.php
@@ -256,6 +257,7 @@ services:
 
   pgadmin:
     container_name: pgadmin
+    restart: unless-stopped
     image: dpage/pgadmin4:${PGADMIN_VERSION:-latest}
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
@@ -265,7 +267,6 @@ services:
     ports:
       #- "5050:80"
       - "${PGADMIN_PORT}"
-    restart: unless-stopped
     deploy:
       resources:
         limits:
