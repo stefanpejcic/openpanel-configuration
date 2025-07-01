@@ -129,8 +129,8 @@
   },
   {
     "name": "postgresql_conf",
-    "title": "MySQL Configuration",
-    "description": "If enabled, users can edit MySQL Configuration from their user panel.",
+    "title": "PostgreSQL Configuration",
+    "description": "If enabled, users can edit PostgreSQL Configuration from their user panel.",
     "link": "/postgresql/configuration",
     "type": "beta",
     "help_link": ""
