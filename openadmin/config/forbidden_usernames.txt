@@ -40,6 +40,7 @@ php-fpm-8.4
 phpmyadmin
 podman
 postgres
+repquota
 reboot
 redis
 restart
