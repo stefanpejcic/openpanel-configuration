@@ -171,6 +171,7 @@ services:
       - /etc/openpanel/ftp/vsftpd.chroot_list:/etc/vsftpd.chroot_list
       - /etc/openpanel/ftp/all.users:/etc/openpanel/ftp/all.users
       - /etc/openpanel/ftp/users/:/etc/openpanel/ftp/users/
+      - /etc/openpanel/caddy/ssl/:/etc/openpanel/caddy/ssl/:ro #ssl
     env_file:
       - /etc/openpanel/ftp/all.users
     networks:
