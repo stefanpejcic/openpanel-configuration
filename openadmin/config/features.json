@@ -306,7 +306,7 @@
   {
     "name": "edit_vhost",
     "title": "Edit VirtualHosts",
-    "description": "If enabled, users can create and manage redirects for their domains.",
+    "description": "If enabled, users can edit Virtual Hosts files for their domains.",
     "link": "/domains/vhosts",
     "type": "enterprise",
     "help_link": ""
