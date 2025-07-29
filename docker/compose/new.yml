@@ -43,7 +43,7 @@ services:
           memory: "${CLAMAV_RAM:-1.0G}"
           pids: 200
 
-# used by panel ui to store user sessions and counters
+  # used by panel ui to store user sessions and counters
   openpanel_redis:
     image: redis:latest
     container_name: openpanel_redis
@@ -68,9 +68,6 @@ services:
       - openpanel_mysql
       - openpanel_redis
       #- clamav
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
     ports:
       - "${PORT}:2083/tcp"
     volumes:
@@ -84,11 +81,11 @@ services:
       - /usr/local/opencli:/usr/local/opencli:ro
       - /var/log:/var/log
       - /var/lib/csf/:/var/lib/csf/       # todo check!
-      - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf
+      - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro
       - /etc/openpanel/:/etc/openpanel/
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - mysql:/var/lib/mysql
-      - /usr/bin/docker:/usr/bin/docker
+      - /usr/bin/docker:/usr/bin/docker:ro
       - ${REDIS_SOCKET}:/tmp/redis/
       - /etc/openpanel/openpanel/custom_code/:/templates/custom_code/
       - /etc/openpanel/openpanel/custom_code/custom.css:/static/css/custom.css
@@ -99,7 +96,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/openpanel/modules/:/modules/plugins/
     restart: always
-    privileged: true
     networks:
       - openpanel_network
     deploy:
