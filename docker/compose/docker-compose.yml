@@ -174,8 +174,6 @@ services:
       - /etc/openpanel/ftp/all.users:/etc/openpanel/ftp/all.users
       - /etc/openpanel/ftp/users/:/etc/openpanel/ftp/users/
       - /etc/openpanel/caddy/ssl/:/etc/openpanel/caddy/ssl/:ro #ssl
-    env_file:
-      - /etc/openpanel/ftp/all.users
     networks:
       - openpanel_network
     deploy:
