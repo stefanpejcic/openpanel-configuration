@@ -173,6 +173,7 @@ services:
           pids: 100
 
   # helper for password hashing
+  # https://github.com/stefanpejcic/opencli/issues/28
   hash:
     image: openpanel/werkzeug-hasher
     entrypoint:
