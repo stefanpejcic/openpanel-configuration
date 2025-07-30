@@ -16,22 +16,18 @@ import subprocess
 RESTART_FILE_PATH = '/root/openpanel_restart_needed'
 
 # Function to check the file content and empty it in place
-def check_and_clear_restart_file():
+def delete_the_flag_file():
     if os.path.exists(RESTART_FILE_PATH):
         try:
-            with open(RESTART_FILE_PATH, 'r+') as f:
-                content = f.read().strip()
-                if content in ['Restart']:
-                    f.seek(0)
-                    f.truncate()
-                    print(f"Cleared the content of {RESTART_FILE_PATH} flag.")
-                else:
-                    print(f"Unexpected content in {RESTART_FILE_PATH}: '{content}' — not modifying.")
+            with open(RESTART_FILE_PATH, 'r+'):
+                pass
+            with open(RESTART_FILE_PATH, 'w') as f:
+                f.truncate(0)
+            print(f"Flag file {RESTART_FILE_PATH} emptied")
         except Exception as e:
-            print(f"Error accessing {RESTART_FILE_PATH}: {e}")
+            print(f"Error clearing {RESTART_FILE_PATH}: {e}")
 
-# Call the function before starting the Gunicorn server
-check_and_clear_restart_file()
+delete_the_flag_file()
 
 # File paths
 CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
