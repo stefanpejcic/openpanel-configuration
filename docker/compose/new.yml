@@ -95,6 +95,7 @@ services:
       - /usr/bin/docker:/usr/bin/docker
       - /root/.ssh/:/root/.ssh/:ro # for remote contexts
       - /root/.docker/:/root/.docker/ # allows contexts editing
+      - /root/openpanel_restart_needed:/root/openpanel_restart_needed #
       - /root/.env:/root/.env #
       - /root/docker-compose.yml:/root/docker-compose.yml
       - ${REDIS_SOCKET}:/tmp/redis/
