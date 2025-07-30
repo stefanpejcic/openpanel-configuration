@@ -30,7 +30,7 @@ services:
     image: clamav/clamav:${CLAMAV_VERSION}
     container_name: clamav
     volumes:
-      - /home:/home
+      - /home/:/home/
       - ./clamav-db:/var/lib/clamav
     restart: unless-stopped
     network_mode: ${CLAMAV_DB_AUTOUPDATE} # needed to update db daily
