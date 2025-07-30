@@ -78,7 +78,7 @@ services:
       - /lib/modules:/lib/modules:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
-      - /:/hostfs #:ro off for ssh pass change!
+      - /:/hostfs:ro
       - /home:/home
       - /usr/local/admin:/usr/local/admin
       - /usr/local/bin/opencli:/usr/local/bin/opencli
