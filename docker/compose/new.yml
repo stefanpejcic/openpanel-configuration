@@ -78,9 +78,10 @@ services:
       - /lib/modules:/lib/modules:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
-      - /run/user/:/hostfs/run/user/
-      - /etc/passwd:/hostfs/etc/passwd:ro     # get uid for op user
-      - /etc/group:/hostfs/etc/group:ro       # get guid for op user
+      #- /run/user/:/hostfs/run/user/
+      #- /etc/passwd:/hostfs/etc/passwd:ro     # get uid for op user
+      #- /etc/group:/hostfs/etc/group:ro       # get guid for op user
+      - /:/hostfs #todo!
       - /home:/home
       - /usr/local/admin:/usr/local/admin
       - /usr/local/bin/opencli:/usr/local/bin/opencli
