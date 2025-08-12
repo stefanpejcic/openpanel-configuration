@@ -27,7 +27,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
-      - /etc/openpanel/openlitespeed/start.sh:/usr/local/lsws/start.sh:ro # generates main vhost file for litespeed
+      - /etc/openpanel/openlitespeed/start.sh:/entrypoint.sh:ro # chmod +x first!
       - webserver_data:/usr/local/lsws/conf/vhosts/ # vhosts
       - html_data:/var/www/html/                          # Website files
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs
