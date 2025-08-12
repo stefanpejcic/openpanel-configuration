@@ -42,17 +42,18 @@ echo "  }" >> $OUTPUT_CONF
 # Add errorLog and accessLog sections
 cat >> $OUTPUT_CONF <<EOL
 
-  errorLog {
-    file \$SERVER_ROOT/logs/error.log
-    rollingSize 10M
-  }
+<errorLog>
+  <fileName>\$SERVER_ROOT/logs/error.log</fileName>
+  <rollingSize>10M</rollingSize>
+</errorLog>
 
-  accessLog {
-    file \$SERVER_ROOT/logs/access.log
-    rollingSize 10M
-  }
+<accessLog>
+  <fileName>\$SERVER_ROOT/logs/access.log</fileName>
+  <rollingSize>10M</rollingSize>
+</accessLog>
 
 EOL
+
 
 # Append all virtual host configs into main config
 for f in $VHOST_DIR/*.conf; do
