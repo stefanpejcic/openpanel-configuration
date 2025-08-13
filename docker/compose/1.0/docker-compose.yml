@@ -27,6 +27,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
+      #- ./openlitespeed.conf:/usr/local/lsws/conf/httpd_config.conf:ro     # main conf
       - /etc/openpanel/openlitespeed/start.sh:/entrypoint.sh:ro # chmod +x first!
       - webserver_data:/usr/local/lsws/conf/vhosts/ # vhosts
       - html_data:/var/www/html/                          # Website files
