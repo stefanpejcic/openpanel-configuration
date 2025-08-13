@@ -524,8 +524,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root"
+    command: php-fpm --allow-to-run-as-root
       
 
 
@@ -559,8 +558,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root" 
+    command: php-fpm --allow-to-run-as-root
       
 
   php-fpm-7.4:
@@ -593,8 +591,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root" 
+    command: php-fpm --allow-to-run-as-root
       
   php-fpm-8.0:
     image: shinsenter/php:8.0-fpm
@@ -626,8 +623,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root"
+    command: php-fpm --allow-to-run-as-root
    
       
 
@@ -661,8 +657,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root"
+    command: php-fpm --allow-to-run-as-root
   
 
       
@@ -697,8 +692,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root"
+    command: php-fpm --allow-to-run-as-root
       
 
   php-fpm-8.3:
@@ -731,8 +725,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root"
+    command: php-fpm --allow-to-run-as-root
       
   php-fpm-8.4:
     image: shinsenter/php:8.4-fpm
@@ -764,8 +757,7 @@ services:
     networks:
       - www
       - db
-    command: >
-      sh -c "php-fpm --allow-to-run-as-root" 
+    command: php-fpm --allow-to-run-as-root
 
 
   backup:
