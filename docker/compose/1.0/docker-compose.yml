@@ -33,6 +33,7 @@ services:
       - webserver_data:/usr/local/lsws/conf/vhosts/ # vhosts
       - html_data:/var/www/html/                          # Website files
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/bin/wp 
     deploy:
       resources:
         limits:
