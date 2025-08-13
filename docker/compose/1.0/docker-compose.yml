@@ -27,8 +27,9 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
-      #- ./openlitespeed.conf:/usr/local/lsws/conf/httpd_config.conf:ro     # main conf
+      - ./openlitespeed.conf:/usr/local/lsws/conf/httpd_config.conf     # main conf
       - /etc/openpanel/openlitespeed/start.sh:/entrypoint.sh:ro # chmod +x first!
+      - ./sockets/mysqld:/var/run/mysqld           # MySQL socket
       - webserver_data:/usr/local/lsws/conf/vhosts/ # vhosts
       - html_data:/var/www/html/                          # Website files
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/       # SSLs
@@ -40,6 +41,7 @@ services:
           pids: 100
     networks:
       - www
+      - db
       
   openresty:
     image: openresty/openresty:${OPENRESTY_VERSION:-bullseye-fat}
