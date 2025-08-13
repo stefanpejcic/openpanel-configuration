@@ -5,6 +5,8 @@ echo "[*] Initializing.."
 chown -R 994:994 /usr/local/lsws/conf
 chown -R 994:1001 /usr/local/lsws/admin/conf
 
+# https://github.com/litespeedtech/ols-dockerfiles/issues/13
+
 HTTPD_CONF="/usr/local/lsws/conf/httpd_config.conf"
 
 echo "[*] Checking include sections for all VHosts files.."
