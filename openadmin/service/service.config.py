@@ -138,7 +138,7 @@ graceful_timeout = 10
 keepalive = 2
 max_requests = 1000
 max_requests_jitter = 50
-pidfile = 'adminpanel'
+pidfile = 'openadmin'
 
 # BUG https://github.com/benoitc/gunicorn/issues/2382
 #errorlog = "-"   # Log to stdout
