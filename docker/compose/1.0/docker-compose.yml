@@ -18,22 +18,6 @@ services:
       - www
       - db
 
-  git:
-    image: bitnami/git:${GIT_VERSION:-latest}
-    container_name: git
-    restart: unless-stopped
-    volumes:
-      - html_data:/var/www/html
-    deploy:
-      resources:
-        limits:
-          cpus: "${GIT_CPU:-0.15}"
-          memory: "${GIT_RAM:-0.10G}"
-          pids: 100
-    networks:
-      - www
-      - db
-
   openlitespeed:
     image: litespeedtech/openlitespeed:${OPENLITESPEED_VERSION:-latest}
     container_name: openlitespeed
