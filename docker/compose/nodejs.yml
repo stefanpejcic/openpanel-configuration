@@ -5,6 +5,7 @@
     command: >
       sh -c "${SERVICE_NAME_NODE_REQUIREMENTS:+npm install &&} ${SERVICE_NAME_NODE_CUSTOM_CMD:-node ${SERVICE_NAME_NODE_STARTUP_FILE:-index.js}}"
     working_dir: ${SERVICE_NAME_NODE_WORKDIR:-/var/www/html/}
+    stop_signal: SIGINT
     deploy:
       resources:
         limits:
