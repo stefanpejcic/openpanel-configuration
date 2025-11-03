@@ -437,7 +437,7 @@
     "description": "If enabled, users enable Two-Factor Authentication (2FA) for their account.",
     "link": "/account/2fa",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#2fa"
   },
   {
     "name": "activity",
