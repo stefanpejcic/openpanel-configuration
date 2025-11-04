@@ -1,10 +1,12 @@
-# /etc/cron.d/openpanel: crontab entries for the OpenPanel
+# /etc/cron.d/openpanel: crontab entries for the OpenPanel server
 #
 #
 # This file is used by OpenPanel to schedule cronjobs
 #
-# It should NOT be edited manually as it is overwritten on update.
-# To add crons please use the crontab as root user.
+# It should NOT be edited manually,
+# instead edit from OpenAdmin > Advanced > System CronJobs
+#
+# To add crons, use the crontab as root user.
 #
 # Important Note!  This cronjob will NOT be executed if you are
 # running systemd as your init system.  If you are running systemd,
@@ -32,7 +34,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 59 23 31 2 * root /usr/local/bin/opencli docker-backup && echo "$(date) Executed Backup for all users" >> /var/log/openpanel/admin/cron.log
 
 @reboot root mkdir -p /tmp/redis && chmod 777 /tmp/redis
-
 
 # MONITORING
 */5 * * * * root /usr/local/bin/opencli sentinel && echo "$(date) Notifications script executed" >> /var/log/openpanel/admin/cron.log
