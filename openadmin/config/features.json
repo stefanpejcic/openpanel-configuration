@@ -332,8 +332,8 @@
     "title": "SSL",
     "description": "If enabled, users can view SSL configuration for domains and add custom certificates.",
     "link": "/domains/ssl",
-    "type": "enterprise",
-    "help_link": ""
+    "type": "community",
+    "help_link": "https://openpanel.com/docs/panel/domains/ssl/"
   },
     {
     "name": "docroot",
