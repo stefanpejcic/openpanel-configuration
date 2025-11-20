@@ -36,7 +36,7 @@ def is_dev_mode():
 DEV_MODE = is_dev_mode()
 
 if DEV_MODE:
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     logger = logging.getLogger("openpanel")
 
     class StreamToLogger:
@@ -46,7 +46,10 @@ if DEV_MODE:
 
         def write(self, buf):
             for line in buf.rstrip().splitlines():
-                self.logger.log(self.log_level, line.rstrip())
+                if " - " in line:
+                    word, msg = line.split(" - ", 1)
+                    line = f"[{word}] {msg}"
+                self.logger.log(self.log_level, line)
 
         def flush(self):
             pass
