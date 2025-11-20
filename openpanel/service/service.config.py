@@ -214,9 +214,9 @@ def when_ready(server):
             "redis-cli --raw KEYS 'flask_cache_*' | xargs -r redis-cli DEL"
         ]
         result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        server.log.info("Redis cache cleared:\n%s", result.stdout.strip())
+        server.log.info("Redis cache cleared: %s", result.stdout.strip())
     except subprocess.CalledProcessError as e:
-        server.log.error("Failed to clear Redis cache:\n%s", e.stderr.strip())
+        server.log.error("Failed to clear Redis cache: %s", e.stderr.strip())
     except Exception as e:
         server.log.error("Unexpected error clearing Redis cache: %s", str(e))
 
