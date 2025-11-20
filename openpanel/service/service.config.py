@@ -36,7 +36,7 @@ def is_dev_mode():
 DEV_MODE = is_dev_mode()
 
 if DEV_MODE:
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     logger = logging.getLogger("openpanel")
 
     class StreamToLogger:
