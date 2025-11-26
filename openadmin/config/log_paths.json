@@ -10,7 +10,7 @@
     "OpenCLI Logs": "/var/log/openpanel/admin/opencli.log",
     "MailServer Log": "openadmin_mailserver",
     "Caddy Logs": "caddy",
-    "MySQL Logs": "openadmin_mysql",
+    "MySQL Logs": "openpanel_mysql",
     "FTP Logs": "openadmin_ftp",
     "CSF Deny Log": "/etc/csf/csf.deny",
     "AuthLog": "/var/log/auth.log",
