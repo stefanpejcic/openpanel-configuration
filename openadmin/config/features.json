@@ -405,7 +405,7 @@
     "description": "If enabled, users can start/stop and view logs for any service.",
     "link": "/services",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#services"
   },
   {
     "name": "elasticsearch",
@@ -413,7 +413,7 @@
     "description": "If enabled, users can configure Elasticsearch from their user panel.",
     "link": "/cache/elasticsearch",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#ElasticSearch"
   },
   {
     "name": "opensearch",
@@ -421,7 +421,7 @@
     "description": "If enabled, users can configure Opensearch from their user panel.",
     "link": "/cache/opensearch",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#OpenSearch"
   },
   {
     "name": "temporary_links",
