@@ -389,7 +389,7 @@
     "description": "If enabled, users can configure Redis from their user panel.",
     "link": "/cache/redis",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#Redis"
   },
   {
     "name": "memcached",
@@ -397,7 +397,7 @@
     "description": "If enabled, users can configure Memcached from their user panel.",
     "link": "/cache/memcached",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#Memcached"
   },
   {
     "name": "services",
