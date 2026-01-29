@@ -341,7 +341,7 @@
     "description": "If enabled, users can set and change document root (folder) for their domains.",
     "link": "/domains/docroot",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#docroot"
   },
   {
     "name": "capitalize_domains",
