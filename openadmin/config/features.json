@@ -189,7 +189,7 @@
     "description": "If enabled, users can configure backups.",
     "link": "/backups",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#backups"
   },
   {
     "name": "wordpress",
