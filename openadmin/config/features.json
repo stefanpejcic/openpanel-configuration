@@ -357,7 +357,7 @@
     "description": "If enabled, ClamAV is run locally and domain's docroots are automatically scanned for malicious files. Users can exclude directories and view quarantined files. NOTE: ARM CPU is not supported",
     "link": "/malware-scanner",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#clamav"
   },
   {
     "name": "domain_logs",
