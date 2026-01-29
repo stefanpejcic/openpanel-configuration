@@ -229,7 +229,7 @@
     "description": "If enabled, users can use the Auto-Installer page to manage websites and install applications.",
     "link": "/auto-installer",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#autoinstaller"
   },
   {
     "name": "disk_usage",
