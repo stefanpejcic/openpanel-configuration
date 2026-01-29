@@ -157,7 +157,7 @@
     "description": "If enabled, users can edit configured PHP.INI directives using the Options page.",
     "link": "/php/options",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#php-options"
   },
   {
     "name": "php_ini",
