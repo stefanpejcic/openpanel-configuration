@@ -293,7 +293,7 @@
     "description": "If enabled, users have access to the Fix Permisisons tool to change owner and permissions for website files.",
     "link": "/fix-permissions",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#fix-permissions"
   },
   {
     "name": "dns",
