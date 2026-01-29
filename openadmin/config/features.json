@@ -117,7 +117,7 @@
     "description": "If enabled, users can enable/disable remote access to PostgreSQL databases.",
     "link": "/postgresql/remote-postgresql",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#remote-postgresql"
   },
   {
     "name": "postgresql_import",
