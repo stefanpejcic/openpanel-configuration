@@ -205,7 +205,7 @@
     "description": "If enabled, Mautic can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/mautic/install",
     "type": "beta",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#mautic"
   },
   {
     "name": "website_builder",
@@ -213,7 +213,7 @@
     "description": "If enabled, users can create HTML websites using the GrapeJS drag-drop editor.",
     "link": "/website-builder",
     "type": "community",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/website-builder"
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#website-builder"
   },
   {
     "name": "pm2",
