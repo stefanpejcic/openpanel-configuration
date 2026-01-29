@@ -237,7 +237,7 @@
     "description": "If enabled, users can access the Disk Usage page to browse current disk usage per directories.",
     "link": "/disk-usage",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#disk-usage-explorer"
   },
   {
     "name": "inodes",
@@ -245,7 +245,7 @@
     "description": "If enabled, users can access the Inodes Usage page to browse current inodes usage per directories.",
     "link": "/inodes-explorer",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#inodes-explorer"
   },
   {
     "name": "usage",
