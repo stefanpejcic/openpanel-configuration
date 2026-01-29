@@ -165,7 +165,7 @@
     "description": "If enabled, users can edit directly the PHP.INI file for any PHP version from their OpenPanel.",
     "link": "/php/ini",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#phpini-editor"
   },
   {
     "name": "phpmyadmin",
