@@ -149,7 +149,7 @@
     "description": "If enabled, users can change PHP version for domains, set limits and set default version for new domains.",
     "link": "/php",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#php"
   },
   {
     "name": "php_options",
