@@ -317,7 +317,7 @@
     "description": "If enabled, users can edit Virtual Hosts files for their domains.",
     "link": "/domains/vhosts",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#edit-virtualhosts"
   },  
   {
     "name": "domains",
