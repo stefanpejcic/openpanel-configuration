@@ -261,7 +261,7 @@
     "description": "If enabled, users can view their hosting plan limits and server information on Server Information page.",
     "link": "/server/info",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#server-info"
   },
   {
     "name": "webserver_conf",
