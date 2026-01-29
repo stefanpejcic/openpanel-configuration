@@ -221,7 +221,7 @@
     "description": "If enabled, containerized NodeJS and Python applications can be setup from the Autoinstaller.",
     "link": "/pm2",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#applications"
   },
   {
     "name": "autoinstaller",
