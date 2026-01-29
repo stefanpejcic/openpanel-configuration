@@ -309,7 +309,7 @@
     "description": "If enabled, users can create and manage redirects for their domains.",
     "link": "/domains/redirects",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#redirects"
   },
   {
     "name": "edit_vhost",
