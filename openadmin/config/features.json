@@ -285,7 +285,7 @@
     "description": "If enabled, users have access to the File Manager interface to manage website files (/var/www/html/ directory). Disable this feature for  'Email-only' or 'DNS-only' plans.",
     "link": "/files",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#files"
   },
   {
     "name": "fix_permissions",
