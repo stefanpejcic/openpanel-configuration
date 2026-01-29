@@ -133,7 +133,7 @@
     "description": "If enabled, users can edit PostgreSQL Configuration from their user panel.",
     "link": "/postgresql/configuration",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#postgresql-conf"
   },
     {
     "name": "pgadmin",
