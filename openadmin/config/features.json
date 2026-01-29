@@ -349,7 +349,7 @@
     "description": "If enabled, users can capitalize letters in their domains.",
     "link": "/domains/capitalize",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#capitalize-domains"
   },
   {
     "name": "malware_scan",
