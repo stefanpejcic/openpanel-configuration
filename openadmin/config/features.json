@@ -277,7 +277,7 @@
     "description": "If enabled, CorazaWAF is automatically enabled for new domains and users can enable/disable the protection per domain.",
     "link": "/waf",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#waf"
   },
   {
     "name": "filemanager",
