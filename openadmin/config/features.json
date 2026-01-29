@@ -181,7 +181,7 @@
     "description": "If enabled, users can configure cronjobs.",
     "link": "/cronjobs",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#crons"
   },
   {
     "name": "backups",
