@@ -373,7 +373,7 @@
     "description": "If enabled, GoAccess is run on schedule to generate HTML reports from Caddy domain logs. Users can view the reports from the Domain Logs page.",
     "link": "/domains/stats",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#goaccess"
   },
   {
     "name": "process_manager",
