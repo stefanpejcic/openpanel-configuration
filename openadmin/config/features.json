@@ -125,7 +125,7 @@
     "description": "If enabled, users can import .sql files into PostgreSQL databases from their user panel.",
     "link": "/postgresql/import",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#postgresql-import"
   },
   {
     "name": "postgresql_conf",
