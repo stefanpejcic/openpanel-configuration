@@ -265,7 +265,7 @@
   },
   {
     "name": "webserver_conf",
-    "title": "Apache/Nginx Configuration",
+    "title": "Webserver Configuration",
     "description": "If enabled, users can edit the Nginx/Apache configuration for their webserver containers.",
     "link": "/server/webserver_conf",
     "type": "community",
