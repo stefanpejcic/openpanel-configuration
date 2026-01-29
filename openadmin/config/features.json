@@ -301,7 +301,7 @@
     "description": "If enabled, BIND9 server is run locally and DNS zone is created for new domains. Users can manage the records via Zone Editor interface.",
     "link": "/dns",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#dns"
   },
   {
     "name": "redirects",
