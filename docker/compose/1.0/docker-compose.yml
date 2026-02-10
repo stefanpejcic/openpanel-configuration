@@ -274,7 +274,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
       - ./sockets/postgres:/var/run/postgresql
-      - ./postgre_custom.conf:/var/lib/postgresql/data/postgresql.conf
+      #- ./postgre_custom.conf:/var/lib/postgresql/data/postgresql.conf
     deploy:
       resources:
         limits:
