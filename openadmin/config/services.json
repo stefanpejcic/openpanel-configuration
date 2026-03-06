@@ -55,8 +55,13 @@
         "real_name": "ssh"
     },    
     {
-        "name": "Sentinel Firewall",
+        "name": "Sentinel Firewall (CSF)",
         "type": "system",
         "real_name": "csf"
-    }
+    },
+    {
+        "name": "Login Failure Daemon (LFD)",
+        "type": "system",
+        "real_name": "lfd"
+    }    
 ]
