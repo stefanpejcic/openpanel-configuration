@@ -53,7 +53,12 @@
         "name": "SSH",
         "type": "system",
         "real_name": "ssh"
-    },    
+    },
+    {
+        "name": "Cron",
+        "type": "system",
+        "real_name": "cron"
+    },
     {
         "name": "Sentinel Firewall (CSF)",
         "type": "system",
@@ -63,5 +68,5 @@
         "name": "Login Failure Daemon (LFD)",
         "type": "system",
         "real_name": "lfd"
-    }    
+    }
 ]
