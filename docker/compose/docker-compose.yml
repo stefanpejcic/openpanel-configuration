@@ -81,8 +81,8 @@ services:
       - /:/hostfs:ro #todo!
       - /home:/home
       - /usr/local/admin:/usr/local/admin:ro #TODO: TEST PASS RESET
-      - /usr/local/bin/opencli:/usr/local/bin/opencli
-      - /usr/local/opencli:/usr/local/opencli
+      - /usr/local/bin/opencli:/usr/local/bin/opencli:ro #TODO: TEST CP ON IMAGE CREATE
+      - /usr/local/opencli:/usr/local/opencli:ro #TODO: TEST MAIN
       - /var/log/caddy:/var/log/caddy
       - /var/log/openpanel:/var/log/openpanel
       - /var/lib/csf/:/var/lib/csf/
