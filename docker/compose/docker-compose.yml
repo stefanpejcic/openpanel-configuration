@@ -123,10 +123,10 @@ services:
       - NET_ADMIN
     working_dir: /etc/caddy/
     volumes:
-      - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile                           # Caddy config
-      - /etc/openpanel/caddy/ssl:/data/caddy/certificates                             # Custom SSL certificates
-      - /etc/openpanel/caddy/:/etc/openpanel/caddy/                                   # domain files, templates 
-      - /etc/openpanel/caddy/coraza_rules.conf:/etc/openpanel/caddy/coraza_rules.conf # default rules
+      - /etc/openpanel/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /etc/openpanel/caddy/:/etc/openpanel/caddy:ro
+      - /etc/openpanel/caddy/ssl:/data/caddy/certificates
+      - /etc/openpanel/caddy/coraza_rules.conf:/etc/openpanel/caddy/coraza_rules.conf:ro
       - /var/log/caddy/:/var/log/caddy/
     restart: unless-stopped
     mem_limit: ${CADDY_RAM}
