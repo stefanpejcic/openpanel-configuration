@@ -101,10 +101,10 @@ services:
       - /etc/openpanel/openpanel/custom_code/custom.css:/static/css/custom.css:ro
       - /etc/openpanel/openpanel/custom_code/custom.js:/static/js/custom.js:ro
       - /etc/openpanel/openpanel/conf/knowledge_base_articles.json:/etc/openpanel/openpanel/conf/knowledge_base_articles.json:ro
-      - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/ # localization
+      - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/:ro # localization
       - /usr/local/mail/openmail/:/usr/local/mail/openmail/ # emails
       - /etc/localtime:/etc/localtime:ro
-      - /etc/openpanel/modules/:/modules/plugins/ # plugins
+      - /etc/openpanel/modules/:/modules/plugins/:ro
     restart: always
     privileged: true
     networks:
