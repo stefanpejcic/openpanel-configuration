@@ -80,7 +80,7 @@ services:
       - /sys:/host/sys:ro
       - /:/hostfs:ro #todo!
       - /home:/home
-      - /usr/local/admin:/usr/local/admin
+      - /usr/local/admin:/usr/local/admin:ro #TODO: TEST PASS RESET
       - /usr/local/bin/opencli:/usr/local/bin/opencli
       - /usr/local/opencli:/usr/local/opencli
       - /var/log/caddy:/var/log/caddy
