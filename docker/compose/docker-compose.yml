@@ -95,9 +95,9 @@ services:
       - /root/.docker/:/root/.docker/ # allows contexts editing
       - /root/openpanel_restart_needed:/root/openpanel_restart_needed #
       - /root/.env:/root/.env:ro #TODO: test if 2083 uses it
-      - /root/docker-compose.yml:/root/docker-compose.yml
+      - /root/docker-compose.yml:/root/docker-compose.yml #TODO: test if 2083 uses it
       - ${REDIS_SOCKET}:/tmp/redis/
-      - /etc/openpanel/openpanel/custom_code/:/templates/custom_code/ #https://dev.openpanel.com/customize.html#Custom-Code
+      - /etc/openpanel/openpanel/custom_code/:/templates/custom_code/:ro #https://dev.openpanel.com/customize.html#Custom-Code
       - /etc/openpanel/openpanel/custom_code/custom.css:/static/css/custom.css
       - /etc/openpanel/openpanel/custom_code/custom.js:/static/js/custom.js
       - /etc/openpanel/openpanel/conf/knowledge_base_articles.json:/etc/openpanel/openpanel/conf/knowledge_base_articles.json
