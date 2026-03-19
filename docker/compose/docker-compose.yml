@@ -13,7 +13,6 @@ services:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
-      - /etc/openpanel/:/etc/openpanel/:ro #TODO: test if still used
       - /root/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro      
