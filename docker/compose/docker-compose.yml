@@ -79,7 +79,6 @@ services:
       - /etc/bind:/etc/bind
       - /lib/modules:/lib/modules:ro #TODO: test csf blocks
       - /proc:/host/proc:ro #TODO: test
-      - /sys:/host/sys:ro #TODO: test
       - /run/user/:/hostfs/run/user/:ro
       - /etc/passwd:/hostfs/etc/passwd:ro
       - /etc/group:/hostfs/etc/group:ro
