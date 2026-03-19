@@ -79,7 +79,7 @@ services:
       - /etc/openpanel/:/etc/openpanel/                                                  # settings      
       - /etc/openpanel/modules/:/modules/plugins/:ro                                     # plugins
       - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro                             # mysql logins
-      - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/:ro # locales
+      - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations     # locales
       - /root/openpanel_restart_needed:/root/openpanel_restart_needed                    # flag used on openadmin
       - /run/user/:/hostfs/run/user/:ro                                                  # docker contexts
       - /var/run/docker.sock:/var/run/docker.sock:ro                                     # reload caddy on waf changes      
