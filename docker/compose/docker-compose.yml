@@ -72,32 +72,26 @@ services:
     ports:
       - "${PORT}:2083/tcp"
     volumes:
-      - /etc/bind:/etc/bind
-      - /lib/modules:/lib/modules:ro #TODO: test csf blocks
-      - /proc:/host/proc:ro #TODO: test csf blocks
-      - /run/user/:/hostfs/run/user/:ro
-      - /etc/passwd:/hostfs/etc/passwd:ro #TODO: safe to remove since v1.7.47
-      - /home:/home
-      - /usr/local/opencli:/usr/local/opencli:ro
-      - /var/log/caddy:/var/log/caddy
-      - /var/lib/csf/:/var/lib/csf/ #TODO: remove ratelimiting and this
-      - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro
-      - /etc/openpanel/:/etc/openpanel/
-      - /var/run/docker.sock:/var/run/docker.sock:ro # needed to reload caddy on waf changes
-      - /usr/bin/docker:/usr/bin/docker:ro
-      - /root/.ssh/:/root/.ssh/:ro # for remote contexts
-      - /root/.docker/:/root/.docker/:ro # allows contexts editing
-      - /root/openpanel_restart_needed:/root/openpanel_restart_needed #
-      - ${REDIS_SOCKET}:/tmp/redis/
-      - /etc/openpanel/openpanel/custom_code/:/templates/custom_code/:ro #https://dev.openpanel.com/customize.html#Custom-Code
-      - /etc/openpanel/openpanel/custom_code/custom.css:/static/css/custom.css:ro
-      - /etc/openpanel/openpanel/custom_code/custom.js:/static/js/custom.js:ro
-      - /etc/openpanel/openpanel/conf/knowledge_base_articles.json:/etc/openpanel/openpanel/conf/knowledge_base_articles.json:ro
-      - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/:ro # localization
-      - /usr/local/mail/openmail/:/usr/local/mail/openmail/:ro # emails
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/openpanel/modules/:/modules/plugins/:ro
+      - /usr/local/opencli:/usr/local/opencli:ro                                         # opencli    
+      - /etc/bind:/etc/bind                                                              # dns
+      - /home:/home                                                                      # files      
+      - /usr/bin/docker:/usr/bin/docker:ro                                               # docker      
+      - /etc/openpanel/:/etc/openpanel/                                                  # settings      
+      - /etc/openpanel/modules/:/modules/plugins/:ro                                     # plugins
+      - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro                             # mysql logins
+      - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/:ro # locales
+      - /root/openpanel_restart_needed:/root/openpanel_restart_needed                    # flag used on openadmin
+      - /run/user/:/hostfs/run/user/:ro                                                  # docker contexts
+      - /var/run/docker.sock:/var/run/docker.sock:ro                                     # reload caddy on waf changes      
+      - ${REDIS_SOCKET}:/tmp/redis/                                                      # redis cache
+      - /var/log/caddy:/var/log/caddy                                                    # waf and domlogs      
+      - /etc/localtime:/etc/localtime:ro                                                 # server timezone
+      - /etc/timezone:/etc/timezone:ro                                                   # ui timezone   
+      # CSF
+      - /lib/modules:/lib/modules:ro      #TODO: test csf blocks
+      - /proc:/host/proc:ro               #TODO: test csf blocks
+      - /var/lib/csf/:/var/lib/csf/       #TODO: remove ratelimiting and this
+      - /etc/passwd:/hostfs/etc/passwd:ro #TODO: safe to remove from v1.7.47
     restart: always
     networks:
       - openpanel_network
