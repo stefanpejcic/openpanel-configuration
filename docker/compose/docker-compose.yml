@@ -77,34 +77,33 @@ services:
       - "${PORT}:2083/tcp"
     volumes:
       - /etc/bind:/etc/bind
-      - /lib/modules:/lib/modules:ro
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/hostfs:ro #todo!
+      - /lib/modules:/lib/modules:ro #TODO: test csf blocks
+      - /proc:/host/proc:ro #TODO: test
+      - /sys:/host/sys:ro #TODO: test
+      - /run/user/:/hostfs/run/user/:ro
+      - /etc/passwd:/hostfs/etc/passwd:ro
+      - /etc/group:/hostfs/etc/group:ro
       - /home:/home
-      - /usr/local/admin:/usr/local/admin:ro #TODO: TEST PASS RESET
-      - /usr/local/bin/opencli:/usr/local/bin/opencli:ro #TODO: TEST CP ON IMAGE CREATE
-      - /usr/local/opencli:/usr/local/opencli:ro #TODO: TEST MAIN
+      - /usr/local/bin/opencli:/usr/local/bin/opencli:ro
+      - /usr/local/opencli:/usr/local/opencli:ro
       - /var/log/caddy:/var/log/caddy
       - /var/log/openpanel:/var/log/openpanel
       - /var/lib/csf/:/var/lib/csf/
-      - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf
+      - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro
       - /etc/openpanel/:/etc/openpanel/
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - mysql:/var/lib/mysql
-      - /usr/bin/docker:/usr/bin/docker
+      - /usr/bin/docker:/usr/bin/docker:ro
       - /root/.ssh/:/root/.ssh/:ro # for remote contexts
-      - /root/.docker/:/root/.docker/ # allows contexts editing
+      - /root/.docker/:/root/.docker/:ro # allows contexts editing
       - /root/openpanel_restart_needed:/root/openpanel_restart_needed #
-      - /root/.env:/root/.env:ro #TODO: test if 2083 uses it
-      - /root/docker-compose.yml:/root/docker-compose.yml:ro #TODO: test if 2083 uses it
       - ${REDIS_SOCKET}:/tmp/redis/
       - /etc/openpanel/openpanel/custom_code/:/templates/custom_code/:ro #https://dev.openpanel.com/customize.html#Custom-Code
       - /etc/openpanel/openpanel/custom_code/custom.css:/static/css/custom.css:ro
       - /etc/openpanel/openpanel/custom_code/custom.js:/static/js/custom.js:ro
       - /etc/openpanel/openpanel/conf/knowledge_base_articles.json:/etc/openpanel/openpanel/conf/knowledge_base_articles.json:ro
       - /etc/openpanel/openpanel/translations/:/etc/openpanel/openpanel/translations/:ro # localization
-      - /usr/local/mail/openmail/:/usr/local/mail/openmail/ # emails
+      - /usr/local/mail/openmail/:/usr/local/mail/openmail/:ro # emails
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
       - /etc/openpanel/modules/:/modules/plugins/:ro
