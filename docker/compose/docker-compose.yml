@@ -78,11 +78,9 @@ services:
       - /run/user/:/hostfs/run/user/:ro
       - /etc/passwd:/hostfs/etc/passwd:ro #TODO: safe to remove since v1.7.47
       - /home:/home
-      - /usr/local/bin/opencli:/usr/local/bin/opencli:ro
       - /usr/local/opencli:/usr/local/opencli:ro #TODO: test and remove since its now copied on image build
       - /var/log/caddy:/var/log/caddy
-      - /var/log/openpanel:/var/log/openpanel
-      - /var/lib/csf/:/var/lib/csf/
+      - /var/lib/csf/:/var/lib/csf/ #TODO: remove ratelimiting and this
       - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro
       - /etc/openpanel/:/etc/openpanel/
       - /var/run/docker.sock:/var/run/docker.sock:ro
