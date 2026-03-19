@@ -13,7 +13,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
-      - /etc/openpanel/:/etc/openpanel/
+      - /etc/openpanel/:/etc/openpanel/:ro #TODO: test if still used
       - /root/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro      
@@ -173,11 +173,10 @@ services:
       - "${FTP_PORT_RANGE}:21000-21010"
     volumes:
       - /home/:/home/
-      - /etc/openpanel/ftp/vsftpd.conf:/etc/vsftpd/vsftpd.conf
-      - /etc/openpanel/ftp/start_vsftpd.sh:/bin/start_vsftpd.sh
+      - /etc/openpanel/ftp/vsftpd.conf:/etc/vsftpd/vsftpd.conf:ro
+      - /etc/openpanel/ftp/start_vsftpd.sh:/bin/start_vsftpd.sh:ro
       - /etc/openpanel/ftp/vsftpd.chroot_list:/etc/vsftpd.chroot_list
       - /etc/openpanel/ftp/all.users:/etc/openpanel/ftp/all.users
-      - /etc/openpanel/ftp/users/:/etc/openpanel/ftp/users/
       - /etc/openpanel/caddy/ssl/:/etc/openpanel/caddy/ssl/:ro #ssl
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro      
