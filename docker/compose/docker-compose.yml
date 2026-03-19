@@ -69,9 +69,6 @@ services:
       - openpanel_mysql
       - openpanel_redis
       #- clamav
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
     ports:
       - "${PORT}:2083/tcp"
     volumes:
@@ -90,7 +87,6 @@ services:
       - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro
       - /etc/openpanel/:/etc/openpanel/
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - mysql:/var/lib/mysql
       - /usr/bin/docker:/usr/bin/docker:ro
       - /root/.ssh/:/root/.ssh/:ro # for remote contexts
       - /root/.docker/:/root/.docker/:ro # allows contexts editing
@@ -106,7 +102,6 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/openpanel/modules/:/modules/plugins/:ro
     restart: always
-    privileged: true
     networks:
       - openpanel_network
     deploy:
