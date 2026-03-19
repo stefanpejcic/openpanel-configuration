@@ -83,7 +83,7 @@ services:
       - /var/lib/csf/:/var/lib/csf/ #TODO: remove ratelimiting and this
       - /etc/openpanel/mysql/container_my.cnf:/etc/my.cnf:ro
       - /etc/openpanel/:/etc/openpanel/
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro # needed to reload caddy on waf changes
       - /usr/bin/docker:/usr/bin/docker:ro
       - /root/.ssh/:/root/.ssh/:ro # for remote contexts
       - /root/.docker/:/root/.docker/:ro # allows contexts editing
