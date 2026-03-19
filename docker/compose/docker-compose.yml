@@ -74,13 +74,12 @@ services:
     volumes:
       - /etc/bind:/etc/bind
       - /lib/modules:/lib/modules:ro #TODO: test csf blocks
-      - /proc:/host/proc:ro #TODO: test
+      - /proc:/host/proc:ro #TODO: test csf blocks
       - /run/user/:/hostfs/run/user/:ro
-      - /etc/passwd:/hostfs/etc/passwd:ro
-      - /etc/group:/hostfs/etc/group:ro
+      - /etc/passwd:/hostfs/etc/passwd:ro #TODO: safe to remove since v1.7.47
       - /home:/home
       - /usr/local/bin/opencli:/usr/local/bin/opencli:ro
-      - /usr/local/opencli:/usr/local/opencli:ro
+      - /usr/local/opencli:/usr/local/opencli:ro #TODO: test and remove since its now copied on image build
       - /var/log/caddy:/var/log/caddy
       - /var/log/openpanel:/var/log/openpanel
       - /var/lib/csf/:/var/lib/csf/
