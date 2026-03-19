@@ -73,6 +73,7 @@ services:
       - "${PORT}:2083/tcp"
     volumes:
       - /usr/local/opencli:/usr/local/opencli:ro                                         # opencli    
+      - /var/log/openpanel/admin/opencli.log:/var/log/openpanel/admin/opencli.log        # history
       - /etc/bind:/etc/bind                                                              # dns
       - /home:/home                                                                      # files      
       - /usr/bin/docker:/usr/bin/docker:ro                                               # docker      
