@@ -92,7 +92,6 @@ services:
       - /lib/modules:/lib/modules:ro      #TODO: test csf blocks
       - /proc:/host/proc:ro               #TODO: test csf blocks
       - /var/lib/csf/:/var/lib/csf/       #TODO: remove ratelimiting and this
-      - /etc/passwd:/hostfs/etc/passwd:ro #TODO: safe to remove from v1.7.47
     restart: always
     networks:
       - openpanel_network
