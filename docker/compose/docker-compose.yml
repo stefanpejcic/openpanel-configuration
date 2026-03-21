@@ -15,7 +15,6 @@ services:
       - mysql:/var/lib/mysql
       - /root/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
       - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro      
     oom_kill_disable: true
     networks:
       - openpanel_network
