@@ -97,8 +97,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "${OPENPANEL_CPUS:-1.0}"
-          memory: "${OPENPANEL_RAM:-1.0G}"
+          #cpus: "${OPENPANEL_CPUS:-1.0}"
+          #memory: "${OPENPANEL_RAM:-1.0G}"
           pids: 1000
 
   caddy:
