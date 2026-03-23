@@ -159,6 +159,7 @@ services:
       - /etc/openpanel/ftp/start_vsftpd.sh:/bin/start_vsftpd.sh:ro
       - /etc/openpanel/ftp/vsftpd.chroot_list:/etc/vsftpd.chroot_list
       - /etc/openpanel/ftp/all.users:/etc/openpanel/ftp/all.users
+      - /etc/openpanel/ftp/users/:/etc/openpanel/ftp/users/
       - /etc/openpanel/caddy/ssl/:/etc/openpanel/caddy/ssl/:ro #ssl
       - /etc/localtime:/etc/localtime:ro
     networks:
