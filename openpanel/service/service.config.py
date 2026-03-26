@@ -47,16 +47,25 @@ if DEV_MODE:
         def __init__(self, logger, log_level=logging.INFO):
             self.logger = logger
             self.log_level = log_level
-
+    
         def write(self, buf):
+            if not buf:
+                return
             for line in buf.rstrip().splitlines():
                 if " - " in line:
                     word, msg = line.split(" - ", 1)
                     line = f"[{word}] {msg}"
                 self.logger.log(self.log_level, line)
-
+    
         def flush(self):
             pass
+    
+        def isatty(self):
+            return False
+    
+        @property
+        def closed(self):
+            return False
 
     sys.stdout = StreamToLogger(logger, logging.INFO)
     sys.stderr = StreamToLogger(logger, logging.ERROR)
