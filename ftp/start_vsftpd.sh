@@ -118,13 +118,13 @@ if [ "$TOTAL_USER_COUNT" -gt 0 ]; then
       unset NAME HASHED_PASS FOLDER UID GID GROUP UID_OPT GROUP_OPT
     done < "$USER_LIST_FILE"
   done  
+  if [ "$USER_COUNT" -gt 0 ]; then
+    echo "[*] User creation complete: $USER_COUNT users created."
+  fi  
 else
   echo "[*] No users found to create."
 fi
 
-if [ "$USER_COUNT" -gt 0 ]; then
-  echo "[*] User creation complete: $USER_COUNT users created."
-fi
 
 # 6. tweak settings
 MIN_PORT=${MIN_PORT:-21000}
