@@ -22,7 +22,7 @@ services:
       - ./php.ini/8.2.ini:/usr/local/lsws/lsphp82/etc/php/8.2/litespeed/php.ini
       - ./php.ini/8.3.ini:/usr/local/lsws/lsphp83/etc/php/8.3/litespeed/php.ini
       - ./php.ini/8.4.ini:/usr/local/lsws/lsphp84/etc/php/8.4/litespeed/php.ini
-      - ./php.ini/8.5.ini:/usr/local/lsws/lsphp84/etc/php/8.5/litespeed/php.ini
+      - ./php.ini/8.5.ini:/usr/local/lsws/lsphp85/etc/php/8.5/litespeed/php.ini
     deploy:
       resources:
         limits:
