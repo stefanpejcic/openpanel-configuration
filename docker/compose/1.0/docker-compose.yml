@@ -239,7 +239,7 @@ services:
       - "${MYSQL_TYPE:-mysql}"
     image: phpmyadmin:${PMA_VERSION:-latest}
     volumes:
-      - html_data:/html/  
+      #- html_data:/html/  
       - ./pma.php:/var/www/html/pma.php
       - /etc/openpanel/mysql/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.inc.php:ro
     ports:
