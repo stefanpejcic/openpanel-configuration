@@ -159,8 +159,8 @@ services:
     restart: unless-stopped
     command: daemon --config=/crons.ini
     volumes:
-      - /hostfs/run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
-      - /hostfs/home/${CONTEXT}/crons.ini:/crons.ini:ro
+      - /run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
+      - /home/${CONTEXT}/crons.ini:/crons.ini:ro
     deploy:
       resources:
         limits:
