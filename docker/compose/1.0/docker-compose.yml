@@ -152,14 +152,31 @@ services:
       - www
       - db
 
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy
+    environment:
+      CONTAINERS: 1
+      POST: 1
+    volumes:
+      - /run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "64M"
+          pids: 50
 
   cron:
     image: mcuadros/ofelia:latest
     container_name: cron
     restart: unless-stopped
+    environment:
+      DOCKER_HOST: tcp://docker-proxy:2375
     command: daemon --config=/crons.ini
+    depends_on:
+      docker-proxy:
+        condition: service_started
     volumes:
-      - /run/user/${USER_ID}/docker.sock:/var/run/docker.sock:ro
       - /home/${CONTEXT}/crons.ini:/crons.ini:ro
     deploy:
       resources:
