@@ -265,6 +265,7 @@ services:
       #- html_data:/html/  
       - ./pma.php:/var/www/html/pma.php
       - /etc/openpanel/mysql/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.inc.php:ro
+      - ./sockets/mysqld:/var/run/mysqld:ro
     ports:
       - "${PMA_PORT}"
     deploy:
@@ -274,7 +275,8 @@ services:
           memory: "${PMA_RAM:-0.1G}"                
           pids: 100
     environment:
-      PMA_HOST: ${MYSQL_TYPE:-mysql}
+      PMA_HOST: localhost #${MYSQL_TYPE:-mysql}
+      PMA_SOCKET: "/var/run/mysqld/mysqld.sock"
       MAX_EXECUTION_TIME: ${PMA_MAX_EXECUTION_TIME:-600}
       MEMORY_LIMIT: ${PMA_MEMORY_LIMIT:-512M}
       UPLOAD_LIMIT: ${PMA_UPLOAD_LIMIT:-256M}
