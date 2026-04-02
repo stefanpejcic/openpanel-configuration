@@ -154,6 +154,7 @@ services:
 
   docker-proxy:
     image: tecnativa/docker-socket-proxy
+    container_name: docker-proxy
     environment:
       CONTAINERS: 1
       POST: 1
