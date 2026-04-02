@@ -895,7 +895,7 @@ networks:
     driver: bridge
     internal: true   # no internet access
     labels:
-    description: "Used by cron and backup containers to access docker socket securely."
+      description: "Used by cron and backup containers to access docker socket securely."
       purpose: "internal"
 
 volumes:
