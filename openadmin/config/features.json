@@ -104,6 +104,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#mysql-conf"
   },
   {
+    "name": "mysql_root_password",
+    "title": "MySQL Root Password",
+    "description": "If enabled, users can change password for their MySQL root user from the user panel.",
+    "link": "/mysql/root-password",
+    "type": "community",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#mysql-root-password"
+  },
+  {
     "name": "postgresql",
     "title": "PostgreSQL",
     "description": "If enabled, users can manage PostgreSQL databases and users.",
