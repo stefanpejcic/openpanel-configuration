@@ -104,12 +104,20 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#mysql-conf"
   },
   {
+    "name": "mysql_processlist",
+    "title": "MySQL Process List",
+    "description": "If enabled, users can view MySQL processlist from the user panel.",
+    "link": "/mysql/rprocesslist",
+    "type": "community",
+    "help_link": ""
+  },
+  {
     "name": "mysql_root_password",
     "title": "MySQL Root Password",
     "description": "If enabled, users can change password for their MySQL root user from the user panel.",
     "link": "/mysql/root-password",
     "type": "community",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/#mysql-root-password"
+    "help_link": ""
   },
   {
     "name": "postgresql",
