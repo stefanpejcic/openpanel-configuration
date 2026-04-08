@@ -10,7 +10,6 @@ myisam-recover-options  = BACKUP
 table_open_cache        = 4000
 interactive_timeout=15
 wait_timeout=10
-event_scheduler=ON
 
 #max_user_connections=20
 #max_connections        = 151
