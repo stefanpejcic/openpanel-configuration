@@ -304,7 +304,7 @@ services:
       resources:
         limits:
           cpus: "${POSTGRES_CPU:-0.3}"
-          memory: "${POSTGRES_RAM:-0.3}"
+          memory: "${POSTGRES_RAM:-0.3G}"
           pids: 100
     networks:
       - db
