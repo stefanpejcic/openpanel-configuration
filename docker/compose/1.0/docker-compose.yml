@@ -833,7 +833,7 @@ networks:
   default:
     driver: bridge
     labels:
-      description: "This network is not used used and serves as a fallback."
+      description: "Used by phpmyadmin and serves as a fallback if no network is defined."
       purpose: "internal"
   www:
     driver: bridge
