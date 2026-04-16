@@ -448,7 +448,7 @@ services:
           memory: "${MEMCACHED_RAM:-0.1G}" 
           pids: 100
     healthcheck:
-      test: ["CMD", "memcached", "-h"]
+      test: ["CMD-SHELL", "echo stats | nc -w1 127.0.0.1 11211 | grep -q STAT"]
       interval: 30s
       retries: 3
       start_period: 10s
