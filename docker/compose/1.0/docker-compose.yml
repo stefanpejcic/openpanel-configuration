@@ -219,9 +219,10 @@ services:
       - db
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
-      interval: 1s
-      timeout: 5s
+      interval: 5s
+      timeout: 3s
       retries: 10
+      start_period: 30s
 
   mariadb:
     image: mariadb:${MYSQL_VERSION:-latest}
@@ -251,9 +252,10 @@ services:
       - db
     healthcheck:
       test: ['CMD-SHELL', 'mariadb-admin ping -h localhost']
-      interval: 1s
-      timeout: 5s
+      interval: 5s
+      timeout: 3s
       retries: 10
+      start_period: 30s
 
   phpmyadmin:
     container_name: phpmyadmin 
