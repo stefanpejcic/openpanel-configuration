@@ -356,7 +356,29 @@ services:
       timeout: 5s
     networks:
       - www
-
+  
+  valkey:
+    image: valkey/valkey:${VALKEY_VERSION:-8.0-alpine}
+    container_name: valkey
+    restart: unless-stopped
+    user: "${USER_ID:-0}"
+    command: ["valkey-server", "--bind", "0.0.0.0", "--port", "6379"]
+    volumes:
+      - ./sockets/valkey:/var/run/valkey
+    deploy:
+      resources:
+        limits:
+          cpus: "${VALKEY_CPU:-0.1}"
+          memory: "${VALKEY_RAM:-0.1G}"
+          pids: 100
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 5s
+    networks:
+      - www
 
   elasticsearch:
     image: elasticsearch:${ELASTICSEARCH_VERSION:-9.3.2}
