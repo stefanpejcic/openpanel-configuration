@@ -330,7 +330,7 @@ services:
       resources:
         limits:
           cpus: "${PGADMIN_CPU:-0.1}"
-          memory: "${PGADMIN_RAM:-0.1}"
+          memory: "${PGADMIN_RAM:-0.1G}"
           pids: 100
     networks:
       - db
