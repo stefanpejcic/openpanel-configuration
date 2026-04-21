@@ -60,7 +60,7 @@ get_license() {
 
 
 get_public_ip() {
-    ip=$(curl --silent --max-time 1 -4 https://ip.openpanel.com || curl --silent --max-time 1 -4 https://ifconfig.me)
+    ip=$(curl --silent --max-time 1 -4 https://ip.openpanel.com || curl --silent --max-time 1 -4 https://ifconfig.me/ip)
     
     if [ -z "$ip" ] || ! [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         ip=$(hostname -I | awk '{print $1}')
