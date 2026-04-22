@@ -180,9 +180,8 @@ else:
 
 threads = 4
 worker_class = 'gthread'
-worker_connections = 1000
 timeout = 360
-graceful_timeout = 10
+graceful_timeout = 30
 keepalive = 5
 max_requests = 1000
 max_requests_jitter = 50
