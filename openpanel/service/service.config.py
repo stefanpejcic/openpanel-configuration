@@ -178,6 +178,7 @@ else:
     workers = min(calculated_workers, max_workers)
     print(f"Using {workers} workers for OpenPanel as server has >2 cpu cores available.")
 
+threads = 4
 worker_class = 'gthread'
 worker_connections = 1000
 timeout = 360
