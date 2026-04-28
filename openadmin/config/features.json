@@ -400,6 +400,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#Redis"
   },
   {
+    "name": "valkey",
+    "title": "Valkey",
+    "description": "If enabled, users can configure Valkey from their user panel.",
+    "link": "/cache/valkey",
+    "type": "community",
+    "help_link": ""
+  },
+  {
     "name": "memcached",
     "title": "Memcached",
     "description": "If enabled, users can configure Memcached from their user panel.",
