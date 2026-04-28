@@ -17,6 +17,7 @@ from pathlib import Path
 import subprocess
 import logging
 import sys
+import ssl
 
 # ======================================================================
 # Read config file
@@ -114,24 +115,13 @@ empty_flag_file()
 # ====================================================================== #
 # SSL
 CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
-CADDY_CERT_DIRS = [
-    "/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/",
-    "/etc/openpanel/caddy/ssl/custom/"
-]
+CADDY_CERT_DIRS = ["/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/", "/etc/openpanel/caddy/ssl/custom/"]
 
-def get_domain():
+def opencli(cmd_args):
     try:
-        result = subprocess.run(["opencli", "domain"], capture_output=True, text=True, check=True)
-        return result.stdout.strip()
+        return subprocess.run(["opencli", *cmd_args], capture_output=True, text=True, check=True).stdout.strip()
     except subprocess.CalledProcessError as e:
-        print(f"Error running command: {e}")
-        return None
-
-def get_port():
-    try:
-        result = subprocess.run(["opencli", "port"], capture_output=True, text=True, check=True)
-        return result.stdout.strip()
-    except subprocess.CalledProcessError as e:
+        print(f"OpenCLI command failed {' '.join(cmd_args)}: {e}")
         return None
 
 def check_ssl_exists(domain):
@@ -141,51 +131,51 @@ def check_ssl_exists(domain):
             return cert_path
     return None
 
-DOMAIN = get_domain()
-ssl_cert_path = None
+certfile = None
+keyfile = None
+
+DOMAIN = opencli(["domain"])
+PORT = opencli(["port"])
+
 if DOMAIN:
     ssl_cert_path = check_ssl_exists(DOMAIN)
-
-if DOMAIN and ssl_cert_path:
-    PORT = get_port()
-    if PORT == '443':
-        print(f"Custom domain is set and certificate exists, but due to 443 port, HTTPS will NOT be used, reverse proxy should handle SSL.")
-    else:
-        print(f"Custom domain is set and certificate exists, HTTPS will be used.")
-        import ssl
+    if ssl_cert_path and PORT != '443':
+        print(f"Domain '{DOMAIN}' has SSL, gunicorn will terminate TLS directly.")
         certfile = os.path.join(ssl_cert_path, f"{DOMAIN}.crt")
-        keyfile = os.path.join(ssl_cert_path, f"{DOMAIN}.key")
-        keyfile = keyfile
-        certfile = certfile
-        print(f"Certificate file: {certfile}")
-        print(f"Certificate key:  {keyfile}")
+        keyfile  = os.path.join(ssl_cert_path, f"{DOMAIN}.key")
+        print(f"Certificate: {certfile}")
+        print(f"Key:         {keyfile}")
         ssl_version = ssl.PROTOCOL_TLS
         cert_reqs = ssl.CERT_NONE
         ciphers = 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH'
+    elif ssl_cert_path and PORT == '443':
+        print(f"Domain '{DOMAIN}' has SSL but port is 443: Caddy handles TLS, gunicorn runs plain HTTP.")
+    else:
+        print(f"No SSL certificate found for '{DOMAIN}', running plain HTTP.")
+
 
 # ======================================================================
 # Performance
 bind = [f"0.0.0.0:2083"]
-backlog = 2048
+backlog = 512
 
 cpu_count = multiprocessing.cpu_count()
 if cpu_count <= 2:
-    print(f"Using a single worker for OpenPanel as server has <=2 cpu cores available.")
-    workers = 1
+    workers = 2  # minimum 2 so one can serve while other restarts
+    print(f"Small server ({cpu_count} cores): using {workers} workers.")
 else:
-    calculated_workers = cpu_count * 2 + 1
-    max_workers = 4
-    workers = min(calculated_workers, max_workers)
-    print(f"Using {workers} workers for OpenPanel as server has >2 cpu cores available.")
+    workers = min(cpu_count * 2 + 1, 8)
+    print(f"Server has {cpu_count} cores: using {workers} workers.")
 
-threads = 4
 worker_class = 'gthread'
-timeout = 360
+threads = 8 
+timeout = 60
 graceful_timeout = 30
 keepalive = 5
-max_requests = 1000
-max_requests_jitter = 50
+max_requests = 5000
+max_requests_jitter = 500
 pidfile = 'openpanel'
+
 
 # ======================================================================
 # Create Log files
@@ -193,10 +183,8 @@ errorlog = "/var/log/openpanel/user/error.log"
 accesslog = "/var/log/openpanel/user/access.log"
 
 def ensure_directory(file_path):
-    directory = Path(file_path).parent
-    directory.mkdir(parents=True, exist_ok=True)
+    Path(file_path).parent.mkdir(parents=True, exist_ok=True)
 
-print(f"Creating log files..")
 ensure_directory(errorlog)
 ensure_directory(accesslog)
 
@@ -213,10 +201,10 @@ def pre_exec(server):
     server.log.info("Forked child, re-executing.")
 
 def when_ready(server):
-    server.log.info("Server is ready. Spawning workers")
+    server.log.info("Server ready. Spawning workers.")
     try:
         cmd = ["docker", "--context=default", "exec", "openpanel_redis", "sh", "-c", "redis-cli --raw KEYS 'flask_cache_*' | xargs -r redis-cli DEL"]
-        result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env={**os.environ})
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True, env={**os.environ})
         server.log.info("Redis cache cleared: %s", result.stdout.strip())
     except subprocess.CalledProcessError as e:
         server.log.error("Failed to clear Redis cache: %s", e.stderr.strip())
