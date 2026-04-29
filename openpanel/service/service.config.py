@@ -171,12 +171,13 @@ else:
     print(f"Server has {cpu_count} cores: using {workers} workers.")
 
 worker_class = 'gthread' #sync
-threads = 8 #1
+worker_connections = 50
+threads = 4 #1
 timeout = 60
 graceful_timeout = 30
 keepalive = 2
-max_requests = 1000
-max_requests_jitter = 200
+max_requests = 500
+max_requests_jitter = 100
 pidfile = 'openpanel'
 
 
