@@ -203,7 +203,7 @@ def pre_exec(server):
 def when_ready(server):
     server.log.info("Server ready. Spawning workers.")
     try:
-        cmd = ["docker", "--context=default", "exec", "openpanel_redis", "sh", "-c", "redis-cli --raw KEYS 'flask_cache_*' | xargs -r redis-cli DEL"]
+        cmd = ["docker", "--context=default", "exec", "openpanel_redis", "redis-cli", "FLUSHDB"]
         result = subprocess.run(cmd, check=True, capture_output=True, text=True, env={**os.environ})
         server.log.info("Redis cache cleared: %s", result.stdout.strip())
     except subprocess.CalledProcessError as e:
