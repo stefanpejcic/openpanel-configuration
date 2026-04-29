@@ -88,7 +88,7 @@ CUSTOM_SCRIPT = "/root/openpanel_run_on_startup"
 if os.path.exists(CUSTOM_SCRIPT) and os.path.isfile(CUSTOM_SCRIPT):
     print(f"Executing custom script: {CUSTOM_SCRIPT} with BASH.")
     try:
-        subprocess.run(["bash", CUSTOM_SCRIPT], check=True)
+        subprocess.run(["bash", CUSTOM_SCRIPT], check=True, timeout=60)
         print(f"Executed custom script successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error executing {CUSTOM_SCRIPT}: {e}")
@@ -119,7 +119,10 @@ CADDY_CERT_DIRS = ["/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-direct
 
 def opencli(cmd_args):
     try:
-        return subprocess.run(["opencli", *cmd_args], capture_output=True, text=True, check=True).stdout.strip()
+        return subprocess.run(["opencli", *cmd_args], capture_output=True, text=True, check=True, timeout=5).stdout.strip()
+    except subprocess.TimeoutExpired:
+        print(f"OpenCLI timed out: {' '.join(cmd_args)}")
+        return None
     except subprocess.CalledProcessError as e:
         print(f"OpenCLI command failed {' '.join(cmd_args)}: {e}")
         return None
@@ -167,14 +170,15 @@ else:
     workers = min(cpu_count * 2 + 1, 8)
     print(f"Server has {cpu_count} cores: using {workers} workers.")
 
-worker_class = 'gthread'
-threads = 8 
+worker_class = 'gthread' #sync
+threads = 8 #1
 timeout = 60
 graceful_timeout = 30
-keepalive = 5
-max_requests = 5000
-max_requests_jitter = 500
+keepalive = 2
+max_requests = 1000
+max_requests_jitter = 200
 pidfile = 'openpanel'
+
 
 
 # ======================================================================
@@ -204,7 +208,7 @@ def when_ready(server):
     server.log.info("Server ready. Spawning workers.")
     try:
         cmd = ["docker", "--context=default", "exec", "openpanel_redis", "redis-cli", "FLUSHDB"]
-        result = subprocess.run(cmd, check=True, capture_output=True, text=True, env={**os.environ})
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True, env={**os.environ}, timeout=10)
         server.log.info("Redis cache cleared: %s", result.stdout.strip())
     except subprocess.CalledProcessError as e:
         server.log.error("Failed to clear Redis cache: %s", e.stderr.strip())
