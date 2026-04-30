@@ -99,8 +99,6 @@ services:
     networks:
       openpanel_network:
         ipv4_address: 172.20.0.5
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     deploy:
       resources:
         limits:
