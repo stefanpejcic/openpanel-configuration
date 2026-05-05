@@ -218,11 +218,11 @@ services:
     networks:
       - db
     healthcheck:
-      test: ['CMD-SHELL', 'mysqladmin ping -h localhost']
-      interval: 5s
-      timeout: 3s
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --silent']
+      interval: 3s
+      timeout: 1s
       retries: 10
-      start_period: 30s
+      start_period: 5s
 
   mariadb:
     image: mariadb:${MYSQL_VERSION:-latest}
@@ -251,11 +251,11 @@ services:
     networks:
       - db
     healthcheck:
-      test: ['CMD-SHELL', 'mariadb-admin ping -h localhost']
-      interval: 5s
-      timeout: 3s
+      test: ['CMD-SHELL', 'mariadb-admin ping -h 127.0.0.1 --silent']
+      interval: 3s
+      timeout: 1s
       retries: 10
-      start_period: 30s
+      start_period: 5s
 
   phpmyadmin:
     container_name: phpmyadmin 
