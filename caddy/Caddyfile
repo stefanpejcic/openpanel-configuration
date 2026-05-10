@@ -11,6 +11,7 @@
     }
 
     renew_interval 30m
+    ocsp_interval 3h
 
     on_demand_tls {
         ask "http://localhost/check"
