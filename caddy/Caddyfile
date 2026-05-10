@@ -1,6 +1,17 @@
 # general
 {   
     #admin off
+
+    cert_issuer acme {
+        ca https://acme-v02.api.letsencrypt.org/directory
+    }
+
+    cert_issuer zerossl {
+        ca https://acme.zerossl.com/v2/DV90
+    }
+
+    renew_interval 30m
+
     on_demand_tls {
         ask "http://localhost/check"
     }
