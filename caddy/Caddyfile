@@ -1,22 +1,30 @@
 # general
-{   
+{
     #admin off
 
     cert_issuer acme {
-        ca https://acme-v02.api.letsencrypt.org/directory
+        dir https://acme-v02.api.letsencrypt.org/directory
     }
 
-    cert_issuer zerossl {
-        ca https://acme.zerossl.com/v2/DV90
+    cert_issuer acme {
+        dir https://acme.zerossl.com/v2/DV90
     }
 
     renew_interval 30m
-    ocsp_interval 3h
 
     on_demand_tls {
-        ask "http://localhost/check"
+        ask      "http://localhost/check"
+    }
+
+    ocsp_stapling off
+    storage_clean_interval 48h
+
+    log {
+        output discard
+        level  WARN
     }
 }
+
 
 # START HOSTNAME DOMAIN #
 example.net {
