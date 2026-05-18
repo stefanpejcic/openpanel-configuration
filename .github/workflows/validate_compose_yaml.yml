@@ -1,0 +1,32 @@
+name: Validate Docker Compose Files
+
+on:
+  push:
+    paths:
+      - docker/compose/1.0/docker-compose.yml
+      - docker/compose/docker-compose.yml
+
+jobs:
+  validate_1_0:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure backup.env exists
+        run: |
+          touch docker/compose/1.0/backup.env
+
+      - name: Validate docker-compose for users
+        run: |
+          docker compose -f docker/compose/1.0/docker-compose.yml config
+
+  validate_root:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate docker-compose (root)
+        run: |
+          docker compose -f docker/compose/docker-compose.yml config
