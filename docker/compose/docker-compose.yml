@@ -189,7 +189,7 @@ services:
     depends_on:
       - caddy
     ports:
-      - "9090:80"
+      - "8888:80"
     networks:
       openpanel_network:
         ipv4_address: 172.20.0.7
