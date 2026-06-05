@@ -186,8 +186,10 @@ services:
       - /etc/openpanel/mysql/phpmyadmin/pma.php:/var/www/html/pma.php
       - /etc/openpanel/mysql/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.inc.php:ro
       - /home:/home:ro
+    depends_on:
+      - caddy
     ports:
-      - "127.0.0.1:${PHPMYADMIN_PORT:-9090}:80"
+      - "0.0.0.0:9090:80" # when domain is set, port is closed. when ip is set, port is opened
     networks:
       openpanel_network:
         ipv4_address: 172.20.0.7
