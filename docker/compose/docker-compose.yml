@@ -72,6 +72,7 @@ services:
       - openpanel_mysql
       - openpanel_redis
       #- clamav
+      #- phpmyadmin
     ports:
       - "${PORT}:2083/tcp"
     volumes:
