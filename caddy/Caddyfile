@@ -26,7 +26,7 @@ webmail.example.net {
 
 # START PHPMYADMIN DOMAIN #
 example.net:2053 {
-    reverse_proxy localhost:9090
+    reverse_proxy localhost:8888
 }
 # END PHPMYADMIN DOMAIN #
 
