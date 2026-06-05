@@ -189,7 +189,7 @@ services:
     depends_on:
       - caddy
     ports:
-      - "0.0.0.0:9090:80" # when domain is set, port is closed. when ip is set, port is opened
+      - "9090:80"
     networks:
       openpanel_network:
         ipv4_address: 172.20.0.7
