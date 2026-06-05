@@ -186,8 +186,6 @@ services:
       - /etc/openpanel/mysql/phpmyadmin/pma.php:/var/www/html/pma.php
       - /etc/openpanel/mysql/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.inc.php:ro
       - /home:/home:ro
-    depends_on:
-      - caddy
     ports:
       - "8888:80"
     networks:
