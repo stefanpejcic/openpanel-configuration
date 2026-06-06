@@ -1,65 +1,45 @@
 <?php
 
 require_once '/etc/phpmyadmin/config.secret.inc.php';
+require_once '/etc/phpmyadmin/helpers.php';
 
-$providedToken = $_GET['token'] ?? '';
-$username      = $_GET['user']  ?? '';
-
-if (empty($username) || empty($providedToken)) {
-    header("Location: ./index.php");
-    exit;
+if (isset($_ENV['MAX_EXECUTION_TIME'])) {
+    $cfg['ExecTimeLimit'] = (int) $_ENV['MAX_EXECUTION_TIME'];
+}
+if (isset($_ENV['MEMORY_LIMIT'])) {
+    $cfg['MemoryLimit'] = $_ENV['MEMORY_LIMIT'];
+}
+if (isset($_ENV['PMA_ABSOLUTE_URI'])) {
+    $cfg['PmaAbsoluteUri'] = trim($_ENV['PMA_ABSOLUTE_URI']);
 }
 
-if (!preg_match('/^[a-zA-Z0-9_-]+$/', $username)) {
-    header("Location: ./index.php?invalid");
-    exit;
-}
-
-$tokenFile = '/home/' . $username . '/pma.token';
-if (!file_exists($tokenFile)) {
-    header("Location: ./index.php?invalid");
-    exit;
-}
-
-$fileToken = trim(file_get_contents($tokenFile));
-if (strlen($fileToken) < 32 || !hash_equals($fileToken, $providedToken)) {
-    header("Location: ./index.php?invalid");
-    exit;
-}
-
-$socketPath = '/home/' . $username . '/sockets/mysqld/mysqld.sock';
-if (!file_exists($socketPath)) {
-    header("Location: ./index.php?invalid");
-    exit;
-}
-
-$envFile = '/home/' . $username . '/.env';
-$envVars = parse_ini_file($envFile);
-$mysqlPassword = $envVars['MYSQL_ROOT_PASSWORD'] ?? '';
-if (empty($mysqlPassword)) {
-    header("Location: ./index.php?invalid");
-    exit;
-}
+$cfg['AllowArbitraryServer'] = false;
+$cfg['NavigationDisplayServers'] = false;
 
 $serverIndex = 1;
-foreach (glob('/home/*/sockets/mysqld/mysqld.sock') as $i => $sock) {
-    $sockUser = explode('/', $sock)[2];
-    if ($sockUser === $username) {
-        $serverIndex = $i + 1;
-        break;
-    }
+foreach (glob('/home/*/sockets/mysqld/mysqld.sock') as $socketPath) {
+    $username = explode('/', $socketPath)[2];
+
+    $cfg['Servers'][$serverIndex]['verbose']         = $username;
+    $cfg['Servers'][$serverIndex]['host']            = 'localhost';
+    $cfg['Servers'][$serverIndex]['socket']          = $socketPath;
+    $cfg['Servers'][$serverIndex]['auth_type']       = 'signon';
+    $cfg['Servers'][$serverIndex]['SignonSession']   = 'OPENPANEL_PMA_' . strtoupper($username);
+    $cfg['Servers'][$serverIndex]['SignonURL']       = 'pma.php';
+    $cfg['Servers'][$serverIndex]['compress']        = false;
+    $cfg['Servers'][$serverIndex]['AllowNoPassword'] = true;
+
+    $serverIndex++;
 }
 
-$sessionName = 'OPENPANEL_PMA_' . strtoupper($username);
-session_set_cookie_params(0, '/', '', false, true);
-session_name($sessionName);
-session_start();
+if (isset($_ENV['PMA_UPLOADDIR'])) { $cfg['UploadDir'] = $_ENV['PMA_UPLOADDIR']; }
+if (isset($_ENV['PMA_SAVEDIR']))   { $cfg['SaveDir']   = $_ENV['PMA_SAVEDIR'];   }
 
-$_SESSION['PMA_single_signon_user']     = 'root';
-$_SESSION['PMA_single_signon_password'] = $mysqlPassword;
-$_SESSION['PMA_single_signon_host']     = 'localhost';
-
-session_write_close();
-
-header("Location: ./index.php?server=" . $serverIndex);
-exit;
+if (file_exists('/etc/phpmyadmin/config.user.inc.php')) {
+    include '/etc/phpmyadmin/config.user.inc.php';
+}
+if (is_dir('/etc/phpmyadmin/conf.d/')) {
+    foreach (glob('/etc/phpmyadmin/conf.d/*.php') as $filename) {
+        include $filename;
+    }
+}
