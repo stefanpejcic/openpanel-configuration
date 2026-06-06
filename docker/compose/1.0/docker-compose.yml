@@ -259,36 +259,6 @@ services:
       retries: 10
       start_period: 5s
 
-  phpmyadmin:
-    container_name: phpmyadmin 
-    restart: unless-stopped
-    depends_on:
-      - "${MYSQL_TYPE:-mysql}"
-    image: phpmyadmin:${PMA_VERSION:-latest}
-    volumes:
-      #- html_data:/html/  
-      - ./pma.php:/var/www/html/pma.php
-      - /etc/openpanel/mysql/phpmyadmin/config.inc.php:/etc/phpmyadmin/config.inc.php:ro
-      - ./sockets/mysqld:/var/run/mysqld:ro
-    ports:
-      - "${PMA_PORT}"
-    deploy:
-      resources:
-        limits:
-          cpus: "${PMA_CPU:-0.1}"
-          memory: "${PMA_RAM:-0.1G}"                
-          pids: 100
-    environment:
-      PMA_HOST: localhost #${MYSQL_TYPE:-mysql}
-      PMA_SOCKET: "/var/run/mysqld/mysqld.sock"
-      MAX_EXECUTION_TIME: ${PMA_MAX_EXECUTION_TIME:-600}
-      MEMORY_LIMIT: ${PMA_MEMORY_LIMIT:-512M}
-      UPLOAD_LIMIT: ${PMA_UPLOAD_LIMIT:-256M}
-      #PMA_UPLOADDIR: "/html/"
-      #PMA_SAVEDIR: "/html/"
-      PMA_ABSOLUTE_URI: ${PMA_ABSOLUTE_URI}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-
   postgres:
     image: postgres:${POSTGRES_VERSION:-latest}
     container_name: postgres
@@ -860,7 +830,7 @@ networks:
   default:
     driver: bridge
     labels:
-      description: "Used by phpmyadmin and serves as a fallback if no network is defined."
+      description: "Not used, serves as a fallback if no network is defined."
       purpose: "internal"
   www:
     driver: bridge
