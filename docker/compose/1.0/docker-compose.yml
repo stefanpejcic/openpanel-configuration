@@ -365,13 +365,13 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     volumes:
       - es_data:/usr/share/elasticsearch/data
-      ulimits:
-        nproc:
-          soft: 4096
-          hard: 4096
-        nofile:
-          soft: 65535
-          hard: 65535
+    ulimits:
+      nproc:
+        soft: 4096
+        hard: 4096
+      nofile:
+        soft: 65535
+        hard: 65535
     deploy:
       resources:
         limits:
