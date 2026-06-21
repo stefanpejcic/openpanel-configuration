@@ -388,9 +388,17 @@
     "title": "Domains",
     "description": "If enabled, users can add and manage domains. Disable this feature for  'Email-only' or 'DB-only' plans.",
     "link": "/domains",
-    "type": "community",
+    "type": "community",    
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#domains"
   },
+  {
+    "name": "domain_suspend",
+    "title": "Suspend domains",
+    "description": "If enabled, users can suspend a domain to temporary disable website access.",
+    "link": "/domains/suspend",    
+    "type": "enterprise",
+    "help_link": ""
+  },  
   {
     "name": "ssl",
     "title": "SSL",
