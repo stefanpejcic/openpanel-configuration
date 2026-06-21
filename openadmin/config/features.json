@@ -456,6 +456,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#2fa"
   },
   {
+    "name": "passkeys",
+    "title": "Passkeys",
+    "description": "If enabled, users can configure Passkeys for their account.",
+    "link": "/account/passkeys",
+    "type": "enterprise",
+    "help_link": ""
+  },  
+  {
     "name": "activity",
     "title": "Activity Log",
     "description": "If enabled, users can browse all recorded actions for their account.",
