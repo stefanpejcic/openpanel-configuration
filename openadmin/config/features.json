@@ -64,6 +64,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#ftp"
   },
   {
+    "name": "webmail",
+    "title": "Webmail (Roundcube)",
+    "description": "If enabled, users can auto-login to webmmail (Reoundcube) for email accounts. The Roundcube service must be configured separately.",
+    "link": "/webmail",
+    "type": "enterprise",
+    "help_link": ""
+  },  
+  {
     "name": "emails",
     "title": "Email accounts",
     "description": "If enabled, users can create and manage email accounts. The Mail server must be configured separately.",
