@@ -72,6 +72,54 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#emails"
   },
   {
+    "name": "email_deliverability",
+    "title": "Email Deliverability",
+    "description": "If enabled, users can check SPF, DKIM and DMARC for their domains.",
+    "link": "/emails/deliverability",
+    "type": "enterprise",
+    "help_link": ""
+  },
+  {
+    "name": "email_filters",
+    "title": "Email Filters",
+    "description": "If enabled, users can configure filters and forwarders for their emails.",
+    "link": "/emails/filter",
+    "type": "enterprise",
+    "help_link": ""
+  },  
+  {
+    "name": "email_aliases",
+    "title": "Email Aliases",
+    "description": "If enabled, users can manage aliases (forward from non-existing address).",
+    "link": "/emails/aliases",
+    "type": "enterprise",
+    "help_link": ""
+  },
+  {
+    "name": "email_import",
+    "title": "Address Importer",
+    "description": "If enabled, users can import email addresses from a CSV file.",
+    "link": "/emails/import",
+    "type": "enterprise",
+    "help_link": ""
+  },  
+  {
+    "name": "email_export",
+    "title": "Address Exporter",
+    "description": "If enabled, users can export email addresses inot a CSV file.",
+    "link": "/emails/export",
+    "type": "enterprise",
+    "help_link": ""
+  },    
+  {
+    "name": "email_default",
+    "title": "Default Address",
+    "description": "If enabled, users can create default (catch-all) email addresses.",
+    "link": "/emails/default",
+    "type": "enterprise",
+    "help_link": ""
+  },     
+  {
     "name": "mysql",
     "title": "MySQL",
     "description": "If enabled, users can manage MySql databases and users.",
