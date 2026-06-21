@@ -352,6 +352,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#files"
   },
   {
+    "name": "trash",
+    "title": "Trash",
+    "description": "If enabled, users can view and manage Trash folder.",
+    "link": "/files.trash",
+    "type": "enterprise",
+    "help_link": ""
+  },  
+  {
     "name": "fix_permissions",
     "title": "Fix Permissions",
     "description": "If enabled, users have access to the Fix Permisisons tool to change owner and permissions for website files.",
