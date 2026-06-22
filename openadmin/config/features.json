@@ -549,7 +549,7 @@
     "description": "If enabled, users can create subdomains that will be updated via webhooks.",
     "link": "/domains/dynamic-dns",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#dynamic-dns"
   },
   {
     "name": "ip_blocker",
@@ -557,7 +557,7 @@
     "description": "If enabled, users can block IP addresses from accessing their websites.",
     "link": "/security/ip-blocker",
     "type": "beta",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#ip-blocker"
   },
   {
     "name": "api",
@@ -565,6 +565,6 @@
     "description": "If enabled, users can use JWT tokens to perform panel actions.",
     "link": "/api/login",
     "type": "beta",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#api"
   }
 ]
