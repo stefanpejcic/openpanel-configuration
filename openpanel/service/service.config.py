@@ -115,7 +115,7 @@ empty_flag_file()
 # ====================================================================== #
 # SSL
 CADDYFILE_PATH = "/etc/openpanel/caddy/Caddyfile"
-CADDY_CERT_DIRS = ["/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/", "/etc/openpanel/caddy/ssl/custom/"]
+CADDY_CERT_DIRS = ["/etc/openpanel/caddy/ssl/custom/", "/etc/openpanel/caddy/ssl/acme-v02.api.letsencrypt.org-directory/"]
 
 def opencli(cmd_args):
     try:
