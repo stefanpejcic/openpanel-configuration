@@ -222,10 +222,10 @@ services:
       - db
     healthcheck:
       test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --silent']
-      interval: 3s
-      timeout: 1s
-      retries: 10
-      start_period: 5s
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
 
   mariadb:
     image: mariadb:${MYSQL_VERSION:-latest}
@@ -255,10 +255,10 @@ services:
       - db
     healthcheck:
       test: ['CMD-SHELL', 'mariadb-admin ping -h 127.0.0.1 --silent']
-      interval: 3s
-      timeout: 1s
-      retries: 10
-      start_period: 5s
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
 
   postgres:
     image: postgres:${POSTGRES_VERSION:-latest}
