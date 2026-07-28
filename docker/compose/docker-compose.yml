@@ -64,7 +64,7 @@ services:
 
   # OpenPanel UI
   openpanel:
-    image: openpanel/openpanel-ui:${VERSION}
+    image: openpanel/openpanel-podman:${VERSION}
     container_name: openpanel
     hostname: openpanel
     depends_on:
