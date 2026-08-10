@@ -203,30 +203,6 @@ services:
       MEMORY_LIMIT: ${PHPMYADMIN_MEMORY_LIMIT:-512M}
       UPLOAD_LIMIT: ${PHPMYADMIN_UPLOAD_LIMIT:-256M}
 
-  # PGADMIN
-  pgadmin:
-    container_name: pgadmin
-    restart: unless-stopped
-    image: dpage/pgadmin4:${PGADMIN_VERSION:-latest}
-    user: "0:0"
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
-    volumes:
-      - /home:/home:ro
-    ports:
-      - "8889:80"
-    networks:
-      openpanel_network:
-        ipv4_address: 172.20.0.8
-    deploy:
-      resources:
-        limits:
-          cpus: "${PGADMIN_CPU:-1.0}"
-          memory: "${PGADMIN_RAM:-1.0G}"
-          pids: 5000
-
-
 volumes:
   mysql:
     labels:
