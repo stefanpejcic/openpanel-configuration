@@ -285,29 +285,7 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
-      
-
-  pgadmin:
-    container_name: pgadmin
-    restart: unless-stopped
-    image: dpage/pgadmin4:${PGADMIN_VERSION:-latest}
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PW}
-    depends_on:
-      - "postgres"
-    ports:
-      - "${PGADMIN_PORT}"
-    deploy:
-      resources:
-        limits:
-          cpus: "${PGADMIN_CPU:-0.1}"
-          memory: "${PGADMIN_RAM:-0.1G}"
-          pids: 100
-    networks:
-      - db
-
-  
+       
   redis:
     image: redis:${REDIS_VERSION:-8.6.2-alpine}
     container_name: redis
