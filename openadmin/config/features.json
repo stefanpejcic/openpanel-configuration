@@ -294,7 +294,15 @@
     "link": "/drupal/install",
     "type": "beta",
     "help_link": ""
-  },  
+  },
+  {
+    "name": "joomla",
+    "title": "Joomla",
+    "description": "If enabled, Joomla Content Management System (CMS) can be installed using the Autoinstaller and managed via Site Manager.",
+    "link": "/joomla/install",
+    "type": "beta",
+    "help_link": ""
+  },
   {
     "name": "website_builder",
     "title": "Website Builder",
