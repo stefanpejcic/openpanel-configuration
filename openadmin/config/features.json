@@ -296,6 +296,30 @@
     "help_link": ""
   },
   {
+    "name": "opencart",
+    "title": "OpenCart",
+    "description": "If enabled, OpenCart can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/opencart/install",
+    "type": "beta",
+    "help_link": ""
+  },
+  {
+    "name": "prestashop",
+    "title": "PrestaShop",
+    "description": "If enabled, PrestaShop can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/prestashop/install",
+    "type": "beta",
+    "help_link": ""
+  },  
+  {
+    "name": "nextcloud",
+    "title": "NextCloud",
+    "description": "If enabled, NextCloud can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/nextcloud/install",
+    "type": "beta",
+    "help_link": ""
+  },  
+  {
     "name": "joomla",
     "title": "Joomla",
     "description": "If enabled, Joomla Content Management System (CMS) can be installed using the Autoinstaller and managed via Site Manager.",
