@@ -56,6 +56,38 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#docker"
   },
   {
+    "name": "terminal",
+    "title": "Web Terminal",
+    "description": "If enabled, users can open an interactive shell inside their containers from the user panel.",
+    "link": "/containers/terminal",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#terminal"
+  },
+  {
+    "name": "change_image",
+    "title": "Change Container Image Tag",
+    "description": "If enabled, users can change the image tag used by a container from the user panel.",
+    "link": "/containers/image/change",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#change-image"
+  },
+  {
+    "name": "change_ws",
+    "title": "Switch WebServer",
+    "description": "If enabled, users can switch the webserver used for their account from the user panel.",
+    "link": "/containers/webserver",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#change-ws"
+  },
+  {
+    "name": "change_db",
+    "title": "Switch MySQL Type",
+    "description": "If enabled, users can switch between MySQL and MariaDB for their account from the user panel.",
+    "link": "/containers/mysql",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#change-db"
+  },
+  {
     "name": "ftp",
     "title": "FTP accounts",
     "description": "If enabled, users can create and manage FTP accounts. The FTP server must be configured separately.",
