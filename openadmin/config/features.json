@@ -336,6 +336,14 @@
     "help_link": ""
   },
   {
+    "name": "sofawiki",
+    "title": "SofaWiki",
+    "description": "If enabled, SofaWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/sofawiki/install",
+    "type": "beta",
+    "help_link": ""
+  },
+  {
     "name": "opencart",
     "title": "OpenCart",
     "description": "If enabled, OpenCart can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
