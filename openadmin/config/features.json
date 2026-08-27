@@ -327,6 +327,15 @@
     "type": "beta",
     "help_link": ""
   },
+
+  {
+    "name": "flarum",
+    "title": "Flarum",
+    "description": "If enabled, Flarum can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/flarum/install",
+    "type": "beta",
+    "help_link": ""
+  },
   {
     "name": "opencart",
     "title": "OpenCart",
