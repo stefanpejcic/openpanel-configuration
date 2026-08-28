@@ -508,7 +508,7 @@
     "title": "ClamAV (Malware Scanner)",
     "description": "If enabled, ClamAV service is started and users can scan run scans.",
     "link": "/malware-scanner",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },  
   {
