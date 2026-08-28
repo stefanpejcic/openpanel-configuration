@@ -344,6 +344,22 @@
     "help_link": ""
   },
   {
+    "name": "dokuwiki",
+    "title": "DokuWiki",
+    "description": "If enabled, DokuWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/dokuwiki/install",
+    "type": "beta",
+    "help_link": ""
+  },
+  {
+    "name": "phpbb",
+    "title": "phpBB",
+    "description": "If enabled, phpBB can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/phpbb/install",
+    "type": "beta",
+    "help_link": ""
+  },  
+  {
     "name": "opencart",
     "title": "OpenCart",
     "description": "If enabled, OpenCart can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
@@ -407,6 +423,14 @@
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#nodejs"
   },
+  {
+    "name": "ruby",
+    "title": "Ruby Applications",
+    "description": "If enabled, containerized Ruby applications can be setup from the Autoinstaller.",
+    "link": "/ruby",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#ruby"
+  },  
   {
     "name": "autoinstaller",
     "title": "AutoInstaller",
