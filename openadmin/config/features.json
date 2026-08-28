@@ -430,6 +430,14 @@
     "link": "/ruby",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#ruby"
+  },
+  {
+    "name": "java",
+    "title": "Java Applications",
+    "description": "If enabled, containerized Java applications can be setup from the Autoinstaller.",
+    "link": "/java",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#java"
   },  
   {
     "name": "autoinstaller",
