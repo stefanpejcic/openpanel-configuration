@@ -1,0 +1,18 @@
+  SERVICE:
+    image: eclipse-temurin:${SERVICE_NAME_JAVA_TAG:-21-jdk-jammy}
+    container_name: SERVICE
+    restart: always
+    command: >
+      sh -c "${SERVICE_NAME_JAVA_REQUIREMENTS:+mvn install &&} ${SERVICE_NAME_JAVA_CUSTOM_CMD:-java ${SERVICE_NAME_JAVA_STARTUP_FILE:-Main.java}}"
+    working_dir: ${SERVICE_NAME_JAVA_WORKDIR:-/var/www/html/}
+    stop_signal: SIGINT
+    deploy:
+      resources:
+        limits:
+          cpus: "${SERVICE_NAME_JAVA_CPU:-0.1}"
+          memory: "${SERVICE_NAME_JAVA_RAM:-0.1G}"
+          pids: 100
+    volumes:
+      - html_data:/var/www/html/
+    networks:
+      - www
