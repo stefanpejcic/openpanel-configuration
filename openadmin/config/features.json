@@ -527,6 +527,15 @@
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#dns"
   },
+
+  {
+    "name": "dynamic_dns",
+    "title": "Dynamic DNS",
+    "description": "If enabled, users can create subdomains that will be updated via webhooks.",
+    "link": "/domains/dynamic-dns",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#dynamic-dns"
+  },  
   {
     "name": "redirects",
     "title": "Domain Redirects",
@@ -694,14 +703,6 @@
     "link": "/account/activity",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#activity"
-  },
-  {
-    "name": "dynamic_dns",
-    "title": "Dynamic DNS",
-    "description": "If enabled, users can create subdomains that will be updated via webhooks.",
-    "link": "/domains/dynamic-dns",
-    "type": "enterprise",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/#dynamic-dns"
   },
   {
     "name": "ip_blocker",
