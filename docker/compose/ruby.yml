@@ -1,0 +1,18 @@
+  SERVICE:
+    image: ruby:${SERVICE_NAME_RUBY_TAG:-3.3-slim}
+    container_name: SERVICE
+    restart: always
+    command: >
+      sh -c "${SERVICE_NAME_RUBY_REQUIREMENTS:+bundle install &&} ${SERVICE_NAME_RUBY_CUSTOM_CMD:-ruby ${SERVICE_NAME_RUBY_STARTUP_FILE:-app.rb}}"
+    working_dir: ${SERVICE_NAME_RUBY_WORKDIR:-/var/www/html/}
+    stop_signal: SIGINT
+    deploy:
+      resources:
+        limits:
+          cpus: "${SERVICE_NAME_RUBY_CPU:-0.1}"
+          memory: "${SERVICE_NAME_RUBY_RAM:-0.1G}"
+          pids: 100
+    volumes:
+      - html_data:/var/www/html/
+    networks:
+      - www
