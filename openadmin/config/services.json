@@ -63,10 +63,5 @@
         "name": "phpMyAdmin",
         "type": "docker",
         "real_name": "phpmyadmin"
-    },
-    {
-        "name": "pgAdmin",
-        "type": "docker",
-        "real_name": "pgadmin"
     }
 ]
