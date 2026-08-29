@@ -352,6 +352,14 @@
     "help_link": ""
   },
   {
+    "name": "tinyfilemanager",
+    "title": "TinyFileManager",
+    "description": "If enabled, TinyFileManager can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/tinyfilemanager/install",
+    "type": "beta",
+    "help_link": ""
+  },
+  {
     "name": "dokuwiki",
     "title": "DokuWiki",
     "description": "If enabled, DokuWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
