@@ -360,6 +360,14 @@
     "help_link": ""
   },
   {
+    "name": "ojs",
+    "title": "OJS",
+    "description": "If enabled, Open Journal Systems can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/ojs/install",
+    "type": "beta",
+    "help_link": ""
+  },
+  {
     "name": "dokuwiki",
     "title": "DokuWiki",
     "description": "If enabled, DokuWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
