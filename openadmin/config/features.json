@@ -368,6 +368,14 @@
     "help_link": ""
   },
   {
+    "name": "mediawiki",
+    "title": "MediaWiki",
+    "description": "If enabled, MediaWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/mediawiki/install",
+    "type": "beta",
+    "help_link": ""
+  },
+  {
     "name": "dokuwiki",
     "title": "DokuWiki",
     "description": "If enabled, DokuWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
