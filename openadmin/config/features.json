@@ -422,7 +422,15 @@
     "link": "/matomo/install",
     "type": "beta",
     "help_link": ""
-  },    
+  },
+  {
+    "name": "moodle",
+    "title": "Moodle",
+    "description": "If enabled, Moodle can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
+    "link": "/moodle/install",
+    "type": "beta",
+    "help_link": ""
+  },
   {
     "name": "joomla",
     "title": "Joomla",
