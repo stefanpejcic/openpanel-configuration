@@ -1,9 +1,18 @@
 #!/bin/bash
 echo "[*] Initializing.."
 
+# Seed admin webadmin config/cert/htpasswd from the image's hidden template
+# on first boot -- upstream's stock /entrypoint.sh does this (and we override
+# that entrypoint entirely), so without it admin/conf stays empty forever and
+# LSWS fails hard on every start with "missing configuration file for admin server".
+if [ -z "$(ls -A -- "/usr/local/lsws/admin/conf/")" ]; then
+  cp -R /usr/local/lsws/admin/.conf/* /usr/local/lsws/admin/conf/
+fi
+
 # Ensure permissions
 chown -R 994:994 /usr/local/lsws/conf
-chown -R 994:1001 /usr/local/lsws/admin/conf
+chown -R lsadm:lsadm /usr/local/lsws/admin/conf
+chmod -R u=rwX,go= /usr/local/lsws/admin/conf
 
 # https://github.com/litespeedtech/ols-dockerfiles/issues/13
 usermod -aG nogroup root
@@ -44,8 +53,12 @@ if [ -n "$new_blocks" ]; then
     /vhTemplate docker {/ { print block }
     { print }
   ' "$HTTPD_CONF" > "$tmpfile"
-  cat "$tmpfile" > "$HTTPD_CONF"
-  rm "$tmpfile"
+  if [ -s "$tmpfile" ]; then
+    cat "$tmpfile" > "$HTTPD_CONF"
+  else
+    echo "[ERROR] vhost include rewrite produced empty output -- leaving $HTTPD_CONF untouched" >&2
+  fi
+  rm -f "$tmpfile"
 fi
 
 echo "[*] Updating listener mappings.."
@@ -87,8 +100,12 @@ update_listener_maps() {
     }
   ' "$HTTPD_CONF" > "$tmpfile"
 
-  cat "$tmpfile" > "$HTTPD_CONF"
-  rm "$tmpfile"
+  if [ -s "$tmpfile" ]; then
+    cat "$tmpfile" > "$HTTPD_CONF"
+  else
+    echo "[ERROR] listener map rewrite ($listener) produced empty output -- leaving $HTTPD_CONF untouched" >&2
+  fi
+  rm -f "$tmpfile"
 }
 
 update_listener_maps "HTTP"
