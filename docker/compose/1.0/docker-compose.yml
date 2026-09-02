@@ -337,13 +337,14 @@ services:
     image: elasticsearch:${ELASTICSEARCH_VERSION:-9.3.2}
     container_name: elasticsearch
     restart: unless-stopped
-    user: "${USER_ID:-0}"
     environment:
       discovery.type: single-node
       xpack.security.enabled: "false"
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     volumes:
       - es_data:/usr/share/elasticsearch/data
+      - es_config:/usr/share/elasticsearch/config
+      - es_logs:/usr/share/elasticsearch/logs
     ulimits:
       nproc:
         soft: 4096
@@ -378,7 +379,9 @@ services:
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: "${OPENSEARCH_INITIAL_ADMIN_PASSWORD:-iIybFJOgznCYmpOO}"
       DISABLE_INSTALL_DEMO_CONFIG: "true"
     volumes:
-      - opensearch_data:/usr/share/opensearch/data      
+      - opensearch_data:/usr/share/opensearch/data
+      - opensearch_config:/usr/share/opensearch/config
+      - opensearch_logs:/usr/share/opensearch/logs
     deploy:
       resources:
         limits:
@@ -876,11 +879,31 @@ volumes:
     labels:
       description: "This volume holds the ElasticSearch data."
       purpose: "storage"
+  es_config:
+    driver: local
+    labels:
+      description: "This volume holds the ElasticSearch configuration."
+      purpose: "configuration"
+  es_logs:
+    driver: local
+    labels:
+      description: "This volume holds the ElasticSearch logs."
+      purpose: "logs"
   opensearch_data:
     driver: local
     labels:
       description: "This volume holds the OpenSearch data."
       purpose: "storage"
+  opensearch_config:
+    driver: local
+    labels:
+      description: "This volume holds the OpenSearch configuration."
+      purpose: "configuration"
+  opensearch_logs:
+    driver: local
+    labels:
+      description: "This volume holds the OpenSearch logs."
+      purpose: "logs"
   pg_data:
     driver: local
     labels:
