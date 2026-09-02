@@ -378,7 +378,7 @@ services:
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: "${OPENSEARCH_INITIAL_ADMIN_PASSWORD:-iIybFJOgznCYmpOO}"
       DISABLE_INSTALL_DEMO_CONFIG: "true"
     volumes:
-      - es_data:/usr/share/opensearch/data      
+      - opensearch_data:/usr/share/opensearch/data      
     deploy:
       resources:
         limits:
@@ -874,7 +874,12 @@ volumes:
   es_data:
     driver: local
     labels:
-      description: "This volume holds the ElasticSearch/OpenSearch data."
+      description: "This volume holds the ElasticSearch data."
+      purpose: "storage"
+  opensearch_data:
+    driver: local
+    labels:
+      description: "This volume holds the OpenSearch data."
       purpose: "storage"
   pg_data:
     driver: local
