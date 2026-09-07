@@ -8,6 +8,8 @@ WorkingDirectory=/usr/local/admin/
 ExecStart=/usr/local/admin/venv/bin/gunicorn -c /etc/openpanel/openadmin/service/service.config.py app:app
 ExecReload=/bin/kill -s HUP $MAINPID
 Restart=always
+TimeoutStopSec=30
+KillMode=mixed
 
 [Install]
 WantedBy=multi-user.target
