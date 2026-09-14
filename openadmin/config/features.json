@@ -44,7 +44,7 @@
     "title": "Varnish Caching",
     "description": "If enabled, users can use Varnish Caching and enable/disable cache per domain.",
     "link": "/cache/varnish",
-    "type": "community",
+    "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#varnish"
   },
   {
