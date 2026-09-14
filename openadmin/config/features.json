@@ -276,7 +276,7 @@
     "title": "PHP Extensions",
     "description": "If enabled, users can manage extensions for their PHP versions.",
     "link": "/php/extensions",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -300,7 +300,7 @@
     "title": "Backups",
     "description": "If enabled, users can configure backups.",
     "link": "/backups",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#backups"
   },
   {
@@ -324,7 +324,7 @@
     "title": "Drupal",
     "description": "If enabled, Drupal can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/drupal/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -332,7 +332,7 @@
     "title": "Flarum",
     "description": "If enabled, Flarum can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/flarum/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -340,7 +340,7 @@
     "title": "SofaWiki",
     "description": "If enabled, SofaWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/sofawiki/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -348,7 +348,7 @@
     "title": "TinyPhotoGallery",
     "description": "If enabled, TinyPhotoGallery can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/tinyphotogallery/install",
-    "type": "beta",
+    "type": "community",
     "help_link": ""
   },
   {
@@ -356,7 +356,7 @@
     "title": "TinyFileManager",
     "description": "If enabled, TinyFileManager can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/tinyfilemanager/install",
-    "type": "beta",
+    "type": "community",
     "help_link": ""
   },
   {
@@ -364,7 +364,7 @@
     "title": "OJS",
     "description": "If enabled, Open Journal Systems can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/ojs/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -372,7 +372,7 @@
     "title": "MediaWiki",
     "description": "If enabled, MediaWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/mediawiki/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -380,7 +380,7 @@
     "title": "DokuWiki",
     "description": "If enabled, DokuWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/dokuwiki/install",
-    "type": "beta",
+    "type": "community",
     "help_link": ""
   },
   {
@@ -388,7 +388,7 @@
     "title": "phpBB",
     "description": "If enabled, phpBB can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/phpbb/install",
-    "type": "beta",
+    "type": "community",
     "help_link": ""
   },  
   {
@@ -396,7 +396,7 @@
     "title": "OpenCart",
     "description": "If enabled, OpenCart can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/opencart/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -404,7 +404,7 @@
     "title": "PrestaShop",
     "description": "If enabled, PrestaShop can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/prestashop/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },  
   {
@@ -412,7 +412,7 @@
     "title": "NextCloud",
     "description": "If enabled, NextCloud can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/nextcloud/install",
-    "type": "beta",
+    "type": "community",
     "help_link": ""
   },  
   {
@@ -420,7 +420,7 @@
     "title": "Matomo",
     "description": "If enabled, Matomo can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/matomo/install",
-    "type": "beta",
+    "type": "community",
     "help_link": ""
   },
   {
@@ -428,7 +428,7 @@
     "title": "Moodle",
     "description": "If enabled, Moodle can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/moodle/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -436,7 +436,7 @@
     "title": "Joomla",
     "description": "If enabled, Joomla Content Management System (CMS) can be installed using the Autoinstaller and managed via Site Manager.",
     "link": "/joomla/install",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
