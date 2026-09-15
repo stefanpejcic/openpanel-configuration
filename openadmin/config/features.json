@@ -208,6 +208,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#mysql-root-password"
   },
   {
+    "name": "mongodb",
+    "title": "MongoDB",
+    "description": "If enabled, users can manage MongoDB databases.",
+    "link": "/mongodb",
+    "type": "beta",
+    "help_link": ""
+  },
+  {
     "name": "postgresql",
     "title": "PostgreSQL",
     "description": "If enabled, users can manage PostgreSQL databases and users.",
