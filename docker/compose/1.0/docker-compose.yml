@@ -778,6 +778,12 @@ services:
       - mongodb_config:/data/configdb
       - ./sockets/mongodb:/tmp
     command: ["--bind_ip", "127.0.0.1,/tmp/mongodb-27017.sock"]
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ping:1})' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     deploy:
       resources:
         limits:
