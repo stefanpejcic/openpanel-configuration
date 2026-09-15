@@ -777,6 +777,7 @@ services:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
       - ./sockets/mongodb:/tmp
+    command: ["--bind_ip", "127.0.0.1,/tmp/mongodb-27017.sock"]
     deploy:
       resources:
         limits:
