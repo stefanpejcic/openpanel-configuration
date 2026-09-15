@@ -776,6 +776,7 @@ services:
     volumes:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
+      - ./sockets/mongodb:/tmp
     deploy:
       resources:
         limits:
