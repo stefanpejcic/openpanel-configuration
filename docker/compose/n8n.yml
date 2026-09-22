@@ -1,0 +1,24 @@
+  SERVICE:
+    image: n8nio/n8n:${SERVICE_NAME_N8N_TAG:-latest}
+    container_name: SERVICE
+    restart: always
+    stop_signal: SIGINT
+    environment:
+      - N8N_HOST=${SERVICE_NAME_N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${SERVICE_NAME_N8N_PROTOCOL:-https}
+      - N8N_EDITOR_BASE_URL=${SERVICE_NAME_N8N_WEBHOOK_URL:-}
+      - WEBHOOK_URL=${SERVICE_NAME_N8N_WEBHOOK_URL:-}
+      - GENERIC_TIMEZONE=${SERVICE_NAME_N8N_TIMEZONE:-UTC}
+      - N8N_RUNNERS_ENABLED=true
+    deploy:
+      resources:
+        limits:
+          cpus: "${SERVICE_NAME_N8N_CPU:-1.0}"
+          memory: "${SERVICE_NAME_N8N_RAM:-1.0G}"
+          pids: 100
+    volumes:
+      - SERVICE_data:/home/node/.n8n
+    networks:
+      - www
+      - db
