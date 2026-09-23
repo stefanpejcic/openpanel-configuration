@@ -773,17 +773,12 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USER:-admin}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD:-rootpassword}
       MONGO_INITDB_DATABASE: ${MONGODB_DATABASE:-app}
+    entrypoint: ["sh", "-c", "chown mongodb:mongodb /var/run/mongodb && exec docker-entrypoint.sh \"$$@\"", "--"]
+    command: ["mongod", "--unixSocketPrefix", "/var/run/mongodb", "--filePermissions", "0777"]
     volumes:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
-      - ./sockets/mongodb:/tmp
-    command: ["--bind_ip", "127.0.0.1,/tmp/mongodb-27017.sock"]
-    healthcheck:
-      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ping:1})' || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+      - ./sockets/mongodb:/var/run/mongodb
     deploy:
       resources:
         limits:
@@ -792,6 +787,13 @@ services:
           pids: "${MONGODB_PIDS:-100}"
     networks:
       - db
+    healthcheck:
+      test: ['CMD-SHELL', 'mongosh --quiet --norc --eval "db.adminCommand({ping: 1}).ok" | grep -q 1']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
 
   backup:
     image: offen/docker-volume-backup:v2
