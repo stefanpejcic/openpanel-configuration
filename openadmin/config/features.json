@@ -216,6 +216,14 @@
     "help_link": ""
   },
   {
+    "name": "mongodb_import",
+    "title": "Import MongoDB Databases",
+    "description": "If enabled, users can import files into MongoDB databases from their user panel.",
+    "link": "/mongodb/import",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#mongodb-import"
+  },  
+  {
     "name": "postgresql",
     "title": "PostgreSQL",
     "description": "If enabled, users can manage PostgreSQL databases and users.",
