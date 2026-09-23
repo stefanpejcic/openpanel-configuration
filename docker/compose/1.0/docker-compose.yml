@@ -3,6 +3,7 @@ services:
   openlitespeed:
     image: litespeedtech/openlitespeed:${OPENLITESPEED_VERSION:-latest}
     container_name: openlitespeed
+    hostname: openlitespeed
     restart: unless-stopped
     ports:
       - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
@@ -37,6 +38,7 @@ services:
   openresty:
     image: openresty/openresty:${OPENRESTY_VERSION:-alpine}
     container_name: openresty
+    hostname: openresty
     restart: unless-stopped
     ports:
       - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
@@ -62,6 +64,7 @@ services:
   nginx:
     image: nginx:${NGINX_VERSION:-latest}
     container_name: nginx
+    hostname: nginx
     restart: unless-stopped
     ports:
       - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
@@ -88,6 +91,7 @@ services:
   apache:
     image: httpd:${APACHE_VERSION:-latest}
     container_name: apache
+    hostname: apache
     restart: unless-stopped
     ports:
       - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
@@ -113,6 +117,7 @@ services:
   varnish:
     image: varnish:${VARNISH_VERSION:-stable}
     container_name: varnish
+    hostname: varnish
     restart: unless-stopped
     environment:
       WEB_SERVER: "${WEB_SERVER:-nginx}"
@@ -139,6 +144,7 @@ services:
   tor:
     image: openpanel/torwebsite:${TOR_VERSION:-latest}
     container_name: tor
+    hostname: tor
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html
@@ -157,6 +163,7 @@ services:
   docker-proxy:
     image: tecnativa/docker-socket-proxy
     container_name: docker-proxy
+    hostname: docker-proxy
     environment:
       CONTAINERS: 1
       POST: 1
@@ -177,6 +184,7 @@ services:
   cron:
     image: mcuadros/ofelia:latest
     container_name: cron
+    hostname: cron
     restart: unless-stopped
     environment:
       DOCKER_HOST: tcp://docker-proxy:2375
@@ -198,6 +206,7 @@ services:
   mysql:
     image: mysql:${MYSQL_VERSION:-latest}
     container_name: mysql
+    hostname: mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
@@ -231,6 +240,7 @@ services:
   mariadb:
     image: mariadb:${MYSQL_VERSION:-latest}
     container_name: mariadb
+    hostname: mariadb
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
@@ -264,6 +274,7 @@ services:
   postgres:
     image: postgres:${POSTGRES_VERSION:-latest}
     container_name: postgres
+    hostname: postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -291,6 +302,7 @@ services:
   redis:
     image: redis:${REDIS_VERSION:-8.6.2-alpine}
     container_name: redis
+    hostname: redis
     restart: unless-stopped
     user: "${USER_ID:-0}"
     command: ["redis-server", "--bind", "0.0.0.0", "--port", "6379", "--save", ""]
@@ -314,6 +326,7 @@ services:
   valkey:
     image: valkey/valkey:${VALKEY_VERSION:-8.0-alpine}
     container_name: valkey
+    hostname: valkey
     restart: unless-stopped
     user: "${USER_ID:-0}"
     command: ["valkey-server", "--bind", "0.0.0.0", "--port", "6379"]
@@ -337,6 +350,7 @@ services:
   elasticsearch:
     image: elasticsearch:${ELASTICSEARCH_VERSION:-9.3.2}
     container_name: elasticsearch
+    hostname: elasticsearch
     restart: unless-stopped
     environment:
       discovery.type: single-node
@@ -372,6 +386,7 @@ services:
   opensearch:
     image: opensearchproject/opensearch:${OPENSEARCH_VERSION:-2.11.0}
     container_name: opensearch
+    hostname: opensearch
     restart: unless-stopped
     environment:
       discovery.type: single-node
@@ -401,6 +416,7 @@ services:
   memcached:
     image: memcached:${MEMCACHED_VERSION:-1.6.41-alpine}
     container_name: memcached
+    hostname: memcached
     restart: unless-stopped
     user: "${USER_ID:-0}"
     command: ["memcached", "-u", "root", "-l", "0.0.0.0", "-p", "11211"]
@@ -425,6 +441,7 @@ services:
   php-fpm-5.6:
     image: shinsenter/php:5.6-fpm
     container_name: php-fpm-5.6
+    hostname: php-fpm-5.6
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -453,6 +470,7 @@ services:
   php-fpm-7.0:
     image: shinsenter/php:7.0-fpm
     container_name: php-fpm-7.0
+    hostname: php-fpm-7.0
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -481,6 +499,7 @@ services:
   php-fpm-7.1:
     image: shinsenter/php:7.1-fpm
     container_name: php-fpm-7.1
+    hostname: php-fpm-7.1
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -510,6 +529,7 @@ services:
   php-fpm-7.2:
     image: shinsenter/php:7.2-fpm
     container_name: php-fpm-7.2
+    hostname: php-fpm-7.2
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -540,6 +560,7 @@ services:
   php-fpm-7.3:
     image: shinsenter/php:7.3-fpm
     container_name: php-fpm-7.3
+    hostname: php-fpm-7.3
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -569,6 +590,7 @@ services:
   php-fpm-7.4:
     image: shinsenter/php:7.4-fpm
     container_name: php-fpm-7.4
+    hostname: php-fpm-7.4
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -597,6 +619,7 @@ services:
   php-fpm-8.0:
     image: shinsenter/php:8.0-fpm
     container_name: php-fpm-8.0
+    hostname: php-fpm-8.0
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -625,6 +648,7 @@ services:
   php-fpm-8.1:
     image: shinsenter/php:8.1-fpm
     container_name: php-fpm-8.1
+    hostname: php-fpm-8.1
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -655,6 +679,7 @@ services:
   php-fpm-8.2:
     image: shinsenter/php:8.2-fpm
     container_name: php-fpm-8.2
+    hostname: php-fpm-8.2
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -684,6 +709,7 @@ services:
   php-fpm-8.3:
     image: shinsenter/php:8.3-fpm
     container_name: php-fpm-8.3
+    hostname: php-fpm-8.3
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -712,6 +738,7 @@ services:
   php-fpm-8.4:
     image: shinsenter/php:8.4-fpm
     container_name: php-fpm-8.4
+    hostname: php-fpm-8.4
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -742,6 +769,7 @@ services:
   php-fpm-8.5:
     image: shinsenter/php:8.5-fpm
     container_name: php-fpm-8.5
+    hostname: php-fpm-8.5
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
@@ -768,6 +796,7 @@ services:
   mongodb:
     image: mongo:${MONGODB_VERSION:-latest}
     container_name: mongodb
+    hostname: mongodb
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USER:-admin}
@@ -798,6 +827,7 @@ services:
   backup:
     image: offen/docker-volume-backup:v2
     container_name: backup
+    hostname: backup
     environment:
       USERNAME: ${CONTEXT}
       DOCKER_HOST: tcp://docker-proxy:2375
