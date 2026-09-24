@@ -105,4 +105,4 @@ Installing to a remote UNIX/LINUX DEDICATED or VPS server
 The Loader Wizard will not give directions for installing 64-bit Loaders for
 any earlier version of PHP 5.
 
-Copyright (c) 2002-2025 ionCube Ltd.           Last revised January 2025
+Copyright (c) 2002-2026 ionCube Ltd.           Last revised March 2026

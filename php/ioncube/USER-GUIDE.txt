@@ -1,4 +1,4 @@
-ionCube Loader 15.0 User Guide
+ionCube Loader 15.5 User Guide
 =====================================
 
 This document describes the available php.ini configuration options of the
@@ -79,6 +79,9 @@ produce them. So a file produced by the Encoder for PHP 7.2
 can be run by the Loaders for PHP 7.2, 7.3 and 7.4, but 7.1. This 
 means that the Loaders offer good backwards compatibility, 
 however there are the following limitations:
+
+  * The Loader for PHP 8.5 can run files produced by the PHP 8.2, 8.3
+    and 8.4 Encoders.
 
   * The Loader for PHP 8.4 can run files produced by the PHP 8.2, 8.3
     and 8.4 Encoders.
@@ -340,4 +343,4 @@ Example:
 
 ic24.phperr.ignore = E_NOTICE | E_DEPRECATED
 
-(c) ionCube Ltd. 2025
+(c) ionCube Ltd. 2026
