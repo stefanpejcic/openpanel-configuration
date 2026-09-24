@@ -1,0 +1,52 @@
+name: Update ionCube Loaders
+
+on:
+  schedule:
+    - cron: '0 3 1 * *'  # 1st of every month at 03:00 UTC
+  workflow_dispatch:     # manual trigger
+
+permissions:
+  contents: write  # to push
+
+jobs:
+  update_ioncube:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download loaders and update docker-compose
+      run: python3 .github/scripts/update_ioncube.py
+
+    - name: Check for changes
+      id: changes
+      run: |
+        if [ -n "$(git status --porcelain php/ioncube docker/compose/1.0/docker-compose.yml)" ]; then
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "No ionCube changes."
+        fi
+
+    - name: Validate docker-compose
+      if: steps.changes.outputs.changed == 'true'
+      run: |
+        touch docker/compose/1.0/backup.env
+        docker compose -f docker/compose/1.0/docker-compose.yml config -q
+
+    - name: Verify loaders load in every PHP image
+      if: steps.changes.outputs.changed == 'true'
+      run: |
+        # compose mounts reference /etc/openpanel/php, point it at this checkout
+        sudo mkdir -p /etc/openpanel
+        sudo ln -sfn "$GITHUB_WORKSPACE/php" /etc/openpanel/php
+        python3 .github/scripts/update_ioncube.py --verify
+
+    - name: Commit and push changes
+      if: steps.changes.outputs.changed == 'true'
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add php/ioncube docker/compose/1.0/docker-compose.yml
+        git commit -m "Update ionCube loaders"
+        git push
