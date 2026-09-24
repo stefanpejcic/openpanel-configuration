@@ -1,0 +1,45 @@
+name: Update WP-CLI
+
+on:
+  schedule:
+    - cron: '0 4 1 * *'  # 1st of every month at 04:00 UTC
+  workflow_dispatch:     # manual trigger
+
+permissions:
+  contents: write  # to push
+
+jobs:
+  update_wp_cli:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download latest wp-cli.phar
+      run: |
+        BASE=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar
+        curl -fsSL -o /tmp/wp-cli.phar "$BASE/wp-cli.phar"
+        curl -fsSL -o /tmp/wp-cli.phar.sha512 "$BASE/wp-cli.phar.sha512"
+        echo "$(cat /tmp/wp-cli.phar.sha512)  /tmp/wp-cli.phar" | sha512sum -c -
+        php /tmp/wp-cli.phar --info
+        install -m 644 /tmp/wp-cli.phar wordpress/wp-cli.phar
+
+    - name: Check for changes
+      id: changes
+      run: |
+        if [ -n "$(git status --porcelain wordpress/wp-cli.phar)" ]; then
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "version=$(php wordpress/wp-cli.phar cli version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+        else
+          echo "wp-cli.phar is already up to date."
+        fi
+
+    - name: Commit and push changes
+      if: steps.changes.outputs.changed == 'true'
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add wordpress/wp-cli.phar
+        git commit -m "Update wp-cli.phar to ${{ steps.changes.outputs.version }}"
+        git push
