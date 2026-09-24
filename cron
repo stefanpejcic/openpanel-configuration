@@ -32,7 +32,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 0 1 * * root /usr/local/bin/opencli waf-update && echo "$(date) Executed OWASP CRS update - view logs with: opencli waf-update log" >> /var/log/openpanel/admin/cron.log
 0 1 * * 0 root /usr/local/bin/opencli backup && echo "$(date) Executed system backup - view logs from: OpenAdmin > Backups > System > Runs" >> /var/log/openpanel/admin/cron.log
 0 0 * * 0 root /usr/local/bin/opencli files-malware_scan --all && echo "$(date) Executed ClamAV scan for all users" >> /var/log/openpanel/admin/cron.log
-59 23 31 2 * root /usr/local/bin/opencli docker-backup && echo "$(date) Executed Backup for all users" >> /var/log/openpanel/admin/cron.log
+55 5 1 * * root /usr/local/bin/opencli update --wp && echo "$(date) Updated wp-cli.phar from github" >> /var/log/openpanel/admin/cron.log
+59 23 31 2 * root /usr/local/bin/opencli docker-backup && echo "$(date) Executed scheduled admin-configured backups for users" >> /var/log/openpanel/admin/cron.log
 
 # MONITORING
 */5 * * * * root /usr/local/bin/opencli sentinel && echo "$(date) Notifications script executed" >> /var/log/openpanel/admin/cron.log
