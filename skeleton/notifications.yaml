@@ -16,3 +16,4 @@ notify_password_change_notification_disabled=1
 notify_service_failed=1
 notify_twofactorauth_change=1
 notify_twofactorauth_change_notification_disabled=1
+notify_ssl_expiry=1
