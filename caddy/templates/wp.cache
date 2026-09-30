@@ -1,0 +1,27 @@
+# /etc/openpanel/caddy/templates/wp.cache
+
+@cache {
+    # Skip cache for logged-in users, commenters, or password-protected posts
+    not header_regexp Cookie "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in"
+
+    # Skip cache for admin, system endpoints, RSS feeds, and sitemaps
+    not path_regexp "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(index)?.xml|[a-z0-9-]+-sitemap([0-9]+)?.xml)"
+
+    # Skip cache for non-GET/HEAD requests
+    not method POST
+
+    # Skip cache if query parameters exist
+    not expression {query} != ''
+}
+
+route @cache {
+    try_files \
+        /wp-content/cache/supercache/{host}{uri}/index-https.html \
+        /wp-content/cache/wp-rocket/{host}{uri}/index-https.html \
+        /wp-content/cache/wp-rocket/{host}{uri}/index.html \
+        /wp-content/cache/cache-enabler/{host}{uri}/https-index.html \
+        /wp-content/cache/cache-enabler/{host}{uri}/index.html \
+        /wp-content/cache/page_enhanced/{host}{uri}/_index_ssl.html \
+        /wp-content/cache/page_enhanced/{host}{uri}/_index.html \
+        /wp-content/cache/all/{uri}/index.html
+}
