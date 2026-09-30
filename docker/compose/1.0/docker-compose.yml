@@ -452,6 +452,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/5.6.ini:/usr/local/etc/php/php.ini
       - ./php.ini/5.6.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -481,6 +482,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.0.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.0.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -510,6 +512,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.1.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.1.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -540,6 +543,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.2.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.2.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -571,6 +575,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.3.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.3.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -601,6 +606,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.4.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.4.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -630,6 +636,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.0.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.0.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro   
@@ -659,6 +666,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.1.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.1.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -690,6 +698,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.2.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -720,6 +729,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.3.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.3.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -749,6 +759,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.4.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.4.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
@@ -780,6 +791,7 @@ services:
     restart: unless-stopped
     volumes:
       - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.5.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.5.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
