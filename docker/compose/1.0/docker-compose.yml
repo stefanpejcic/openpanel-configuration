@@ -129,7 +129,7 @@ services:
     environment:
       WEB_SERVER: "${WEB_SERVER:-nginx}"
       VARNISH_SIZE: "${VARNISH_SIZE:-1G}"
-    entrypoint: /bin/sh -c "cp /etc/varnish/default.vcl.template /etc/varnish/default.vcl && sed -i 's|VARNISH_BACKEND_HOST|'"$WEB_SERVER"'|g' /etc/varnish/default.vcl && /usr/local/bin/docker-varnish-entrypoint"
+    entrypoint: ["/bin/sh", "-c", "cp /etc/varnish/default.vcl.template /etc/varnish/default.vcl && B=$$(getent ahostsv4 \"$$WEB_SERVER\" | awk 'NR==1{print $$1}') && sed -i \"s|VARNISH_BACKEND_HOST|$${B:-$$WEB_SERVER}|g\" /etc/varnish/default.vcl && exec /usr/local/bin/docker-varnish-entrypoint"]
     command: [ "-n", "/var/lib/varnish" ]
     volumes:
       - ./default.vcl:/etc/varnish/default.vcl.template
