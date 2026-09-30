@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set up your email account</title>
+</head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111827;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f4f6;padding:24px 12px;">
+<tr><td align="center">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;">
+  <tr><td style="padding:28px 28px 8px 28px;">
+    <h1 style="margin:0 0 8px 0;font-size:20px;font-weight:600;">Welcome to your new mailbox</h1>
+    <p style="margin:0;font-size:14px;line-height:1.6;color:#4b5563;">Your email account <strong style="color:#111827;">{{EMAIL}}</strong> is ready. Use the settings below to add it to a mail client like Outlook, Thunderbird, Apple Mail or the mail app on your phone.</p>
+  </td></tr>
+
+  <tr><td style="padding:20px 28px 0 28px;">
+    <h2 style="margin:0 0 10px 0;font-size:15px;font-weight:600;">Account</h2>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;border:1px solid #e5e7eb;border-radius:6px;border-collapse:separate;">
+      <tr><td style="padding:10px 12px;color:#6b7280;width:40%;border-bottom:1px solid #e5e7eb;">Username</td><td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;"><strong>{{EMAIL}}</strong></td></tr>
+      <tr><td style="padding:10px 12px;color:#6b7280;">Password</td><td style="padding:10px 12px;">The password set for this account</td></tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:20px 28px 0 28px;">
+    <h2 style="margin:0 0 10px 0;font-size:15px;font-weight:600;">Incoming mail (IMAP)</h2>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;border:1px solid #e5e7eb;border-radius:6px;border-collapse:separate;">
+      <tr><td style="padding:10px 12px;color:#6b7280;width:40%;border-bottom:1px solid #e5e7eb;">Server</td><td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;"><strong>{{MAIL_HOST}}</strong></td></tr>
+      <tr><td style="padding:10px 12px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Port</td><td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;">{{IMAP_PORT}}</td></tr>
+      <tr><td style="padding:10px 12px;color:#6b7280;">Security</td><td style="padding:10px 12px;">{{SECURITY}}</td></tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:20px 28px 0 28px;">
+    <h2 style="margin:0 0 10px 0;font-size:15px;font-weight:600;">Outgoing mail (SMTP)</h2>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;border:1px solid #e5e7eb;border-radius:6px;border-collapse:separate;">
+      <tr><td style="padding:10px 12px;color:#6b7280;width:40%;border-bottom:1px solid #e5e7eb;">Server</td><td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;"><strong>{{MAIL_HOST}}</strong></td></tr>
+      <tr><td style="padding:10px 12px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Port</td><td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;">{{SMTP_PORT}}</td></tr>
+      <tr><td style="padding:10px 12px;color:#6b7280;border-bottom:1px solid #e5e7eb;">Security</td><td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;">{{SECURITY}}</td></tr>
+      <tr><td style="padding:10px 12px;color:#6b7280;">Authentication</td><td style="padding:10px 12px;">Required, same username and password</td></tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="padding:24px 28px 0 28px;">
+    <h2 style="margin:0 0 6px 0;font-size:15px;font-weight:600;">Webmail</h2>
+    <p style="margin:0 0 14px 0;font-size:14px;line-height:1.6;color:#4b5563;">You can also read and send mail from your browser, no setup needed.</p>
+    <a href="{{WEBMAIL_URL}}" style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;font-size:14px;font-weight:500;padding:10px 16px;border-radius:6px;">Open Webmail</a>
+  </td></tr>
+
+  <tr><td style="padding:28px;">
+    <p style="margin:0;font-size:12px;line-height:1.6;color:#9ca3af;border-top:1px solid #e5e7eb;padding-top:16px;">This message was placed in your mailbox automatically when {{EMAIL}} was created. It was not sent over the internet.</p>
+  </td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>
