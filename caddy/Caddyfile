@@ -40,5 +40,8 @@ import /etc/openpanel/caddy/templates/domain_log
 # import wp-manager rules
 import /etc/openpanel/caddy/templates/wp.rules
 
+# import cloudflare only IP addresses
+import /etc/openpanel/caddy/templates/cloudflare.only
+
 # import all sites
 import /etc/openpanel/caddy/domains/*
