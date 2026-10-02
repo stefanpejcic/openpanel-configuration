@@ -77,6 +77,20 @@
         query author=*
     }
     respond @authorScan 403
+
+    # rest api lists usernames too, logged in users still need it for the block editor
+    @restUsers {
+        path_regexp restUsers (?i)^/wp-json/wp/v2/users
+        not path_regexp restUsersMe (?i)^/wp-json/wp/v2/users/me
+        not header_regexp Cookie wordpress_logged_in_
+    }
+    respond @restUsers 403
+
+    @restRouteUsers {
+        expression {query.rest_route}.matches("(?i)^/wp/v2/users") && !{query.rest_route}.matches("(?i)^/wp/v2/users/me")
+        not header_regexp Cookie wordpress_logged_in_
+    }
+    respond @restRouteUsers 403
 }
 
 # ------------------------------
@@ -107,7 +121,7 @@
 # ------------------------------
 (wp_manager_env_files) {
     @forbiddenFiles {
-        path /.env /.htaccess /.htpasswd
+        path_regexp forbiddenFiles (?i)/\.(env(\..*)?|htaccess|htpasswd)$
     }
     respond @forbiddenFiles 403
 }
@@ -128,7 +142,11 @@
 # Block access to /wp-admin completely
 # ------------------------------
 (wp_manager_disable_wp_admin) {
-    error /wp-admin* "Unauthorized" 401
+    @wpAdmin {
+        path /wp-admin /wp-admin/*
+        not path /wp-admin/admin-ajax.php /wp-admin/admin-post.php
+    }
+    error @wpAdmin "Unauthorized" 401
 }
 
 # ------------------------------
