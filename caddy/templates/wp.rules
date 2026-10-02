@@ -122,3 +122,26 @@
     }
     respond @badBots 403
 }
+
+# ------------------------------
+# Rule: disable_wp_admin
+# Block access to /wp-admin completely
+# ------------------------------
+(wp_manager_disable_wp_admin) {
+    error /wp-admin* "Unauthorized" 401
+}
+
+# ------------------------------
+# Rule: mitigate_spam_logins
+# Mitigate spam attack logins and comments
+# ------------------------------
+(wp_manager_mitigate_spam_logins) {
+    @protected path_regexp (wp-comments-post|wp-login)\.php$
+    handle @protected {
+        @no-referer {
+            not header Referer https://{host}*
+            method POST
+        }
+        abort @no-referer
+    }
+}
