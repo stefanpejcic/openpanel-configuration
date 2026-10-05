@@ -3,6 +3,8 @@ services:
   openlitespeed:
     image: litespeedtech/openlitespeed:${OPENLITESPEED_VERSION:-latest}
     container_name: openlitespeed
+    healthcheck:
+      disable: true
     hostname: openlitespeed
     restart: unless-stopped
     ports:
@@ -45,6 +47,8 @@ services:
   openresty:
     image: openresty/openresty:${OPENRESTY_VERSION:-alpine}
     container_name: openresty
+    healthcheck:
+      disable: true
     hostname: openresty
     restart: unless-stopped
     ports:
@@ -71,6 +75,8 @@ services:
   nginx:
     image: nginx:${NGINX_VERSION:-latest}
     container_name: nginx
+    healthcheck:
+      disable: true
     hostname: nginx
     restart: unless-stopped
     ports:
@@ -98,6 +104,8 @@ services:
   apache:
     image: httpd:${APACHE_VERSION:-latest}
     container_name: apache
+    healthcheck:
+      disable: true
     hostname: apache
     restart: unless-stopped
     ports:
@@ -124,6 +132,8 @@ services:
   varnish:
     image: varnish:${VARNISH_VERSION:-stable}
     container_name: varnish
+    healthcheck:
+      disable: true
     hostname: varnish
     restart: unless-stopped
     environment:
@@ -151,6 +161,8 @@ services:
   tor:
     image: openpanel/torwebsite:${TOR_VERSION:-latest}
     container_name: tor
+    healthcheck:
+      disable: true
     hostname: tor
     restart: unless-stopped
     volumes:
@@ -170,6 +182,8 @@ services:
   docker-proxy:
     image: tecnativa/docker-socket-proxy
     container_name: docker-proxy
+    healthcheck:
+      disable: true
     hostname: docker-proxy
     environment:
       CONTAINERS: 1
@@ -191,6 +205,8 @@ services:
   cron:
     image: mcuadros/ofelia:latest
     container_name: cron
+    healthcheck:
+      disable: true
     hostname: cron
     restart: unless-stopped
     environment:
@@ -448,6 +464,8 @@ services:
   php-fpm-5.6:
     image: shinsenter/php:5.6-fpm
     container_name: php-fpm-5.6
+    healthcheck:
+      disable: true
     hostname: php-fpm-5.6
     restart: unless-stopped
     volumes:
@@ -478,6 +496,8 @@ services:
   php-fpm-7.0:
     image: shinsenter/php:7.0-fpm
     container_name: php-fpm-7.0
+    healthcheck:
+      disable: true
     hostname: php-fpm-7.0
     restart: unless-stopped
     volumes:
@@ -508,6 +528,8 @@ services:
   php-fpm-7.1:
     image: shinsenter/php:7.1-fpm
     container_name: php-fpm-7.1
+    healthcheck:
+      disable: true
     hostname: php-fpm-7.1
     restart: unless-stopped
     volumes:
@@ -539,6 +561,8 @@ services:
   php-fpm-7.2:
     image: shinsenter/php:7.2-fpm
     container_name: php-fpm-7.2
+    healthcheck:
+      disable: true
     hostname: php-fpm-7.2
     restart: unless-stopped
     volumes:
@@ -571,6 +595,8 @@ services:
   php-fpm-7.3:
     image: shinsenter/php:7.3-fpm
     container_name: php-fpm-7.3
+    healthcheck:
+      disable: true
     hostname: php-fpm-7.3
     restart: unless-stopped
     volumes:
@@ -602,6 +628,8 @@ services:
   php-fpm-7.4:
     image: shinsenter/php:7.4-fpm
     container_name: php-fpm-7.4
+    healthcheck:
+      disable: true
     hostname: php-fpm-7.4
     restart: unless-stopped
     volumes:
@@ -632,6 +660,8 @@ services:
   php-fpm-8.0:
     image: shinsenter/php:8.0-fpm
     container_name: php-fpm-8.0
+    healthcheck:
+      disable: true
     hostname: php-fpm-8.0
     restart: unless-stopped
     volumes:
@@ -662,6 +692,8 @@ services:
   php-fpm-8.1:
     image: shinsenter/php:8.1-fpm
     container_name: php-fpm-8.1
+    healthcheck:
+      disable: true
     hostname: php-fpm-8.1
     restart: unless-stopped
     volumes:
@@ -694,6 +726,8 @@ services:
   php-fpm-8.2:
     image: shinsenter/php:8.2-fpm
     container_name: php-fpm-8.2
+    healthcheck:
+      disable: true
     hostname: php-fpm-8.2
     restart: unless-stopped
     volumes:
@@ -725,6 +759,8 @@ services:
   php-fpm-8.3:
     image: shinsenter/php:8.3-fpm
     container_name: php-fpm-8.3
+    healthcheck:
+      disable: true
     hostname: php-fpm-8.3
     restart: unless-stopped
     volumes:
@@ -755,6 +791,8 @@ services:
   php-fpm-8.4:
     image: shinsenter/php:8.4-fpm
     container_name: php-fpm-8.4
+    healthcheck:
+      disable: true
     hostname: php-fpm-8.4
     restart: unless-stopped
     volumes:
@@ -787,6 +825,8 @@ services:
   php-fpm-8.5:
     image: shinsenter/php:8.5-fpm
     container_name: php-fpm-8.5
+    healthcheck:
+      disable: true
     hostname: php-fpm-8.5
     restart: unless-stopped
     volumes:
@@ -848,6 +888,8 @@ services:
   backup:
     image: offen/docker-volume-backup:v2
     container_name: backup
+    healthcheck:
+      disable: true
     hostname: backup
     environment:
       USERNAME: ${CONTEXT}
