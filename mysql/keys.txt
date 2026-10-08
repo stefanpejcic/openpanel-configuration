@@ -28,3 +28,6 @@ innodb_buffer_pool_instances
 innodb_buffer_pool_size
 max_heap_table_size
 tmp_table_size
+table_open_cache
+table_definition_cache
+innodb_flush_log_at_trx_commit
