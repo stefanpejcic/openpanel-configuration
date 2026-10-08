@@ -1,5 +1,6 @@
 # opencli domains-cloudflare
 (cloudflare-only) {
+    # cloudflare ranges + openpanel api (screenshots, temporary links)
     @not_cloudflare {
         not remote_ip \
             173.245.48.0/20 \
@@ -23,7 +24,8 @@
             2405:b500::/32 \
             2405:8100::/32 \
             2a06:98c0::/29 \
-            2c0f:f248::/32
+            2c0f:f248::/32 \
+            185.119.90.100
     }
 
     route @not_cloudflare {
