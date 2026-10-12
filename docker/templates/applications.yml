@@ -1,1 +1,108 @@
+# One-click Docker apps shown on the OpenPanel Auto Installer, each one prefills /containers/new.
+# OpenPanel caches this file for 24h. {domain} in env values is replaced with the domain picked on the form.
+#
+# id           unique, lowercase
+# service      default container name: lowercase letters and digits, at least 3 chars
+# cpu/ram/pids default limits, ram in GB (or 512M)
+# port         port the app listens on inside the container, used for the domain proxy
+# networks     www is needed for a domain, db to reach the account's databases
+# volumes      name:/path or name:/path:ro, names that don't exist yet are created
+# env          KEY=value lines
 
+applications:
+  - id: uptime-kuma
+    name: Uptime Kuma
+    description: Self-hosted monitoring for websites, APIs and servers, with status pages and alerts.
+    category: Monitoring
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptime-kuma.svg
+    docs: https://github.com/louislam/uptime-kuma/wiki
+    image: louislam/uptime-kuma:2
+    service: uptimekuma
+    cpu: "0.5"
+    ram: "0.5"
+    pids: 300
+    port: 3001
+    networks: [www]
+    volumes:
+      - uptimekuma_data:/app/data
+    env:
+      - TZ=UTC
+
+  - id: n8n
+    name: n8n
+    description: Workflow automation, connect apps and APIs with a visual editor.
+    category: Automation
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/n8n.svg
+    docs: https://docs.n8n.io/hosting/
+    image: n8nio/n8n:latest
+    service: n8n
+    cpu: "1"
+    ram: "1"
+    pids: 500
+    port: 5678
+    networks: [www, db]
+    volumes:
+      - n8n_data:/home/node/.n8n
+    env:
+      - N8N_HOST={domain}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - N8N_EDITOR_BASE_URL=https://{domain}/
+      - WEBHOOK_URL=https://{domain}/
+      - GENERIC_TIMEZONE=UTC
+      - N8N_RUNNERS_ENABLED=true
+
+  - id: gitea
+    name: Gitea
+    description: Lightweight self-hosted Git service with issues, pull requests and CI.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gitea.svg
+    docs: https://docs.gitea.com/installation/install-with-docker
+    image: gitea/gitea:latest
+    service: gitea
+    cpu: "1"
+    ram: "1"
+    pids: 500
+    port: 3000
+    networks: [www, db]
+    volumes:
+      - gitea_data:/data
+    env:
+      - GITEA__server__DOMAIN={domain}
+      - GITEA__server__ROOT_URL=https://{domain}/
+      - GITEA__server__DISABLE_SSH=true
+
+  - id: vaultwarden
+    name: Vaultwarden
+    description: Password manager compatible with the Bitwarden apps and browser extensions.
+    category: Security
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vaultwarden.svg
+    docs: https://github.com/dani-garcia/vaultwarden/wiki
+    image: vaultwarden/server:latest
+    service: vaultwarden
+    cpu: "0.5"
+    ram: "0.5"
+    pids: 200
+    port: 80
+    networks: [www]
+    volumes:
+      - vaultwarden_data:/data
+    env:
+      - DOMAIN=https://{domain}
+      - SIGNUPS_ALLOWED=true
+
+  - id: memos
+    name: Memos
+    description: Privacy-first note taking, a lightweight place for quick notes and knowledge.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/memos.svg
+    docs: https://www.usememos.com/docs
+    image: neosmemo/memos:stable
+    service: memos
+    cpu: "0.5"
+    ram: "0.5"
+    pids: 200
+    port: 5230
+    networks: [www]
+    volumes:
+      - memos_data:/var/opt/memos
