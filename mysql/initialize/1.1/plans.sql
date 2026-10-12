@@ -114,6 +114,26 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mcp_tokens`
+--
+
+CREATE TABLE `mcp_tokens` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `user_id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `token_prefix` varchar(20) NOT NULL,
+  `token_hash` char(64) NOT NULL UNIQUE,
+  `read_only` tinyint(1) NOT NULL DEFAULT '0',
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB;
+
+
 --
 -- Indexes for dumped tables
 --
