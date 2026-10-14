@@ -1,5 +1,64 @@
 #!/bin/sh
 
+QUOTA_CONF_DIR=/etc/vsftpd/user_conf
+QUOTA_INTERVAL=${QUOTA_INTERVAL:-60}
+
+# drop active sessions of an ftp user, vsftpd titles them "vsftpd: <ip>/<user>: ..."
+kill_sessions() {
+  ps -o pid,args | grep -F "/$1: " | grep "vsftpd:" | grep -v grep | awk '{print $1}' | xargs -r kill 2>/dev/null
+}
+
+# 6th users.list field is the quota in MB, users over it get a per-user conf that denies uploads
+check_quotas() {
+  mkdir -p "$QUOTA_CONF_DIR"
+  seen=" "
+  for list in /etc/openpanel/ftp/users/*/users.list; do
+    [ -f "$list" ] || continue
+    dir=$(dirname "$list")
+    ctx=$(basename "$dir")
+    usage_tmp="$dir/.quota.usage.$$"
+    : > "$usage_tmp"
+    while IFS='|' read -r NAME _ FOLDER _ _ QUOTA || [ -n "$NAME" ]; do
+      [ -z "$NAME" ] && continue
+      case "$QUOTA" in ''|*[!0-9]*|0) continue ;; esac
+      [ -z "$FOLDER" ] && FOLDER="/var/www/html/"
+      FOLDER=$(echo "$FOLDER" | sed "s|/var/www/html/|/home/${ctx}/docker-data/volumes/${ctx}_html_data/_data/|g")
+      USED_KB=$(du -sk "$FOLDER" 2>/dev/null | cut -f1)
+      USED_KB=${USED_KB:-0}
+      seen="$seen$NAME "
+      OVER=0
+      if [ "$USED_KB" -ge $((QUOTA * 1024)) ]; then
+        OVER=1
+        if [ ! -f "$QUOTA_CONF_DIR/$NAME" ]; then
+          echo "[!] FTP user $NAME is over quota (${USED_KB}K of ${QUOTA}M), uploads disabled"
+          echo "cmds_denied=STOR,STOU,APPE,MKD" > "$QUOTA_CONF_DIR/$NAME"
+          kill_sessions "$NAME"
+        fi
+      elif [ -f "$QUOTA_CONF_DIR/$NAME" ]; then
+        echo "[*] FTP user $NAME is under quota again (${USED_KB}K of ${QUOTA}M), uploads enabled"
+        rm -f "$QUOTA_CONF_DIR/$NAME"
+      fi
+      echo "$NAME|$USED_KB|$QUOTA|$OVER" >> "$usage_tmp"
+    done < "$list"
+    mv -f "$usage_tmp" "$dir/quota.usage"
+  done
+
+  # unblock users that were deleted or had their quota removed
+  for f in "$QUOTA_CONF_DIR"/*; do
+    [ -f "$f" ] || continue
+    case "$seen" in
+      *" $(basename "$f") "*) ;;
+      *) rm -f "$f" ;;
+    esac
+  done
+}
+
+# opencli ftp-quota runs this right after a quota change
+if [ "$1" = "--check-quotas" ]; then
+  check_quotas
+  exit 0
+fi
+
 print_banner() {
   echo "-------------------------------------------"
   echo " Starting FTP server (vsftpd)"
@@ -61,7 +120,7 @@ if [ "$TOTAL_USER_COUNT" -gt 0 ]; then
     BASE_DIR=$(dirname "$USER_LIST_FILE")
     OPENPANEL_USER=$(basename "$BASE_DIR")
     echo "[!] Processing users for OpenPanel account: $OPENPANEL_USER"
-    while IFS='|' read -r NAME HASHED_PASS FOLDER UID GID; do
+    while IFS='|' read -r NAME HASHED_PASS FOLDER UID GID QUOTA; do
       USER_COUNT=$((USER_COUNT + 1))
       [ -z "$NAME" ] && continue  # Skip empty lines
       GROUP="$OPENPANEL_USER"
@@ -124,7 +183,7 @@ if [ "$TOTAL_USER_COUNT" -gt 0 ]; then
       chown "${UID}:${GID}" "$FOLDER"
   
       echo ""
-      unset NAME HASHED_PASS FOLDER UID GID GROUP UID_OPT GROUP_OPT
+      unset NAME HASHED_PASS FOLDER UID GID QUOTA GROUP UID_OPT GROUP_OPT
     done < "$USER_LIST_FILE"
   done
   
@@ -143,12 +202,17 @@ MIN_PORT=${MIN_PORT:-21000}
 MAX_PORT=${MAX_PORT:-21010}
 echo "[*] Passive mode port range: $MIN_PORT-$MAX_PORT"
 
-# 7. start service
+# 7. quotas, checked now and then every QUOTA_INTERVAL seconds
+echo "[*] Checking FTP quotas every ${QUOTA_INTERVAL}s..."
+check_quotas
+( while sleep "$QUOTA_INTERVAL"; do check_quotas; done ) &
+
+# 8. start service
 if [ -n "$1" ]; then
   echo "[*] Executing custom command: $*"
   exec "$@"
 else
   echo "[*] Starting vsftpd and accepting user logins..."
   echo "-------------------------------------------"
-  vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT /etc/vsftpd/vsftpd.conf
+  vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT -ouser_config_dir=$QUOTA_CONF_DIR /etc/vsftpd/vsftpd.conf
 fi
