@@ -592,6 +592,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#fix-permissions"
   },
   {
+    "name": "git",
+    "title": "Git",
+    "description": "If enabled, users can deploy websites from Git repositories: clone from GitHub, GitLab or Bitbucket, or push to repositories hosted on the server over HTTPS.",
+    "link": "/git",
+    "type": "community",
+    "help_link": "https://openpanel.com/docs/panel/applications/git/"
+  },
+  {
     "name": "dns",
     "title": "DNS",
     "description": "If enabled, BIND9 server is run locally and DNS zone is created for new domains. Users can manage the records via Zone Editor interface.",
