@@ -1,0 +1,11 @@
+[Unit]
+Description=OpenPanel io.cost, so per-account IOWeight is enforced
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /etc/openpanel/systemd/iocost.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

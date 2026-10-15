@@ -697,6 +697,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#goaccess"
   },
   {
+    "name": "error_logs",
+    "title": "Error Logs",
+    "description": "If enabled, users can view PHP, webserver, database and HTTP 5xx errors for their websites from a single Error Logs page.",
+    "link": "/error-logs",
+    "type": "community",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#error-logs"
+  },
+  {
     "name": "process_manager",
     "title": "Process Manager",
     "description": "If enabled, users can view/kill process from the Process Manager page.",

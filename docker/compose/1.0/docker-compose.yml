@@ -19,6 +19,7 @@ services:
       - html_data:/var/www/html/
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/composer/v2_composer.phar:/usr/local/bin/composer:ro
       - ./php.ini/7.4.ini:/usr/local/lsws/lsphp74/etc/php/7.4/litespeed/php.ini
       - ./php.ini/8.0.ini:/usr/local/lsws/lsphp80/etc/php/8.0/litespeed/php.ini
@@ -482,6 +483,7 @@ services:
       - ./php.ini/5.6.ini:/usr/local/etc/php/php.ini
       - ./php.ini/5.6.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_5.6.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -489,7 +491,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -514,6 +515,7 @@ services:
       - ./php.ini/7.0.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.0.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_7.0.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -521,7 +523,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -546,6 +547,7 @@ services:
       - ./php.ini/7.1.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.1.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_7.1.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro      
     environment:
@@ -553,7 +555,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -579,6 +580,7 @@ services:
       - ./php.ini/7.2.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.2.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_7.2.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -586,7 +588,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -613,6 +614,7 @@ services:
       - ./php.ini/7.3.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.3.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_7.3.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -620,7 +622,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -646,6 +647,7 @@ services:
       - ./php.ini/7.4.ini:/usr/local/etc/php/php.ini
       - ./php.ini/7.4.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_7.4.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -653,7 +655,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -677,13 +678,13 @@ services:
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.0.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.0.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
-      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro   
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
     environment:
       - APP_USER=root
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -710,6 +711,7 @@ services:
       - ./php.ini/8.1.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.1.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_8.1.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -717,7 +719,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -744,6 +745,7 @@ services:
       - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.2.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_8.2.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -751,7 +753,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -777,6 +778,7 @@ services:
       - ./php.ini/8.3.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.3.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_8.3.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro      
     environment:
@@ -784,7 +786,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -809,6 +810,7 @@ services:
       - ./php.ini/8.4.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.4.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_8.4.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -816,7 +818,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:
@@ -843,6 +844,7 @@ services:
       - ./php.ini/8.5.ini:/usr/local/etc/php/php.ini
       - ./php.ini/8.5.ini:/usr/local/etc/php/conf.d/zz-docker-shinsenter-php.ini:ro
       - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/fpm-tuning.sh:/etc/hooks/bootstrap/05-openpanel-fpm-tuning:ro
       - /etc/openpanel/php/ioncube/ioncube_loader_lin_8.5.so:/usr/local/lib/php/extensions/ioncube_loader.so:ro
       - /etc/openpanel/php/ioncube_extension.ini:/usr/local/etc/php/conf.d/docker-php-ext-ioncube.ini:ro
     environment:
@@ -850,7 +852,6 @@ services:
       - APP_GROUP=root
       - APP_UID=${USER_ID:-0}
       - APP_GID=${USER_ID:-0}
-      - ENABLE_TUNING_FPM=1
     deploy:
       resources:
         limits:

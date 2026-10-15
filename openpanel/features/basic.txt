@@ -18,6 +18,7 @@ dns
 domains
 docroot
 goaccess
+error_logs
 redis
 memcached
 temporary_links

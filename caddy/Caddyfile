@@ -5,6 +5,14 @@
     on_demand_tls {
         ask      "http://localhost/check"
     }
+
+    # START TRUSTED PROXIES #
+    # {client_ip} is the real visitor behind cloudflare, so per-ip rate limits don't lump everyone on one edge ip together
+    servers {
+        trusted_proxies static 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22 2400:cb00::/32 2606:4700::/32 2803:f800::/32 2405:b500::/32 2405:8100::/32 2a06:98c0::/29 2c0f:f248::/32
+        client_ip_headers CF-Connecting-IP
+    }
+    # END TRUSTED PROXIES #
 }
 
 
@@ -42,6 +50,9 @@ import /etc/openpanel/caddy/templates/wp.rules
 
 # import cloudflare only IP addresses
 import /etc/openpanel/caddy/templates/cloudflare.only
+
+# import rate limit snippets (opencli domains-ratelimit)
+import /etc/openpanel/caddy/ratelimit.conf
 
 # import all sites
 import /etc/openpanel/caddy/domains/*
