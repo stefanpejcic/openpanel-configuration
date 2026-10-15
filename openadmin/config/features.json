@@ -600,6 +600,14 @@
     "help_link": "https://openpanel.com/docs/panel/applications/git/"
   },
   {
+    "name": "ai_assistant",
+    "title": "AI Assistant",
+    "description": "If enabled, users get an AI chat assistant in the top bar that answers questions using the OpenPanel documentation and, if allowed on Settings > OpenPanel, looks things up or makes changes in their account after they approve them.",
+    "link": "",
+    "type": "community",
+    "help_link": "https://openpanel.com/docs/panel/dashboard/dashboard/#ai-assistant"
+  },
+  {
     "name": "dns",
     "title": "DNS",
     "description": "If enabled, BIND9 server is run locally and DNS zone is created for new domains. Users can manage the records via Zone Editor interface.",
