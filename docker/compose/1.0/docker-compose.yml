@@ -237,14 +237,15 @@ services:
       - "${MYSQL_PORT}"     
     volumes:
       - mysql_data:/var/lib/mysql
-      - mysql_dumps:/tmp/dumps/  
+      - mysql_dumps:/tmp/dumps/
+      - backup_meta:/tmp/backup_meta/
       - /etc/openpanel/mysql/scripts/dump.sh:/dump.sh:ro
       - ./sockets/mysqld:/var/run/mysqld
       - ./my.cnf:/root/.my.cnf:ro
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf
     labels:
       - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
-      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/*'
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/* /tmp/backup_meta/mysql.json'
     deploy:
       resources:
         limits:
@@ -272,13 +273,14 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - mysql_dumps:/tmp/dumps/
+      - backup_meta:/tmp/backup_meta/
       - /etc/openpanel/mysql/scripts/dump.sh:/dump.sh:ro
       - ./sockets/mysqld:/var/run/mysqld
       - ./my.cnf:/root/.my.cnf:ro
       - ./custom.cnf:/etc/mysql/conf.d/custom.cnf
     labels:
       - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
-      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/*'
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/* /tmp/backup_meta/mysql.json'
     deploy:
       resources:
         limits:
@@ -297,6 +299,9 @@ services:
   postgres:
     image: postgres:${POSTGRES_VERSION:-latest}
     container_name: postgres
+    labels:
+      - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/* /tmp/backup_meta/postgres.json'
     hostname: postgres
     restart: unless-stopped
     environment:
@@ -306,6 +311,9 @@ services:
       - "${POSTGRES_PORT}"
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - pg_dumps:/tmp/dumps/
+      - backup_meta:/tmp/backup_meta/
+      - /etc/openpanel/postgres/scripts/dump.sh:/dump.sh:ro
       - ./sockets/postgres:/var/run/postgresql
       #- ./postgre_custom.conf:/var/lib/postgresql/data/postgresql.conf
     deploy:
@@ -887,6 +895,9 @@ services:
 
   backup:
     image: offen/docker-volume-backup:v2
+    labels:
+      - docker-volume-backup.archive-pre=/bin/sh /files-list.sh
+      - docker-volume-backup.archive-post=/bin/sh -c 'rm -f /tmp/backup_meta/files.tsv /tmp/backup_meta/mail.tsv /tmp/backup_meta/vhosts.tsv /tmp/backup_meta/dns.tsv'
     container_name: backup
     healthcheck:
       disable: true
@@ -905,7 +916,10 @@ services:
       - mysql_dumps:/backup/mysql:ro
       - mail_data:/backup/mail:ro
       - webserver_data:/backup/vhosts:ro
-      - pg_data:/backup/postgres:ro
+      - pg_dumps:/backup/postgres:ro
+      - backup_meta:/backup/00-meta:ro
+      - backup_meta:/tmp/backup_meta/
+      - /etc/openpanel/backups/scripts/files-list.sh:/files-list.sh:ro
       - ./crons.ini:/backup/crons.ini:ro
       - /etc/openpanel/backups/customized.template:/etc/dockervolumebackup/notifications.d/01.template:ro
     deploy:
@@ -948,6 +962,16 @@ volumes:
     labels:
       description: "This volume holds the mysql/mariadb databases."
       purpose: "database"
+  pg_dumps:
+    driver: local
+    labels:
+      description: "This volume holds the .sql dumps of postgres databases during backup."
+      purpose: "storage"
+  backup_meta:
+    driver: local
+    labels:
+      description: "This volume holds the list of dumped databases that goes first in every backup archive."
+      purpose: "storage"
   mysql_dumps:
     driver: local
     labels:
