@@ -46,6 +46,7 @@ edit_vhost
 domain_logs
 goaccess
 error_logs
+summary
 process_manager
 redis
 memcached

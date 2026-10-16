@@ -19,6 +19,7 @@ domains
 docroot
 goaccess
 error_logs
+summary
 redis
 memcached
 temporary_links

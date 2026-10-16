@@ -705,6 +705,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#error-logs"
   },
   {
+    "name": "summary",
+    "title": "Daily Summary",
+    "description": "If enabled, a summary of each day is saved for users: what needs their attention with links to fix it, website traffic, logins and account changes. Users can also get it by email.",
+    "link": "/summary",
+    "type": "community",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#daily-summary"
+  },
+  {
     "name": "process_manager",
     "title": "Process Manager",
     "description": "If enabled, users can view/kill process from the Process Manager page.",
