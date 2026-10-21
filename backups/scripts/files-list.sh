@@ -20,10 +20,12 @@ if [ -d /backup/html ]; then
     list_files /backup/html > "$META_DIR/.files.tsv.tmp" && mv -f "$META_DIR/.files.tsv.tmp" "$META_DIR/files.tsv"
 fi
 
-# virtual host files
-if [ -d /backup/vhosts ]; then
-    list_files /backup/vhosts > "$META_DIR/.vhosts.tsv.tmp" && mv -f "$META_DIR/.vhosts.tsv.tmp" "$META_DIR/vhosts.tsv"
-fi
+# virtual host files, 01-vhosts sorts before html/ in the archive, plain vhosts is the old mount
+for vhosts in /backup/01-vhosts /backup/vhosts; do
+    [ -d "$vhosts" ] || continue
+    list_files "$vhosts" > "$META_DIR/.vhosts.tsv.tmp" && mv -f "$META_DIR/.vhosts.tsv.tmp" "$META_DIR/vhosts.tsv"
+    break
+done
 
 # dns zone files
 if [ -d /backup/dns ]; then

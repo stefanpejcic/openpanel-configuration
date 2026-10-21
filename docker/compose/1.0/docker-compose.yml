@@ -914,10 +914,10 @@ services:
     volumes:
       - html_data:/var/www/html/:ro
       - html_data:/backup/html:ro
-      - mysql_dumps:/backup/mysql:ro
-      - mail_data:/backup/mail:ro
-      - webserver_data:/backup/vhosts:ro
-      - pg_dumps:/backup/postgres:ro
+      - mysql_dumps:/backup/01-mysql:ro
+      - mail_data:/backup/01-mail:ro
+      - webserver_data:/backup/01-vhosts:ro
+      - pg_dumps:/backup/01-postgres:ro
       - backup_meta:/backup/00-meta:ro
       - backup_meta:/tmp/backup_meta/
       - /etc/openpanel/backups/scripts/files-list.sh:/files-list.sh:ro
