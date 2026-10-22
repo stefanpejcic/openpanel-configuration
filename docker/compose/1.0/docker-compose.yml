@@ -300,6 +300,7 @@ services:
   postgres:
     image: postgres:${POSTGRES_VERSION:-latest}
     container_name: postgres
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
     labels:
       - docker-volume-backup.archive-pre=/bin/sh -c '/dump.sh'
       - docker-volume-backup.archive-post=/bin/sh -c 'rm -rf /tmp/dumps/* /tmp/backup_meta/postgres.json'
@@ -316,7 +317,7 @@ services:
       - backup_meta:/tmp/backup_meta/
       - /etc/openpanel/postgres/scripts/dump.sh:/dump.sh:ro
       - ./sockets/postgres:/var/run/postgresql
-      #- ./postgre_custom.conf:/var/lib/postgresql/data/postgresql.conf
+      - ./postgre_custom.conf:/etc/postgresql/postgresql.conf:ro
     deploy:
       resources:
         limits:
