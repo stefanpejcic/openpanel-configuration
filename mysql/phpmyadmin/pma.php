@@ -51,6 +51,12 @@ foreach (glob('/home/*/sockets/mysqld/mysqld.sock') as $i => $sock) {
     }
 }
 
+// the image's /sessions can be missing, then fall back to the temp dir, config.inc.php picks the same so phpMyAdmin finds this session
+$sessionPath = session_save_path();
+if ($sessionPath === '' || !(is_dir($sessionPath) || @mkdir($sessionPath, 01733, true)) || !is_writable($sessionPath)) {
+    session_save_path(sys_get_temp_dir());
+}
+
 $sessionName = 'OPENPANEL_PMA_' . strtoupper($username);
 session_set_cookie_params(0, '/', '', false, true);
 session_name($sessionName);

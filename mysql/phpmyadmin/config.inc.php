@@ -10,6 +10,12 @@ if (isset($_ENV['MEMORY_LIMIT'])) {
 if (isset($_ENV['PMA_ABSOLUTE_URI'])) {
     $cfg['PmaAbsoluteUri'] = trim($_ENV['PMA_ABSOLUTE_URI']);
 }
+// same session dir pma.php writes the signon session to, the temp dir when the image's /sessions is missing
+$sessionPath = session_save_path();
+if ($sessionPath === '' || !(is_dir($sessionPath) || @mkdir($sessionPath, 01733, true)) || !is_writable($sessionPath)) {
+    $cfg['SessionSavePath'] = sys_get_temp_dir();
+}
+
 $cfg['DisplayServersList'] = false;
 $cfg['AllowArbitraryServer'] = false;
 $cfg['NavigationDisplayServers'] = false;
