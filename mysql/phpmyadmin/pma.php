@@ -34,9 +34,14 @@ if (!file_exists($socketPath)) {
     exit;
 }
 
+// .env is compose syntax, not INI - parse_ini_file fails on '#' comments containing ( ) ! etc., so read just the one key line by line
 $envFile = '/home/' . $username . '/.env';
-$envVars = parse_ini_file($envFile);
-$mysqlPassword = $envVars['MYSQL_ROOT_PASSWORD'] ?? '';
+$mysqlPassword = '';
+foreach (@file($envFile, FILE_IGNORE_NEW_LINES) ?: [] as $line) {
+    if (preg_match('/^\s*MYSQL_ROOT_PASSWORD\s*=\s*(["\']?)(.*?)\1\s*$/', $line, $m)) {
+        $mysqlPassword = $m[2];
+    }
+}
 if (empty($mysqlPassword)) {
     header("Location: ./index.php?invalid");
     exit;
