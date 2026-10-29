@@ -4,6 +4,9 @@
 META_DIR="/tmp/backup_meta"
 [ -d "$META_DIR" ] || exit 0
 
+# can run in two backup containers at once on the same backup_meta volume, so each run gets its own temp files
+TMP_SUFFIX="$(hostname).$$.$(date +%s)"
+
 # size, mtime and path relative to $1 per line, skipping what BACKUP_EXCLUDE_REGEXP keeps out of the archive
 list_files() {
     find "$1" -type f -exec stat -c '%s %Y %n' {} + 2>/dev/null \
@@ -17,19 +20,19 @@ list_files() {
 
 # website files
 if [ -d /backup/html ]; then
-    list_files /backup/html > "$META_DIR/.files.tsv.tmp" && mv -f "$META_DIR/.files.tsv.tmp" "$META_DIR/files.tsv"
+    list_files /backup/html > "$META_DIR/.files.tsv.$TMP_SUFFIX" && mv -f "$META_DIR/.files.tsv.$TMP_SUFFIX" "$META_DIR/files.tsv"
 fi
 
 # virtual host files, 01-vhosts sorts before html/ in the archive, plain vhosts is the old mount
 for vhosts in /backup/01-vhosts /backup/vhosts; do
     [ -d "$vhosts" ] || continue
-    list_files "$vhosts" > "$META_DIR/.vhosts.tsv.tmp" && mv -f "$META_DIR/.vhosts.tsv.tmp" "$META_DIR/vhosts.tsv"
+    list_files "$vhosts" > "$META_DIR/.vhosts.tsv.$TMP_SUFFIX" && mv -f "$META_DIR/.vhosts.tsv.$TMP_SUFFIX" "$META_DIR/vhosts.tsv"
     break
 done
 
 # dns zone files
 if [ -d /backup/dns ]; then
-    list_files /backup/dns > "$META_DIR/.dns.tsv.tmp" && mv -f "$META_DIR/.dns.tsv.tmp" "$META_DIR/dns.tsv"
+    list_files /backup/dns > "$META_DIR/.dns.tsv.$TMP_SUFFIX" && mv -f "$META_DIR/.dns.tsv.$TMP_SUFFIX" "$META_DIR/dns.tsv"
 fi
 
 # one line per mailbox: size, message count and domain/user, from the real mail dirs mounted under /backup/emails
@@ -46,5 +49,5 @@ if [ -d /backup/emails ]; then
             if (path ~ /\/(cur|new)\/[^\/]+$/) count[box]++
         }
         END { for (b in size) print size[b] "\t" count[b] "\t" b }
-    ' > "$META_DIR/.mail.tsv.tmp" && mv -f "$META_DIR/.mail.tsv.tmp" "$META_DIR/mail.tsv"
+    ' > "$META_DIR/.mail.tsv.$TMP_SUFFIX" && mv -f "$META_DIR/.mail.tsv.$TMP_SUFFIX" "$META_DIR/mail.tsv"
 fi
