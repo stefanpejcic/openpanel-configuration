@@ -11,7 +11,7 @@
     "name": "account",
     "title": "Settings (Email & Password Change)",
     "description": "If enabled, users can change username, password and email address for the account in their user panel.",
-    "link": "/account/settings",
+    "link": "/account",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#account"
   },
@@ -27,7 +27,7 @@
     "name": "locale",
     "title": "Locales (Language Change)",
     "description": "If enabled, users can switch languages in their user panel.",
-    "link": "/account/languages",
+    "link": "/account/language",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#locale"
   },
@@ -82,7 +82,7 @@
   {
     "name": "change_db",
     "title": "Switch MySQL Type",
-    "description": "If enabled, users can switch between MySQL and MariaDB for their account from the user panel.",
+    "description": "If enabled, users can switch between MySQL, MariaDB and Percona for their account from the user panel.",
     "link": "/containers/mysql",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#change-db"
@@ -98,7 +98,7 @@
   {
     "name": "webmail",
     "title": "Webmail (Roundcube)",
-    "description": "If enabled, users can auto-login to webmmail (Reoundcube) for email accounts. The Roundcube service must be configured separately.",
+    "description": "If enabled, users can auto-login to webmail (Roundcube) for email accounts. The Roundcube service must be configured separately.",
     "link": "/webmail",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#webmail"
@@ -154,7 +154,7 @@
   {
     "name": "email_export",
     "title": "Address Exporter",
-    "description": "If enabled, users can export email addresses inot a CSV file.",
+    "description": "If enabled, users can export email addresses into a CSV file.",
     "link": "/emails/export",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#email-export"
@@ -170,7 +170,7 @@
   {
     "name": "mysql",
     "title": "MySQL",
-    "description": "If enabled, users can manage MySql databases and users.",
+    "description": "If enabled, users can manage MySQL databases and users.",
     "link": "/mysql",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#mysql"
@@ -221,7 +221,7 @@
     "description": "If enabled, users can manage MongoDB databases.",
     "link": "/mongodb",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#mongodb"
   },
   {
     "name": "mongodb_import",
@@ -237,7 +237,7 @@
     "description": "If enabled, users can manage PostgreSQL databases and users.",
     "link": "/postgresql",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#postgresql"
   },
   {
     "name": "remote_postgresql",
@@ -283,7 +283,7 @@
     "name": "php_ini",
     "title": "PHP.INI Editor",
     "description": "If enabled, users can edit directly the PHP.INI file for any PHP version from their OpenPanel.",
-    "link": "/php/ini",
+    "link": "/php/php_ini_editor",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#phpini-editor"
   },
@@ -293,7 +293,7 @@
     "description": "If enabled, users can manage extensions for their PHP versions.",
     "link": "/php/extensions",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#php-extensions"
   },
   {
     "name": "phpmyadmin",
@@ -325,7 +325,7 @@
     "description": "If enabled, users can generate and download a full account backup.",
     "link": "/backup-wizard",
     "type": "community",
-    "help_link": ""    
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#backup-wizard"    
   },
   {
     "name": "wordpress",
@@ -341,7 +341,7 @@
     "description": "If enabled, Drupal can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/drupal/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#drupal"
   },
   {
     "name": "flarum",
@@ -349,7 +349,7 @@
     "description": "If enabled, Flarum can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/flarum/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#flarum"
   },
   {
     "name": "sofawiki",
@@ -357,7 +357,7 @@
     "description": "If enabled, SofaWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/sofawiki/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#sofawiki"
   },
   {
     "name": "tinyphotogallery",
@@ -365,7 +365,7 @@
     "description": "If enabled, TinyPhotoGallery can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/tinyphotogallery/install",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#tinyphotogallery"
   },
   {
     "name": "tinyfilemanager",
@@ -373,7 +373,7 @@
     "description": "If enabled, TinyFileManager can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/tinyfilemanager/install",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#tinyfilemanager"
   },
   {
     "name": "ojs",
@@ -381,7 +381,7 @@
     "description": "If enabled, Open Journal Systems can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/ojs/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#ojs"
   },
   {
     "name": "mediawiki",
@@ -389,7 +389,7 @@
     "description": "If enabled, MediaWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/mediawiki/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#mediawiki"
   },
   {
     "name": "dokuwiki",
@@ -397,7 +397,7 @@
     "description": "If enabled, DokuWiki can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/dokuwiki/install",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#dokuwiki"
   },
   {
     "name": "phpbb",
@@ -405,7 +405,7 @@
     "description": "If enabled, phpBB can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/phpbb/install",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#phpbb"
   },  
   {
     "name": "opencart",
@@ -413,7 +413,7 @@
     "description": "If enabled, OpenCart can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/opencart/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#opencart"
   },
   {
     "name": "prestashop",
@@ -421,7 +421,7 @@
     "description": "If enabled, PrestaShop can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/prestashop/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#prestashop"
   },  
   {
     "name": "nextcloud",
@@ -429,7 +429,7 @@
     "description": "If enabled, NextCloud can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/nextcloud/install",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#nextcloud"
   },  
   {
     "name": "matomo",
@@ -437,7 +437,7 @@
     "description": "If enabled, Matomo can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/matomo/install",
     "type": "community",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#matomo"
   },
   {
     "name": "moodle",
@@ -445,7 +445,7 @@
     "description": "If enabled, Moodle can be installed using the Autoinstaller and users can use the Site Manager to manage websites.",
     "link": "/moodle/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#moodle"
   },
   {
     "name": "joomla",
@@ -453,7 +453,7 @@
     "description": "If enabled, Joomla Content Management System (CMS) can be installed using the Autoinstaller and managed via Site Manager.",
     "link": "/joomla/install",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#joomla"
   },
   {
     "name": "website_builder",
@@ -509,7 +509,7 @@
     "description": "If enabled, n8n can be setup from the Autoinstaller.",
     "link": "/n8n",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#n8n"
   },  
   {
     "name": "disk_usage",
@@ -531,7 +531,7 @@
     "name": "usage",
     "title": "Resources Usage",
     "description": "If enabled, docker stats are collected for containers and users can browse the data using the Resource Usage page",
-    "link": "/usage",
+    "link": "/server/usage",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#resources-usage"
   },
@@ -581,7 +581,7 @@
     "description": "If enabled, ClamAV service is started and users can scan run scans.",
     "link": "/malware-scanner",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#clamav"
   },  
   {
     "name": "fix_permissions",
@@ -611,7 +611,7 @@
     "name": "dns",
     "title": "DNS",
     "description": "If enabled, BIND9 server is run locally and DNS zone is created for new domains. Users can manage the records via Zone Editor interface.",
-    "link": "/dns",
+    "link": "/domains/edit-dns-zone",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#dns"
   },
@@ -628,7 +628,7 @@
     "name": "redirects",
     "title": "Domain Redirects",
     "description": "If enabled, users can create and manage redirects for their domains.",
-    "link": "/domains/redirects",
+    "link": "/domains/redirect",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#redirects"
   },
@@ -742,7 +742,7 @@
     "description": "If enabled, users can configure Memcached from their user panel.",
     "link": "/cache/memcached",
     "type": "community",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/#Memcached"
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#memcached"
   },
   {
     "name": "services",
@@ -758,7 +758,7 @@
     "description": "If enabled, users can configure Elasticsearch from their user panel.",
     "link": "/cache/elasticsearch",
     "type": "community",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/#ElasticSearch"
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#elasticsearch"
   },
   {
     "name": "opensearch",
@@ -766,13 +766,13 @@
     "description": "If enabled, users can configure Opensearch from their user panel.",
     "link": "/cache/opensearch",
     "type": "community",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/#OpenSearch"
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#opensearch"
   },
   {
     "name": "temporary_links",
     "title": "Temporary Links",
     "description": "If enabled, users can test their websites using temporary openpanel.org subdomains. Links expire after 15m.",
-    "link": "/websites",
+    "link": "/sites",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#temporary-links"
   },
@@ -780,7 +780,7 @@
     "name": "login_history",
     "title": "Login History",
     "description": "If enabled, users can view last 20 IPs that logged into their account.",
-    "link": "/account/loginlog",
+    "link": "/account/login-history",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#login-history"
   },
@@ -830,6 +830,6 @@
     "description": "If enabled, users can use the MCP to perform panel actions.",
     "link": "/account/mcp",
     "type": "enterprise",
-    "help_link": ""
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#mcp"
   }
 ]
