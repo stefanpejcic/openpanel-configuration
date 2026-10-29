@@ -220,7 +220,7 @@
     "title": "MongoDB",
     "description": "If enabled, users can manage MongoDB databases.",
     "link": "/mongodb",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },
   {
@@ -508,7 +508,7 @@
     "title": "n8n",
     "description": "If enabled, n8n can be setup from the Autoinstaller.",
     "link": "/n8n",
-    "type": "beta",
+    "type": "enterprise",
     "help_link": ""
   },  
   {
