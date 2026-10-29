@@ -263,14 +263,6 @@
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#postgresql-conf"
   },
-    {
-    "name": "pgadmin",
-    "title": "pgAdmin",
-    "description": "If enabled, users can manage pgAdmin and use it to connect to their Postgres databases.",
-    "link": "/postgresql/pgadmin",
-    "type": "enterprise",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/#pgadmin"
-  },
   {
     "name": "php",
     "title": "PHP",
