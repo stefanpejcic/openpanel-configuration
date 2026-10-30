@@ -57,7 +57,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
-      - ./openresty.conf:/etc/openresty/nginx.conf:ro
+      - ./openresty.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
       - webserver_data:/etc/nginx/conf.d
       - html_data:/var/www/html/   
       - /etc/openpanel/nginx/certs/:/etc/nginx/ssl/
