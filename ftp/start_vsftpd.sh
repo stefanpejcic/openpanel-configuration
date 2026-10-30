@@ -202,6 +202,20 @@ MIN_PORT=${MIN_PORT:-21000}
 MAX_PORT=${MAX_PORT:-21010}
 echo "[*] Passive mode port range: $MIN_PORT-$MAX_PORT"
 
+# https://github.com/stefanpejcic/OpenPanel/issues/1280
+if [ -z "$PASV_ADDRESS" ]; then
+    PASV_ADDRESS=$(wget -qO- -T 3 https://ip.openpanel.com 2>/dev/null | tr -d '[:space:]')
+fi
+
+PASV_OPTS=""
+# plain sh (busybox), so no [[ =~ ]] or <<<
+if echo "$PASV_ADDRESS" | awk -F. 'NF != 4 { exit 1 } { for (i = 1; i <= 4; i++) if ($i !~ /^[0-9]+$/ || $i > 255) exit 1 }'; then
+    echo "[*] Passive mode address: $PASV_ADDRESS"
+    PASV_OPTS="-opasv_address=$PASV_ADDRESS -opasv_addr_resolve=NO"
+else
+    echo "[!] Could not detect a valid public IPv4; passive mode will use the default address"
+fi
+
 # 7. quotas, checked now and then every QUOTA_INTERVAL seconds
 echo "[*] Checking FTP quotas every ${QUOTA_INTERVAL}s..."
 check_quotas
@@ -214,5 +228,5 @@ if [ -n "$1" ]; then
 else
   echo "[*] Starting vsftpd and accepting user logins..."
   echo "-------------------------------------------"
-  vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT -ouser_config_dir=$QUOTA_CONF_DIR /etc/vsftpd/vsftpd.conf
+  vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT -ouser_config_dir=$QUOTA_CONF_DIR $PASV_OPTS /etc/vsftpd/vsftpd.conf
 fi
