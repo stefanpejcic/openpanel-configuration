@@ -45,6 +45,47 @@ services:
       - www
       - db
       
+  litespeed:
+    image: litespeedtech/litespeed:${LITESPEED_VERSION:-latest}
+    container_name: litespeed
+    healthcheck:
+      disable: true
+    hostname: litespeed
+    restart: unless-stopped
+    ports:
+      - "${PROXY_HTTP_PORT:-${HTTP_PORT}}"
+      - "${HTTPS_PORT}"
+    working_dir: /var/www/html
+    volumes:
+      - ./litespeed.conf:/etc/apache2/httpd.conf:ro
+      - /etc/openpanel/litespeed/start.sh:/entrypoint.sh:ro
+      - litespeed_conf:/usr/local/lsws/conf
+      - ./sockets/mysqld:/var/run/mysqld
+      - webserver_data:/etc/httpd/conf.d/
+      - html_data:/var/www/html/
+      - /etc/openpanel/nginx/certs/:/etc/apache2/ssl/
+      - /etc/openpanel/nginx/default_page.html:/etc/apache2/default_page.html:ro
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+      - /etc/openpanel/php/composer/v2_composer.phar:/usr/local/bin/composer:ro
+      - ./php.ini/8.2.ini:/usr/local/lsws/lsphp82/etc/php/8.2/litespeed/php.ini
+      - ./php.ini/8.3.ini:/usr/local/lsws/lsphp83/etc/php/8.3/litespeed/php.ini
+      - ./php.ini/8.4.ini:/usr/local/lsws/lsphp84/etc/php/8.4/litespeed/php.ini
+      - ./php.ini/8.5.ini:/usr/local/lsws/lsphp85/etc/php/8.5/litespeed/php.ini
+      - /etc/openpanel/php/ioncube:/etc/openpanel/php/ioncube:ro
+      - /etc/openpanel/php/ioncube/openlitespeed/lsphp82.ini:/usr/local/lsws/lsphp82/etc/php/8.2/mods-available/00-ioncube.ini:ro
+      - /etc/openpanel/php/ioncube/openlitespeed/lsphp83.ini:/usr/local/lsws/lsphp83/etc/php/8.3/mods-available/00-ioncube.ini:ro
+      - /etc/openpanel/php/ioncube/openlitespeed/lsphp84.ini:/usr/local/lsws/lsphp84/etc/php/8.4/mods-available/00-ioncube.ini:ro
+      - /etc/openpanel/php/ioncube/openlitespeed/lsphp85.ini:/usr/local/lsws/lsphp85/etc/php/8.5/mods-available/00-ioncube.ini:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${LITESPEED_CPU:-0.5}"
+          memory: "${LITESPEED_RAM:-0.5G}"
+          pids: "${LITESPEED_PIDS:-100}"
+    networks:
+      - www
+      - db
+
   openresty:
     image: openresty/openresty:${OPENRESTY_VERSION:-alpine}
     container_name: openresty
@@ -993,6 +1034,11 @@ volumes:
     driver: local
     labels:
       description: "This volume holds the Nginx/Apache vhost files."
+      purpose: "configuration"
+  litespeed_conf:
+    driver: local
+    labels:
+      description: "This volume holds the LiteSpeed server config and its license key."
       purpose: "configuration"
   mongodb_data:
     driver: local

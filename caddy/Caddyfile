@@ -1,5 +1,10 @@
 # general
 {
+    # default logger only, site access logs have their own; the WAF warns "key not found in collection" on most requests and filled syslog
+    log {
+        level ERROR
+    }
+
     #admin off
 
     on_demand_tls {
