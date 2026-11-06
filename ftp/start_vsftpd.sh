@@ -8,6 +8,33 @@ kill_sessions() {
   ps -o pid,args | grep -F "/$1: " | grep "vsftpd:" | grep -v grep | awk '{print $1}' | xargs -r kill 2>/dev/null
 }
 
+# create and chown an account's folder from a checked cwd, we're root here so a symlink the tenant swapped in must not be followed
+prepare_ftp_folder() {
+  local root="$1" folder="$2" owner="$3"
+  case "$folder" in
+    "$root"|"$root"/*) ;;
+    *) return 1 ;;
+  esac
+  (
+    [ "$(realpath "$root" 2>/dev/null)" = "$root" ] || exit 1
+    cd "$root" || exit 1
+    IFS=/
+    set -f
+    for part in ${folder#"$root"}; do
+      if [ -z "$part" ] || [ "$part" = "." ]; then continue; fi
+      [ "$part" = ".." ] && exit 1
+      [ -L "./$part" ] && exit 1
+      [ -d "./$part" ] || mkdir "./$part" || exit 1
+      cd "./$part" || exit 1
+      case "$(pwd -P)/" in
+        "$root"/*) ;;
+        *) exit 1 ;;
+      esac
+    done
+    chown "$owner" .
+  )
+}
+
 # 6th users.list field is the quota in MB, users over it get a per-user conf that denies uploads
 check_quotas() {
   mkdir -p "$QUOTA_CONF_DIR"
@@ -142,7 +169,13 @@ if [ "$TOTAL_USER_COUNT" -gt 0 ]; then
           continue
           ;;
       esac
-  
+
+      echo "    - Ensuring folder exists and ownership is correct (${UID}:${GID})"
+      if ! prepare_ftp_folder "/home/${GROUP}/docker-data/volumes/${GROUP}_html_data/_data" "$FOLDER" "${UID}:${GID}"; then
+          echo "    - Skipping user $NAME: folder $FAKE_FOLDER is not a real folder inside /var/www/html/"
+          continue
+      fi
+
       UID_OPT=""
       GROUP_OPT=""
   
@@ -178,9 +211,6 @@ if [ "$TOTAL_USER_COUNT" -gt 0 ]; then
           continue
       fi
   
-      echo "    - Ensuring folder exists and ownership is correct (${UID}:${GID})"
-      mkdir -p "$FOLDER"
-      chown "${UID}:${GID}" "$FOLDER"
   
       echo ""
       unset NAME HASHED_PASS FOLDER UID GID QUOTA GROUP UID_OPT GROUP_OPT
