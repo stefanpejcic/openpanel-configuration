@@ -203,13 +203,24 @@ MAX_PORT=${MAX_PORT:-21010}
 echo "[*] Passive mode port range: $MIN_PORT-$MAX_PORT"
 
 # https://github.com/stefanpejcic/OpenPanel/issues/1280
+# plain sh (busybox), so no [[ =~ ]] or <<<
+valid_ipv4() {
+    echo "$1" | awk -F. 'NF != 4 { exit 1 } { for (i = 1; i <= 4; i++) if ($i !~ /^[0-9]+$/ || $i > 255) exit 1 }'
+}
+
+# PASV_ADDRESS from the host's .env (FTP_PASV_ADDRESS) wins, otherwise look it up,
+# retrying for ~60s since right after boot the network may not be up yet
 if [ -z "$PASV_ADDRESS" ]; then
-    PASV_ADDRESS=$(wget -qO- -T 3 https://ip.openpanel.com 2>/dev/null | tr -d '[:space:]')
+    for i in 1 2 3 4 5 6 7 8 9 10; do
+        PASV_ADDRESS=$(wget -qO- -T 3 https://ip.openpanel.com 2>/dev/null | tr -d '[:space:]')
+        valid_ipv4 "$PASV_ADDRESS" && break
+        echo "[!] Public IPv4 lookup failed (attempt $i/10), retrying..."
+        sleep 3
+    done
 fi
 
 PASV_OPTS=""
-# plain sh (busybox), so no [[ =~ ]] or <<<
-if echo "$PASV_ADDRESS" | awk -F. 'NF != 4 { exit 1 } { for (i = 1; i <= 4; i++) if ($i !~ /^[0-9]+$/ || $i > 255) exit 1 }'; then
+if valid_ipv4 "$PASV_ADDRESS"; then
     echo "[*] Passive mode address: $PASV_ADDRESS"
     PASV_OPTS="-opasv_address=$PASV_ADDRESS -opasv_addr_resolve=NO"
 else

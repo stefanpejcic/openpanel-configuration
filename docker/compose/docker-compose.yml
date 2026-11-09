@@ -156,6 +156,9 @@ services:
     container_name: openadmin_ftp
     image: openpanel/vsftpd
     restart: always
+    environment:
+      # public IPv4 sent to clients for passive mode, empty = start_vsftpd.sh looks it up
+      - PASV_ADDRESS=${FTP_PASV_ADDRESS:-}
     ports:
       - "21:21"
       - "${FTP_PORT_RANGE}:21000-21010"
