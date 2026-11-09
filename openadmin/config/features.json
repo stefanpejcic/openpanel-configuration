@@ -602,7 +602,7 @@
   {
     "name": "ai_assistant",
     "title": "AI Assistant",
-    "description": "If enabled, users get an AI chat assistant in the top bar that answers questions using the OpenPanel documentation and, if allowed on Settings > OpenPanel, looks things up or makes changes in their account after they approve them.",
+    "description": "If enabled, users get an AI chat assistant that answers questions using the OpenPanel documentation and, if allowed, looks things up or makes changes in their account.",
     "link": "",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/panel/dashboard/dashboard/#ai-assistant"
