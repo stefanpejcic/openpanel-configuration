@@ -522,7 +522,7 @@
   {
     "name": "usage",
     "title": "Resources Usage",
-    "description": "If enabled, docker stats are collected for containers and users can browse the data using the Resource Usage page",
+    "description": "If enabled, Docker stats are collected, allowing users to view CPU/RAM usage and historical data on the Resource Usage page.",
     "link": "/server/usage",
     "type": "community",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#resources-usage"
