@@ -89,6 +89,7 @@ services:
       - /root/openpanel_restart_needed:/root/openpanel_restart_needed                    # flag used on openadmin
       - /run/user/:/hostfs/run/user/:rslave                                              # contexts
       - /run/podman/podman.sock:/run/podman/podman.sock:ro                               # reload caddy on waf changes
+      - /run/defence360agent/:/run/defence360agent/:ro                                   # imunifyav rpc socket
       - ${REDIS_SOCKET}:/tmp/redis/                                                      # redis cache
       - /var/log/caddy:/var/log/caddy                                                    # waf and domlogs      
       - /etc/localtime:/etc/localtime:ro                                                 # server timezone
