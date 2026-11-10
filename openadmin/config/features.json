@@ -504,14 +504,6 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#autoinstaller"
   },
   {
-    "name": "n8n",
-    "title": "n8n",
-    "description": "If enabled, n8n can be setup from the Autoinstaller.",
-    "link": "/n8n",
-    "type": "enterprise",
-    "help_link": "https://openpanel.com/docs/admin/settings/modules/#n8n"
-  },  
-  {
     "name": "disk_usage",
     "title": "Disk Usage Explorer",
     "description": "If enabled, users can access the Disk Usage page to browse current disk usage per directories.",
