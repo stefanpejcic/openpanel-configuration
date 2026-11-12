@@ -106,3 +106,40 @@ applications:
     networks: [www]
     volumes:
       - memos_data:/var/opt/memos
+
+  - id: weblate
+    name: Weblate
+    description: Web-based translation tool with Git sync, for translating software and documentation. Needs about 2 GB of free RAM on the plan and the account's PostgreSQL and Redis services, create a PostgreSQL database and user first and put them in the POSTGRES_ values.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/WeblateOrg/weblate/weblate/static/weblate.svg
+    docs: https://docs.weblate.org/en/latest/admin/install/docker.html
+    image: weblate/weblate:latest
+    service: weblate
+    cpu: "1"
+    ram: "2"
+    pids: 500
+    port: 8080
+    networks: [www, db]
+    volumes:
+      - weblate_data:/app/data
+      - weblate_cache:/app/cache
+    env:
+      - WEBLATE_SITE_DOMAIN={domain}
+      - WEBLATE_SITE_TITLE=Weblate
+      - WEBLATE_ADMIN_NAME=Admin
+      - WEBLATE_ADMIN_EMAIL=admin@{domain}
+      - WEBLATE_ADMIN_PASSWORD=change-this-password
+      - WEBLATE_SERVER_EMAIL=noreply@{domain}
+      - WEBLATE_DEFAULT_FROM_EMAIL=noreply@{domain}
+      - WEBLATE_ENABLE_HTTPS=1
+      - WEBLATE_IP_PROXY_HEADER=HTTP_X_FORWARDED_FOR
+      - WEBLATE_SECURE_PROXY_SSL_HEADER=HTTP_X_FORWARDED_PROTO,https
+      - WEBLATE_WORKERS=1
+      - WEBLATE_TIME_ZONE=UTC
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=weblate
+      - POSTGRES_USER=weblate
+      - POSTGRES_PASSWORD=change-this-password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
