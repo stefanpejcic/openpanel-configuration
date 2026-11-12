@@ -1,8 +1,8 @@
 # CSF BLOCKLISTS OPENPANEL
 # Format: NAME|INTERVAL|MAX|URL
 # NAME must be unique
-# INTERVAL is how often to fetch, in seconds (lfd uses at least 3600)
-# MAX is the most IPs to use from the list, 0 = all
+# INTERVAL is how often to fetch (in seconds, csf uses at least 3600)
+# MAX is how many IPs to use from the list, 0 means all of them
 # URL is the downloadable list (IP/CIDR per line)
 
 # === Reputation ===
@@ -24,7 +24,6 @@
 # GREENSNOW|3600|0|https://blocklist.greensnow.co/greensnow.txt
 # HONEYPOT|3600|0|https://www.projecthoneypot.org/list_of_ips.php?t=d&rss=1
 # NETAPI|3600|0|https://netapi.com/zf-api/f/compromised/ip/live/
-# BFB|3600|0|https://danger.rulez.sk/projects/bruteforceblocker/blist.php
 
 # === Abuse ===
 # BLOCKLIST_NET_UA|3600|0|https://blocklist.net.ua/blocklist.csv
