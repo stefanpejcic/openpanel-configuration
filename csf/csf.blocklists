@@ -23,7 +23,7 @@
 # INTERSERVER_ALL|3600|0|https://sigs.interserver.net/iprbl.txt
 # GREENSNOW|3600|0|https://blocklist.greensnow.co/greensnow.txt
 # HONEYPOT|3600|0|https://www.projecthoneypot.org/list_of_ips.php?t=d&rss=1
-# BFB|3600|0|https://danger.rulez.sk/projects/bruteforceblocker/blist.php
+# NETAPI|3600|0|https://netapi.com/zf-api/f/compromised/ip/live/
 
 # === Abuse ===
 # BLOCKLIST_NET_UA|3600|0|https://blocklist.net.ua/blocklist.csv
