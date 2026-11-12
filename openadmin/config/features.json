@@ -576,6 +576,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#clamav"
   },  
   {
+    "name": "imunifyav",
+    "title": "ImunifyAV",
+    "description": "If enabled, users get ImunifyAV's own interface for their account and a summary of infected files and scans. Needs ImunifyAV installed from OpenAdmin > Security > ImunifyAV.",
+    "link": "/imunifyav",
+    "type": "community",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#imunifyav"
+  },
+  {
     "name": "fix_permissions",
     "title": "Fix Permissions",
     "description": "If enabled, users have access to the Fix Permisisons tool to change owner and permissions for website files.",
