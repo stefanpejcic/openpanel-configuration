@@ -729,3 +729,19 @@ applications:
       - TYPESENSE_DATA_DIR=/data
       - TYPESENSE_API_KEY=change-this-api-key
       - TYPESENSE_ENABLE_CORS=true
+
+  - id: dashy
+    name: Dashy
+    description: Customizable start page for your self-hosted apps and links, with status checks, widgets and themes. The layout is edited in the browser and kept in the volume.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/dashy.png
+    docs: https://dashy.to/docs/deployment
+    image: lissy93/dashy:latest
+    service: dashy
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 8080
+    networks: [www]
+    volumes:
+      - dashy_data:/app/user-data
