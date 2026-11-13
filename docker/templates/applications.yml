@@ -639,3 +639,20 @@ applications:
     env:
       - QDRANT__SERVICE__API_KEY=change-this-api-key
       - QDRANT__TELEMETRY_DISABLED=true
+
+  - id: umami
+    name: Umami
+    description: Simple, privacy-friendly web analytics without cookies, a Google Analytics alternative. Needs the account's PostgreSQL service, create a database and user first and put them in DATABASE_URL. Log in as admin with password umami and change it.
+    category: Analytics
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/umami.svg
+    docs: https://umami.is/docs/install
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    service: umami
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 3000
+    networks: [www, db]
+    env:
+      - DATABASE_URL=postgresql://umami:change-this-password@postgres:5432/umami
+      - APP_SECRET=change-this-to-a-long-random-string
