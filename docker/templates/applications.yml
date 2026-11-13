@@ -311,3 +311,20 @@ applications:
       - LITELLM_MASTER_KEY=sk-change-this-key
       - LITELLM_SALT_KEY=sk-change-this-salt
       - STORE_MODEL_IN_DB=True
+
+  - id: pocketbase
+    name: PocketBase
+    description: Open source backend in one file, with a realtime database, authentication, file storage and an admin dashboard at /_/. Create the first superuser with the setup link printed in the container logs.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pocketbase.svg
+    docs: https://pocketbase.io/docs/
+    image: ghcr.io/muchobien/pocketbase:latest
+    service: pocketbase
+    cpu: "0.5"
+    ram: "256M"
+    pids: 200
+    port: 8090
+    networks: [www]
+    volumes:
+      - pocketbase_data:/pb_data
+      - pocketbase_public:/pb_public
