@@ -509,3 +509,19 @@ applications:
       - PAPERLESS_ADMIN_PASSWORD=change-this-password
       - PAPERLESS_TIME_ZONE=UTC
       - PAPERLESS_OCR_LANGUAGE=eng
+
+  - id: gogs
+    name: Gogs
+    description: Painless self-hosted Git service, small and fast. Pick SQLite3 in the install wizard and set the domain as the application URL, SSH is not available so use HTTPS for cloning.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/gogs.png
+    docs: https://github.com/gogs/gogs/tree/main/docker
+    image: gogs/gogs:latest
+    service: gogs
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 3000
+    networks: [www, db]
+    volumes:
+      - gogs_data:/data
