@@ -601,3 +601,22 @@ applications:
     pids: 100
     port: 8080
     networks: [www]
+
+  - id: changedetection
+    name: changedetection.io
+    description: Watches web pages for changes and notifies you by email, Discord, Telegram and more. It opens without a password, set one under Settings right after installing.
+    category: Monitoring
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/changedetection.svg
+    docs: https://github.com/dgtlmoon/changedetection.io/wiki
+    image: ghcr.io/dgtlmoon/changedetection.io:latest
+    service: changedetection
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 5000
+    networks: [www]
+    volumes:
+      - changedetection_data:/datastore
+    env:
+      - BASE_URL=https://{domain}
+      - USE_X_SETTINGS=1
