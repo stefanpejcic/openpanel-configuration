@@ -709,3 +709,23 @@ applications:
       - beszel_data:/beszel_data
     env:
       - APP_URL=https://{domain}
+
+  - id: typesense
+    name: Typesense
+    description: Typo-tolerant search engine with a REST API, an easier Algolia and Elasticsearch alternative. Set TYPESENSE_API_KEY, every request needs it.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/typesense.svg
+    docs: https://typesense.org/docs/guide/install-typesense.html
+    image: typesense/typesense:30.2
+    service: typesense
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 8108
+    networks: [www]
+    volumes:
+      - typesense_data:/data
+    env:
+      - TYPESENSE_DATA_DIR=/data
+      - TYPESENSE_API_KEY=change-this-api-key
+      - TYPESENSE_ENABLE_CORS=true
