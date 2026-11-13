@@ -162,3 +162,25 @@ applications:
     env:
       - WEBUI_URL=https://{domain}
       - ENABLE_OLLAMA_API=false
+
+  - id: langflow
+    name: Langflow
+    description: Visual builder for AI agents and RAG workflows, drag and drop components and serve them as an API. Log in with the LANGFLOW_SUPERUSER values.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/langflow.png
+    docs: https://docs.langflow.org/
+    image: langflowai/langflow:latest
+    service: langflow
+    cpu: "1"
+    ram: "2"
+    pids: 500
+    port: 7860
+    networks: [www]
+    volumes:
+      - langflow_data:/app/langflow
+    env:
+      - LANGFLOW_CONFIG_DIR=/app/langflow
+      - LANGFLOW_DATABASE_URL=sqlite:////app/langflow/langflow.db
+      - LANGFLOW_AUTO_LOGIN=false
+      - LANGFLOW_SUPERUSER=admin
+      - LANGFLOW_SUPERUSER_PASSWORD=change-this-password
