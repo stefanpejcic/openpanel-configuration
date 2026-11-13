@@ -216,3 +216,20 @@ applications:
       - stirlingpdf_configs:/configs
     env:
       - LANGS=en_GB
+
+  - id: nextchat
+    name: NextChat
+    description: Lightweight ChatGPT-style chat for OpenAI and other providers. Put your API key in OPENAI_API_KEY and a password in CODE, visitors need that password to use your key.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/ChatGPTNextWeb/NextChat/public/android-chrome-192x192.png
+    docs: https://github.com/ChatGPTNextWeb/NextChat
+    image: yidadaa/chatgpt-next-web:latest
+    service: nextchat
+    cpu: "0.5"
+    ram: "512M"
+    pids: 200
+    port: 3000
+    networks: [www]
+    env:
+      - OPENAI_API_KEY=
+      - CODE=change-this-password
