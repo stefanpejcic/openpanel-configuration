@@ -817,6 +817,14 @@
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#ip-blocker"
   },
   {
+    "name": "bot_control",
+    "title": "AI & Bot Control",
+    "description": "If enabled, users can allow, rate-limit, or block AI crawlers per website and inspect top bots, ASNs, and hit URLs.",
+    "link": "/server/bot-control",
+    "type": "enterprise",
+    "help_link": "https://openpanel.com/docs/admin/settings/modules/#bot-control"
+  },
+  {
     "name": "api",
     "title": "API",
     "description": "If enabled, users can use JWT tokens to perform panel actions.",

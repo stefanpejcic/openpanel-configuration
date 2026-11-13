@@ -33,6 +33,7 @@ usage
 info
 webserver_conf
 waf
+bot_control
 filemanager
 fix_permissions
 malware_scan
