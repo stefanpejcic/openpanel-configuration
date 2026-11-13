@@ -292,3 +292,22 @@ applications:
     env:
       - NC_PUBLIC_URL=https://{domain}
       - NC_DISABLE_TELE=true
+
+  - id: litellm
+    name: LiteLLM
+    description: OpenAI-compatible gateway in front of 100+ LLM providers, with virtual keys, budgets and usage tracking. Needs the account's PostgreSQL service, create a database and user first and put them in DATABASE_URL. Log in to /ui as admin with the LITELLM_MASTER_KEY.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/selfhst/icons/svg/litellm.svg
+    docs: https://docs.litellm.ai/docs/proxy/deploy
+    image: ghcr.io/berriai/litellm:main-stable
+    service: litellm
+    cpu: "1"
+    ram: "1"
+    pids: 500
+    port: 4000
+    networks: [www, db]
+    env:
+      - DATABASE_URL=postgresql://litellm:change-this-password@postgres:5432/litellm
+      - LITELLM_MASTER_KEY=sk-change-this-key
+      - LITELLM_SALT_KEY=sk-change-this-salt
+      - STORE_MODEL_IN_DB=True
