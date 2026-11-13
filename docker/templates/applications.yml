@@ -255,3 +255,21 @@ applications:
       - GF_SECURITY_ADMIN_PASSWORD=change-this-password
       - GF_ANALYTICS_CHECK_FOR_UPDATES=false
       - GF_ANALYTICS_REPORTING_ENABLED=false
+
+  - id: anythingllm
+    name: AnythingLLM
+    description: Chat with your documents using any LLM provider, with workspaces, RAG and AI agents. You pick the LLM and set the admin password in the setup wizard.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/anything-llm.svg
+    docs: https://docs.anythingllm.com/installation-docker/overview
+    image: mintplexlabs/anythingllm:latest
+    service: anythingllm
+    cpu: "1"
+    ram: "1.5"
+    pids: 500
+    port: 3001
+    networks: [www]
+    volumes:
+      - anythingllm_storage:/app/server/storage
+    env:
+      - STORAGE_DIR=/app/server/storage
