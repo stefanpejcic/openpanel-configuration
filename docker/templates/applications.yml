@@ -184,3 +184,35 @@ applications:
       - LANGFLOW_AUTO_LOGIN=false
       - LANGFLOW_SUPERUSER=admin
       - LANGFLOW_SUPERUSER_PASSWORD=change-this-password
+
+  - id: excalidraw
+    name: Excalidraw
+    description: Virtual whiteboard for hand-drawn style diagrams and sketches, drawings are kept in the browser or exported as files.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/excalidraw.svg
+    docs: https://github.com/excalidraw/excalidraw
+    image: excalidraw/excalidraw:latest
+    service: excalidraw
+    cpu: "0.25"
+    ram: "256M"
+    pids: 100
+    port: 80
+    networks: [www]
+
+  - id: stirling-pdf
+    name: Stirling PDF
+    description: Web toolbox for PDF files, merge, split, convert, compress, sign and OCR, files are processed on your server. Log in as admin with password stirling and change it right away.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/stirling-pdf.svg
+    docs: https://docs.stirlingpdf.com/
+    image: stirlingtools/stirling-pdf:latest
+    service: stirlingpdf
+    cpu: "1"
+    ram: "1.5"
+    pids: 500
+    port: 8080
+    networks: [www]
+    volumes:
+      - stirlingpdf_configs:/configs
+    env:
+      - LANGS=en_GB
