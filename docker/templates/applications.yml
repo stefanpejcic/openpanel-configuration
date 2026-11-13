@@ -675,3 +675,19 @@ applications:
       - searxng_cache:/var/cache/searxng
     env:
       - SEARXNG_BASE_URL=https://{domain}/
+
+  - id: actual-budget
+    name: Actual Budget
+    description: Local-first personal finance and envelope budgeting, with sync between your devices. The first visit asks you to set the server password.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/actual-budget.svg
+    docs: https://actualbudget.org/docs/install/docker
+    image: ghcr.io/actualbudget/actual:latest
+    service: actualbudget
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 5006
+    networks: [www]
+    volumes:
+      - actualbudget_data:/data
