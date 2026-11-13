@@ -691,3 +691,21 @@ applications:
     networks: [www]
     volumes:
       - actualbudget_data:/data
+
+  - id: beszel
+    name: Beszel
+    description: Lightweight server monitoring hub with history, Docker stats and alerts, the agents on your servers report to it. The first visit asks you to create the admin account.
+    category: Monitoring
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/beszel.svg
+    docs: https://beszel.dev/guide/getting-started
+    image: henrygd/beszel:latest
+    service: beszel
+    cpu: "0.5"
+    ram: "256M"
+    pids: 200
+    port: 8090
+    networks: [www]
+    volumes:
+      - beszel_data:/beszel_data
+    env:
+      - APP_URL=https://{domain}
