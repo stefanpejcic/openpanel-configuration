@@ -143,3 +143,22 @@ applications:
       - POSTGRES_PASSWORD=change-this-password
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+
+  - id: open-webui
+    name: Open WebUI
+    description: ChatGPT-style web interface for AI models, connects to OpenAI-compatible APIs and Ollama. The first account you register becomes the admin.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/open-webui.svg
+    docs: https://docs.openwebui.com/
+    image: ghcr.io/open-webui/open-webui:main
+    service: openwebui
+    cpu: "1"
+    ram: "1.5"
+    pids: 500
+    port: 8080
+    networks: [www]
+    volumes:
+      - openwebui_data:/app/backend/data
+    env:
+      - WEBUI_URL=https://{domain}
+      - ENABLE_OLLAMA_API=false
