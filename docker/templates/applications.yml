@@ -587,3 +587,17 @@ applications:
     networks: [www]
     volumes:
       - trilium_data:/home/node/trilium-data
+
+  - id: cyberchef
+    name: CyberChef
+    description: The cyber swiss army knife, chain operations to encode, decode, encrypt, compress and analyse data, everything runs in the browser.
+    category: Security
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/cyberchef.svg
+    docs: https://github.com/gchq/CyberChef
+    image: ghcr.io/gchq/cyberchef:latest
+    service: cyberchef
+    cpu: "0.25"
+    ram: "128M"
+    pids: 100
+    port: 8080
+    networks: [www]
