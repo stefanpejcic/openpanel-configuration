@@ -328,3 +328,23 @@ applications:
     volumes:
       - pocketbase_data:/pb_data
       - pocketbase_public:/pb_public
+
+  - id: meilisearch
+    name: Meilisearch
+    description: Fast search engine with a REST API, typo tolerance and filters, for adding search to websites and apps. Set a MEILI_MASTER_KEY of at least 16 characters, API requests need it.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/meilisearch.svg
+    docs: https://www.meilisearch.com/docs/learn/self_hosted/install_meilisearch_locally
+    image: getmeili/meilisearch:latest
+    service: meilisearch
+    cpu: "0.5"
+    ram: "512M"
+    pids: 200
+    port: 7700
+    networks: [www]
+    volumes:
+      - meilisearch_data:/meili_data
+    env:
+      - MEILI_ENV=production
+      - MEILI_MASTER_KEY=change-this-master-key
+      - MEILI_NO_ANALYTICS=true
