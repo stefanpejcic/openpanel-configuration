@@ -571,3 +571,19 @@ applications:
     pids: 100
     port: 80
     networks: [www]
+
+  - id: trilium
+    name: Trilium Notes
+    description: Hierarchical note taking for building a personal knowledge base, with rich text, code notes, scripting and sync. The first visit asks you to set the password.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/trilium.svg
+    docs: https://docs.triliumnotes.org/
+    image: triliumnext/trilium:latest
+    service: trilium
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 8080
+    networks: [www]
+    volumes:
+      - trilium_data:/home/node/trilium-data
