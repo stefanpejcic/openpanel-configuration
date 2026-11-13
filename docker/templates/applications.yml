@@ -368,3 +368,26 @@ applications:
       - jellyfin_media:/media
     env:
       - JELLYFIN_PublishedServerUrl=https://{domain}
+
+  - id: joplin
+    name: Joplin Server
+    description: Sync server for the Joplin note taking apps, with sharing and note publishing. Needs the account's PostgreSQL service, create a database and user first and put them in the POSTGRES_ values. Log in as admin@localhost with password admin and change it.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/joplin.svg
+    docs: https://github.com/laurent22/joplin/blob/dev/packages/server/README.md
+    image: joplin/server:latest
+    service: joplin
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 22300
+    networks: [www, db]
+    env:
+      - APP_BASE_URL=https://{domain}
+      - APP_PORT=22300
+      - DB_CLIENT=pg
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=joplin
+      - POSTGRES_USER=joplin
+      - POSTGRES_PASSWORD=change-this-password
