@@ -233,8 +233,10 @@ services:
       EXEC: 1
       INFO: 1
       VERSION: 1
+      SOCKET_PATH: /run/podman-user/podman.sock
     volumes:
-      - /run/user/${USER_ID}/podman/podman.sock:/var/run/docker.sock:ro
+      # the dir, not the socket file: a file mount keeps the old inode after podman recreates the socket and the proxy answers 503
+      - /run/user/${USER_ID}/podman:/run/podman-user:ro
     deploy:
       resources:
         limits:
