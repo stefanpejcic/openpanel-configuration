@@ -273,3 +273,22 @@ applications:
       - anythingllm_storage:/app/server/storage
     env:
       - STORAGE_DIR=/app/server/storage
+
+  - id: nocodb
+    name: NocoDB
+    description: Spreadsheet-style interface on top of a database, an open source Airtable alternative. Data is kept in SQLite in the volume, the first account you sign up with becomes the owner.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nocodb.svg
+    docs: https://nocodb.com/docs/self-hosting/installation/docker
+    image: nocodb/nocodb:latest
+    service: nocodb
+    cpu: "0.5"
+    ram: "1"
+    pids: 300
+    port: 8080
+    networks: [www, db]
+    volumes:
+      - nocodb_data:/usr/app/data
+    env:
+      - NC_PUBLIC_URL=https://{domain}
+      - NC_DISABLE_TELE=true
