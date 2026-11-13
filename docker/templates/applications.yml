@@ -391,3 +391,30 @@ applications:
       - POSTGRES_DATABASE=joplin
       - POSTGRES_USER=joplin
       - POSTGRES_PASSWORD=change-this-password
+
+  - id: ghost
+    name: Ghost
+    description: Publishing platform for blogs, newsletters and paid memberships. Uses SQLite in the volume, open /ghost to create the admin account. Set the mail__ values for newsletters and member logins.
+    category: CMS
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/ghost.png
+    docs: https://ghost.org/docs/config/
+    image: ghost:6-alpine
+    service: ghost
+    cpu: "1"
+    ram: "768M"
+    pids: 300
+    port: 2368
+    networks: [www]
+    volumes:
+      - ghost_content:/var/lib/ghost/content
+    env:
+      - url=https://{domain}
+      - database__client=sqlite3
+      - database__connection__filename=/var/lib/ghost/content/data/ghost.db
+      - database__useNullAsDefault=true
+      - mail__transport=SMTP
+      - mail__from=noreply@{domain}
+      - mail__options__host=
+      - mail__options__port=587
+      - mail__options__auth__user=
+      - mail__options__auth__pass=
