@@ -543,3 +543,17 @@ applications:
       - NODE_ENV=production
       - CACHE_TYPE=memory
       - ACCESS_KEY=change-this-key
+
+  - id: it-tools
+    name: IT-Tools
+    description: Collection of handy tools for developers, converters, generators, encoders and formatters, everything runs in the browser.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/it-tools.svg
+    docs: https://github.com/CorentinTh/it-tools
+    image: corentinth/it-tools:latest
+    service: ittools
+    cpu: "0.25"
+    ram: "128M"
+    pids: 100
+    port: 80
+    networks: [www]
