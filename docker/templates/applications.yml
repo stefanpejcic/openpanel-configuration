@@ -438,3 +438,27 @@ applications:
     env:
       - PORT=3000
       - APP_URL=https://{domain}
+
+  - id: huginn
+    name: Huginn
+    description: Build agents that watch websites, feeds and APIs and act on what they find, a self-hosted IFTTT. Needs the account's MySQL or MariaDB service, create a database and user first and put them in the DATABASE_ values, DATABASE_HOST is mariadb when the account runs MariaDB. Log in as admin, the generated password is printed in the container logs on the first start.
+    category: Automation
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/huginn.svg
+    docs: https://github.com/huginn/huginn/blob/master/doc/docker/install.md
+    image: huginn/huginn:latest
+    service: huginn
+    cpu: "1"
+    ram: "1"
+    pids: 500
+    port: 3000
+    networks: [www, db]
+    env:
+      - DOMAIN={domain}
+      - FORCE_SSL=true
+      - TIMEZONE=UTC
+      - DATABASE_ADAPTER=mysql2
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=huginn
+      - DATABASE_USERNAME=huginn
+      - DATABASE_PASSWORD=change-this-password
