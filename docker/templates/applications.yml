@@ -418,3 +418,23 @@ applications:
       - mail__options__port=587
       - mail__options__auth__user=
       - mail__options__auth__pass=
+
+  - id: flowise
+    name: Flowise
+    description: Low-code builder for LLM apps, chatbots and AI agents with a drag and drop editor. The first visit asks you to create the admin account.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/flowise.svg
+    docs: https://docs.flowiseai.com/getting-started
+    # 3.1.4 crashes on start, FlowiseAI/Flowise#6688
+    image: flowiseai/flowise:3.1.3
+    service: flowise
+    cpu: "1"
+    ram: "1"
+    pids: 500
+    port: 3000
+    networks: [www]
+    volumes:
+      - flowise_data:/home/node/.flowise
+    env:
+      - PORT=3000
+      - APP_URL=https://{domain}
