@@ -525,3 +525,21 @@ applications:
     networks: [www, db]
     volumes:
       - gogs_data:/data
+
+  - id: rsshub
+    name: RSSHub
+    description: Generates RSS feeds for thousands of websites and social networks that don't have one. Set ACCESS_KEY to keep strangers from using your instance.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/selfhst/icons/svg/rsshub.svg
+    docs: https://docs.rsshub.app/deploy/
+    image: diygod/rsshub:latest
+    service: rsshub
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 1200
+    networks: [www]
+    env:
+      - NODE_ENV=production
+      - CACHE_TYPE=memory
+      - ACCESS_KEY=change-this-key
