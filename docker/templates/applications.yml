@@ -557,3 +557,17 @@ applications:
     pids: 100
     port: 80
     networks: [www]
+
+  - id: drawdb
+    name: drawDB
+    description: Database diagram editor in the browser, design tables and relations and export SQL for MySQL, PostgreSQL, SQLite and more.
+    category: Development
+    logo: https://cdn.jsdelivr.net/gh/drawdb-io/drawdb/src/assets/icon_dark_64.png
+    docs: https://github.com/drawdb-io/drawdb
+    image: ghcr.io/drawdb-io/drawdb:latest
+    service: drawdb
+    cpu: "0.25"
+    ram: "128M"
+    pids: 100
+    port: 80
+    networks: [www]
