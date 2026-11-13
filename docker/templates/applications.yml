@@ -620,3 +620,22 @@ applications:
     env:
       - BASE_URL=https://{domain}
       - USE_X_SETTINGS=1
+
+  - id: qdrant
+    name: Qdrant
+    description: Vector database for AI search and RAG, with a REST API and a web dashboard at /dashboard. Set QDRANT__SERVICE__API_KEY, requests and the dashboard need it.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/qdrant.svg
+    docs: https://qdrant.tech/documentation/guides/installation/
+    image: qdrant/qdrant:latest
+    service: qdrant
+    cpu: "0.5"
+    ram: "1"
+    pids: 300
+    port: 6333
+    networks: [www, db]
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    env:
+      - QDRANT__SERVICE__API_KEY=change-this-api-key
+      - QDRANT__TELEMETRY_DISABLED=true
