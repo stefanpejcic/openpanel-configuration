@@ -482,3 +482,30 @@ applications:
       - MB_DB_FILE=/metabase-data/metabase.db
       - MB_SITE_URL=https://{domain}
       - JAVA_TIMEZONE=UTC
+
+  - id: paperless-ngx
+    name: Paperless-ngx
+    description: Document management, scans and PDFs get OCR, tags and full text search. Needs the account's Redis service running. Set a long random PAPERLESS_SECRET_KEY and the admin password before installing.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/paperless-ngx.svg
+    docs: https://docs.paperless-ngx.com/setup/#docker
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    service: paperless
+    cpu: "1"
+    ram: "1.5"
+    pids: 500
+    port: 8000
+    networks: [www, db]
+    volumes:
+      - paperless_data:/usr/src/paperless/data
+      - paperless_media:/usr/src/paperless/media
+      - paperless_consume:/usr/src/paperless/consume
+      - paperless_export:/usr/src/paperless/export
+    env:
+      - PAPERLESS_URL=https://{domain}
+      - PAPERLESS_REDIS=redis://redis:6379
+      - PAPERLESS_SECRET_KEY=change-this-to-a-long-random-string
+      - PAPERLESS_ADMIN_USER=admin
+      - PAPERLESS_ADMIN_PASSWORD=change-this-password
+      - PAPERLESS_TIME_ZONE=UTC
+      - PAPERLESS_OCR_LANGUAGE=eng
