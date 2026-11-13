@@ -462,3 +462,23 @@ applications:
       - DATABASE_NAME=huginn
       - DATABASE_USERNAME=huginn
       - DATABASE_PASSWORD=change-this-password
+
+  - id: metabase
+    name: Metabase
+    description: Business intelligence dashboards and questions on top of your MySQL, PostgreSQL and other databases, no SQL needed. The setup wizard creates the admin account, its own settings are kept in the volume.
+    category: Analytics
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/metabase.svg
+    docs: https://www.metabase.com/docs/latest/installation-and-operation/running-metabase-on-docker
+    image: metabase/metabase:latest
+    service: metabase
+    cpu: "1"
+    ram: "1.5"
+    pids: 500
+    port: 3000
+    networks: [www, db]
+    volumes:
+      - metabase_data:/metabase-data
+    env:
+      - MB_DB_FILE=/metabase-data/metabase.db
+      - MB_SITE_URL=https://{domain}
+      - JAVA_TIMEZONE=UTC
