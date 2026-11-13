@@ -233,3 +233,25 @@ applications:
     env:
       - OPENAI_API_KEY=
       - CODE=change-this-password
+
+  - id: grafana
+    name: Grafana
+    description: Dashboards and alerts for metrics, logs and databases, connects to Prometheus, MySQL, PostgreSQL and many other sources. Log in with the GF_SECURITY_ADMIN values.
+    category: Monitoring
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/grafana.svg
+    docs: https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
+    image: grafana/grafana-oss:latest
+    service: grafana
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 3000
+    networks: [www, db]
+    volumes:
+      - grafana_data:/var/lib/grafana
+    env:
+      - GF_SERVER_ROOT_URL=https://{domain}/
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=change-this-password
+      - GF_ANALYTICS_CHECK_FOR_UPDATES=false
+      - GF_ANALYTICS_REPORTING_ENABLED=false
