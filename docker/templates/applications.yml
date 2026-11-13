@@ -656,3 +656,22 @@ applications:
     env:
       - DATABASE_URL=postgresql://umami:change-this-password@postgres:5432/umami
       - APP_SECRET=change-this-to-a-long-random-string
+
+  - id: searxng
+    name: SearXNG
+    description: Private metasearch engine, combines results from 70+ search engines without tracking or profiling you.
+    category: Productivity
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/searxng.svg
+    docs: https://docs.searxng.org/admin/installation-docker.html
+    image: searxng/searxng:latest
+    service: searxng
+    cpu: "0.5"
+    ram: "512M"
+    pids: 300
+    port: 8080
+    networks: [www]
+    volumes:
+      - searxng_config:/etc/searxng
+      - searxng_cache:/var/cache/searxng
+    env:
+      - SEARXNG_BASE_URL=https://{domain}/
