@@ -59,5 +59,8 @@ import /etc/openpanel/caddy/templates/cloudflare.only
 # import rate limit snippets (opencli domains-ratelimit)
 import /etc/openpanel/caddy/ratelimit.conf
 
+# import AI & bot crawler control snippets
+import /etc/openpanel/caddy/botcontrol.conf
+
 # import all sites
 import /etc/openpanel/caddy/domains/*
