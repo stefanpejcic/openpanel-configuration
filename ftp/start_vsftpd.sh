@@ -239,5 +239,7 @@ if [ -n "$1" ]; then
 else
   echo "[*] Starting vsftpd and accepting user logins..."
   echo "-------------------------------------------"
-  vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT -ouser_config_dir=$QUOTA_CONF_DIR $PASV_OPTS /etc/vsftpd/vsftpd.conf
+  # the config file has to come first: vsftpd applies arguments in order, so a file after the -o options
+  # overrode all of them, passive mode then sent the container IP and a random port, and quotas were ignored
+  vsftpd /etc/vsftpd/vsftpd.conf -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT -ouser_config_dir=$QUOTA_CONF_DIR $PASV_OPTS
 fi
