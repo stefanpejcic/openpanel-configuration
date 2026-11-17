@@ -97,6 +97,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
+      - ./sockets/php:/run/php
       - ./openresty.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
       - webserver_data:/etc/nginx/conf.d
       - html_data:/var/www/html/   
@@ -125,6 +126,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
+      - ./sockets/php:/run/php
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - webserver_data:/etc/nginx/conf.d
       - html_data:/var/www/html/   
@@ -154,6 +156,7 @@ services:
       - "${HTTPS_PORT}"
     working_dir: /var/www/html
     volumes:
+      - ./sockets/php:/run/php
       - ./httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
       - webserver_data:/etc/httpd/conf.d/
       - html_data:/var/www/html/
@@ -520,7 +523,10 @@ services:
       disable: true
     hostname: php-fpm-5.6
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/5.6.ini:/usr/local/etc/php/php.ini
@@ -544,7 +550,10 @@ services:
       disable: true
     hostname: php-fpm-7.0
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.0.ini:/usr/local/etc/php/php.ini
@@ -568,7 +577,10 @@ services:
       disable: true
     hostname: php-fpm-7.1
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.1.ini:/usr/local/etc/php/php.ini
@@ -593,7 +605,10 @@ services:
       disable: true
     hostname: php-fpm-7.2
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.2.ini:/usr/local/etc/php/php.ini
@@ -619,7 +634,10 @@ services:
       disable: true
     hostname: php-fpm-7.3
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.3.ini:/usr/local/etc/php/php.ini
@@ -644,7 +662,10 @@ services:
       disable: true
     hostname: php-fpm-7.4
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/7.4.ini:/usr/local/etc/php/php.ini
@@ -668,7 +689,10 @@ services:
       disable: true
     hostname: php-fpm-8.0
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.0.ini:/usr/local/etc/php/php.ini
@@ -692,7 +716,10 @@ services:
       disable: true
     hostname: php-fpm-8.1
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.1.ini:/usr/local/etc/php/php.ini
@@ -718,7 +745,10 @@ services:
       disable: true
     hostname: php-fpm-8.2
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.2.ini:/usr/local/etc/php/php.ini
@@ -743,7 +773,10 @@ services:
       disable: true
     hostname: php-fpm-8.3
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.3.ini:/usr/local/etc/php/php.ini
@@ -767,7 +800,10 @@ services:
       disable: true
     hostname: php-fpm-8.4
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.4.ini:/usr/local/etc/php/php.ini
@@ -793,7 +829,10 @@ services:
       disable: true
     hostname: php-fpm-8.5
     restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
     volumes:
+      - ./sockets/php:/run/php
       - html_data:/var/www/html/
       - ./sockets/mysqld:/var/run/mysqld
       - ./php.ini/8.5.ini:/usr/local/etc/php/php.ini
