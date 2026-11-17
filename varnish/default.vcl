@@ -159,6 +159,17 @@ sub vcl_pipe {
 }
 
 sub vcl_backend_response {
+    # Never cache 5xx (e.g. nginx 502 while php-fpm is still starting after a reboot).
+    # On a background refresh keep serving the old good object instead.
+    if (beresp.status >= 500) {
+        if (bereq.is_bgfetch) {
+            return (abandon);
+        }
+        set beresp.uncacheable = true;
+        set beresp.ttl = 10s;
+        return (deliver);
+    }
+
     # Inject URL & Host header into the object for asynchronous banning purposes
     set beresp.http.x-url = bereq.url;
     set beresp.http.x-host = bereq.http.host;
