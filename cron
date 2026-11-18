@@ -26,6 +26,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 4 * * * root /usr/local/bin/opencli websites-pagespeed --all && echo "$(date) Google PageSpeed data collected for all domains" >> /var/log/openpanel/admin/cron.log
 0 5 */2 * * root /usr/local/bin/opencli websites-vulnerability --all && echo "$(date) WordPress websites scanned for known vulnerabilities" >> /var/log/openpanel/admin/cron.log
 15 6 * * * root /usr/local/bin/opencli user-daily_summary --all && echo "$(date) Saved daily summaries and emailed them to users who turned them on" >> /var/log/openpanel/admin/cron.log
+45 6 * * * root for b in /usr/local/admin/openadmin-amd64 /usr/local/admin/openadmin-arm64; do [ -x "$b" ] && "$b" daily-summary >> /var/log/openpanel/admin/cron.log 2>&1 && break; done
 30 7 * * * root /usr/local/bin/opencli user-error_report --all && echo "$(date) Emailed daily error reports to users who turned them on" >> /var/log/openpanel/admin/cron.log
 0 */4 * * * root /usr/local/bin/opencli files-calculate_resellers_storage && echo "$(date) Calculated storage usage for all reseller accounts" >> /var/log/openpanel/admin/cron.log
 
