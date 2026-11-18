@@ -1,0 +1,4 @@
+# Themes for the OpenAdmin admin panel, same format as openpanel/templates/themes.yml.
+# Installed themes live in this folder (/etc/openpanel/openadmin/templates/<folder>/), admin_template=<folder> in openpanel.config picks the active one.
+
+themes: []

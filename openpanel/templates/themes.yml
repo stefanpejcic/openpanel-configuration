@@ -1,0 +1,34 @@
+# Themes for the OpenPanel user panel, listed under OpenAdmin > Settings > OpenPanel > Theme.
+# OpenAdmin caches this file for 24h. Installed themes live in this folder (/etc/openpanel/openpanel/templates/<folder>/) and are always shown from disk,
+# so a theme copied in by hand works even when it's not listed here. template=<folder> in openpanel.config picks the active one.
+#
+# folder       folder it installs into: lowercase letters, digits, - and _
+# name         shown on the card, the theme's readme.txt takes over once installed
+# description  one line
+# author, author_uri, version, license, license_uri, uri   same as the readme.txt headers
+# screenshot   image url shown before install, the installed theme uses its own screenshot.png
+# download     https .tar.gz, .tgz or .zip with the theme files, readme.txt at the root or inside one top folder
+#
+# A theme folder mirrors the panel's web/templates/ (base.html, partials/, user/, ...), only the files it changes are needed.
+# partials/*.html the panel doesn't have are added to every page, static/ overrides /static/ files. readme.txt is required:
+#
+#   Theme Name: Modern
+#   Theme URI: https://...
+#   Author: ...
+#   Author URI: https://...
+#   Version: 1.0.0
+#   License: GPLv2 or later
+#   License URI: https://...
+#   Description: ...
+
+themes: []
+#  - folder: modern
+#    name: Modern
+#    description: Redesigned user panel with a sidebar layout.
+#    author: OpenPanel
+#    author_uri: https://openpanel.com
+#    version: 1.0.0
+#    license: GPLv2 or later
+#    uri: https://openpanel.com
+#    screenshot: https://example.com/modern.png
+#    download: https://example.com/modern.tar.gz
