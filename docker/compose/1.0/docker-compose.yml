@@ -524,7 +524,7 @@ services:
     hostname: php-fpm-5.6
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -552,7 +552,7 @@ services:
     hostname: php-fpm-7.0
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -580,7 +580,7 @@ services:
     hostname: php-fpm-7.1
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -609,7 +609,7 @@ services:
     hostname: php-fpm-7.2
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -639,7 +639,7 @@ services:
     hostname: php-fpm-7.3
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -668,7 +668,7 @@ services:
     hostname: php-fpm-7.4
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -696,7 +696,7 @@ services:
     hostname: php-fpm-8.0
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -724,7 +724,7 @@ services:
     hostname: php-fpm-8.1
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -754,7 +754,7 @@ services:
     hostname: php-fpm-8.2
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -783,7 +783,7 @@ services:
     hostname: php-fpm-8.3
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -811,7 +811,7 @@ services:
     hostname: php-fpm-8.4
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
@@ -841,7 +841,7 @@ services:
     hostname: php-fpm-8.5
     restart: unless-stopped
     environment:
-      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-port}
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
       - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
     volumes:
       - ./sockets/php:/run/php
