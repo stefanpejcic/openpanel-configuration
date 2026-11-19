@@ -745,3 +745,21 @@ applications:
     networks: [www]
     volumes:
       - dashy_data:/app/user-data
+
+  - id: picoclaw
+    name: PicoClaw
+    description: Lightweight personal AI assistant that runs tools, files and scheduled tasks for you, using your own LLM API keys. Chat in the browser console or connect Delta Chat, Discord, Slack, Matrix and more. Open the domain right away and set the dashboard password on /launcher-setup.
+    category: AI
+    logo: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/picoclaw.png
+    docs: https://github.com/sipeed/picoclaw/blob/main/docs/guides/docker.md
+    image: sipeed/picoclaw:launcher
+    service: picoclaw
+    cpu: "0.5"
+    ram: "512M"
+    pids: 200
+    port: 18800
+    networks: [www]
+    volumes:
+      - picoclaw_data:/root/.picoclaw
+    env:
+      - TZ=UTC
