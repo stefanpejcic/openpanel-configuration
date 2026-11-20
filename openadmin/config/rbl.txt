@@ -1,0 +1,15 @@
+# Mail blocklists (RBL/DNSBL) that sentinel checks the server IP against once a day.
+# Only runs when the mail server is installed, has email accounts and doesn't send through a relay host.
+# One zone per line, lines starting with # are skipped. Add or remove lists as you like,
+# the file is read on every check. Results show in OpenAdmin > Notifications and the daily summary.
+#
+# Spamhaus refuses queries from public resolvers (8.8.8.8, 1.1.1.1...), use a local resolver to get its answers.
+zen.spamhaus.org
+bl.spamcop.net
+b.barracudacentral.org
+psbl.surriel.com
+bl.mailspike.net
+dnsbl-1.uceprotect.net
+ix.dnsbl.manitu.net
+dnsbl.dronebl.org
+all.s5h.net
