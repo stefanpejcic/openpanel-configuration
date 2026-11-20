@@ -44,13 +44,3 @@ themes:
     uri: https://github.com/stefanpejcic/modern-openpanel-theme
     screenshot: https://raw.githubusercontent.com/stefanpejcic/modern-openpanel-theme/main/screenshot.png
     download: https://github.com/stefanpejcic/modern-openpanel-theme/archive/refs/heads/main.tar.gz
-#  - folder: modern
-#    name: Modern
-#    description: Redesigned user panel with a sidebar layout.
-#    author: OpenPanel
-#    author_uri: https://openpanel.com
-#    version: 1.0.0
-#    license: GPLv2 or later
-#    uri: https://openpanel.com
-#    screenshot: https://example.com/modern.png
-#    download: https://example.com/modern.tar.gz
