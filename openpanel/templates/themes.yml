@@ -33,6 +33,17 @@ themes:
     uri: https://github.com/stefanpejcic/saturn-openpanel-theme
     screenshot: https://raw.githubusercontent.com/stefanpejcic/saturn-openpanel-theme/main/screenshot.png
     download: https://github.com/stefanpejcic/saturn-openpanel-theme/archive/refs/heads/main.tar.gz
+  - folder: modern
+    name: Modern
+    description: Redesigned user panel with a sidebar layout, an op- component kit, Overview and Tools dashboard views and a guided app installer.
+    author: OpenPanel
+    author_uri: https://openpanel.com
+    version: 1.0.0
+    license: OpenPanel EULA
+    license_uri: https://github.com/stefanpejcic/OpenPanel/blob/main/LICENSE
+    uri: https://github.com/stefanpejcic/modern-openpanel-theme
+    screenshot: https://raw.githubusercontent.com/stefanpejcic/modern-openpanel-theme/main/screenshot.png
+    download: https://github.com/stefanpejcic/modern-openpanel-theme/archive/refs/heads/main.tar.gz
 #  - folder: modern
 #    name: Modern
 #    description: Redesigned user panel with a sidebar layout.
