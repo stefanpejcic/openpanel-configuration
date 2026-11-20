@@ -36,8 +36,8 @@ themes:
   - folder: modern
     name: Modern
     description: Redesigned user panel with a sidebar layout, an op- component kit, Overview and Tools dashboard views and a guided app installer.
-    author: OpenPanel
-    author_uri: https://openpanel.com
+    author: Arshile Gogen
+    author_uri: https://github.com/caesarmind
     version: 1.0.0
     license: OpenPanel EULA
     license_uri: https://github.com/stefanpejcic/OpenPanel/blob/main/LICENSE
