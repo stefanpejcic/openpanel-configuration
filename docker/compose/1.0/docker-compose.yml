@@ -861,6 +861,32 @@ services:
       - www
       - db
 
+  php-fpm-8.6:
+    image: openpanel/php-fpm:8.6
+    container_name: php-fpm-8.6
+    healthcheck:
+      disable: true
+    hostname: php-fpm-8.6
+    restart: unless-stopped
+    environment:
+      - PHPFPM_LISTEN=${PHP_FPM_LISTEN:-socket}
+      - PHPFPM_PM=${PHP_FPM_PM:-ondemand}
+    volumes:
+      - ./sockets/php:/run/php
+      - html_data:/var/www/html/
+      - ./sockets/mysqld:/var/run/mysqld
+      - ./php.ini/8.6.ini:/usr/local/etc/php/php.ini
+      - /etc/openpanel/wordpress/wp-cli.phar:/usr/local/bin/wp:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "${PHP_FPM_8_6_CPU:-0.25}"
+          memory: "${PHP_FPM_8_6_RAM:-0.5G}"
+          pids: "${PHP_FPM_8_6_PIDS:-100}"
+    networks:
+      - www
+      - db
+
   mongodb:
     image: mongo:${MONGODB_VERSION:-latest}
     container_name: mongodb
