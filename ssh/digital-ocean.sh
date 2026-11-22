@@ -105,7 +105,7 @@ if [[ $? -ne 0 || $user_count -eq 0 ]]; then
 fi
 echo -e  "Need assistance or looking to learn more? We've got you covered:"
 echo -e  "        - 📚 Admin Docs: https://openpanel.com/docs/admin/intro/"
-echo -e  "        - 💬 Forums: https://community.openpanel.org/"
+echo -e  "        - 💬 Discussions: https://github.com/stefanpejcic/OpenPanel/discussions"
 echo -e  "        - 👉 Discord: https://discord.openpanel.org/"
 echo -e  ""
 echo -e  "================================================================"
