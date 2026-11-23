@@ -130,6 +130,8 @@ CREATE TABLE `mcp_tokens` (
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_used_at` timestamp NULL DEFAULT NULL,
+  `mode` varchar(10) NULL DEFAULT NULL,
+  `allowed_features` text NULL DEFAULT NULL,
   KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB;
 
