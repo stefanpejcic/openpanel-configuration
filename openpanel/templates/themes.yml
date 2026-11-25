@@ -38,7 +38,7 @@ themes:
     description: Redesigned user panel with a sidebar layout, an op- component kit, Overview and Tools dashboard views and a guided app installer.
     author: Arshile Gogen
     author_uri: https://github.com/caesarmind
-    version: 1.0.0
+    version: 1.1.0
     license: OpenPanel EULA
     license_uri: https://github.com/stefanpejcic/OpenPanel/blob/main/LICENSE
     uri: https://github.com/caesarmind/modern-openpanel-theme
