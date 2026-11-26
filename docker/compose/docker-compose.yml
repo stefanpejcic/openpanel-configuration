@@ -48,7 +48,7 @@ services:
   openpanel_redis:
     image: redis:8.6.2-alpine
     container_name: openpanel_redis
-    command: ["redis-server", "--unixsocket", "/tmp/redis/redis.sock", "--unixsocketperm", "770"]
+    command: ["redis-server", "--port", "0", "--unixsocket", "/tmp/redis/redis.sock", "--unixsocketperm", "770"]
     volumes:
       - ${REDIS_SOCKET}:/tmp/redis
     restart: always
