@@ -11,6 +11,11 @@ ExecReload=/bin/kill -s HUP $MAINPID
 Restart=always
 TimeoutStopSec=30
 KillMode=mixed
+# keep the control plane responsive and alive when the server is under load
+Nice=-5
+OOMScoreAdjust=-800
+CPUWeight=400
+MemoryLow=128M
 
 [Install]
 WantedBy=multi-user.target
