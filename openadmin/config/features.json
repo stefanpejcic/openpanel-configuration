@@ -97,8 +97,8 @@
   },
   {
     "name": "webmail",
-    "title": "Webmail (Roundcube)",
-    "description": "If enabled, users can auto-login to webmail (Roundcube) for email accounts. The Roundcube service must be configured separately.",
+    "title": "Webmail",
+    "description": "If enabled, users can auto-login to webmail (Roundcube or Golub) for email accounts. The webmail service must be configured separately.",
     "link": "/webmail",
     "type": "enterprise",
     "help_link": "https://openpanel.com/docs/admin/settings/modules/#webmail"
