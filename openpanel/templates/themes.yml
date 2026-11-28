@@ -43,4 +43,4 @@ themes:
     license_uri: https://github.com/stefanpejcic/OpenPanel/blob/main/LICENSE
     uri: https://github.com/caesarmind/modern-openpanel-theme
     screenshot: https://raw.githubusercontent.com/caesarmind/modern-openpanel-theme/main/screenshot.png
-    download: https://github.com/caesarmind/modern-openpanel-theme/archive/refs/heads/main.tar.gz
+    download: https://github.com/caesarmind/modern-openpanel-theme/archive/refs/tags/v1.3.1.tar.gz
