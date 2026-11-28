@@ -239,6 +239,8 @@ services:
     volumes:
       # the dir, not the socket file: a file mount keeps the old inode after podman recreates the socket and the proxy answers 503
       - /run/user/${USER_ID}/podman:/run/podman-user:ro
+      # deny rules for container create, archive and update, see the file
+      - /etc/openpanel/docker/socket-proxy/haproxy.cfg.template:/usr/local/etc/haproxy/haproxy.cfg.template:ro
     deploy:
       resources:
         limits:
