@@ -15,3 +15,11 @@ add_action('init', function() {
         $_SERVER['HTTPS'] = 'on';
     }
 });
+
+// WordPress only reads WP_AUTO_UPDATE_CORE itself, the plugin and theme constants set from OpenPanel are applied here
+if (defined('WP_AUTO_UPDATE_PLUGINS') && WP_AUTO_UPDATE_PLUGINS === true) {
+    add_filter('auto_update_plugin', '__return_true');
+}
+if (defined('WP_AUTO_UPDATE_THEMES') && WP_AUTO_UPDATE_THEMES === true) {
+    add_filter('auto_update_theme', '__return_true');
+}
