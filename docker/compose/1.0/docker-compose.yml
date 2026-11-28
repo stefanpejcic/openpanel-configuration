@@ -175,6 +175,8 @@ services:
 
   varnish:
     image: varnish:${VARNISH_VERSION:-stable}
+    # newer images default to user varnish, which cannot write default.vcl or read the 600 template, root here is the account's own rootless user
+    user: root
     container_name: varnish
     healthcheck:
       disable: true

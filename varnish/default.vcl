@@ -26,7 +26,8 @@ sub vcl_hit {
         return (deliver);
     }
 
-    return (miss);  # Use "miss" instead of "fetch"
+    # past ttl and grace, fetch from the backend, current Varnish has no "miss" action in vcl_hit
+    return (pass);
 }
 
 sub vcl_recv {
